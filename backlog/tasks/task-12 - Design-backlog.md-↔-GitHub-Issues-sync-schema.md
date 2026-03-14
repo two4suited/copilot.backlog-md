@@ -1,9 +1,11 @@
 ---
 id: TASK-12
 title: 'Design: backlog.md ↔ GitHub Issues sync schema'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 21:46'
+updated_date: '2026-03-14 21:51'
 labels:
   - design
   - infrastructure
