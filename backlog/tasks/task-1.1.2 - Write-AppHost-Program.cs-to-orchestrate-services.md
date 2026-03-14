@@ -4,9 +4,11 @@ title: Write AppHost Program.cs to orchestrate services
 status: To Do
 assignee: []
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:19'
 labels:
   - task
   - infrastructure
+  - aspire
 dependencies: []
 parent_task_id: TASK-1.1
 priority: high
