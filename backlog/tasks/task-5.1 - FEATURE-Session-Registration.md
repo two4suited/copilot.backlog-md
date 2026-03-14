@@ -1,9 +1,11 @@
 ---
 id: TASK-5.1
 title: 'FEATURE: Session Registration'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:44'
 labels:
   - feature
   - backend
