@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
-updated_date: '2026-03-14 22:06'
+updated_date: '2026-03-14 22:09'
 labels:
   - backend
   - testing
@@ -21,8 +21,8 @@ Write xUnit unit tests for the ConferenceApp.Api project. Cover: AuthController 
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 ConferenceApp.Api.Tests project created and added to solution
-- [ ] #2 AuthController tests: register, login valid, login invalid credentials
-- [ ] #3 RegistrationsController tests: register, cancel, duplicate (409), over-capacity
-- [ ] #4 dotnet test passes with all tests green
+- [x] #1 ConferenceApp.Api.Tests project created and added to solution
+- [x] #2 AuthController tests: register, login valid, login invalid credentials
+- [x] #3 RegistrationsController tests: register, cancel, duplicate (409), over-capacity
+- [x] #4 dotnet test passes with all tests green
 <!-- AC:END -->
