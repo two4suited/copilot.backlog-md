@@ -1,9 +1,11 @@
 ---
 id: TASK-26
 title: 'Production deployment config: Docker Compose and env vars'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@devops'
 created_date: '2026-03-14 22:13'
+updated_date: '2026-03-14 22:14'
 labels:
   - infrastructure
 dependencies: []
