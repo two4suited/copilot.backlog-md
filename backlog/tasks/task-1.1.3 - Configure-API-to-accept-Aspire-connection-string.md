@@ -4,8 +4,11 @@ title: Configure API to accept Aspire connection string
 status: To Do
 assignee: []
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:19'
 labels:
   - task
+  - infrastructure
+  - aspire
   - backend
 dependencies: []
 parent_task_id: TASK-1.1
