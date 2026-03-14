@@ -317,7 +317,9 @@ function cmdTagTasks(params) {
     "api": "dotnet-developer",
     "auth": "dotnet-developer",
     "authentication": "dotnet-developer",
-    "testing": "dotnet-developer",
+    "testing": "tester",
+    "qa": "tester",
+    "e2e": "tester",
     "devops": "aspire-expert",
   };
 
@@ -379,6 +381,222 @@ function cmdTagTasks(params) {
 }
 
 /**
+ * Ralph loop — continuously scan backlog, assign ready tasks, and file bugs
+ * Named after the continuous improvement loop concept.
+ */
+async function cmdRalph(params) {
+  const intervalSec = parseInt(params.interval || "30", 10);
+  const maxCycles = params.cycles ? parseInt(params.cycles, 10) : Infinity;
+  const dryRun = !!params["dry-run"];
+
+  const labelToAgent = {
+    aspire: "aspire-expert",
+    infrastructure: "aspire-expert",
+    observability: "aspire-expert",
+    database: "database-developer",
+    frontend: "react-developer",
+    react: "react-developer",
+    design: "designer",
+    ui: "designer",
+    backend: "dotnet-developer",
+    api: "dotnet-developer",
+    auth: "dotnet-developer",
+    authentication: "dotnet-developer",
+    testing: "tester",
+    qa: "tester",
+    e2e: "tester",
+    devops: "aspire-expert",
+  };
+
+  const tasksDir = path.join(projectRoot, "backlog", "tasks");
+  const stateFile = path.join(projectRoot, "backlog", ".ralph-state.json");
+
+  // Load prior state so we don't re-assign tasks we already handled
+  let state = { assigned: {}, bugs: [] };
+  if (fs.existsSync(stateFile)) {
+    try { state = JSON.parse(fs.readFileSync(stateFile, "utf8")); } catch { /* fresh state */ }
+  }
+
+  const saveState = () => fs.writeFileSync(stateFile, JSON.stringify(state, null, 2));
+
+  const ts = () => new Date().toISOString().replace("T", " ").slice(0, 19);
+  const log = (msg) => console.log(`\x1b[90m[${ts()}]\x1b[0m ${msg}`);
+  const ok  = (msg) => console.log(`\x1b[32m[${ts()}] ✓\x1b[0m ${msg}`);
+  const warn = (msg) => console.log(`\x1b[33m[${ts()}] ⚠\x1b[0m ${msg}`);
+  const err  = (msg) => console.log(`\x1b[31m[${ts()}] ✗\x1b[0m ${msg}`);
+
+  console.log(`\n\x1b[1m🔄 Ralph loop starting\x1b[0m  (interval: ${intervalSec}s, max cycles: ${maxCycles === Infinity ? "∞" : maxCycles}${dryRun ? ", DRY RUN" : ""})\n`);
+
+  let cycle = 0;
+
+  const runCycle = () => {
+    cycle++;
+    log(`--- Cycle ${cycle} ---`);
+
+    if (!fs.existsSync(tasksDir)) {
+      warn("No backlog/tasks directory. Skipping.");
+      return;
+    }
+
+    const files = fs.readdirSync(tasksDir).filter(f => f.endsWith(".md"));
+    let newAssignments = 0;
+    let alreadyActive = 0;
+    const issues = [];
+
+    files.forEach(file => {
+      try {
+        const content = fs.readFileSync(path.join(tasksDir, file), "utf8");
+        const idMatch = file.match(/task-([\d.]+)/i);
+        const taskId = idMatch ? idMatch[1] : null;
+        if (!taskId) return;
+
+        const statusMatch = content.match(/^status:\s*(.+)/m);
+        const status = statusMatch ? statusMatch[1].trim().replace(/['"]/g, "") : "To Do";
+        const titleMatch = content.match(/^title:\s*(.+)/m);
+        const title = titleMatch ? titleMatch[1].trim() : file;
+        const assigneeMatch = content.match(/^assignee:\s*\[?([^\]\n]+)\]?/m);
+        const assignee = assigneeMatch ? assigneeMatch[1].trim() : "";
+
+        // ── Bug detection ──────────────────────────────────────────────────
+        // Tasks stuck In Progress for more than one cycle without progress
+        if (status === "In Progress") {
+          alreadyActive++;
+          const prevSeen = state.assigned[taskId]?.seenInProgress;
+          if (prevSeen && (Date.now() - prevSeen) > 5 * 60 * 1000) {
+            // Stuck > 5 min — flag it
+            const bugMsg = `Task ${taskId} ("${title}") has been In Progress since ${new Date(prevSeen).toISOString()} with no status change.`;
+            if (!state.bugs.find(b => b.taskId === taskId && b.type === "stuck")) {
+              issues.push({ taskId, title, type: "stuck", message: bugMsg });
+            }
+          } else if (!prevSeen) {
+            state.assigned[taskId] = { ...state.assigned[taskId], seenInProgress: Date.now() };
+          }
+          return;
+        }
+
+        // Clear stuck flag if task moved past In Progress
+        if (state.assigned[taskId]?.seenInProgress && status !== "In Progress") {
+          delete state.assigned[taskId].seenInProgress;
+        }
+
+        // ── Assignment ────────────────────────────────────────────────────
+        if (status !== "To Do") return;  // Only assign To Do tasks
+        if (state.assigned[taskId]?.assigned) return;  // Already handled
+
+        // Extract labels
+        let labels = [];
+        const inlineLabels = content.match(/^labels:\s*\[([^\]]*)\]/m);
+        if (inlineLabels) {
+          labels = inlineLabels[1].split(",").map(l => l.trim().replace(/['"]/g, "").toLowerCase()).filter(Boolean);
+        }
+
+        // Find agent
+        let agent = null;
+        for (const label of labels) {
+          if (labelToAgent[label]) { agent = labelToAgent[label]; break; }
+        }
+        if (!agent) {
+          const analysis = orchestrator.analyzeTask({ title, labels });
+          agent = analysis.agentType;
+        }
+
+        if (!dryRun) {
+          orchestrator.assignTask(taskId, agent, `Ralph loop cycle ${cycle}`);
+          state.assigned[taskId] = { agent, cycle, assignedAt: new Date().toISOString() };
+        }
+
+        ok(`Assigned task-${taskId} → \x1b[36m${agent}\x1b[0m  "${title}"`);
+        newAssignments++;
+      } catch (e) {
+        err(`Failed to process ${file}: ${e.message}`);
+      }
+    });
+
+    // ── File bugs for detected issues ─────────────────────────────────────
+    issues.forEach(issue => {
+      if (!dryRun) {
+        try {
+          const { execSync } = require("child_process");
+          const bugTitle = `[BUG] Task ${issue.taskId} stuck in In Progress`;
+          const bugDesc = issue.message + "\n\nAuto-filed by Ralph loop.";
+          execSync(
+            `cd "${projectRoot}" && backlog task create "${bugTitle}" --label bug,ralph -d "${bugDesc.replace(/"/g, '\\"')}" --priority high`,
+            { stdio: "pipe" }
+          );
+          state.bugs.push({ taskId: issue.taskId, type: issue.type, filedAt: new Date().toISOString() });
+          warn(`Filed bug for stuck task-${issue.taskId}`);
+        } catch (e) {
+          err(`Could not file bug: ${e.message}`);
+        }
+      } else {
+        warn(`[DRY RUN] Would file bug: ${issue.message}`);
+      }
+    });
+
+    const summary = [];
+    if (newAssignments) summary.push(`${newAssignments} assigned`);
+    if (alreadyActive) summary.push(`${alreadyActive} active`);
+    if (issues.length) summary.push(`${issues.length} bugs filed`);
+    if (!summary.length) summary.push("nothing to do");
+    log(`Cycle ${cycle} complete — ${summary.join(", ")}\n`);
+
+    if (!dryRun) saveState();
+  };
+
+  // Run first cycle immediately
+  runCycle();
+  if (cycle >= maxCycles) return;
+
+  // Then loop
+  const handle = setInterval(() => {
+    runCycle();
+    if (cycle >= maxCycles) {
+      clearInterval(handle);
+      log("Max cycles reached — Ralph loop stopping.");
+    }
+  }, intervalSec * 1000);
+
+  // Graceful shutdown
+  process.on("SIGINT", () => {
+    clearInterval(handle);
+    console.log("\n\x1b[1mRalph loop stopped.\x1b[0m");
+    process.exit(0);
+  });
+}
+
+/**
+ * File a bug task manually
+ */
+function cmdBug(params) {
+  const title = params._?.[0] || params.title;
+  if (!title) {
+    console.error("Usage: orchestrator bug <title> [--desc <description>] [--task <taskId>] [--priority high|medium|low]");
+    process.exit(1);
+  }
+
+  const desc = params.desc || params.description || "Bug filed by orchestrator.";
+  const priority = params.priority || "high";
+  const relatedTask = params.task;
+
+  const fullDesc = relatedTask
+    ? `${desc}\n\nRelated task: ${relatedTask}`
+    : desc;
+
+  const { execSync } = require("child_process");
+  try {
+    const result = execSync(
+      `cd "${projectRoot}" && backlog task create "${title}" --label bug,ralph -d "${fullDesc.replace(/"/g, '\\"')}" --priority ${priority}`,
+      { encoding: "utf8" }
+    );
+    console.log(`\n✓ Bug filed: ${title}`);
+    if (result) console.log(result.trim());
+  } catch (e) {
+    console.error("Failed to file bug:", e.message);
+    process.exit(1);
+  }
+}
+
+/**
  * Help command
  */
 function cmdHelp() {
@@ -389,6 +607,10 @@ USAGE:
   orchestrator <command> [options]
 
 COMMANDS:
+  ralph [--interval <sec>] [--cycles <n>] [--dry-run]
+                             Continuous loop: assign tasks, detect stuck work, file bugs
+  bug <title> [--desc <d>] [--task <id>] [--priority high|medium|low]
+                             Manually file a bug task
   assign <taskId> [--agent <type>]   Assign task to agent (auto-detect if no agent specified)
   bulk-assign [--status <status>]    Auto-assign all tasks with given status (default: "To Do")
   tag [--dry-run]                    Tag & assign all tasks by their backlog labels
@@ -402,6 +624,7 @@ SKILL-BASED AGENTS:
   dotnet-developer     - ASP.NET Core, C#, EF Core, Web API, JWT
   database-developer   - PostgreSQL, EF Core, migrations, schema design
   aspire-expert        - Aspire AppHost, containers, service discovery, CI/CD
+  tester               - Playwright e2e, API testing, bug filing, QA
   designer             - UI/UX, component design, accessibility, Tailwind
 
 GENERIC AGENTS:
@@ -411,7 +634,18 @@ GENERIC AGENTS:
   general-purpose      - Complex multi-step work
   orchestrator         - Task coordination & delegation
 
+RALPH LOOP:
+  Continuously scans backlog every <interval> seconds.
+  - Assigns all "To Do" tasks to their skill agent
+  - Detects tasks stuck "In Progress" and auto-files bug reports
+  - Persists state in backlog/.ralph-state.json
+  - Press Ctrl+C to stop
+
 EXAMPLES:
+  orchestrator ralph                      # Run forever (30s interval)
+  orchestrator ralph --interval 60        # Check every 60s
+  orchestrator ralph --cycles 5 --dry-run # 5 dry-run cycles
+  orchestrator bug "Login fails on mobile" --task 4.2 --priority high
   orchestrator tag                        # Assign all tasks by label
   orchestrator tag --dry-run              # Preview assignments without saving
   orchestrator assign 1.1.1               # Auto-detect best agent
@@ -435,6 +669,13 @@ function main() {
   const { cmd, params } = parseArgs(args);
 
   switch (cmd) {
+    case "ralph":
+      cmdRalph(params);
+      break;
+    case "bug":
+      params._ = args.slice(1);
+      cmdBug(params);
+      break;
     case "assign":
       params._ = args.slice(1);
       cmdAssign(params);

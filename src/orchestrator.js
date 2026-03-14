@@ -17,6 +17,7 @@ const AGENT_TYPES = {
   CODE_REVIEW: "code-review",
   GENERAL_PURPOSE: "general-purpose",
   ORCHESTRATOR: "orchestrator",
+  TESTER: "tester",
   // Skill-based agents
   REACT_DEVELOPER: "react-developer",
   DOTNET_DEVELOPER: "dotnet-developer",
@@ -156,6 +157,24 @@ const AGENT_PROFILES = {
     timelinessRequired: false,
     capabilities: ["Aspire.Hosting", "AppHost", "Aspire Dashboard", "OpenTelemetry", "Docker", "CI/CD"],
     skillLabels: ["aspire", "infrastructure", "observability"],
+  },
+
+  "tester": {
+    name: "Tester",
+    description: "Expert in end-to-end testing with Playwright, API testing, bug filing, and quality assurance",
+    specialties: [
+      "e2e testing", "playwright", "api testing", "regression testing",
+      "bug filing", "smoke tests", "integration tests", "test reports",
+      "quality assurance", "accessibility testing",
+    ],
+    keywords: [
+      "test", "e2e", "playwright", "regression", "smoke", "bug", "qa",
+      "quality", "assert", "verify", "check", "validate", "coverage",
+    ],
+    complexity: "medium",
+    timelinessRequired: true,
+    capabilities: ["Playwright", "xUnit", "Vitest", "Bug filing", "Test reporting"],
+    skillLabels: ["testing", "qa", "e2e"],
   },
 
   "designer": {
