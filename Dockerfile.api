@@ -1,0 +1,32 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+# Copy solution and project files for layer-cached restore
+COPY ConferenceApp.sln ./
+COPY ConferenceApp.Api/ConferenceApp.Api.csproj ConferenceApp.Api/
+COPY ConferenceApp.Models/ConferenceApp.Models.csproj ConferenceApp.Models/
+COPY ConferenceApp.ServiceDefaults/ConferenceApp.ServiceDefaults.csproj ConferenceApp.ServiceDefaults/
+
+RUN dotnet restore ConferenceApp.Api/ConferenceApp.Api.csproj
+
+# Copy remaining source and publish
+COPY ConferenceApp.Api/ ConferenceApp.Api/
+COPY ConferenceApp.Models/ ConferenceApp.Models/
+COPY ConferenceApp.ServiceDefaults/ ConferenceApp.ServiceDefaults/
+
+RUN dotnet publish ConferenceApp.Api/ConferenceApp.Api.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["dotnet", "ConferenceApp.Api.dll"]

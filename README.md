@@ -43,6 +43,58 @@ The API auto-runs EF migrations and seeds demo data (TechConf 2026) on first sta
 | `Jwt__Key` | dev key in appsettings.json | JWT signing key — **change in production** |
 | `VITE_API_URL` | `http://localhost:5000` | API base URL for the frontend |
 
+## Production Deployment
+
+Deploy the full stack (API + PostgreSQL + frontend) with Docker Compose.
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/) v2+
+
+### Steps
+
+```bash
+# 1. Copy the example env file and fill in your secrets
+cp .env.example .env
+
+# 2. Edit .env — at minimum change POSTGRES_PASSWORD and Jwt__Key
+#    Jwt__Key must be at least 32 characters long
+
+# 3. Start all services in the background
+docker compose up -d
+
+# 4. Follow logs (optional)
+docker compose logs -f
+```
+
+| Service | URL |
+|---------|-----|
+| Frontend | http://localhost:3000 |
+| API (direct) | http://localhost:8080 |
+| API health | http://localhost:8080/health |
+
+> **Note:** Swagger UI is disabled in Production mode. Use `/health` to verify the API is up.
+
+### Environment variables
+
+All variables are defined in `.env` (copy from `.env.example`):
+
+| Variable | Description |
+|----------|-------------|
+| `POSTGRES_USER` | PostgreSQL username |
+| `POSTGRES_PASSWORD` | PostgreSQL password — **change this** |
+| `POSTGRES_DB` | PostgreSQL database name |
+| `ConnectionStrings__conferencedb` | Full Npgsql connection string for the API |
+| `Jwt__Key` | JWT signing secret — **must be ≥ 32 chars, change this** |
+| `Jwt__Issuer` | JWT issuer claim (default: `ConferenceApp`) |
+| `Jwt__Audience` | JWT audience claim (default: `ConferenceApp`) |
+
+### Stopping and cleaning up
+
+```bash
+docker compose down          # stop containers
+docker compose down -v       # stop and remove the postgres data volume
+```
+
 ## API Endpoints
 
 | Method | Route | Description |
