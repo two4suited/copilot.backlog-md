@@ -22,10 +22,10 @@ Unit tests for service layer, integration tests for API endpoints using WebAppli
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 xUnit project tests service layer with mocked dependencies
-- [ ] #2 Integration tests cover all major API endpoints
-- [ ] #3 Vitest runs React component tests
-- [ ] #4 All tests pass in CI
+- [x] #1 xUnit project tests service layer with mocked dependencies
+- [x] #2 Integration tests cover all major API endpoints
+- [x] #3 Vitest runs React component tests
+- [x] #4 All tests pass in CI
 <!-- AC:END -->
 
 ## Implementation Plan
