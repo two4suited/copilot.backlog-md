@@ -604,6 +604,10 @@ function cmdPush() {
 }
 
 
+/**
+ * File a bug task manually
+ */
+function cmdBug(params) {
   const title = params._?.[0] || params.title;
   if (!title) {
     console.error("Usage: orchestrator bug <title> [--desc <description>] [--task <taskId>] [--priority high|medium|low]");
