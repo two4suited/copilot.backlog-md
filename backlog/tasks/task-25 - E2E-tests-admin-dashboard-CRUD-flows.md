@@ -15,11 +15,11 @@ priority: high
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Admin login and /admin route access verified
-- [ ] #2 Create conference form submits and new item appears in list
-- [ ] #3 Edit session form pre-fills existing data and saves changes
-- [ ] #4 Delete speaker shows confirmation dialog and removes item
-- [ ] #5 Non-admin user cannot access /admin (redirect to login or 403)
+- [x] #1 Admin login and /admin route access verified
+- [x] #2 Create conference form submits and new item appears in list
+- [x] #3 Edit session form pre-fills existing data and saves changes
+- [x] #4 Delete speaker shows confirmation dialog and removes item
+- [x] #5 Non-admin user cannot access /admin (redirect to login or 403)
 <!-- AC:END -->
 
 ## Implementation Plan
