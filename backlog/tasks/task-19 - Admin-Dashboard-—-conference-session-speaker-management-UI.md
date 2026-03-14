@@ -28,3 +28,9 @@ Build a protected /admin section for admins to create, edit, and delete conferen
 - [x] #4 Admin can create/edit/delete speakers
 - [x] #5 Forms validate required fields and show inline errors
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Implemented full protected /admin section. Backend: added PUT /api/sessions/{id}/speakers endpoint (Admin-only) and UpdateSessionSpeakersRequest DTO. Frontend: AdminLayout with sidebar nav and role guard (redirects non-admins to /); 6 admin pages for conferences/sessions/speakers with create/edit/delete; cascade conference->track selects in SessionFormPage; speaker multi-select checkboxes; email disabled on speaker edit; shared useToast, Toast, and ConfirmDialog components; Admin nav link in Layout for Admin role users. Build passes with 0 TypeScript errors.
+<!-- SECTION:FINAL_SUMMARY:END -->
