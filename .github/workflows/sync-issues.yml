@@ -1,0 +1,45 @@
+name: Sync Backlog to GitHub Issues
+
+on:
+  push:
+    branches: ['**']
+    tags: ['**']
+    paths:
+      - 'backlog/tasks/**'
+
+permissions:
+  issues: write
+  contents: write   # needed to write github_issue field back to task files
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Fetch full history so git rev-parse works; also allows push-back
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync backlog tasks to GitHub Issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          chmod +x scripts/sync-backlog-issues.sh
+          scripts/sync-backlog-issues.sh
+
+      - name: Commit updated task frontmatter (github_issue fields)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No frontmatter changes to commit."
+          else
+            git add backlog/tasks/
+            git commit -m "chore: sync github_issue numbers into task frontmatter [skip ci]"
+            git push
+          fi

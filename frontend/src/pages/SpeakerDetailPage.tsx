@@ -7,13 +7,24 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
 
-function LargeAvatar({ name }: { name: string }) {
+function LargeAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   const initials = name
     .split(' ')
     .map(n => n[0])
     .slice(0, 2)
     .join('')
     .toUpperCase();
+
+  if (photoUrl) {
+    return (
+      <img
+        src={photoUrl}
+        alt={name}
+        className="w-24 h-24 rounded-full object-cover shrink-0"
+      />
+    );
+  }
+
   return (
     <div className="w-24 h-24 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-2xl shrink-0">
       {initials}
@@ -46,7 +57,7 @@ export function SpeakerDetailPage() {
 
       {/* Profile header */}
       <div className="flex gap-6 items-start mb-8">
-        <LargeAvatar name={speaker.name} />
+        <LargeAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
         <div className="flex-1 min-w-0">
           <h1 className="text-3xl font-bold text-slate-900">{speaker.name}</h1>
           {speaker.company && (

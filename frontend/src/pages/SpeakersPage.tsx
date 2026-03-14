@@ -5,13 +5,24 @@ import type { Speaker } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 
-function SpeakerAvatar({ name }: { name: string }) {
+function SpeakerAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   const initials = name
     .split(' ')
     .map(n => n[0])
     .slice(0, 2)
     .join('')
     .toUpperCase();
+
+  if (photoUrl) {
+    return (
+      <img
+        src={photoUrl}
+        alt={name}
+        className="w-14 h-14 rounded-full object-cover shrink-0"
+      />
+    );
+  }
+
   return (
     <div className="w-14 h-14 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-semibold text-lg shrink-0">
       {initials}
@@ -42,7 +53,7 @@ export function SpeakersPage() {
               className="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-indigo-200 transition-all flex gap-4 items-start"
               data-testid="speaker-card"
             >
-              <SpeakerAvatar name={speaker.name} />
+              <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
                   {speaker.name}
