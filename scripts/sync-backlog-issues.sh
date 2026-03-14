@@ -286,15 +286,14 @@ $description"
   sleep "$SLEEP_BETWEEN_CALLS"
 
   # Write body to a temp file to safely handle newlines, quotes, and special chars
-  local body_file
   body_file="$(mktemp /tmp/sync-issue-body.XXXXXX)"
   printf '%s' "$issue_body" > "$body_file"
-  trap 'rm -f "$body_file"' RETURN
 
   # --- Create or update ---
   if [[ -z "$existing_issue" ]]; then
     log "Creating issue for $task_id_upper ..."
-    local create_out create_err create_rc
+    create_out=""
+    create_rc=0
     create_out="$(gh issue create \
       --title "$issue_title" \
       --body-file "$body_file" \
@@ -339,6 +338,9 @@ $description"
   fi
 
   sleep "$SLEEP_BETWEEN_CALLS"
+
+  # Clean up temp body file
+  rm -f "$body_file"
 
   unset issue_labels
   declare -a issue_labels=()
