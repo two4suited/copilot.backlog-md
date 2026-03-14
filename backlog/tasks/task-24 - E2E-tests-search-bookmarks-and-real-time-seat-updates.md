@@ -1,9 +1,11 @@
 ---
 id: TASK-24
 title: 'E2E tests: search, bookmarks, and real-time seat updates'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@tester'
 created_date: '2026-03-14 22:13'
+updated_date: '2026-03-14 22:14'
 labels:
   - testing
   - frontend
