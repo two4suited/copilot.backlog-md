@@ -1,9 +1,11 @@
 ---
 id: TASK-27
 title: '[BUG] sync creates duplicate GitHub Issues — no workflow concurrency guard'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 22:15'
+updated_date: '2026-03-14 22:15'
 labels:
   - bug
   - ci
