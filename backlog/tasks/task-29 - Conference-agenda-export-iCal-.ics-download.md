@@ -1,9 +1,11 @@
 ---
 id: TASK-29
 title: 'Conference agenda export: iCal (.ics) download'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 22:17'
+updated_date: '2026-03-14 22:17'
 labels:
   - backend
   - frontend
