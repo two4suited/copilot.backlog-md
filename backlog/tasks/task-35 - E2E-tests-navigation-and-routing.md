@@ -47,5 +47,9 @@ Fixed API URL to use Vite proxy (http://localhost:5174/api/...) instead of dead 
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Wrote frontend/e2e/navigation.spec.ts with 11 tests. Covers home page, all nav links, 404 page, Go Home link, back button, and deep links. 8 passed, 3 skipped (API-dependent), 0 failed.
+Re-ran navigation tests with live API stack.
+Fixed: hardcoded localhost:5173 URL regex now accepts 5173|5174 (Vite runs on 5174 when Aspire occupies 5173).
+Fixed: isApiAvailable() and session/speaker ID lookups now use Vite proxy (http://localhost:5174/api/...) instead of dead localhost:5000.
+Results: 8 passed, 3 skipped (skips caused by TASK-41 — GET /api/sessions returns 500 due to ambiguous route bug).
+All navigation assertions pass cleanly.
 <!-- SECTION:FINAL_SUMMARY:END -->
