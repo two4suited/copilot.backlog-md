@@ -40,14 +40,22 @@ export const api = {
     list: (conferenceId: string) => apiClient.get(`/api/conferences/${conferenceId}/tracks`).then(r => r.data),
     get: (conferenceId: string, trackId: string) =>
       apiClient.get(`/api/conferences/${conferenceId}/tracks/${trackId}`).then(r => r.data),
+    create: (conferenceId: string, data: unknown) => apiClient.post(`/api/conferences/${conferenceId}/tracks`, data).then(r => r.data),
+    update: (conferenceId: string, trackId: string, data: unknown) => apiClient.put(`/api/conferences/${conferenceId}/tracks/${trackId}`, data).then(r => r.data),
+    delete: (conferenceId: string, trackId: string) => apiClient.delete(`/api/conferences/${conferenceId}/tracks/${trackId}`).then(r => r.data),
   },
   sessions: {
     list: (trackId?: string) => apiClient.get('/api/sessions', { params: { trackId } }).then(r => r.data),
     listByConference: (conferenceId: string) =>
       apiClient.get(`/api/conferences/${conferenceId}/sessions`).then(r => r.data),
+    listAll: () => apiClient.get('/api/sessions').then(r => r.data),
     get: (id: string) => apiClient.get(`/api/sessions/${id}`).then(r => r.data),
     register: (id: string) => apiClient.post(`/api/sessions/${id}/register`).then(r => r.data),
     unregister: (id: string) => apiClient.delete(`/api/sessions/${id}/register`).then(r => r.data),
+    create: (data: unknown) => apiClient.post('/api/sessions', data).then(r => r.data),
+    update: (id: string, data: unknown) => apiClient.put(`/api/sessions/${id}`, data).then(r => r.data),
+    updateSpeakers: (id: string, speakerIds: string[]) => apiClient.put(`/api/sessions/${id}/speakers`, { speakerIds }).then(r => r.data),
+    delete: (id: string) => apiClient.delete(`/api/sessions/${id}`).then(r => r.data),
   },
   registrations: {
     register: (sessionId: string) => apiClient.post(`/api/sessions/${sessionId}/register`).then(r => r.data),
@@ -57,6 +65,9 @@ export const api = {
   speakers: {
     list: () => apiClient.get('/api/speakers').then(r => r.data),
     get: (id: string) => apiClient.get(`/api/speakers/${id}`).then(r => r.data),
+    create: (data: unknown) => apiClient.post('/api/speakers', data).then(r => r.data),
+    update: (id: string, data: unknown) => apiClient.put(`/api/speakers/${id}`, data).then(r => r.data),
+    delete: (id: string) => apiClient.delete(`/api/speakers/${id}`).then(r => r.data),
   },
   auth: {
     login: (email: string, password: string) =>

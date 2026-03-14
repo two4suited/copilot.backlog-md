@@ -1,0 +1,368 @@
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { ChevronLeft } from 'lucide-react';
+import { api } from '../../services/api';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
+import { Toast } from '../../components/Toast';
+import { useToast } from '../../hooks/useToast';
+import type { Conference, Track, Speaker, Session } from '../../types';
+
+function toDateTimeLocal(dt: string) {
+  if (!dt) return '';
+  const d = new Date(dt);
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+const SESSION_TYPES = ['Talk', 'Workshop', 'Panel', 'Keynote', 'Lightning Talk'];
+const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'All'];
+
+interface FormData {
+  title: string;
+  description: string;
+  conferenceId: string;
+  trackId: string;
+  startTime: string;
+  endTime: string;
+  room: string;
+  capacity: number;
+  sessionType: string;
+  level: string;
+  slidesUrl: string;
+  recordingUrl: string;
+  speakerIds: string[];
+}
+
+interface FormErrors {
+  title?: string;
+  trackId?: string;
+  startTime?: string;
+  endTime?: string;
+  room?: string;
+  capacity?: string;
+  sessionType?: string;
+  level?: string;
+}
+
+export function SessionFormPage() {
+  const { id } = useParams<{ id: string }>();
+  const isNew = id === 'new';
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { toast, showToast, clearToast } = useToast();
+
+  const [form, setForm] = useState<FormData>({
+    title: '', description: '', conferenceId: '', trackId: '',
+    startTime: '', endTime: '', room: '', capacity: 50,
+    sessionType: 'Talk', level: 'All', slidesUrl: '', recordingUrl: '', speakerIds: [],
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const { data: conferences } = useQuery<Conference[]>({
+    queryKey: ['conferences'],
+    queryFn: () => api.conferences.list(),
+  });
+
+  const { data: tracks } = useQuery<Track[]>({
+    queryKey: ['tracks', form.conferenceId],
+    queryFn: () => api.tracks.list(form.conferenceId),
+    enabled: !!form.conferenceId,
+  });
+
+  const { data: speakers } = useQuery<Speaker[]>({
+    queryKey: ['speakers'],
+    queryFn: () => api.speakers.list(),
+  });
+
+  const { data: session, isLoading } = useQuery<Session>({
+    queryKey: ['session', id],
+    queryFn: () => api.sessions.get(id!),
+    enabled: !isNew && !!id,
+  });
+
+  useEffect(() => {
+    if (session) {
+      setForm({
+        title: session.title,
+        description: session.description ?? '',
+        conferenceId: session.track?.conferenceId ?? '',
+        trackId: session.trackId,
+        startTime: toDateTimeLocal(session.startTime),
+        endTime: toDateTimeLocal(session.endTime),
+        room: session.room,
+        capacity: session.seatsTotal,
+        sessionType: session.sessionType,
+        level: session.level,
+        slidesUrl: session.slidesUrl ?? '',
+        recordingUrl: session.recordingUrl ?? '',
+        speakerIds: session.speakers?.map(s => s.id) ?? [],
+      });
+    }
+  }, [session]);
+
+  const saveMutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      if (isNew) {
+        await api.sessions.create({
+          trackId: data.trackId,
+          title: data.title,
+          description: data.description || null,
+          startTime: data.startTime,
+          endTime: data.endTime,
+          room: data.room,
+          capacity: data.capacity,
+          sessionType: data.sessionType,
+          level: data.level,
+          speakerIds: data.speakerIds.length > 0 ? data.speakerIds : null,
+        });
+      } else {
+        await api.sessions.update(id!, {
+          title: data.title,
+          description: data.description || null,
+          startTime: data.startTime,
+          endTime: data.endTime,
+          room: data.room,
+          capacity: data.capacity,
+          sessionType: data.sessionType,
+          level: data.level,
+          slidesUrl: data.slidesUrl || null,
+          recordingUrl: data.recordingUrl || null,
+        });
+        await api.sessions.updateSpeakers(id!, data.speakerIds);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'sessions'] });
+      showToast(isNew ? 'Session created' : 'Session updated');
+      setTimeout(() => navigate('/admin/sessions'), 1200);
+    },
+    onError: () => {
+      showToast('Failed to save session', 'error');
+    },
+  });
+
+  function validate(): boolean {
+    const errs: FormErrors = {};
+    if (!form.title.trim()) errs.title = 'Title is required';
+    if (!form.trackId) errs.trackId = 'Track is required';
+    if (!form.startTime) errs.startTime = 'Start time is required';
+    if (!form.endTime) errs.endTime = 'End time is required';
+    if (!form.room.trim()) errs.room = 'Room is required';
+    if (!form.capacity || form.capacity < 1) errs.capacity = 'Capacity must be at least 1';
+    if (!form.sessionType) errs.sessionType = 'Session type is required';
+    if (!form.level) errs.level = 'Level is required';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (validate()) saveMutation.mutate(form);
+  }
+
+  function toggleSpeaker(speakerId: string) {
+    setForm(f => ({
+      ...f,
+      speakerIds: f.speakerIds.includes(speakerId)
+        ? f.speakerIds.filter(sid => sid !== speakerId)
+        : [...f.speakerIds, speakerId],
+    }));
+  }
+
+  if (!isNew && isLoading) return <LoadingSpinner />;
+
+  return (
+    <div className="max-w-2xl">
+      <Link to="/admin/sessions" className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-6">
+        <ChevronLeft className="w-4 h-4" />
+        Back to Sessions
+      </Link>
+
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">{isNew ? 'New Session' : 'Edit Session'}</h1>
+
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Title *</label>
+          <input
+            type="text"
+            value={form.title}
+            onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.title ? 'border-red-400' : 'border-slate-200'}`}
+          />
+          {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+          <textarea
+            rows={3}
+            value={form.description}
+            onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
+            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Conference</label>
+          <select
+            value={form.conferenceId}
+            onChange={e => setForm(f => ({ ...f, conferenceId: e.target.value, trackId: '' }))}
+            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="">Select a conference...</option>
+            {conferences?.map(c => (
+              <option key={c.id} value={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Track *</label>
+          <select
+            value={form.trackId}
+            onChange={e => setForm(f => ({ ...f, trackId: e.target.value }))}
+            disabled={!form.conferenceId}
+            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.trackId ? 'border-red-400' : 'border-slate-200'} ${!form.conferenceId ? 'bg-slate-50 text-slate-400' : ''}`}
+          >
+            <option value="">Select a track...</option>
+            {tracks?.map(t => (
+              <option key={t.id} value={t.id}>{t.name}</option>
+            ))}
+          </select>
+          {errors.trackId && <p className="mt-1 text-xs text-red-600">{errors.trackId}</p>}
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Start Time *</label>
+            <input
+              type="datetime-local"
+              value={form.startTime}
+              onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.startTime ? 'border-red-400' : 'border-slate-200'}`}
+            />
+            {errors.startTime && <p className="mt-1 text-xs text-red-600">{errors.startTime}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">End Time *</label>
+            <input
+              type="datetime-local"
+              value={form.endTime}
+              onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.endTime ? 'border-red-400' : 'border-slate-200'}`}
+            />
+            {errors.endTime && <p className="mt-1 text-xs text-red-600">{errors.endTime}</p>}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Room *</label>
+            <input
+              type="text"
+              value={form.room}
+              onChange={e => setForm(f => ({ ...f, room: e.target.value }))}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.room ? 'border-red-400' : 'border-slate-200'}`}
+            />
+            {errors.room && <p className="mt-1 text-xs text-red-600">{errors.room}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Capacity *</label>
+            <input
+              type="number"
+              min={1}
+              value={form.capacity}
+              onChange={e => setForm(f => ({ ...f, capacity: parseInt(e.target.value) || 1 }))}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.capacity ? 'border-red-400' : 'border-slate-200'}`}
+            />
+            {errors.capacity && <p className="mt-1 text-xs text-red-600">{errors.capacity}</p>}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Session Type *</label>
+            <select
+              value={form.sessionType}
+              onChange={e => setForm(f => ({ ...f, sessionType: e.target.value }))}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.sessionType ? 'border-red-400' : 'border-slate-200'}`}
+            >
+              {SESSION_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+            {errors.sessionType && <p className="mt-1 text-xs text-red-600">{errors.sessionType}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Level *</label>
+            <select
+              value={form.level}
+              onChange={e => setForm(f => ({ ...f, level: e.target.value }))}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.level ? 'border-red-400' : 'border-slate-200'}`}
+            >
+              {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
+            </select>
+            {errors.level && <p className="mt-1 text-xs text-red-600">{errors.level}</p>}
+          </div>
+        </div>
+
+        {!isNew && (
+          <>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Slides URL</label>
+              <input
+                type="url"
+                value={form.slidesUrl}
+                onChange={e => setForm(f => ({ ...f, slidesUrl: e.target.value }))}
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Recording URL</label>
+              <input
+                type="url"
+                value={form.recordingUrl}
+                onChange={e => setForm(f => ({ ...f, recordingUrl: e.target.value }))}
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+          </>
+        )}
+
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-2">Speakers</label>
+          <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-slate-200 rounded-lg p-3">
+            {speakers?.map(speaker => (
+              <label key={speaker.id} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form.speakerIds.includes(speaker.id)}
+                  onChange={() => toggleSpeaker(speaker.id)}
+                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                />
+                <span>{speaker.name}</span>
+              </label>
+            ))}
+            {(!speakers || speakers.length === 0) && (
+              <p className="text-slate-400 text-sm col-span-2">No speakers available</p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-2">
+          <Link to="/admin/sessions" className="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            disabled={saveMutation.isPending}
+            className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50"
+          >
+            {saveMutation.isPending ? 'Saving...' : isNew ? 'Create Session' : 'Save Changes'}
+          </button>
+        </div>
+      </form>
+
+      {toast && <Toast message={toast.message} type={toast.type} onClose={clearToast} />}
+    </div>
+  );
+}

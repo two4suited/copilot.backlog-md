@@ -138,6 +138,23 @@ public class SessionsController : ControllerBase
         return NoContent();
     }
 
+    [HttpPut("{id:guid}/speakers")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateSpeakers(Guid id, [FromBody] UpdateSessionSpeakersRequest req, CancellationToken ct)
+    {
+        var session = await _db.Sessions
+            .Include(s => s.SessionSpeakers)
+            .FirstOrDefaultAsync(s => s.Id == id, ct);
+        if (session is null) return NotFound();
+        
+        _db.SessionSpeakers.RemoveRange(session.SessionSpeakers);
+        foreach (var speakerId in req.SpeakerIds ?? [])
+            _db.SessionSpeakers.Add(new ConferenceApp.Models.SessionSpeaker { SessionId = id, SpeakerId = speakerId });
+        
+        await _db.SaveChangesAsync(ct);
+        return NoContent();
+    }
+
     private static SessionDto MapToDto(ConferenceApp.Models.Session s)
     {
         var regCount = s.Registrations?.Count ?? 0;

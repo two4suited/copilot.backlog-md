@@ -142,6 +142,8 @@ public record UpdateSessionRequest(
     string? RecordingUrl
 );
 
+public record UpdateSessionSpeakersRequest(IReadOnlyList<Guid>? SpeakerIds);
+
 public record SpeakerSummaryDto(Guid Id, string Name, string Company, string? PhotoUrl);
 
 // ── Speaker DTOs ──────────────────────────────────────────────────────────────

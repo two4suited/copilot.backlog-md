@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AuthProvider } from './context/AuthContext';
 import { BookmarksProvider } from './context/BookmarksContext';
 import { Layout } from './components/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { AdminLayout } from './components/admin/AdminLayout';
 import { HomePage } from './pages/HomePage';
 import { ConferencesPage } from './pages/ConferencesPage';
 import { ConferenceDetailPage } from './pages/ConferenceDetailPage';
@@ -17,6 +18,12 @@ import { SpeakerDetailPage } from './pages/SpeakerDetailPage';
 import { SchedulePage } from './pages/SchedulePage';
 import { MySchedulePage } from './pages/MySchedulePage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ConferenceAdminPage } from './pages/admin/ConferenceAdminPage';
+import { ConferenceFormPage } from './pages/admin/ConferenceFormPage';
+import { SessionAdminPage } from './pages/admin/SessionAdminPage';
+import { SessionFormPage } from './pages/admin/SessionFormPage';
+import { SpeakerAdminPage } from './pages/admin/SpeakerAdminPage';
+import { SpeakerFormPage } from './pages/admin/SpeakerFormPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +55,15 @@ export default function App() {
               } />
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
+              <Route path="admin" element={<AdminLayout />}>
+                <Route index element={<Navigate to="/admin/conferences" replace />} />
+                <Route path="conferences" element={<ConferenceAdminPage />} />
+                <Route path="conferences/:id" element={<ConferenceFormPage />} />
+                <Route path="sessions" element={<SessionAdminPage />} />
+                <Route path="sessions/:id" element={<SessionFormPage />} />
+                <Route path="speakers" element={<SpeakerAdminPage />} />
+                <Route path="speakers/:id" element={<SpeakerFormPage />} />
+              </Route>
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

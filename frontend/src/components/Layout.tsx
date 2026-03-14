@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { CalendarDays, Mic2, LayoutGrid, LogIn, BookMarked } from 'lucide-react';
+import { CalendarDays, Mic2, LayoutGrid, LogIn, BookMarked, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { SearchBar } from './SearchBar';
 
@@ -52,6 +52,19 @@ export function Layout() {
                   <BookMarked className="w-4 h-4" />
                   My Schedule
                 </Link>
+                {user?.role === 'Admin' && (
+                  <Link
+                    to="/admin"
+                    className={`hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      location.pathname.startsWith('/admin')
+                        ? 'bg-indigo-50 text-indigo-700'
+                        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                    }`}
+                  >
+                    <Settings className="w-4 h-4" />
+                    Admin
+                  </Link>
+                )}
                 <span className="text-sm text-slate-600 hidden sm:block">{user?.name}</span>
                 <button
                   onClick={logout}
