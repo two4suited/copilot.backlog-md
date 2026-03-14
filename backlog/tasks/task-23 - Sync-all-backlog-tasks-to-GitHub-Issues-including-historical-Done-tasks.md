@@ -1,9 +1,11 @@
 ---
 id: TASK-23
 title: Sync all backlog tasks to GitHub Issues including historical Done tasks
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 22:11'
+updated_date: '2026-03-14 22:11'
 labels:
   - ci
   - infrastructure
