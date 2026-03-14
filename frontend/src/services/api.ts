@@ -47,6 +47,11 @@ export const api = {
     register: (id: string) => apiClient.post(`/api/sessions/${id}/register`).then(r => r.data),
     unregister: (id: string) => apiClient.delete(`/api/sessions/${id}/register`).then(r => r.data),
   },
+  registrations: {
+    register: (sessionId: string) => apiClient.post(`/api/sessions/${sessionId}/register`).then(r => r.data),
+    cancel: (sessionId: string) => apiClient.delete(`/api/sessions/${sessionId}/register`),
+    myRegistrations: () => apiClient.get('/api/users/me/registrations').then(r => r.data),
+  },
   speakers: {
     list: () => apiClient.get('/api/speakers').then(r => r.data),
     get: (id: string) => apiClient.get(`/api/speakers/${id}`).then(r => r.data),

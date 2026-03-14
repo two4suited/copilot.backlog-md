@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { CalendarDays, Mic2, LayoutGrid, LogIn } from 'lucide-react';
+import { CalendarDays, Mic2, LayoutGrid, LogIn, BookMarked } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const navItems = [

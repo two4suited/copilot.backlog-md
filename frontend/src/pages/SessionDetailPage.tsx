@@ -58,10 +58,7 @@ export function SessionDetailPage() {
   });
   const timeStr = `${startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} – ${endTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
 
-  const seatsRemaining =
-    session.capacity != null && session.registrationCount != null
-      ? session.capacity - session.registrationCount
-      : null;
+  const seatsRemaining = session.seatsAvailable ?? null;
   const isFull = seatsRemaining !== null && seatsRemaining <= 0;
 
   const conferenceId = session.track?.conferenceId;

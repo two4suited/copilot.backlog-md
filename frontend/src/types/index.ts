@@ -62,13 +62,15 @@ export interface Session extends BaseEntity {
   startTime: string;
   endTime: string;
   room: string;
-  capacity: number;
+  seatsTotal: number;
+  registrationCount: number;
+  seatsAvailable: number;
   sessionType: string;
   level: string;
   slidesUrl?: string;
   recordingUrl?: string;
   speakers?: Speaker[];
-  registrationCount?: number;
+  isRegistered?: boolean;
 }
 
 export interface User extends BaseEntity {

@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/Layout';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import { HomePage } from './pages/HomePage';
 import { ConferencesPage } from './pages/ConferencesPage';
 import { ConferenceDetailPage } from './pages/ConferenceDetailPage';
@@ -13,6 +14,7 @@ import { RegisterPage } from './pages/RegisterPage';
 import { SpeakersPage } from './pages/SpeakersPage';
 import { SpeakerDetailPage } from './pages/SpeakerDetailPage';
 import { SchedulePage } from './pages/SchedulePage';
+import { MySchedulePage } from './pages/MySchedulePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 const queryClient = new QueryClient({
@@ -39,6 +41,9 @@ export default function App() {
               <Route path="speakers" element={<SpeakersPage />} />
               <Route path="speakers/:id" element={<SpeakerDetailPage />} />
               <Route path="schedule" element={<SchedulePage />} />
+              <Route path="my-schedule" element={
+                <ProtectedRoute><MySchedulePage /></ProtectedRoute>
+              } />
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
               <Route path="*" element={<NotFoundPage />} />
