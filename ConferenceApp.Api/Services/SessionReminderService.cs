@@ -23,13 +23,18 @@ public class SessionReminderService : BackgroundService
             try
             {
                 await ProcessRemindersAsync(stoppingToken);
+                await Task.Delay(Interval, stoppingToken);
+            }
+            catch (OperationCanceledException)
+            {
+                // Normal shutdown — exit gracefully
+                break;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error processing session reminders.");
+                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken).ConfigureAwait(false);
             }
-
-            await Task.Delay(Interval, stoppingToken);
         }
     }
 

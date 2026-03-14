@@ -6,6 +6,8 @@
     "4": "dotnet-developer",
     "5": "general-purpose",
     "6": "task",
+    "30": "task",
+    "31": "code-review",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -648,6 +650,20 @@
       "newAgent": "dotnet-developer",
       "timestamp": "2026-03-14T21:20:05.021Z",
       "reason": "User assignment via CLI"
+    },
+    {
+      "taskId": "30",
+      "oldAgent": null,
+      "newAgent": "task",
+      "timestamp": "2026-03-14T22:23:36.780Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": null,
+      "newAgent": "code-review",
+      "timestamp": "2026-03-14T22:23:36.781Z",
+      "reason": "Ralph loop cycle 1"
     }
   ],
   "config": {
