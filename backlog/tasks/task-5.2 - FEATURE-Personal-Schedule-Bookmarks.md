@@ -4,10 +4,10 @@ title: 'FEATURE: Personal Schedule & Bookmarks'
 status: To Do
 assignee: []
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:19'
 labels:
   - feature
   - frontend
-  - backend
 dependencies: []
 parent_task_id: TASK-5
 priority: medium
