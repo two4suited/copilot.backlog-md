@@ -29,3 +29,9 @@ Login and registration pages, JWT storage, auth-aware navigation, and protected 
 - [x] #4 Navigation shows Login/Register when logged out, user name + Logout when logged in
 - [x] #5 Protected routes redirect to login if unauthenticated
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+AuthContext with login/logout/isAuthenticated, persisted to localStorage. LoginPage and RegisterPage with inline error handling. ProtectedRoute redirects unauthenticated users to /login preserving destination. Layout nav shows user name and Sign Out button when authenticated. api/client.ts interceptor key fixed from jwt to token. TypeScript and Vite build clean.
+<!-- SECTION:FINAL_SUMMARY:END -->
