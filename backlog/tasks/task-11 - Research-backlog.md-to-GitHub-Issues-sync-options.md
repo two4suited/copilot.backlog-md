@@ -1,9 +1,11 @@
 ---
 id: TASK-11
 title: 'Research: backlog.md to GitHub Issues sync options'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@explore'
 created_date: '2026-03-14 21:46'
+updated_date: '2026-03-14 21:46'
 labels:
   - research
   - infrastructure
