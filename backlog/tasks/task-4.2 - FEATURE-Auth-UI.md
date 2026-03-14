@@ -1,9 +1,11 @@
 ---
 id: TASK-4.2
 title: 'FEATURE: Auth UI'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@react-developer'
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:34'
 labels:
   - feature
   - frontend
