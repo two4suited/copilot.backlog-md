@@ -1,10 +1,11 @@
 ---
 id: TASK-1.2
 title: 'FEATURE: Database Models & Migrations'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@database-developer'
 created_date: '2026-03-14 21:11'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:20'
 labels:
   - feature
   - database
