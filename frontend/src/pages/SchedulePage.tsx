@@ -7,6 +7,7 @@ import type { Conference, ConferenceDetail, Session, Track } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
+import { BookmarkButton } from '../components/BookmarkButton';
 
 // ── helpers ────────────────────────────────────────────────────────────────
 
@@ -41,11 +42,15 @@ function SessionCard({ session }: { session: Session }) {
   return (
     <Link
       to={`/sessions/${session.id}`}
-      className="group block h-full bg-white rounded-xl border border-slate-200 p-3 hover:shadow-md hover:border-indigo-300 transition-all"
+      className="group relative block h-full bg-white rounded-xl border border-slate-200 p-3 hover:shadow-md hover:border-indigo-300 transition-all"
     >
-      <div className="flex items-start justify-between gap-1 mb-1">
+      {/* Bookmark button – stops propagation so the link doesn't fire */}
+      <div className="absolute top-2 right-2">
+        <BookmarkButton sessionId={session.id} />
+      </div>
+      <div className="flex items-start gap-1 mb-1 pr-8">
         <LevelBadge level={session.level} />
-        <span className="text-xs text-slate-400 shrink-0">{mins}m</span>
+        <span className="ml-auto text-xs text-slate-400 shrink-0">{mins}m</span>
       </div>
       <p className="text-sm font-semibold text-slate-900 group-hover:text-indigo-600 leading-snug line-clamp-3 mb-1.5 transition-colors">
         {session.title}

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AuthProvider } from './context/AuthContext';
+import { BookmarksProvider } from './context/BookmarksContext';
 import { Layout } from './components/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { HomePage } from './pages/HomePage';
@@ -30,6 +31,7 @@ export default function App() {
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
+        <BookmarksProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
@@ -50,6 +52,7 @@ export default function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+        </BookmarksProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </AuthProvider>

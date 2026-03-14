@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Clock, DoorOpen, Users, CalendarX } from 'lucide-react';
+import { Clock, DoorOpen, Users, CalendarX, Tag } from 'lucide-react';
 import { api } from '../services/api';
 import type { Session } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
@@ -100,6 +100,16 @@ export function MySchedulePage() {
                             <Users className="w-3.5 h-3.5" />
                             {session.registrationCount}/{session.seatsTotal}
                           </span>
+                          {session.track && (
+                            <span className="flex items-center gap-1">
+                              <Tag className="w-3.5 h-3.5" />
+                              <span
+                                className="inline-block w-2 h-2 rounded-full"
+                                style={{ backgroundColor: session.track.color }}
+                              />
+                              {session.track.name}
+                            </span>
+                          )}
                           <LevelBadge level={session.level} />
                         </div>
                       </div>
@@ -108,7 +118,7 @@ export function MySchedulePage() {
                         disabled={isCancelling}
                         className="shrink-0 px-3 py-1.5 text-sm font-medium rounded-lg border border-red-200 text-red-600 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
-                        {isCancelling ? 'Cancelling…' : 'Cancel'}
+                        {isCancelling ? 'Removing…' : 'Remove from schedule'}
                       </button>
                     </div>
                   );
