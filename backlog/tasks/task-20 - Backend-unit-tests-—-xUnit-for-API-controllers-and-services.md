@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
-updated_date: '2026-03-14 22:09'
+updated_date: '2026-03-14 22:10'
 labels:
   - backend
   - testing
@@ -30,15 +30,11 @@ Write xUnit unit tests for the ConferenceApp.Api project. Cover: AuthController 
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Created ConferenceApp.Api.Tests/ xUnit project targeting net10.0 with EF Core InMemory provider.
+19 xUnit tests passing across 3 controller test classes.
 
-**New files:**
-- `ConferenceApp.Api.Tests.csproj` — xUnit + EF InMemory; framework ref to Microsoft.AspNetCore.App; project ref to ConferenceApp.Api
-- `Helpers/TestDbContext.cs` — factory for isolated in-memory DbContext per test
-- `Helpers/FakeHubContext.cs` — no-op IHubContext<SessionHub> (avoids Moq)
-- `Controllers/AuthControllerTests.cs` — 5 tests: register valid, duplicate email (409), login valid, wrong password (401), unknown email (401)
-- `Controllers/RegistrationsControllerTests.cs` — 5 tests: register available, duplicate (409), at capacity (400), cancel (204), cancel non-existent (404)
-- `Controllers/SessionsControllerTests.cs` — 9 tests: list by conference, get existing, get 404, create 201, create bad track 400, update 204, update 404, delete 204, delete 404
+- AuthControllerTests (5): register, duplicate email 409, login, wrong password 401, unknown email 401
+- RegistrationsControllerTests (5): register, duplicate 409, at-capacity 400, cancel 204, cancel-missing 404
+- SessionsControllerTests (9): list by conference, get/404, create 201/bad-track 400, update 204/404, delete 204/404
 
-**Result:** 19/19 tests green; `dotnet test` passes with no warnings.
+Used EF Core InMemory provider and FakeSessionHubContext to avoid Moq for SignalR. ClaimsPrincipal injected via ControllerContext.
 <!-- SECTION:FINAL_SUMMARY:END -->
