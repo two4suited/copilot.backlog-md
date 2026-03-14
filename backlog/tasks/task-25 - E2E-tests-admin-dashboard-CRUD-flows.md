@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:13'
-updated_date: '2026-03-14 22:22'
+updated_date: '2026-03-14 22:23'
 labels:
   - testing
   - frontend
@@ -48,24 +48,11 @@ Test run: 2 passed (pure frontend routing - no API needed), 11 skipped (API unav
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Added two new Playwright E2E spec files for the admin dashboard and iCal export flows.
+13 Playwright e2e tests across admin and iCal export.
 
-**frontend/e2e/admin.spec.ts** (8 tests):
-- Route protection: unauthenticated /admin visit redirects to "/" (AdminLayout behavior)
-- Admin login and dashboard: verifies sidebar nav and Conferences heading
-- Conference CRUD: create flow with form fill + list assertion; required-field validation
-- Session edit: opens first session, changes title, saves, asserts updated title in list
-- Speaker delete: confirm dialog flow + cancel-without-delete flow
-- Non-admin access: registers a regular user, navigates to /admin, asserts redirect away
+admin.spec.ts (8 tests): unauthenticated /admin redirect, admin login + sidebar, conference create/validation, session edit, speaker delete confirm/cancel, non-admin redirect.
 
-**frontend/e2e/ical-export.spec.ts** (5 tests):
-- Unauthenticated /my-schedule redirects to /login and no export button visible
-- No-sessions state: new user sees empty state message, no export button
-- Export button visibility with registered sessions
-- Download trigger: clicks Export to Calendar, asserts download event with filename "my-schedule.ics"
-- Page structure: heading visible after load
+ical-export.spec.ts (5 tests): unauthenticated /my-schedule redirect, no-sessions hides button, sessions shows button, download triggers my-schedule.ics, page heading renders.
 
-**Test results**: 2 passed (pure-frontend routing tests, no API needed), 11 skipped gracefully via isApiAvailable() guard. Zero failures.
-
-**Key finding**: AdminLayout redirects unauthenticated/non-admin users to "/" not "/login" — tests reflect this correctly.
+2/13 pass offline (routing guards); 11 skip gracefully. Zero failures.
 <!-- SECTION:FINAL_SUMMARY:END -->
