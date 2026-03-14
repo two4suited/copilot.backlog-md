@@ -7,6 +7,19 @@ public static class DbSeeder
 {
     public static async Task SeedAsync(ConferenceDbContext db)
     {
+        // Seed admin user if not present (independent of conference seed)
+        if (!await db.Users.AnyAsync(u => u.Email == "admin@conference.dev"))
+        {
+            db.Users.Add(new User
+            {
+                Name = "Admin",
+                Email = "admin@conference.dev",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123!"),
+                Role = UserRole.Admin,
+            });
+            await db.SaveChangesAsync();
+        }
+
         if (await db.Conferences.IgnoreQueryFilters().AnyAsync()) return;
 
         var speaker1Id = Guid.NewGuid();

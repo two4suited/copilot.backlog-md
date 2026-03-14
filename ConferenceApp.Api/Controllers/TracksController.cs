@@ -1,5 +1,6 @@
 using ConferenceApp.Api.Data;
 using ConferenceApp.Api.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,6 +53,7 @@ public class TracksController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<TrackDto>> Create(
         Guid conferenceId, [FromBody] CreateTrackRequest req, CancellationToken ct)
     {
@@ -76,6 +78,7 @@ public class TracksController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(
         Guid conferenceId, Guid id, [FromBody] UpdateTrackRequest req, CancellationToken ct)
     {
@@ -94,6 +97,7 @@ public class TracksController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid conferenceId, Guid id, CancellationToken ct)
     {
         var track = await _db.Tracks

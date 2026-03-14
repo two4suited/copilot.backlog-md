@@ -1,5 +1,6 @@
 using ConferenceApp.Api.Data;
 using ConferenceApp.Api.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,6 +54,7 @@ public class SessionsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<SessionDto>> Create(
         [FromBody] CreateSessionRequest req, CancellationToken ct)
     {
@@ -99,6 +101,7 @@ public class SessionsController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSessionRequest req, CancellationToken ct)
     {
         var session = await _db.Sessions.FindAsync([id], ct);
@@ -120,6 +123,7 @@ public class SessionsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
         var session = await _db.Sessions.FindAsync([id], ct);

@@ -7,9 +7,11 @@ import { HomePage } from './pages/HomePage';
 import { ConferencesPage } from './pages/ConferencesPage';
 import { ConferenceDetailPage } from './pages/ConferenceDetailPage';
 import { TrackDetailPage } from './pages/TrackDetailPage';
+import { SessionDetailPage } from './pages/SessionDetailPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { SpeakersPage } from './pages/SpeakersPage';
+import { SpeakerDetailPage } from './pages/SpeakerDetailPage';
 import { SchedulePage } from './pages/SchedulePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
@@ -33,7 +35,9 @@ export default function App() {
               <Route path="conferences" element={<ConferencesPage />} />
               <Route path="conferences/:id" element={<ConferenceDetailPage />} />
               <Route path="conferences/:id/tracks/:trackId" element={<TrackDetailPage />} />
+              <Route path="sessions/:id" element={<SessionDetailPage />} />
               <Route path="speakers" element={<SpeakersPage />} />
+              <Route path="speakers/:id" element={<SpeakerDetailPage />} />
               <Route path="schedule" element={<SchedulePage />} />
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />

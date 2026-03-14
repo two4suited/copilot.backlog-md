@@ -1,5 +1,6 @@
 using ConferenceApp.Api.Data;
 using ConferenceApp.Api.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,6 +54,7 @@ public class SpeakersController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<SpeakerDto>> Create(
         [FromBody] CreateSpeakerRequest req, CancellationToken ct)
     {
@@ -76,6 +78,7 @@ public class SpeakersController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSpeakerRequest req, CancellationToken ct)
     {
         var speaker = await _db.Speakers.FindAsync([id], ct);
@@ -93,6 +96,7 @@ public class SpeakersController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
         var speaker = await _db.Speakers.FindAsync([id], ct);
