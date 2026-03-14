@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Text;
 using ConferenceApp.Api.Data;
 using ConferenceApp.Api.DTOs;
 using ConferenceApp.Api.Hubs;
@@ -183,6 +184,64 @@ public class RegistrationsController : ControllerBase
         )).ToList();
 
         return Ok(new MyRegistrationsResponse(dtos));
+    }
+
+    /// <summary>Export the currently authenticated user's schedule as an iCal (.ics) file.</summary>
+    /// <response code="200">iCal file containing one VEVENT per registered session.</response>
+    /// <response code="401">Not authenticated.</response>
+    [HttpGet("api/registrations/export/ical")]
+    [Authorize]
+    public async Task<IActionResult> ExportIcal(CancellationToken ct)
+    {
+        if (!TryGetUserId(out var userId))
+            return Unauthorized();
+
+        var registrations = await _db.Registrations
+            .AsNoTracking()
+            .Include(r => r.Session).ThenInclude(s => s.Track)
+            .Where(r => r.UserId == userId)
+            .OrderBy(r => r.Session.StartTime)
+            .ToListAsync(ct);
+
+        var sb = new StringBuilder();
+        sb.AppendLine("BEGIN:VCALENDAR");
+        sb.AppendLine("VERSION:2.0");
+        sb.AppendLine("PRODID:-//ConferenceApp//EN");
+        sb.AppendLine("CALSCALE:GREGORIAN");
+        sb.AppendLine("METHOD:PUBLISH");
+
+        var stamp = DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ");
+        foreach (var reg in registrations)
+        {
+            var session = reg.Session;
+            var description = (session.Description ?? string.Empty);
+            if (description.Length > 500) description = description[..500];
+            description = description
+                .Replace("\\", "\\\\")
+                .Replace(",", "\\,")
+                .Replace(";", "\\;")
+                .Replace("\r\n", "\\n")
+                .Replace("\n", "\\n")
+                .Replace("\r", "\\n");
+
+            var location = !string.IsNullOrWhiteSpace(session.Room)
+                ? session.Room
+                : session.Track?.Name ?? string.Empty;
+
+            sb.AppendLine("BEGIN:VEVENT");
+            sb.AppendLine($"UID:{reg.Id}@conferenceapp");
+            sb.AppendLine($"DTSTAMP:{stamp}");
+            sb.AppendLine($"DTSTART:{session.StartTime:yyyyMMddTHHmmssZ}");
+            sb.AppendLine($"DTEND:{session.EndTime:yyyyMMddTHHmmssZ}");
+            sb.AppendLine($"SUMMARY:{session.Title}");
+            sb.AppendLine($"DESCRIPTION:{description}");
+            sb.AppendLine($"LOCATION:{location}");
+            sb.AppendLine("END:VEVENT");
+        }
+
+        sb.AppendLine("END:VCALENDAR");
+
+        return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/calendar", "my-schedule.ics");
     }
 
     private bool TryGetUserId(out Guid userId)

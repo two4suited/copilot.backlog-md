@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Clock, DoorOpen, Users, CalendarX, Tag } from 'lucide-react';
+import { Clock, DoorOpen, Users, CalendarX, Tag, Download } from 'lucide-react';
 import { api } from '../services/api';
 import type { Session } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
+import { useAuth } from '../context/AuthContext';
 
 interface MyRegistrationsResponse {
   sessions: Session[];
@@ -24,6 +25,7 @@ function groupByDay(sessions: Session[]): Map<string, Session[]> {
 
 export function MySchedulePage() {
   const queryClient = useQueryClient();
+  const { token } = useAuth();
 
   const { data, isPending, isError } = useQuery<MyRegistrationsResponse>({
     queryKey: ['my-registrations'],
@@ -38,6 +40,19 @@ export function MySchedulePage() {
     },
   });
 
+  const handleExport = async () => {
+    const res = await fetch('/api/registrations/export/ical', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-schedule.ics';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if (isPending) return <LoadingSpinner />;
   if (isError) return <ErrorMessage message="Failed to load your schedule." />;
 
@@ -47,12 +62,25 @@ export function MySchedulePage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900">My Schedule</h1>
-        <p className="mt-1 text-slate-500">
-          {sessions.length === 0
-            ? 'You have no registered sessions yet.'
-            : `${sessions.length} session${sessions.length !== 1 ? 's' : ''} registered`}
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900">My Schedule</h1>
+            <p className="mt-1 text-slate-500">
+              {sessions.length === 0
+                ? 'You have no registered sessions yet.'
+                : `${sessions.length} session${sessions.length !== 1 ? 's' : ''} registered`}
+            </p>
+          </div>
+          {sessions.length > 0 && (
+            <button
+              onClick={handleExport}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Export to Calendar
+            </button>
+          )}
+        </div>
       </div>
 
       {sessions.length === 0 ? (
