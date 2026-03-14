@@ -1,9 +1,11 @@
 ---
 id: TASK-25
 title: 'E2E tests: admin dashboard CRUD flows'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@tester'
 created_date: '2026-03-14 22:13'
+updated_date: '2026-03-14 22:20'
 labels:
   - testing
   - frontend
