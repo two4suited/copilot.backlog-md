@@ -21,6 +21,7 @@ remains fully synchronized and up-to-date.
 - ✅ **Documentation & Decisions**: Structured docs and architectural decision records
 - ✅ **Export & Reporting**: Generate markdown reports and board snapshots
 - ✅ **AI-Optimized**: `--plain` flag provides clean text output for AI processing
+- ✅ **Orchestrator Agent**: Intelligent task assignment to Copilot agents with `orchestrator` command
 
 ### Why This Matters to You (AI Agent)
 
@@ -606,6 +607,108 @@ Tests:
 
 ---
 
+---
+
+## 11. Orchestrator Agent: Intelligent Task Assignment
+
+The **Orchestrator Agent** coordinates work across multiple Copilot agents and intelligently assigns tasks based on their properties.
+
+### What is the Orchestrator?
+
+The Orchestrator analyzes task characteristics (title, description, labels) and recommends the best-suited agent:
+- **explore** agent: Research, understanding, investigation
+- **task** agent: Building, testing, deployment
+- **code-review** agent: Code quality, security validation
+- **general-purpose** agent: Complex multi-step refactoring/architecture
+
+### Using Orchestrator Commands
+
+```bash
+# Show orchestrator help
+orchestrator help
+
+# Analyze a task and get agent recommendation
+orchestrator assign 7
+
+# Auto-assign specific agent
+orchestrator assign 7 --agent code-review
+
+# Bulk assign all "To Do" tasks
+orchestrator bulk-assign
+orchestrator bulk-assign --status "In Progress"
+
+# View assignment status and history
+orchestrator status
+
+# Deep analysis of a specific task
+orchestrator show 7
+
+# List all available agents
+orchestrator agents
+```
+
+### Assignment Examples
+
+```
+Task: "Fix memory leak in WebSocket handler"
+Labels: ["bug", "critical"]
+→ Recommended: code-review (80/100)
+  - High for validation & security
+
+Task: "Document API authentication flow"
+Description: "Write comprehensive documentation"
+→ Recommended: explore (82/100)
+  - Strong for research & documentation
+
+Task: "Migrate from Redux to Zustand"
+Labels: ["refactor", "architecture"]
+→ Recommended: general-purpose (85/100)
+  - Complex multi-step work
+```
+
+### How Assignments Work
+
+1. **Analysis**: Orchestrator scores all agents (0-100) based on:
+   - Keyword matches in title/description
+   - Specialty match
+   - Inferred task type
+   - Complexity level
+   - Strong indicator labels
+
+2. **Storage**: Assignments stored in `backlog/.orchestrator-metadata.json`
+   - Tracks current assignments
+   - Maintains complete history
+   - Records rationale and confidence scores
+
+3. **Transparency**: All scoring details visible via `orchestrator show <taskId>`
+
+### Best Practices for Orchestrator
+
+1. **Write clear task titles** - Specific titles improve analysis
+   - ✓ "Fix authentication token expiration in WebSocket handler"
+   - ✗ "Fix bug"
+
+2. **Use labels strategically**:
+   - "research", "understand", "document" → explore
+   - "build", "test", "deploy" → task
+   - "security", "review", "audit" → code-review
+   - "refactor", "architect", "complex" → general-purpose
+
+3. **Review recommendations** - Always check alternative agents before auto-assigning
+
+4. **Check detailed scoring** - Run `orchestrator show <taskId>` to understand why an agent was chosen
+
+### Agent Profiles Reference
+
+See `.github/ORCHESTRATOR.md` for complete documentation on:
+- Detailed agent selection rules
+- Scoring algorithm details
+- Workflow integration examples
+- Troubleshooting guide
+- Future enhancements
+
+---
+
 ## Common Issues
 
 | Problem              | Solution                                                           |
@@ -614,6 +717,7 @@ Tests:
 | AC won't check       | Use correct index: `backlog task 42 --plain` to see AC numbers     |
 | Changes not saving   | Ensure you're using CLI, not editing files                         |
 | Metadata out of sync | Re-edit via CLI to fix: `backlog task edit 42 -s <current-status>` |
+| Wrong agent assigned | Run `orchestrator show <taskId>` to see scoring details             |
 
 ---
 
@@ -622,6 +726,7 @@ Tests:
 **🎯 If you want to change ANYTHING in a task, use the `backlog task edit` command.**
 **📖 Use CLI to read tasks, exceptionally READ task files directly, never WRITE to them.**
 
-Full help available: `backlog --help`
+Full help available: `backlog --help` or `orchestrator help`
+
 
 <!-- BACKLOG.MD GUIDELINES END -->

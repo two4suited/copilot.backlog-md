@@ -1,0 +1,32 @@
+{
+  "name": "copilot.backlog-md",
+  "version": "1.0.0",
+  "description": "Backlog.md project with Orchestrator agent for intelligent task assignment",
+  "main": "src/orchestrator.js",
+  "type": "commonjs",
+  "bin": {
+    "orchestrator": "src/orchestrator-cli.js",
+    "orchestrator-monitor": "src/orchestrator-monitor-cli.js"
+  },
+  "scripts": {
+    "orchestrator": "node src/orchestrator-cli.js",
+    "orchestrator:assign": "node src/orchestrator-cli.js assign",
+    "orchestrator:status": "node src/orchestrator-cli.js status",
+    "orchestrator:bulk-assign": "node src/orchestrator-cli.js bulk-assign",
+    "orchestrator:monitor": "node src/orchestrator-monitor-cli.js",
+    "orchestrator:monitor-scan": "node src/orchestrator-monitor-cli.js scan",
+    "orchestrator:monitor-metrics": "node src/orchestrator-monitor-cli.js metrics"
+  },
+  "keywords": [
+    "backlog",
+    "orchestrator",
+    "agent",
+    "task-management",
+    "copilot"
+  ],
+  "author": "Brian",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

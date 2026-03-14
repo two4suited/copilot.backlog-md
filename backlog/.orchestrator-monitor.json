@@ -1,0 +1,13 @@
+{
+  "taskProgress": {
+    "1": {
+      "lastStatus": "To Do",
+      "lastStatusChange": "2026-03-14T20:00:29.618Z",
+      "agent": "explore",
+      "updatedAt": "2026-03-14T20:01:59.003Z"
+    }
+  },
+  "agentMetrics": {},
+  "stalledTasks": [],
+  "reassignmentSuggestions": []
+}

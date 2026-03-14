@@ -1,0 +1,25 @@
+{
+  "assignments": {
+    "1": "explore"
+  },
+  "history": [
+    {
+      "taskId": "1",
+      "oldAgent": null,
+      "newAgent": "explore",
+      "timestamp": "2026-03-14T19:58:38.748Z",
+      "reason": "User assignment via CLI"
+    },
+    {
+      "taskId": "1",
+      "oldAgent": "explore",
+      "newAgent": "explore",
+      "timestamp": "2026-03-14T20:01:58.704Z",
+      "reason": "User assignment via CLI"
+    }
+  ],
+  "config": {
+    "autoReassign": true,
+    "reassignThresholdMs": 3600000
+  }
+}
