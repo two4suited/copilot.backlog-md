@@ -11,6 +11,7 @@ labels:
   - frontend
 dependencies: []
 priority: medium
+github_issue: 88
 ---
 
 ## Description

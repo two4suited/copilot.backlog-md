@@ -11,6 +11,7 @@ labels:
   - frontend
 dependencies: []
 priority: high
+github_issue: 95
 ---
 
 ## Acceptance Criteria
