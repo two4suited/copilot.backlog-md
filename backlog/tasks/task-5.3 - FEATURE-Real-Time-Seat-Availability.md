@@ -1,9 +1,11 @@
 ---
 id: TASK-5.3
 title: 'FEATURE: Real-Time Seat Availability'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:57'
 labels:
   - feature
   - backend
