@@ -1,9 +1,11 @@
 ---
 id: TASK-22
 title: '[BUG] sync script: gh issue create fails — unknown flag --json'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 22:08'
+updated_date: '2026-03-14 22:08'
 labels:
   - bug
   - ci
