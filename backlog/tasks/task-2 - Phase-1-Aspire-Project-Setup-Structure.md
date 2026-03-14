@@ -1,9 +1,11 @@
 ---
 id: TASK-2
 title: 'Phase 1: Aspire Project Setup & Structure'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@orchestrator'
 created_date: '2026-03-14 20:57'
+updated_date: '2026-03-14 20:57'
 labels:
   - infrastructure
   - aspire
