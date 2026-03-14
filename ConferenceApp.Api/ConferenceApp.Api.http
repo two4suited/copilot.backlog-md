@@ -1,0 +1,6 @@
+@ConferenceApp.Api_HostAddress = http://localhost:5110
+
+GET {{ConferenceApp.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
