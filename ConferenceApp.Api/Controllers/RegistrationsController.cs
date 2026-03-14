@@ -14,7 +14,13 @@ public class RegistrationsController : ControllerBase
     private readonly ConferenceDbContext _db;
     public RegistrationsController(ConferenceDbContext db) => _db = db;
 
-    /// <summary>POST /api/sessions/{sessionId}/register — register the current user</summary>
+    /// <summary>Register the currently authenticated user for a session.</summary>
+    /// <param name="sessionId">ID of the session to register for.</param>
+    /// <response code="200">Registration successful.</response>
+    /// <response code="400">Session is full.</response>
+    /// <response code="401">Not authenticated.</response>
+    /// <response code="404">Session not found.</response>
+    /// <response code="409">Already registered for this session.</response>
     [HttpPost("api/sessions/{sessionId:guid}/register")]
     [Authorize]
     public async Task<ActionResult<RegisterSessionResponse>> Register(Guid sessionId, CancellationToken ct)
@@ -69,7 +75,11 @@ public class RegistrationsController : ControllerBase
         ));
     }
 
-    /// <summary>DELETE /api/sessions/{sessionId}/register — cancel the current user's registration</summary>
+    /// <summary>Cancel the currently authenticated user's registration for a session.</summary>
+    /// <param name="sessionId">ID of the session to cancel registration for.</param>
+    /// <response code="204">Cancellation successful.</response>
+    /// <response code="401">Not authenticated.</response>
+    /// <response code="404">Registration not found.</response>
     [HttpDelete("api/sessions/{sessionId:guid}/register")]
     [Authorize]
     public async Task<IActionResult> Cancel(Guid sessionId, CancellationToken ct)
@@ -88,7 +98,12 @@ public class RegistrationsController : ControllerBase
         return NoContent();
     }
 
-    /// <summary>GET /api/sessions/{sessionId}/registrations — list attendees (Admin only)</summary>
+    /// <summary>List all attendees registered for a session (Admin only).</summary>
+    /// <param name="sessionId">ID of the session.</param>
+    /// <response code="200">List of registered attendees.</response>
+    /// <response code="401">Not authenticated.</response>
+    /// <response code="403">Admin role required.</response>
+    /// <response code="404">Session not found.</response>
     [HttpGet("api/sessions/{sessionId:guid}/registrations")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<IReadOnlyList<AttendeeDto>>> ListAttendees(Guid sessionId, CancellationToken ct)
@@ -106,7 +121,9 @@ public class RegistrationsController : ControllerBase
         return Ok(attendees);
     }
 
-    /// <summary>GET /api/users/me/registrations — my registered sessions</summary>
+    /// <summary>Return all sessions the currently authenticated user is registered for.</summary>
+    /// <response code="200">List of sessions the current user has registered for.</response>
+    /// <response code="401">Not authenticated.</response>
     [HttpGet("api/users/me/registrations")]
     [Authorize]
     public async Task<ActionResult<MyRegistrationsResponse>> MyRegistrations(CancellationToken ct)

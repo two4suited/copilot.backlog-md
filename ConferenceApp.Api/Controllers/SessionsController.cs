@@ -13,6 +13,10 @@ public class SessionsController : ControllerBase
     private readonly ConferenceDbContext _db;
     public SessionsController(ConferenceDbContext db) => _db = db;
 
+    /// <summary>Return all sessions, optionally filtered by track or conference.</summary>
+    /// <param name="trackId">Filter sessions to a specific track.</param>
+    /// <param name="conferenceId">Filter sessions to a specific conference.</param>
+    /// <response code="200">List of sessions ordered by start time.</response>
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<SessionDto>>> List(
         [FromQuery] Guid? trackId,

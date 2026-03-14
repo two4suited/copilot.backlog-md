@@ -14,6 +14,10 @@ public class ConferencesController : ControllerBase
 
     public ConferencesController(ConferenceDbContext db) => _db = db;
 
+    /// <summary>Return a paginated list of conferences, newest first.</summary>
+    /// <param name="page">Page number (1-based).</param>
+    /// <param name="pageSize">Items per page (1–100, default 20).</param>
+    /// <response code="200">Paginated conference list.</response>
     [HttpGet]
     public async Task<ActionResult<PagedResult<ConferenceDto>>> List(
         [FromQuery] int page = 1,

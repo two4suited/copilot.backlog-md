@@ -28,7 +28,7 @@ export function SessionDetailPage() {
   const { isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
   const [registered, setRegistered] = useState(false);
-  const [registerError, setRegisterError] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const { data: session, isPending, isError } = useQuery<Session>({
     queryKey: ['sessions', id],
@@ -37,14 +37,30 @@ export function SessionDetailPage() {
   });
 
   const registerMutation = useMutation({
-    mutationFn: () => api.sessions.register(id!),
+    mutationFn: () => api.registrations.register(id!),
     onSuccess: () => {
       setRegistered(true);
-      setRegisterError(null);
+      setActionError(null);
       queryClient.invalidateQueries({ queryKey: ['sessions', id] });
+      queryClient.invalidateQueries({ queryKey: ['my-registrations'] });
+    },
+    onError: (err: unknown) => {
+      const msg = (err as { response?: { data?: { message?: string } } })
+        ?.response?.data?.message;
+      setActionError(msg ?? 'Registration failed. Please try again.');
+    },
+  });
+
+  const cancelMutation = useMutation({
+    mutationFn: () => api.registrations.cancel(id!),
+    onSuccess: () => {
+      setRegistered(false);
+      setActionError(null);
+      queryClient.invalidateQueries({ queryKey: ['sessions', id] });
+      queryClient.invalidateQueries({ queryKey: ['my-registrations'] });
     },
     onError: () => {
-      setRegisterError('Registration failed. Please try again.');
+      setActionError('Failed to cancel registration. Please try again.');
     },
   });
 
@@ -145,8 +161,17 @@ export function SessionDetailPage() {
       {isAuthenticated && (
         <div className="mb-8">
           {registered ? (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 text-emerald-700 font-medium text-sm border border-emerald-200">
-              ✓ Registered for this session
+            <div className="flex items-center gap-3">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 text-emerald-700 font-medium text-sm border border-emerald-200">
+                ✓ Registered for this session
+              </div>
+              <button
+                onClick={() => cancelMutation.mutate()}
+                disabled={cancelMutation.isPending}
+                className="px-4 py-2 rounded-lg border border-red-200 text-red-600 text-sm font-medium hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {cancelMutation.isPending ? 'Cancelling…' : 'Cancel registration'}
+              </button>
             </div>
           ) : (
             <button
@@ -157,8 +182,8 @@ export function SessionDetailPage() {
               {registerMutation.isPending ? 'Registering…' : isFull ? 'Session Full' : 'Register for this session'}
             </button>
           )}
-          {registerError && (
-            <p className="mt-2 text-sm text-red-600">{registerError}</p>
+          {actionError && (
+            <p className="mt-2 text-sm text-red-600">{actionError}</p>
           )}
         </div>
       )}

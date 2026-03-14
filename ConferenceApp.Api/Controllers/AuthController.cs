@@ -22,6 +22,10 @@ public class AuthController : ControllerBase
         _tokenService = tokenService;
     }
 
+    /// <summary>Register a new attendee account and receive a JWT token.</summary>
+    /// <remarks>Creates a new user with the Attendee role. Returns a JWT for immediate use.</remarks>
+    /// <response code="200">Registration successful; returns JWT and user info.</response>
+    /// <response code="409">Email address already registered.</response>
     [HttpPost("register")]
     public async Task<ActionResult<AuthResponse>> Register(
         [FromBody] RegisterRequest req, CancellationToken ct)
@@ -44,6 +48,9 @@ public class AuthController : ControllerBase
         return Ok(new AuthResponse(token, user.Email, user.Name, user.Role.ToString()));
     }
 
+    /// <summary>Authenticate with email and password, returning a JWT token.</summary>
+    /// <response code="200">Login successful; returns JWT and user info.</response>
+    /// <response code="401">Invalid email or password.</response>
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponse>> Login(
         [FromBody] LoginRequest req, CancellationToken ct)
@@ -58,6 +65,9 @@ public class AuthController : ControllerBase
         return Ok(new AuthResponse(token, user.Email, user.Name, user.Role.ToString()));
     }
 
+    /// <summary>Return the profile of the currently authenticated user.</summary>
+    /// <response code="200">Current user's profile.</response>
+    /// <response code="401">Not authenticated.</response>
     [HttpGet("me")]
     [Authorize]
     public async Task<ActionResult<UserProfileDto>> Me(CancellationToken ct)

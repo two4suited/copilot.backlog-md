@@ -43,6 +43,8 @@ export const api = {
   },
   sessions: {
     list: (trackId?: string) => apiClient.get('/api/sessions', { params: { trackId } }).then(r => r.data),
+    listByConference: (conferenceId: string) =>
+      apiClient.get(`/api/conferences/${conferenceId}/sessions`).then(r => r.data),
     get: (id: string) => apiClient.get(`/api/sessions/${id}`).then(r => r.data),
     register: (id: string) => apiClient.post(`/api/sessions/${id}/register`).then(r => r.data),
     unregister: (id: string) => apiClient.delete(`/api/sessions/${id}/register`).then(r => r.data),

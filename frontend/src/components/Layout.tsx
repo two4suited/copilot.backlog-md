@@ -39,6 +39,17 @@ export function Layout() {
             </nav>
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
+                <Link
+                  to="/my-schedule"
+                  className={`hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    location.pathname === '/my-schedule'
+                      ? 'bg-indigo-50 text-indigo-700'
+                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  <BookMarked className="w-4 h-4" />
+                  My Schedule
+                </Link>
                 <span className="text-sm text-slate-600 hidden sm:block">{user?.name}</span>
                 <button
                   onClick={logout}
