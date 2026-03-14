@@ -30,3 +30,9 @@ JWT-based login/register endpoints. Issues tokens with role claims. Refresh toke
 - [x] #5 Passwords hashed with bcrypt
 - [x] #6 Returns 401 for invalid credentials
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Implemented JWT authentication: POST /api/auth/register (BCrypt hash, returns JWT), POST /api/auth/login (credential validation, returns JWT), GET /api/auth/me ([Authorize], returns profile). User model uses UserRole enum with .ToString() for claims. TokenService (scoped), JwtBearer middleware, 7-day tokens with sub/email/role claims. JWT config in appsettings.json. Build clean.
+<!-- SECTION:FINAL_SUMMARY:END -->
