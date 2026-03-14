@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:40'
+updated_date: '2026-03-14 21:41'
 labels:
   - feature
   - frontend
@@ -33,5 +33,5 @@ Login and registration pages, JWT storage, auth-aware navigation, and protected 
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-AuthContext with login/logout/isAuthenticated, persisted to localStorage. LoginPage and RegisterPage with inline error handling. ProtectedRoute redirects unauthenticated users to /login preserving destination. Layout nav shows user name and Sign Out button when authenticated. api/client.ts interceptor key fixed from jwt to token. TypeScript and Vite build clean.
+Implemented full auth UI: AuthContext with localStorage persistence, LoginPage with redirect-after-login, RegisterPage with auto-login, ProtectedRoute with state.from, Layout nav updated for auth state. Vite build passes cleanly (1857 modules, 0 errors).
 <!-- SECTION:FINAL_SUMMARY:END -->
