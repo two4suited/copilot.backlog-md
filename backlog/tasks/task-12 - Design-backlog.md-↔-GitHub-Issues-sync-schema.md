@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:46'
-updated_date: '2026-03-14 21:52'
+updated_date: '2026-03-14 21:53'
 labels:
   - design
   - infrastructure
@@ -177,3 +177,15 @@ done
    For typical backlog sizes (< 100 tasks) this is well within limits. gh also
    automatically retries HTTP 429 responses.
 <!-- SECTION:NOTES:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Designed the full backlog.md <-> GitHub Issues sync schema:
+
+- **Field mapping**: 7 frontmatter fields mapped to GitHub Issue fields (title, body, state, labels). Assignee intentionally skipped due to username mismatch. task:TASK-N label chosen as the stable foreign key — no separate map file needed.
+- **ID mapping**: label-based lookup via gh issue list --label task:TASK-N --state all; fully idempotent, survives forks and branch changes.
+- **Script design**: pseudocode for scripts/sync-backlog-issues.sh covering pre-create taxonomy labels, per-task frontmatter parse, description extraction, create-or-update logic, open/closed state sync, and archived-task close pass.
+- **Label taxonomy**: status:* (4), priority:* (3), task:TASK-N (dynamic), branch:NAME (dynamic per push), skill labels (pass-through).
+- **Edge cases**: missing Description section, special chars in label names, first-run zero-issues, archived tasks, rate limiting.
+<!-- SECTION:FINAL_SUMMARY:END -->
