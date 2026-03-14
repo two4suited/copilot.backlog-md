@@ -1,10 +1,11 @@
 ---
 id: TASK-2.2
 title: 'FEATURE: Conference UI'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@react-developer'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:30'
 labels:
   - feature
   - frontend
