@@ -1,10 +1,10 @@
 ---
 id: TASK-1.1
 title: 'FEATURE: Aspire AppHost & Orchestration'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 21:11'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 22:04'
 labels:
   - feature
   - infrastructure
@@ -28,3 +28,9 @@ Create the .NET Aspire AppHost project that wires PostgreSQL, the API, and the R
 - [ ] #4 React Vite app added via AddNpmApp or AddViteApp
 - [ ] #5 dotnet run from AppHost starts all services
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+All sub-tasks completed.
+<!-- SECTION:FINAL_SUMMARY:END -->
