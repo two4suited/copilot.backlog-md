@@ -1,10 +1,11 @@
 ---
 id: TASK-3.3
 title: 'FEATURE: Schedule View'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@react-developer'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:37'
 labels:
   - feature
   - frontend
