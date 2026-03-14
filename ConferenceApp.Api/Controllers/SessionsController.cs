@@ -16,6 +16,7 @@ public class SessionsController : ControllerBase
     /// <summary>Return all sessions, optionally filtered by track or conference.</summary>
     /// <param name="trackId">Filter sessions to a specific track.</param>
     /// <param name="conferenceId">Filter sessions to a specific conference.</param>
+    /// <param name="ct">Cancellation token.</param>
     /// <response code="200">List of sessions ordered by start time.</response>
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<SessionDto>>> List(

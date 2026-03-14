@@ -16,6 +16,7 @@ public class RegistrationsController : ControllerBase
 
     /// <summary>Register the currently authenticated user for a session.</summary>
     /// <param name="sessionId">ID of the session to register for.</param>
+    /// <param name="ct">Cancellation token.</param>
     /// <response code="200">Registration successful.</response>
     /// <response code="400">Session is full.</response>
     /// <response code="401">Not authenticated.</response>
@@ -77,6 +78,7 @@ public class RegistrationsController : ControllerBase
 
     /// <summary>Cancel the currently authenticated user's registration for a session.</summary>
     /// <param name="sessionId">ID of the session to cancel registration for.</param>
+    /// <param name="ct">Cancellation token.</param>
     /// <response code="204">Cancellation successful.</response>
     /// <response code="401">Not authenticated.</response>
     /// <response code="404">Registration not found.</response>
@@ -100,6 +102,7 @@ public class RegistrationsController : ControllerBase
 
     /// <summary>List all attendees registered for a session (Admin only).</summary>
     /// <param name="sessionId">ID of the session.</param>
+    /// <param name="ct">Cancellation token.</param>
     /// <response code="200">List of registered attendees.</response>
     /// <response code="401">Not authenticated.</response>
     /// <response code="403">Admin role required.</response>
