@@ -294,15 +294,17 @@ $description"
     log "Creating issue for $task_id_upper ..."
     create_out=""
     create_rc=0
+    # gh issue create outputs the issue URL to stdout (not --json/--jq — not supported on create)
     create_out="$(gh issue create \
       --title "$issue_title" \
       --body-file "$body_file" \
       --label "$labels_csv" \
-      --json number \
-      --jq '.number' 2>/tmp/sync-gh-err.txt)" && create_rc=0 || create_rc=$?
+      2>/tmp/sync-gh-err.txt)" && create_rc=0 || create_rc=$?
 
-    if [[ $create_rc -eq 0 && -n "$create_out" ]]; then
-      new_number="$create_out"
+    # Parse issue number from URL e.g. https://github.com/owner/repo/issues/42
+    new_number="$(echo "$create_out" | grep -oE '[0-9]+$' || true)"
+
+    if [[ $create_rc -eq 0 && -n "$new_number" ]]; then
       log "Created issue #$new_number for $task_id_upper"
       write_github_issue_field "$task_file" "$new_number"
       existing_issue="$new_number"
