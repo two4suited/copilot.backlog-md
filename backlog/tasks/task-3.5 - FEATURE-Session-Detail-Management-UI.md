@@ -4,9 +4,11 @@ title: 'FEATURE: Session Detail & Management UI'
 status: To Do
 assignee: []
 created_date: '2026-03-14 21:12'
+updated_date: '2026-03-14 21:19'
 labels:
   - feature
   - frontend
+  - react
 dependencies: []
 parent_task_id: TASK-3
 priority: high
