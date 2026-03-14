@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:57'
+updated_date: '2026-03-14 22:01'
 labels:
   - feature
   - backend
@@ -23,7 +23,7 @@ SignalR hub pushes seat count updates to all connected clients when registration
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 SignalR hub added to API project
-- [ ] #2 Registration changes broadcast updated seat count to hub group
-- [ ] #3 Session cards update seat count in real-time without page refresh
+- [x] #1 SignalR hub added to API project
+- [x] #2 Registration changes broadcast updated seat count to hub group
+- [x] #3 Session cards update seat count in real-time without page refresh
 <!-- AC:END -->
