@@ -33,3 +33,14 @@ priority: high
 6. Run tests, verify pass/skip counts
 7. Commit and push
 <!-- SECTION:PLAN:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Explored admin UI: AdminLayout guards with role===Admin and redirects to "/" (not /login) for unauthenticated/non-admin users. ConferenceFormPage, SessionFormPage, SpeakerAdminPage all use ConfirmDialog for delete. iCal export button in MySchedulePage only renders when sessions.length > 0; uses programmatic anchor click triggering download event.
+
+Wrote admin.spec.ts (8 tests): route protection, admin login, conference create, session edit, speaker delete/cancel, non-admin redirect.
+Wrote ical-export.spec.ts (5 tests): unauthenticated redirect, no-sessions state, export button visibility, download trigger, page structure.
+
+Test run: 2 passed (pure frontend routing - no API needed), 11 skipped (API unavailable). Zero failures.
+<!-- SECTION:NOTES:END -->
