@@ -2,7 +2,10 @@ project_name: "copilot.backlog-md"
 default_status: "To Do"
 statuses: ["To Do", "In Progress", "Done"]
 labels: []
-definition_of_done: ["e2e Test pass"]
+definition_of_done:
+  - Tests pass
+  - Documentation updated
+  - No regressions introduced
 date_format: yyyy-mm-dd
 max_column_width: 20
 auto_open_browser: true

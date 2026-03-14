@@ -17,6 +17,12 @@ const AGENT_TYPES = {
   CODE_REVIEW: "code-review",
   GENERAL_PURPOSE: "general-purpose",
   ORCHESTRATOR: "orchestrator",
+  // Skill-based agents
+  REACT_DEVELOPER: "react-developer",
+  DOTNET_DEVELOPER: "dotnet-developer",
+  DATABASE_DEVELOPER: "database-developer",
+  ASPIRE_EXPERT: "aspire-expert",
+  DESIGNER: "designer",
 };
 
 /**
@@ -31,6 +37,7 @@ const AGENT_PROFILES = {
     complexity: "low-to-medium",
     timelinessRequired: false,
     capabilities: ["grep", "glob", "view", "bash"],
+    skillLabels: [],
   },
   task: {
     name: "Task Agent",
@@ -40,6 +47,7 @@ const AGENT_PROFILES = {
     complexity: "medium",
     timelinessRequired: false,
     capabilities: ["bash", "all CLI tools"],
+    skillLabels: [],
   },
   "code-review": {
     name: "Code Review Agent",
@@ -49,6 +57,7 @@ const AGENT_PROFILES = {
     complexity: "medium",
     timelinessRequired: true,
     capabilities: ["bash", "grep", "view"],
+    skillLabels: [],
   },
   "general-purpose": {
     name: "General Purpose Agent",
@@ -58,6 +67,7 @@ const AGENT_PROFILES = {
     complexity: "high",
     timelinessRequired: false,
     capabilities: ["all tools", "high-quality reasoning"],
+    skillLabels: [],
   },
   orchestrator: {
     name: "Orchestrator Agent",
@@ -67,6 +77,104 @@ const AGENT_PROFILES = {
     complexity: "high",
     timelinessRequired: false,
     capabilities: ["task delegation", "status tracking"],
+    skillLabels: ["orchestrator"],
+  },
+
+  // ─── Skill-Based Agents ────────────────────────────────────────────────────
+
+  "react-developer": {
+    name: "React Developer",
+    description: "Expert in React, TypeScript, Vite, Tailwind CSS, React Query, and component architecture",
+    specialties: [
+      "react components", "typescript", "vite", "tailwind css", "react query",
+      "react router", "hooks", "state management", "frontend", "UI components",
+      "forms", "responsive design", "spa",
+    ],
+    keywords: [
+      "react", "component", "tsx", "jsx", "vite", "tailwind", "frontend",
+      "ui", "page", "form", "hook", "state", "router", "navigation", "layout",
+      "responsive", "vitest", "react query",
+    ],
+    complexity: "medium",
+    timelinessRequired: false,
+    capabilities: ["TypeScript", "React 18", "Vite", "Tailwind CSS", "React Query", "React Router v6", "Vitest"],
+    skillLabels: ["frontend", "react"],
+  },
+
+  "dotnet-developer": {
+    name: ".NET API Developer",
+    description: "Expert in ASP.NET Core, C#, Web API design, Entity Framework Core, and middleware",
+    specialties: [
+      "asp.net core", "web api", "c#", "rest api", "controllers", "middleware",
+      "entity framework", "dependency injection", "validation", "swagger", "openapi",
+      "signalr", "jwt", "authentication", "authorization",
+    ],
+    keywords: [
+      "api", "endpoint", "controller", "dotnet", ".net", "csharp", "c#",
+      "rest", "http", "backend", "service", "middleware", "swagger", "jwt",
+      "signalr", "aspnet", "webapi",
+    ],
+    complexity: "medium",
+    timelinessRequired: false,
+    capabilities: [".NET 8", "ASP.NET Core", "C#", "Entity Framework Core", "xUnit", "Swagger/OpenAPI", "SignalR"],
+    skillLabels: ["backend", "api"],
+  },
+
+  "database-developer": {
+    name: "Database Developer",
+    description: "Expert in PostgreSQL, Entity Framework Core schema design, migrations, indexing, and query optimisation",
+    specialties: [
+      "postgresql", "entity framework", "ef core", "migrations", "schema design",
+      "indexes", "relationships", "seed data", "query optimisation", "npgsql",
+      "database", "dbcontext", "data model",
+    ],
+    keywords: [
+      "database", "postgres", "postgresql", "migration", "schema", "model",
+      "dbcontext", "entity", "table", "index", "seed", "npgsql", "ef",
+      "relationship", "foreign key",
+    ],
+    complexity: "medium",
+    timelinessRequired: false,
+    capabilities: ["PostgreSQL", "EF Core", "Npgsql", "SQL", "Migrations", "Performance tuning"],
+    skillLabels: ["database"],
+  },
+
+  "aspire-expert": {
+    name: "Aspire Expert",
+    description: "Expert in .NET Aspire orchestration, AppHost configuration, service discovery, Aspire Dashboard, and deployment pipelines",
+    specialties: [
+      "aspire", "apphost", "service discovery", "aspire dashboard", "opentelemetry",
+      "health checks", "infrastructure as code", "docker", "containers",
+      "postgresql container", "aspire hosting", "distributed application",
+    ],
+    keywords: [
+      "aspire", "apphost", "orchestrat", "infrastructure", "container", "dashboard",
+      "service discovery", "distributed", "hosting", "pipeline", "deploy", "devops",
+      "opentelemetry", "health check",
+    ],
+    complexity: "high",
+    timelinessRequired: false,
+    capabilities: ["Aspire.Hosting", "AppHost", "Aspire Dashboard", "OpenTelemetry", "Docker", "CI/CD"],
+    skillLabels: ["aspire", "infrastructure", "observability"],
+  },
+
+  "designer": {
+    name: "Designer",
+    description: "Expert in UI/UX design, design systems, Tailwind CSS component design, accessibility, and user flow",
+    specialties: [
+      "ui design", "ux", "component design", "design system", "accessibility",
+      "tailwind", "colour scheme", "typography", "layout", "responsive design",
+      "user flow", "wireframe", "figma", "visual hierarchy",
+    ],
+    keywords: [
+      "design", "ui", "ux", "layout", "colour", "color", "style", "theme",
+      "accessibility", "a11y", "visual", "typography", "component design",
+      "wireframe", "branding", "logo",
+    ],
+    complexity: "low-to-medium",
+    timelinessRequired: false,
+    capabilities: ["Tailwind CSS", "Design systems", "Accessibility (WCAG)", "Component design", "User flows"],
+    skillLabels: ["design", "ui"],
   },
 };
 
@@ -269,17 +377,11 @@ class Orchestrator {
       score: complexityScore,
     };
 
-    // Labels that strongly indicate agent type
-    const strongIndicators = {
-      explore: ["research", "understand", "document"],
-      task: ["build", "test", "deploy", "lint"],
-      "code-review": ["security", "review", "audit"],
-      "general-purpose": ["refactor", "architect", "complex"],
-    };
-    const strongMatches = (strongIndicators[agentType] || []).filter((ind) =>
+    // Labels that strongly indicate agent type (from profile skillLabels)
+    const strongMatches = (profile.skillLabels || []).filter((ind) =>
       labels.includes(ind)
     ).length;
-    const strongScore = strongMatches * 10;
+    const strongScore = strongMatches * 15; // skill-label match is a strong signal
     score += strongScore;
     reasoning.strongIndicators = {
       matches: strongMatches,
