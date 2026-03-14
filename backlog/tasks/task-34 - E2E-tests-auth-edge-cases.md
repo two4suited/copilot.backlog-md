@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:25'
-updated_date: '2026-03-14 22:26'
+updated_date: '2026-03-14 22:30'
 labels:
   - testing
   - frontend
@@ -41,5 +41,5 @@ Run 1: 1 passed (weak password client-side), 4 skipped (API unavailable)
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Wrote frontend/e2e/auth-edge-cases.spec.ts with 5 tests. Weak-password test runs without API (client-side validation). Remaining 4 tests skip gracefully without backend. 1 passed, 4 skipped, 0 failed.
+Fixed SessionReminderService graceful shutdown (moved Task.Delay inside try/catch, catch OperationCanceledException). Use port 5001 for API (5000 taken by macOS ControlCenter).
 <!-- SECTION:FINAL_SUMMARY:END -->
