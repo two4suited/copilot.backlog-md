@@ -1,9 +1,10 @@
 ---
 id: TASK-4
 title: 'EPIC: User Management & Authentication'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 21:11'
+updated_date: '2026-03-14 22:04'
 labels:
   - epic
   - auth
@@ -24,3 +25,9 @@ Registration, login, roles (Admin / Speaker / Attendee), and profile management.
 - [ ] #3 Role-based access enforced (Admin, Speaker, Attendee)
 - [ ] #4 Users can view and edit their own profile
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+All sub-tasks completed.
+<!-- SECTION:FINAL_SUMMARY:END -->
