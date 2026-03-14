@@ -1,11 +1,11 @@
 ---
 id: TASK-35
 title: 'E2E tests: navigation and routing'
-status: Done
+status: In Progress
 assignee:
-  - '@tester'
+  - '@aspire-expert'
 created_date: '2026-03-14 22:26'
-updated_date: '2026-03-14 22:27'
+updated_date: '2026-03-14 22:31'
 labels:
   - testing
   - frontend
