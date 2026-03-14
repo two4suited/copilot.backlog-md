@@ -391,7 +391,7 @@ async function cmdRalph(params) {
 
   const labelToAgent = {
     aspire: "aspire-expert",
-    infrastructure: "aspire-expert",
+    infrastructure: "github-actions-expert",
     observability: "aspire-expert",
     database: "database-developer",
     frontend: "react-developer",
@@ -405,7 +405,10 @@ async function cmdRalph(params) {
     testing: "tester",
     qa: "tester",
     e2e: "tester",
-    devops: "aspire-expert",
+    devops: "github-actions-expert",
+    "github-actions": "github-actions-expert",
+    ci: "github-actions-expert",
+    workflow: "github-actions-expert",
   };
 
   const tasksDir = path.join(projectRoot, "backlog", "tasks");
@@ -547,6 +550,10 @@ async function cmdRalph(params) {
         gitPush(log);
       }
     }
+
+    // ── CI monitoring — check GitHub Actions on every cycle ───────────────
+    const ciBugs = checkCIAndFileBugs(state, saveState, log, ok, warn, err, dryRun);
+    if (ciBugs > 0 && !dryRun) gitPush(log);
   };
 
   // Run first cycle immediately
@@ -568,6 +575,58 @@ async function cmdRalph(params) {
     console.log("\n\x1b[1mRalph loop stopped.\x1b[0m");
     process.exit(0);
   });
+}
+
+/**
+ * Check GitHub Actions for recent failures and file bug tasks.
+ * Deduplication by run ID stored in ralph state.
+ */
+function checkCIAndFileBugs(state, saveState, log, ok, warn, err, dryRun) {
+  const { execSync } = require("child_process");
+  try {
+    const runsJson = execSync(
+      "gh run list --limit 10 --json databaseId,conclusion,name,headBranch,displayTitle,workflowName --repo $(gh repo view --json nameWithOwner -q .nameWithOwner)",
+      { cwd: projectRoot, encoding: "utf8", stdio: ["pipe","pipe","pipe"] }
+    );
+    const runs = JSON.parse(runsJson);
+
+    if (!state.ciChecked) state.ciChecked = {};
+
+    let newBugs = 0;
+    for (const run of runs) {
+      if (run.conclusion !== "failure") continue;
+      const runId = String(run.databaseId);
+      if (state.ciChecked[runId]) continue;  // already filed
+
+      const bugTitle = `[BUG] CI failure: ${run.workflowName} — ${run.displayTitle.slice(0, 80)}`;
+      const bugDesc = `GitHub Actions run #${runId} failed.\\nWorkflow: ${run.workflowName}\\nBranch: ${run.headBranch}\\nTitle: ${run.displayTitle}\\nRun URL: https://github.com/two4suited/copilot.backlog-md/actions/runs/${runId}\\n\\nInvestigate logs with: gh run view ${runId} --log-failed\\nAuto-filed by Ralph loop.`;
+
+      if (!dryRun) {
+        try {
+          execSync(
+            `cd "${projectRoot}" && backlog task create "${bugTitle.replace(/"/g, '\\"')}" --label bug,ci,infrastructure --priority high -d "${bugDesc}" --ac "CI job passes green" --ac "Root cause identified and fixed"`,
+            { stdio: "pipe" }
+          );
+          state.ciChecked[runId] = { filedAt: new Date().toISOString(), title: bugTitle };
+          saveState();
+          warn(`Filed CI bug for run #${runId}: ${run.workflowName}`);
+          newBugs++;
+        } catch (e) {
+          err(`Could not file CI bug for run #${runId}: ${e.message.split("\n")[0]}`);
+        }
+      } else {
+        warn(`[DRY RUN] Would file CI bug for run #${runId}: ${run.workflowName}`);
+        newBugs++;
+      }
+    }
+
+    if (newBugs === 0) ok("CI check: all recent runs OK (or already filed)");
+    return newBugs;
+  } catch (e) {
+    // gh CLI not available or not authed — skip silently
+    warn(`CI check skipped: ${e.message.split("\n")[0]}`);
+    return 0;
+  }
 }
 
 /**
