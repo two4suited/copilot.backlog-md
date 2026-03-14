@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@dotnet-developer'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:51'
+updated_date: '2026-03-14 21:52'
 labels:
   - feature
   - docs
@@ -31,16 +31,5 @@ Swagger UI for API, README with architecture overview, and a step-by-step guide 
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Added Swagger/OpenAPI with JWT Bearer auth support via Swashbuckle.AspNetCore 7.3.1.
-
-**What changed:**
-- Removed Microsoft.AspNetCore.OpenApi in favour of Swashbuckle (avoids OpenApi 1.x vs 2.x version conflict)
-- Added GenerateDocumentationFile + NoWarn 1591 to csproj for XML doc generation
-- Configured SwaggerGen with Bearer security definition and XML comments in Program.cs
-- Swagger UI available at /swagger in development
-- Added XML doc comments (<summary>, <param>, <response>) to all key endpoints: Auth (register, login, me), Conferences (list), Sessions (list), Registrations (register, cancel, list attendees, my registrations)
-- Created docs/deployment.md covering prerequisites, local dev, environment variables, Azure Container Apps (azd), Docker Compose, EF migrations, and default seed accounts
-- README already contained the Swagger UI link; no change needed
-
-**Tests:** dotnet build ConferenceApp.sln — 0 errors, 0 warnings
+Swagger UI at /swagger with JWT Bearer auth. XML doc comments on Auth/Conferences/Sessions/Registrations controllers. docs/deployment.md with local dev, env vars, Azure, Docker, migrations, seed accounts.
 <!-- SECTION:FINAL_SUMMARY:END -->
