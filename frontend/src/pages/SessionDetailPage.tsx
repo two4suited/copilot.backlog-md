@@ -8,6 +8,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
 import { useAuth } from '../context/AuthContext';
+import { useSessionSeats } from '../hooks/useSessionSeats';
 
 function SpeakerAvatar({ name }: { name: string }) {
   const initials = name
@@ -35,6 +36,8 @@ export function SessionDetailPage() {
     queryFn: () => api.sessions.get(id!),
     enabled: !!id,
   });
+
+  const { seatsAvailable, isConnected } = useSessionSeats(id, session?.seatsAvailable ?? null);
 
   const registerMutation = useMutation({
     mutationFn: () => api.registrations.register(id!),
@@ -74,8 +77,7 @@ export function SessionDetailPage() {
   });
   const timeStr = `${startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} – ${endTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
 
-  const seatsRemaining = session.seatsAvailable ?? null;
-  const isFull = seatsRemaining !== null && seatsRemaining <= 0;
+  const isFull = seatsAvailable !== null && seatsAvailable <= 0;
 
   const conferenceId = session.track?.conferenceId;
   const trackId = session.trackId;
@@ -131,10 +133,16 @@ export function SessionDetailPage() {
           <DoorOpen className="w-4 h-4 text-indigo-400" />
           {session.room}
         </span>
-        {seatsRemaining !== null && (
+        {seatsAvailable !== null && (
           <span className={`flex items-center gap-1.5 font-medium ${isFull ? 'text-red-600' : 'text-emerald-600'}`}>
             <Users className="w-4 h-4" />
-            {isFull ? 'Full' : `${seatsRemaining} seat${seatsRemaining !== 1 ? 's' : ''} remaining`}
+            {isFull ? 'Full' : `${seatsAvailable} seat${seatsAvailable !== 1 ? 's' : ''} remaining`}
+            {isConnected && (
+              <span className="inline-flex items-center gap-1 ml-1 text-xs font-semibold text-indigo-600">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                LIVE
+              </span>
+            )}
           </span>
         )}
       </div>

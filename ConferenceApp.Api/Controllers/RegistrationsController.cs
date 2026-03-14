@@ -1,9 +1,11 @@
 using System.Security.Claims;
 using ConferenceApp.Api.Data;
 using ConferenceApp.Api.DTOs;
+using ConferenceApp.Api.Hubs;
 using ConferenceApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceApp.Api.Controllers;
@@ -12,7 +14,13 @@ namespace ConferenceApp.Api.Controllers;
 public class RegistrationsController : ControllerBase
 {
     private readonly ConferenceDbContext _db;
-    public RegistrationsController(ConferenceDbContext db) => _db = db;
+    private readonly IHubContext<SessionHub> _hubContext;
+
+    public RegistrationsController(ConferenceDbContext db, IHubContext<SessionHub> hubContext)
+    {
+        _db = db;
+        _hubContext = hubContext;
+    }
 
     /// <summary>Register the currently authenticated user for a session.</summary>
     /// <param name="sessionId">ID of the session to register for.</param>
@@ -68,6 +76,10 @@ public class RegistrationsController : ControllerBase
 
         await _db.SaveChangesAsync(ct);
 
+        var newActiveCount = await _db.Registrations.CountAsync(r => r.SessionId == sessionId, ct);
+        await _hubContext.Clients.Group($"session-{sessionId}")
+            .SendAsync("SeatsUpdated", new { sessionId = sessionId.ToString(), seatsAvailable = session.Capacity - newActiveCount }, ct);
+
         return Ok(new RegisterSessionResponse(
             registration.Id,
             session.Id,
@@ -97,6 +109,15 @@ public class RegistrationsController : ControllerBase
 
         registration.IsDeleted = true;
         await _db.SaveChangesAsync(ct);
+
+        var session = await _db.Sessions.FindAsync([sessionId], ct);
+        if (session is not null)
+        {
+            var activeCount = await _db.Registrations.CountAsync(r => r.SessionId == sessionId, ct);
+            await _hubContext.Clients.Group($"session-{sessionId}")
+                .SendAsync("SeatsUpdated", new { sessionId = sessionId.ToString(), seatsAvailable = session.Capacity - activeCount }, ct);
+        }
+
         return NoContent();
     }
 

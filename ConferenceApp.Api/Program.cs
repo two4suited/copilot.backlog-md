@@ -1,4 +1,5 @@
 using System.Text;
+using ConferenceApp.Api.Hubs;
 using ConferenceApp.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ builder.Services.AddSwaggerGen(c =>
     if (File.Exists(xmlPath)) c.IncludeXmlComments(xmlPath);
 });
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 builder.Services.AddProblemDetails();
 builder.Services.AddCors(options =>
 {
@@ -41,7 +43,8 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials();
     });
 });
 
@@ -119,6 +122,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 app.MapControllers();
+app.MapHub<SessionHub>("/hubs/session");
 
 app.MapGet("/api/tracks/{id:guid}", async (Guid id, ConferenceDbContext db) =>
     await db.Tracks.Include(t => t.Sessions).FirstOrDefaultAsync(t => t.Id == id)
