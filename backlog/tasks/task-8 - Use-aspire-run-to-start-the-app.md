@@ -3,9 +3,9 @@ id: TASK-8
 title: Use aspire run to start the app
 status: In Progress
 assignee:
-  - '@aspire-expert'
+  - '@copilot'
 created_date: '2026-03-14 21:39'
-updated_date: '2026-03-14 21:41'
+updated_date: '2026-03-14 21:44'
 labels:
   - infrastructure
   - aspire
