@@ -30,19 +30,9 @@ Allow attendees to export their personal schedule as an iCal file. GET /api/regi
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Added GET /api/registrations/export/ical endpoint to RegistrationsController and an Export to Calendar button on MySchedulePage.
+Implemented iCal export for personal schedule.
 
-**Backend (RegistrationsController.cs):**
-- New ExportIcal action queries active registrations with Session+Track includes
-- Builds RFC 5545-compliant VCALENDAR with one VEVENT per session (UID, DTSTAMP, DTSTART, DTEND, SUMMARY, DESCRIPTION, LOCATION)
-- Description truncated to 500 chars; commas, semicolons, newlines escaped per spec
-- LOCATION: Room field with fallback to Track name
-- Returns text/calendar response with filename my-schedule.ics
+Backend: GET /api/registrations/export/ical (authorized) builds RFC 5545 VCALENDAR with one VEVENT per registered session — UID, DTSTAMP, DTSTART, DTEND, SUMMARY, DESCRIPTION (≤500 chars, escaped), LOCATION (Room → Track fallback). Returns text/calendar as my-schedule.ics.
 
-**Frontend (MySchedulePage.tsx):**
-- Added useAuth hook to access JWT token
-- handleExport fetches the endpoint with Bearer token and triggers browser file download
-- Export to Calendar button in page header (visible when user has sessions), styled consistently with existing buttons
-
-Both dotnet and Vite builds pass with zero warnings or errors.
+Frontend: Export to Calendar button on MySchedulePage header (shown when sessions exist) fetches endpoint with Bearer token and triggers browser download via blob URL.
 <!-- SECTION:FINAL_SUMMARY:END -->
