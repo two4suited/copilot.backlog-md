@@ -1,18 +1,23 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+// Use a stable password so the persisted data volume survives restarts.
+// Override via CONFERENCE_PG_PASSWORD env var or user secrets in production.
+var pgPassword = builder.AddParameter("pg-password", "DevPassword123!", secret: true);
+
 // PostgreSQL with a named data volume for persistence
 var postgres = builder
-    .AddPostgres("postgres")
+    .AddPostgres("postgres", password: pgPassword)
     .WithDataVolume("conference-pgdata")
     .WithPgAdmin();
 
 var db = postgres.AddDatabase("conferencedb");
 
-// API project — receives the conferencedb connection string via Aspire
+// API project — wait for the postgres server to be healthy (not the DB itself,
+// which doesn't exist until EF migrations run on first startup).
 var api = builder
     .AddProject<Projects.ConferenceApp_Api>("api")
     .WithReference(db)
-    .WaitFor(db);
+    .WaitFor(postgres);
 
 // React/Vite frontend (created later at ../frontend)
 builder
