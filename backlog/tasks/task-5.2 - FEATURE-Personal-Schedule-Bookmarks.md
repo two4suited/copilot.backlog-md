@@ -1,7 +1,7 @@
 ---
 id: TASK-5.2
 title: 'FEATURE: Personal Schedule & Bookmarks'
-status: In Progress
+status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:13'
