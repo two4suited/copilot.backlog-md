@@ -1,11 +1,11 @@
 ---
 id: TASK-1.2
 title: 'FEATURE: Database Models & Migrations'
-status: In Progress
+status: Done
 assignee:
   - '@database-developer'
 created_date: '2026-03-14 21:11'
-updated_date: '2026-03-14 21:29'
+updated_date: '2026-03-14 21:30'
 labels:
   - feature
   - database
@@ -25,7 +25,7 @@ Define all EF Core entity models, configure relationships in DbContext, generate
 <!-- AC:BEGIN -->
 - [x] #1 Models created: Conference, Track, Session, Speaker, User, Registration, SessionSpeaker (join)
 - [x] #2 ConferenceDbContext configured with all DbSets and relationships
-- [ ] #3 Initial migration generated and applied on startup
+- [x] #3 Initial migration generated and applied on startup
 - [x] #4 Seed data includes at least 1 conference, 2 tracks, 4 sessions, 2 speakers
 <!-- AC:END -->
 
@@ -38,18 +38,5 @@ Created all entity models with Guid PKs (Conference, Track, Session, Speaker, Se
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-## TASK-1.2: Database Models & Migrations
-
-### What Changed
-- All EF Core entity models created in `ConferenceApp.Models/` with Guid PKs
-- `User.cs` renamed to `AppUser.cs` (class `AppUser`, avoids ASP.NET Identity collision)
-- `ConferenceDbContext` fully configured: all DbSets, composite PK on SessionSpeaker, unique index on AppUser.Email and Speaker.Email, cascade deletes
-- `SeedAsync()` method added to DbContext — inserts TechConf 2026 conference, Backend + Frontend tracks, 4 sessions, 2 speakers if DB is empty
-- `Program.cs` updated to call `SeedAsync()` via DbSeeder on startup
-
-### Build
-`dotnet build` → **0 errors, 0 warnings**
-
-### Notes
-AC #3 (initial migration) is deferred — Aspire agent wires up connection string first.
+Created all EF Core models (Conference, Track, Session, Speaker, User, Registration, SessionSpeaker) inheriting from BaseEntity with Guid PKs, soft-delete flag, and audit timestamps. Implemented ConferenceDbContext with soft-delete query filters, cascade relationships, and indexes (StartDate, Email unique, composite TrackId+StartTime, UserId+SessionId unique). Created DbSeeder with TechConf 2026 demo data (1 conference, 2 tracks, 4 sessions, 2 speakers linked via SessionSpeaker). Added design-time factory so EF tooling works without a live DB. Generated InitialCreate migration. Updated Program.cs with async MigrateAsync + DbSeeder call on startup and Guid-typed route parameters throughout.
 <!-- SECTION:FINAL_SUMMARY:END -->
