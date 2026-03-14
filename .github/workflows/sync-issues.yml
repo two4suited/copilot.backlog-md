@@ -53,5 +53,7 @@ jobs:
           else
             git add backlog/tasks/
             git commit -m "chore: sync github_issue numbers into task frontmatter [skip ci]"
+            # Pull rebase in case another run pushed while we were syncing
+            git pull --rebase origin "${GITHUB_REF_NAME}" || git rebase --abort
             git push
           fi

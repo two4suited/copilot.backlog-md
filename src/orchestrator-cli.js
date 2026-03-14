@@ -598,13 +598,19 @@ function checkCIAndFileBugs(state, saveState, log, ok, warn, err, dryRun) {
       const runId = String(run.databaseId);
       if (state.ciChecked[runId]) continue;  // already filed
 
-      const bugTitle = `[BUG] CI failure: ${run.workflowName} — ${run.displayTitle.slice(0, 80)}`;
-      const bugDesc = `GitHub Actions run #${runId} failed.\\nWorkflow: ${run.workflowName}\\nBranch: ${run.headBranch}\\nTitle: ${run.displayTitle}\\nRun URL: https://github.com/two4suited/copilot.backlog-md/actions/runs/${runId}\\n\\nInvestigate logs with: gh run view ${runId} --log-failed\\nAuto-filed by Ralph loop.`;
+      // Sanitize title: strip special unicode chars that break shell quoting
+      const safeDisplay = run.displayTitle.slice(0, 60)
+        .replace(/[^\x20-\x7E]/g, '')   // strip non-ASCII (em-dash, ellipsis, etc.)
+        .replace(/"/g, "'")
+        .trim();
+      const safeWorkflow = run.workflowName.replace(/[^\x20-\x7E]/g, '').replace(/"/g, "'");
+      const bugTitle = `[BUG] CI failure: ${safeWorkflow} - ${safeDisplay}`;
+      const bugDesc = `GitHub Actions run #${runId} failed. Workflow: ${safeWorkflow}. Branch: ${run.headBranch}. Run URL: https://github.com/two4suited/copilot.backlog-md/actions/runs/${runId}. Investigate with: gh run view ${runId} --log-failed. Auto-filed by Ralph loop.`;
 
       if (!dryRun) {
         try {
           execSync(
-            `cd "${projectRoot}" && backlog task create "${bugTitle.replace(/"/g, '\\"')}" --label bug,ci,infrastructure --priority high -d "${bugDesc}" --ac "CI job passes green" --ac "Root cause identified and fixed"`,
+            `cd "${projectRoot}" && backlog task create "${bugTitle}" --label bug,ci,infrastructure --priority high -d "${bugDesc.replace(/"/g, "'")}" --ac "CI job passes green" --ac "Root cause identified and fixed"`,
             { stdio: "pipe" }
           );
           state.ciChecked[runId] = { filedAt: new Date().toISOString(), title: bugTitle };
