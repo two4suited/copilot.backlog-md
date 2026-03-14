@@ -1,7 +1,7 @@
 ---
 id: TASK-39
 title: 'E2E tests: API error handling'
-status: In Progress
+status: Done
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:32'
