@@ -93,3 +93,96 @@ public record PagedResult<T>(
     int Page,
     int PageSize
 );
+
+// ── Session DTOs ──────────────────────────────────────────────────────────────
+
+public record SessionDto(
+    Guid Id,
+    Guid TrackId,
+    string TrackName,
+    string TrackColor,
+    string Title,
+    string? Description,
+    DateTime StartTime,
+    DateTime EndTime,
+    string Room,
+    int Capacity,
+    int RegistrationCount,
+    string SessionType,
+    string Level,
+    string? SlidesUrl,
+    string? RecordingUrl,
+    IReadOnlyList<SpeakerSummaryDto> Speakers
+);
+
+public record CreateSessionRequest(
+    Guid TrackId,
+    string Title,
+    string? Description,
+    DateTime StartTime,
+    DateTime EndTime,
+    string Room,
+    int Capacity,
+    string SessionType,
+    string Level,
+    IReadOnlyList<Guid>? SpeakerIds
+);
+
+public record UpdateSessionRequest(
+    string Title,
+    string? Description,
+    DateTime StartTime,
+    DateTime EndTime,
+    string Room,
+    int Capacity,
+    string SessionType,
+    string Level,
+    string? SlidesUrl,
+    string? RecordingUrl
+);
+
+public record SpeakerSummaryDto(Guid Id, string Name, string Company, string? PhotoUrl);
+
+// ── Speaker DTOs ──────────────────────────────────────────────────────────────
+
+public record SpeakerDto(
+    Guid Id,
+    string Name,
+    string Bio,
+    string Email,
+    string Company,
+    string? PhotoUrl,
+    string? TwitterHandle,
+    string? LinkedInUrl
+);
+
+public record SpeakerDetailDto(
+    Guid Id,
+    string Name,
+    string Bio,
+    string Email,
+    string Company,
+    string? PhotoUrl,
+    string? TwitterHandle,
+    string? LinkedInUrl,
+    IReadOnlyList<SessionSummaryDto> Sessions
+);
+
+public record CreateSpeakerRequest(
+    string Name,
+    string Bio,
+    string Email,
+    string Company,
+    string? PhotoUrl,
+    string? TwitterHandle,
+    string? LinkedInUrl
+);
+
+public record UpdateSpeakerRequest(
+    string Name,
+    string Bio,
+    string Company,
+    string? PhotoUrl,
+    string? TwitterHandle,
+    string? LinkedInUrl
+);
