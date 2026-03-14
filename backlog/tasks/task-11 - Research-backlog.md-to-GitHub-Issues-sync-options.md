@@ -1,7 +1,7 @@
 ---
 id: TASK-11
 title: 'Research: backlog.md to GitHub Issues sync options'
-status: In Progress
+status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:46'
@@ -195,3 +195,23 @@ permissions:
 
 **Rate limits:** GitHub Actions token: 1000 req/hr. With <=50 tasks x ~4 API calls each = 200 calls per push -- well within limits.
 <!-- SECTION:NOTES:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Researched 7 areas for backlog.md -> GitHub Issues sync:
+
+1. **gh CLI capabilities**: `gh issue create/edit/list/close/reopen` + `gh label create --force` provide all required operations. Issues can be found by label, title search, or number.
+
+2. **Existing tools**: No pre-built action found for markdown frontmatter -> GitHub Issues sync. Custom gh CLI bash script is the right approach.
+
+3. **Task file format**: YAML frontmatter with id, title, status (To Do/In Progress/Done/Blocked), labels (array), assignee (array), priority. Body sections delimited by HTML comment markers.
+
+4. **Changed-file detection**: Recommend Strategy B (sync all tasks every push) -- simpler, idempotent, avoids edge cases with first branch push and force-pushes. With <=50 tasks, ~200 API calls/push is well within limits.
+
+5. **Branch labeling**: `github.ref_name` in workflow; sanitize `/` to `-`; create with `gh label create "branch:NAME" --force` (idempotent).
+
+6. **Mapping storage**: Recommend Option D -- unique label `task:<ID>` on each GitHub Issue. No git write-back needed, GitHub is source of truth, no merge conflicts.
+
+7. **Recommended approach**: gh CLI bash script, `on: push branches: ["**"] paths: ["backlog/tasks/**"]`, unidirectional backlog->issues, label-based mapping, sync title/body/labels/state per task.
+<!-- SECTION:FINAL_SUMMARY:END -->
