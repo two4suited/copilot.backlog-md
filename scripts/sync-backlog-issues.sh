@@ -285,32 +285,40 @@ $description"
 
   sleep "$SLEEP_BETWEEN_CALLS"
 
+  # Write body to a temp file to safely handle newlines, quotes, and special chars
+  local body_file
+  body_file="$(mktemp /tmp/sync-issue-body.XXXXXX)"
+  printf '%s' "$issue_body" > "$body_file"
+  trap 'rm -f "$body_file"' RETURN
+
   # --- Create or update ---
   if [[ -z "$existing_issue" ]]; then
     log "Creating issue for $task_id_upper ..."
-    new_number="$(gh issue create \
+    local create_out create_err create_rc
+    create_out="$(gh issue create \
       --title "$issue_title" \
-      --body "$issue_body" \
+      --body-file "$body_file" \
       --label "$labels_csv" \
       --json number \
-      --jq '.number' 2>/dev/null)"
+      --jq '.number' 2>/tmp/sync-gh-err.txt)" && create_rc=0 || create_rc=$?
 
-    if [[ -n "$new_number" ]]; then
+    if [[ $create_rc -eq 0 && -n "$create_out" ]]; then
+      new_number="$create_out"
       log "Created issue #$new_number for $task_id_upper"
-      # Write the issue number back into the task file (AC #5)
       write_github_issue_field "$task_file" "$new_number"
       existing_issue="$new_number"
     else
-      warn "Failed to create issue for $task_id_upper"
+      warn "Failed to create issue for $task_id_upper (rc=$create_rc): $(cat /tmp/sync-gh-err.txt 2>/dev/null | head -3)"
+      rm -f "$body_file"
       continue
     fi
   else
     log "Updating issue #$existing_issue for $task_id_upper ..."
     gh issue edit "$existing_issue" \
       --title "$issue_title" \
-      --body "$issue_body" \
+      --body-file "$body_file" \
       --add-label "$labels_csv" \
-      >/dev/null 2>&1 || warn "Failed to edit issue #$existing_issue"
+      2>/tmp/sync-gh-err.txt || warn "Failed to edit issue #$existing_issue: $(cat /tmp/sync-gh-err.txt | head -3)"
   fi
 
   sleep "$SLEEP_BETWEEN_CALLS"
