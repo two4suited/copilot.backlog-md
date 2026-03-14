@@ -22,10 +22,10 @@ Based on research findings (TASK-11), design the sync schema: which backlog fiel
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Field mapping table defined: title, description, status, labels, assignee, priority → GitHub Issue fields
-- [ ] #2 ID mapping storage approach chosen (frontmatter field or .github/backlog-issue-map.json)
-- [ ] #3 Branch label format defined (e.g. branch:feature/my-feature)
-- [ ] #4 Sync rules documented: create if no issue, update if changed, close if Done/archived
+- [x] #1 Field mapping table defined: title, description, status, labels, assignee, priority → GitHub Issue fields
+- [x] #2 ID mapping storage approach chosen (frontmatter field or .github/backlog-issue-map.json)
+- [x] #3 Branch label format defined (e.g. branch:feature/my-feature)
+- [x] #4 Sync rules documented: create if no issue, update if changed, close if Done/archived
 <!-- AC:END -->
 
 ## Implementation Notes
