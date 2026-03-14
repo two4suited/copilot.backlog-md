@@ -3,9 +3,9 @@ id: TASK-6.1
 title: 'FEATURE: OpenTelemetry & Aspire Dashboard'
 status: In Progress
 assignee:
-  - '@aspire-expert'
+  - '@copilot'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:44'
+updated_date: '2026-03-14 21:45'
 labels:
   - feature
   - observability
