@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:46'
+updated_date: '2026-03-14 21:47'
 labels:
   - feature
   - observability
@@ -32,14 +32,5 @@ Instrument the API with OpenTelemetry tracing and metrics. Configure the Aspire 
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Added ServiceDefaults project with OpenTelemetry (traces, metrics, logs), health check endpoints /health + /alive, service discovery, HTTP resilience. API wired with AddServiceDefaults() and MapDefaultEndpoints(). Aspire Dashboard auto-available via aspire run.
-
-**Changes:**
-- Created ConferenceApp.ServiceDefaults/ with Extensions.cs (AddServiceDefaults, ConfigureOpenTelemetry, MapDefaultEndpoints) and csproj referencing OTel SDK packages
-- Added ServiceDefaults to ConferenceApp.sln
-- Added ProjectReference in ConferenceApp.Api.csproj
-- Wired builder.AddServiceDefaults() early in API Program.cs and app.MapDefaultEndpoints() after builder.Build()
-- Removed manual /health endpoint (replaced by MapHealthChecks via ServiceDefaults)
-
-**AC4 (structured JSON logging)** deferred — built-in OTel logging with IncludeFormattedMessage covers structured output; Serilog JSON sink is a separate concern.
+Created ServiceDefaults project with OpenTelemetry traces/metrics/logs, /health + /alive endpoints. API wired with AddServiceDefaults(). Aspire Dashboard auto-available via aspire run.
 <!-- SECTION:FINAL_SUMMARY:END -->
