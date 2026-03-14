@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { CalendarDays, Mic2, LayoutGrid, LogIn } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { to: '/conferences', label: 'Conferences', icon: CalendarDays },
@@ -9,6 +10,7 @@ const navItems = [
 
 export function Layout() {
   const location = useLocation();
+  const { user, logout, isAuthenticated } = useAuth();
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -35,13 +37,25 @@ export function Layout() {
                 </Link>
               ))}
             </nav>
-            <Link
-              to="/login"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
-            >
-              <LogIn className="w-4 h-4" />
-              Sign In
-            </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-slate-600 hidden sm:block">{user?.name}</span>
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </header>

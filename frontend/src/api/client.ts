@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 
 // Attach JWT from localStorage if present
 apiClient.interceptors.request.use(config => {
-  const token = localStorage.getItem('jwt')
+  const token = localStorage.getItem('token')
   if (token) config.headers.Authorization = `Bearer ${token}`
   return config
 })

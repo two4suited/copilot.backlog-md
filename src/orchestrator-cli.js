@@ -540,7 +540,13 @@ async function cmdRalph(params) {
     if (!summary.length) summary.push("nothing to do");
     log(`Cycle ${cycle} complete — ${summary.join(", ")}\n`);
 
-    if (!dryRun) saveState();
+    if (!dryRun) {
+      saveState();
+      // Auto-push if anything changed
+      if (newAssignments > 0 || issues.length > 0) {
+        gitPush(log);
+      }
+    }
   };
 
   // Run first cycle immediately
@@ -565,9 +571,39 @@ async function cmdRalph(params) {
 }
 
 /**
- * File a bug task manually
+ * Push to remote — used by ralph loop and explicit push command
  */
-function cmdBug(params) {
+function gitPush(logFn) {
+  const log = logFn || ((msg) => console.log(msg));
+  const { execSync } = require("child_process");
+  try {
+    const status = execSync("git status --porcelain", { cwd: projectRoot, encoding: "utf8" }).trim();
+    if (status) {
+      // Uncommitted changes — stage and commit backlog metadata before pushing
+      execSync("git add backlog/", { cwd: projectRoot, stdio: "pipe" });
+      const staged = execSync("git diff --cached --name-only", { cwd: projectRoot, encoding: "utf8" }).trim();
+      if (staged) {
+        execSync(
+          'git commit -m "chore: sync backlog task metadata [ralph]\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"',
+          { cwd: projectRoot, stdio: "pipe" }
+        );
+      }
+    }
+    execSync("git push", { cwd: projectRoot, stdio: "pipe" });
+    log("\x1b[32m↑ Pushed to remote\x1b[0m");
+  } catch (e) {
+    log(`\x1b[33m⚠ Push failed: ${e.message.split("\n")[0]}\x1b[0m`);
+  }
+}
+
+/**
+ * Explicit push command
+ */
+function cmdPush() {
+  gitPush();
+}
+
+
   const title = params._?.[0] || params.title;
   if (!title) {
     console.error("Usage: orchestrator bug <title> [--desc <description>] [--task <taskId>] [--priority high|medium|low]");
@@ -607,6 +643,7 @@ USAGE:
   orchestrator <command> [options]
 
 COMMANDS:
+  push                               Push to remote (commits staged backlog changes first)
   ralph [--interval <sec>] [--cycles <n>] [--dry-run]
                              Continuous loop: assign tasks, detect stuck work, file bugs
   bug <title> [--desc <d>] [--task <id>] [--priority high|medium|low]
@@ -669,6 +706,9 @@ function main() {
   const { cmd, params } = parseArgs(args);
 
   switch (cmd) {
+    case "push":
+      cmdPush();
+      break;
     case "ralph":
       cmdRalph(params);
       break;
