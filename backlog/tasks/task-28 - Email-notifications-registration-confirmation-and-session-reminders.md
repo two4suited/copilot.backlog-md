@@ -1,11 +1,11 @@
 ---
 id: TASK-28
 title: 'Email notifications: registration confirmation and session reminders'
-status: In Progress
+status: Done
 assignee:
   - '@dotnet-developer'
 created_date: '2026-03-14 22:17'
-updated_date: '2026-03-14 22:20'
+updated_date: '2026-03-14 22:22'
 labels:
   - backend
   - feature
@@ -21,8 +21,8 @@ Send transactional emails using MailKit/SMTP. (1) Confirmation email when user r
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 POST /api/registrations sends confirmation email to registered user
-- [ ] #2 Background service sends reminder emails 1h before session start time
-- [ ] #3 Email config via Smtp__ appsettings; gracefully skips if not configured
-- [ ] #4 Email templates include session title, time, location, and a cancel link
+- [x] #1 POST /api/registrations sends confirmation email to registered user
+- [x] #2 Background service sends reminder emails 1h before session start time
+- [x] #3 Email config via Smtp__ appsettings; gracefully skips if not configured
+- [x] #4 Email templates include session title, time, location, and a cancel link
 <!-- AC:END -->
