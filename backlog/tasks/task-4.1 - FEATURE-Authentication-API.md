@@ -1,9 +1,11 @@
 ---
 id: TASK-4.1
 title: 'FEATURE: Authentication API'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:30'
 labels:
   - feature
   - backend
