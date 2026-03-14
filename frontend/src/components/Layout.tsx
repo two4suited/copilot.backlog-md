@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { CalendarDays, Mic2, LayoutGrid, LogIn, BookMarked } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { SearchBar } from './SearchBar';
 
 const navItems = [
   { to: '/conferences', label: 'Conferences', icon: CalendarDays },
@@ -37,6 +38,7 @@ export function Layout() {
                 </Link>
               ))}
             </nav>
+            <SearchBar />
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
                 <Link
