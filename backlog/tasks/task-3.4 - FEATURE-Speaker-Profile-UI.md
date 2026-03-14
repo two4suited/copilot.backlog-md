@@ -23,9 +23,9 @@ Speaker listing page and individual speaker profile pages showing bio, photo, an
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Speakers page lists all speakers with photo, name, company
-- [ ] #2 Speaker detail page shows full bio and list of their sessions
-- [ ] #3 Sessions on speaker page link to the schedule
+- [x] #1 Speakers page lists all speakers with photo, name, company
+- [x] #2 Speaker detail page shows full bio and list of their sessions
+- [x] #3 Sessions on speaker page link to the schedule
 <!-- AC:END -->
 
 ## Implementation Plan
