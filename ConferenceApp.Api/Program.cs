@@ -56,6 +56,8 @@ builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 
+app.MapDefaultEndpoints();
+
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ConferenceDbContext>();
@@ -205,8 +207,5 @@ app.MapDelete("/api/registrations/{id:guid}", async (Guid id, ConferenceDbContex
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteRegistration");
-
-app.MapGet("/health", () => Results.Ok(new { status = "healthy" }))
-    .WithName("Health");
 
 app.Run();

@@ -133,19 +133,24 @@ public class SessionsController : ControllerBase
         return NoContent();
     }
 
-    private static SessionDto MapToDto(ConferenceApp.Models.Session s) => new(
-        s.Id, s.TrackId,
-        s.Track?.Name ?? "",
-        s.Track?.Color ?? "#6366f1",
-        s.Title, s.Description,
-        s.StartTime, s.EndTime,
-        s.Room, s.Capacity,
-        s.Registrations?.Count ?? 0,
-        s.SessionType, s.Level,
-        s.SlidesUrl, s.RecordingUrl,
-        s.SessionSpeakers?.Select(ss => new SpeakerSummaryDto(
-            ss.Speaker.Id, ss.Speaker.Name,
-            ss.Speaker.Company, ss.Speaker.PhotoUrl)).ToList()
-        ?? new List<SpeakerSummaryDto>()
-    );
+    private static SessionDto MapToDto(ConferenceApp.Models.Session s)
+    {
+        var regCount = s.Registrations?.Count ?? 0;
+        return new(
+            s.Id, s.TrackId,
+            s.Track?.Name ?? "",
+            s.Track?.Color ?? "#6366f1",
+            s.Title, s.Description,
+            s.StartTime, s.EndTime,
+            s.Room, s.Capacity,
+            regCount,
+            s.Capacity - regCount,
+            s.SessionType, s.Level,
+            s.SlidesUrl, s.RecordingUrl,
+            s.SessionSpeakers?.Select(ss => new SpeakerSummaryDto(
+                ss.Speaker.Id, ss.Speaker.Name,
+                ss.Speaker.Company, ss.Speaker.PhotoUrl)).ToList()
+            ?? new List<SpeakerSummaryDto>()
+        );
+    }
 }
