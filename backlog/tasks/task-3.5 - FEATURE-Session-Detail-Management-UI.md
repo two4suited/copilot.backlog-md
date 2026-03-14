@@ -3,9 +3,9 @@ id: TASK-3.5
 title: 'FEATURE: Session Detail & Management UI'
 status: In Progress
 assignee:
-  - '@react-developer'
+  - '@copilot'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:44'
+updated_date: '2026-03-14 21:45'
 labels:
   - feature
   - frontend
