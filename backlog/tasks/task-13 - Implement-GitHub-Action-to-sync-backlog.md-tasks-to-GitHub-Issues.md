@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:46'
-updated_date: '2026-03-14 21:55'
+updated_date: '2026-03-14 21:57'
 labels:
   - infrastructure
   - github
@@ -22,12 +22,12 @@ Implement a GitHub Actions workflow and supporting script that syncs backlog.md 
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Workflow file .github/workflows/sync-backlog-issues.yml created, triggers on push (all branches)
-- [ ] #2 Script reads changed backlog task files and creates/updates GitHub Issues
-- [ ] #3 Issues labelled with branch name (e.g. branch:main, branch:feature/auth)
-- [ ] #4 Issue open/closed state mirrors task status (Done/archived → closed)
-- [ ] #5 Task frontmatter updated with github_issue: <number> after creation
-- [ ] #6 Workflow uses GITHUB_TOKEN — no extra secrets needed
+- [x] #1 Workflow file .github/workflows/sync-backlog-issues.yml created, triggers on push (all branches)
+- [x] #2 Script reads changed backlog task files and creates/updates GitHub Issues
+- [x] #3 Issues labelled with branch name (e.g. branch:main, branch:feature/auth)
+- [x] #4 Issue open/closed state mirrors task status (Done/archived → closed)
+- [x] #5 Task frontmatter updated with github_issue: <number> after creation
+- [x] #6 Workflow uses GITHUB_TOKEN — no extra secrets needed
 <!-- AC:END -->
 
 ## Implementation Plan
