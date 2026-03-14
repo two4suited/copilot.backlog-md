@@ -8,4 +8,5 @@ public class Registration : BaseEntity
     public Session Session { get; set; } = null!;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
     public bool IsWaitlisted { get; set; } = false;
+    public bool ReminderSent { get; set; } = false;
 }

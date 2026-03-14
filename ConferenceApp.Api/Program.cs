@@ -79,6 +79,8 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHostedService<SessionReminderService>();
 
 var app = builder.Build();
 

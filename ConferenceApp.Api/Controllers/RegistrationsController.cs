@@ -3,6 +3,7 @@ using System.Text;
 using ConferenceApp.Api.Data;
 using ConferenceApp.Api.DTOs;
 using ConferenceApp.Api.Hubs;
+using ConferenceApp.Api.Services;
 using ConferenceApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,13 @@ public class RegistrationsController : ControllerBase
 {
     private readonly ConferenceDbContext _db;
     private readonly IHubContext<SessionHub> _hubContext;
+    private readonly IEmailService _emailService;
 
-    public RegistrationsController(ConferenceDbContext db, IHubContext<SessionHub> hubContext)
+    public RegistrationsController(ConferenceDbContext db, IHubContext<SessionHub> hubContext, IEmailService emailService)
     {
         _db = db;
         _hubContext = hubContext;
+        _emailService = emailService;
     }
 
     /// <summary>Register the currently authenticated user for a session.</summary>
@@ -80,6 +83,10 @@ public class RegistrationsController : ControllerBase
         var newActiveCount = await _db.Registrations.CountAsync(r => r.SessionId == sessionId, ct);
         await _hubContext.Clients.Group($"session-{sessionId}")
             .SendAsync("SeatsUpdated", new { sessionId = sessionId.ToString(), seatsAvailable = session.Capacity - newActiveCount }, ct);
+
+        var user = await _db.Users.FindAsync([userId], ct);
+        if (user is not null)
+            _ = _emailService.SendRegistrationConfirmationAsync(user.Email, user.Name, session);
 
         return Ok(new RegisterSessionResponse(
             registration.Id,

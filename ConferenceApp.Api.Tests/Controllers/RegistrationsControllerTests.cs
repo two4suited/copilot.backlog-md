@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using ConferenceApp.Api.Controllers;
+using ConferenceApp.Api.Services;
 using ConferenceApp.Api.Tests.Helpers;
 using ConferenceApp.Models;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ public class RegistrationsControllerTests
     private static RegistrationsController BuildController(
         ConferenceApp.Api.Data.ConferenceDbContext db, Guid userId)
     {
-        var controller = new RegistrationsController(db, new FakeSessionHubContext());
+        var controller = new RegistrationsController(db, new FakeSessionHubContext(), new NoOpEmailService());
         controller.ControllerContext = new ControllerContext
         {
             HttpContext = new DefaultHttpContext
