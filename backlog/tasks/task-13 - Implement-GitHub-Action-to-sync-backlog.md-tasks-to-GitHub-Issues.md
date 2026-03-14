@@ -1,9 +1,11 @@
 ---
 id: TASK-13
 title: 'Implement: GitHub Action to sync backlog.md tasks to GitHub Issues'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 21:46'
+updated_date: '2026-03-14 21:54'
 labels:
   - infrastructure
   - github
