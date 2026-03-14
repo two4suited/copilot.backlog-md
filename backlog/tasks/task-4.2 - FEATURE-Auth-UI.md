@@ -3,9 +3,9 @@ id: TASK-4.2
 title: 'FEATURE: Auth UI'
 status: In Progress
 assignee:
-  - '@react-developer'
+  - '@copilot'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:34'
+updated_date: '2026-03-14 21:38'
 labels:
   - feature
   - frontend
