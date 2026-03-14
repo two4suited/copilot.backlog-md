@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:13'
-updated_date: '2026-03-14 22:23'
+updated_date: '2026-03-14 22:24'
 labels:
   - testing
   - frontend
@@ -25,13 +25,11 @@ priority: high
 ## Implementation Plan
 
 <!-- SECTION:PLAN:BEGIN -->
-1. Read existing e2e patterns (auth.spec.ts, sessions.spec.ts)
-2. Explore admin UI components: AdminLayout, ConferenceAdminPage, SessionAdminPage, SpeakerAdminPage, form pages
-3. Explore MySchedulePage for iCal export button logic
-4. Write frontend/e2e/admin.spec.ts covering route protection, CRUD flows, and non-admin redirect
-5. Write frontend/e2e/ical-export.spec.ts covering unauthenticated redirect, no-sessions state, download trigger
-6. Run tests, verify pass/skip counts
-7. Commit and push
+1. Explored admin pages: AdminLayout, ConferenceAdminPage, ConferenceFormPage, ConfirmDialog, Toast
+2. Read existing e2e helpers: isApiAvailable(), loginAsAdmin(), graceful skip patterns
+3. Wrote frontend/e2e/admin.spec.ts (7 test groups)
+4. Wrote frontend/e2e/ical-export.spec.ts (4 test groups)
+5. Ran tests: 3 passed, 11 skipped (no backend), 0 failed
 <!-- SECTION:PLAN:END -->
 
 ## Implementation Notes
