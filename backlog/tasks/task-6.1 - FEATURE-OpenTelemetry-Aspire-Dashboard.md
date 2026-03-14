@@ -4,9 +4,11 @@ title: 'FEATURE: OpenTelemetry & Aspire Dashboard'
 status: To Do
 assignee: []
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:19'
 labels:
   - feature
   - observability
+  - aspire
 dependencies: []
 parent_task_id: TASK-6
 priority: medium
