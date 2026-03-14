@@ -1,9 +1,11 @@
 ---
 id: TASK-35
 title: 'E2E tests: navigation and routing'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@tester'
 created_date: '2026-03-14 22:26'
+updated_date: '2026-03-14 22:26'
 labels:
   - testing
   - frontend
@@ -19,3 +21,13 @@ priority: high
 - [ ] #4 Back button works after navigating to detail pages
 - [ ] #5 Deep link to /sessions/:id works without prior navigation
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Check App.tsx for routes and 404 handling
+2. Write navigation.spec.ts
+3. Run tests
+4. File bugs for failures
+5. Mark done
+<!-- SECTION:PLAN:END -->
