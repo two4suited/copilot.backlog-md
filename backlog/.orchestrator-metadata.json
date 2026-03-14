@@ -8,6 +8,10 @@
     "6": "task",
     "30": "task",
     "31": "code-review",
+    "32": "general-purpose",
+    "33": "task",
+    "37": "general-purpose",
+    "40": "general-purpose",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -663,6 +667,76 @@
       "oldAgent": null,
       "newAgent": "code-review",
       "timestamp": "2026-03-14T22:23:36.781Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-14T23:29:51.923Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:29:51.924Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": null,
+      "newAgent": "task",
+      "timestamp": "2026-03-14T23:29:51.925Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "37",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:29:51.925Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "40",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:29:51.925Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-14T23:30:10.100Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:30:10.100Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-14T23:30:10.101Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "37",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:30:10.101Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "40",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:30:10.101Z",
       "reason": "Ralph loop cycle 1"
     }
   ],
