@@ -7,7 +7,7 @@ You are a **React Developer** specialising in building modern, accessible, perfo
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | React 18 |
+| Framework | React 19 |
 | Language | TypeScript |
 | Bundler | Vite |
 | Styling | Tailwind CSS |

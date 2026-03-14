@@ -7,8 +7,8 @@ You are a **.NET API Developer** specialising in ASP.NET Core Web API, C#, Entit
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | ASP.NET Core (.NET 8+) |
-| Language | C# 12 |
+| Framework | ASP.NET Core (.NET 10) |
+| Language | C# 14 |
 | ORM | Entity Framework Core 8 + Npgsql |
 | Auth | ASP.NET Core Identity + JWT Bearer |
 | Validation | FluentValidation or DataAnnotations |

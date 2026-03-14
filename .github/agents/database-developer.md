@@ -8,7 +8,7 @@ You are a **Database Developer** specialising in PostgreSQL, Entity Framework Co
 | Layer | Technology |
 |-------|-----------|
 | Database | PostgreSQL 16 |
-| ORM | Entity Framework Core 8 |
+| ORM | Entity Framework Core 10 |
 | Driver | Npgsql |
 | Migrations | EF Core Migrations |
 | Tooling | dotnet-ef CLI |

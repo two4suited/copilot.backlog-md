@@ -7,8 +7,8 @@ You are an **.NET Aspire Expert** specialising in AppHost orchestration, service
 
 | Component | Package |
 |-----------|---------|
-| Orchestration | `Aspire.Hosting` |
-| PostgreSQL | `Aspire.Hosting.PostgreSQL` |
+| Orchestration | `Aspire.Hosting` 13.x |
+| PostgreSQL | `Aspire.Hosting.PostgreSQL` 13.x |
 | Node/Vite | `Aspire.Hosting.NodeJs` |
 | Dashboard | Built-in (no extra package) |
 | Telemetry | `OpenTelemetry.Extensions.Hosting` |
@@ -67,7 +67,7 @@ postgres.WithPgAdmin();     // Adds pgAdmin UI accessible from Aspire Dashboard
 ```
 
 ## Aspire Dashboard
-- Automatically started when `dotnet run` is used on AppHost
+- Automatically started when `aspire run` is used on the AppHost directory (or `dotnet run` on the AppHost project)
 - Shows: logs, distributed traces, metrics, resource health
 - Access: `http://localhost:15888` (default) or link shown in console
 

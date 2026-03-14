@@ -8,17 +8,18 @@ Browse conferences, explore tracks and sessions, view speaker profiles, and regi
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React 18 · TypeScript · Vite · Tailwind CSS · React Query · React Router v6 |
-| Backend | ASP.NET Core (.NET 8+) · Entity Framework Core · JWT auth |
+| Frontend | React 19 · TypeScript · Vite · Tailwind CSS · React Query · React Router v7 |
+| Backend | ASP.NET Core (.NET 10) · Entity Framework Core · JWT auth |
 | Database | PostgreSQL (via Aspire container) |
-| Orchestration | .NET Aspire (AppHost) |
+| Orchestration | .NET Aspire 13 (AppHost) |
 
 ## Running Locally
 
 ### Prerequisites
-- [.NET 8+ SDK](https://dotnet.microsoft.com/download)
-- [Node.js 20+](https://nodejs.org)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- [Node.js 24+](https://nodejs.org)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (for Aspire PostgreSQL container)
+- Aspire CLI: `dotnet tool install -g aspire`
 
 ### Start everything with Aspire
 
@@ -26,23 +27,13 @@ Browse conferences, explore tracks and sessions, view speaker profiles, and regi
 # Install frontend dependencies once
 cd frontend && npm install && cd ..
 
-# Run the Aspire AppHost — starts API, PostgreSQL, and frontend together
-dotnet run --project ConferenceApp.AppHost
+# Run the entire app — starts API, PostgreSQL, and frontend together
+aspire run
 ```
 
 Aspire Dashboard opens at **http://localhost:15888** — shows logs, traces, and service health.
 
 The API auto-runs EF migrations and seeds demo data (TechConf 2026) on first start.
-
-### Run services individually
-
-```bash
-# API only
-dotnet run --project ConferenceApp.Api
-
-# Frontend only
-cd frontend && npm run dev
-```
 
 ### Environment variables
 
