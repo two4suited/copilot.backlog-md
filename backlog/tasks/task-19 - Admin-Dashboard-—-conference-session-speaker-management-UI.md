@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
-updated_date: '2026-03-14 22:18'
+updated_date: '2026-03-14 22:19'
 labels:
   - frontend
   - react
@@ -32,5 +32,17 @@ Build a protected /admin section for admins to create, edit, and delete conferen
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Implemented full protected /admin section. Backend: added PUT /api/sessions/{id}/speakers endpoint (Admin-only) and UpdateSessionSpeakersRequest DTO. Frontend: AdminLayout with sidebar nav and role guard (redirects non-admins to /); 6 admin pages for conferences/sessions/speakers with create/edit/delete; cascade conference->track selects in SessionFormPage; speaker multi-select checkboxes; email disabled on speaker edit; shared useToast, Toast, and ConfirmDialog components; Admin nav link in Layout for Admin role users. Build passes with 0 TypeScript errors.
+Implemented full /admin protected section for managing conferences, sessions, and speakers.
+
+**What changed:**
+- Added AdminLayout (sidebar nav + role guard — redirects to / if not Admin)
+- Admin link in main nav visible only to Admin role users
+- ConferenceAdminPage/ConferenceFormPage — table + create/edit/delete with date pickers and inline validation
+- SessionAdminPage/SessionFormPage — table + create/edit/delete with conference→track cascade selector, datetime-local inputs, multi-speaker checkbox selector
+- SpeakerAdminPage/SpeakerFormPage — table + create/edit/delete (email read-only on edit)
+- Shared ConfirmDialog, Toast, useToast for consistent UX
+- Backend: added PUT /api/sessions/{id}/speakers endpoint (Admin-only) + UpdateSessionSpeakersRequest DTO so speaker assignments can be updated on edit
+- services/api.ts extended with create/update/delete/updateSpeakers/listAll admin methods
+
+**Tests:** `npm run build` passes with 0 TypeScript errors.
 <!-- SECTION:FINAL_SUMMARY:END -->
