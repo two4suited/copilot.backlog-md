@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:32'
-updated_date: '2026-03-14 23:48'
+updated_date: '2026-03-14 23:49'
 labels:
   - testing
   - frontend
@@ -16,9 +16,9 @@ github_issue: 95
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Expired/invalid JWT causes 401 UI shows login prompt or redirects
-- [ ] #2 Network error on schedule load shows error message (not blank page)
-- [ ] #3 Submit conference form with empty fields shows inline validation, no API call
+- [x] #1 Expired/invalid JWT causes 401 UI shows login prompt or redirects
+- [x] #2 Network error on schedule load shows error message (not blank page)
+- [x] #3 Submit conference form with empty fields shows inline validation, no API call
 <!-- AC:END -->
 
 ## Implementation Plan
