@@ -3,7 +3,7 @@ id: TASK-12
 title: 'Design: backlog.md ↔ GitHub Issues sync schema'
 status: In Progress
 assignee:
-  - '@dotnet-developer'
+  - '@copilot'
 created_date: '2026-03-14 21:46'
 updated_date: '2026-03-14 21:51'
 labels:
