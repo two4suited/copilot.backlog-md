@@ -1,9 +1,10 @@
 ---
 id: TASK-5
 title: 'EPIC: Attendee Experience'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 21:11'
+updated_date: '2026-03-14 22:04'
 labels:
   - epic
   - attendee
@@ -24,3 +25,9 @@ Features that make the app useful day-of-conference: session registration, perso
 - [ ] #3 Attendees can view their personal schedule in one place
 - [ ] #4 Seat availability shown in real time on session cards
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+All sub-tasks completed.
+<!-- SECTION:FINAL_SUMMARY:END -->
