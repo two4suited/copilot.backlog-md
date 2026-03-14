@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:46'
-updated_date: '2026-03-14 21:49'
+updated_date: '2026-03-14 21:50'
 labels:
   - research
   - infrastructure
@@ -22,10 +22,10 @@ Research how to sync backlog.md task files with GitHub Issues. Investigate: (1) 
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Findings written to backlog task notes covering all 6 research areas
-- [ ] #2 Recommended sync approach chosen (unidirectional backlog→GitHub or bidirectional)
-- [ ] #3 Recommended tool/library identified (gh CLI, octokit, existing action, or custom script)
-- [ ] #4 Branch-tagging mechanism documented
+- [x] #1 Findings written to backlog task notes covering all 6 research areas
+- [x] #2 Recommended sync approach chosen (unidirectional backlog→GitHub or bidirectional)
+- [x] #3 Recommended tool/library identified (gh CLI, octokit, existing action, or custom script)
+- [x] #4 Branch-tagging mechanism documented
 <!-- AC:END -->
 
 ## Implementation Plan
