@@ -1,9 +1,11 @@
 ---
 id: TASK-17
 title: Add GitHub Actions expert agent and CI-monitor to orchestrator ralph loop
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 21:55'
+updated_date: '2026-03-14 21:55'
 labels:
   - infrastructure
   - orchestrator
