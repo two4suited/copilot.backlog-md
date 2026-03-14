@@ -19,24 +19,27 @@ async function loginAsAdmin(page: import('@playwright/test').Page) {
   await expect(page).not.toHaveURL(/\/login/, { timeout: 10_000 });
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 1. Unauthenticated user on /my-schedule — no Export button visible
+// ──────────────────────────────────────────────────────────────────────────────
 test.describe('iCal export – unauthenticated', () => {
-  test('unauthenticated user visiting /my-schedule is redirected to /login', async ({ page }) => {
+  test('unauthenticated user on /my-schedule is redirected to /login — no Export button', async ({ page }) => {
     await page.goto('/my-schedule');
+    // ProtectedRoute redirects unauthenticated users to /login
     await expect(page).toHaveURL(/\/login/, { timeout: 10_000 });
-    // The Export to Calendar button must not be visible (page redirected away)
+    // Export button must not be visible (page redirected away)
     await expect(page.getByRole('button', { name: /export to calendar/i })).not.toBeVisible();
   });
 });
 
-test.describe('iCal export – authenticated with no sessions', () => {
-  test('Export to Calendar button is not shown when user has no registered sessions', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+// ──────────────────────────────────────────────────────────────────────────────
+// 2. Authenticated user with no sessions — Export button NOT shown
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('iCal export – authenticated, empty schedule', () => {
+  test('Export button is hidden when user has no registered sessions', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
-    // Register a brand-new user who has no registrations
+    // Register a brand-new user (zero registrations)
     const uniqueEmail = `ical-empty-${Date.now()}@e2e.test`;
     await page.goto('/register');
     await page.getByLabel(/name/i).fill('iCal Empty User');
@@ -48,108 +51,94 @@ test.describe('iCal export – authenticated with no sessions', () => {
     await page.goto('/my-schedule');
     await expect(page).toHaveURL(/\/my-schedule/, { timeout: 10_000 });
 
-    // Export button is only rendered when sessions.length > 0
-    await expect(page.getByRole('button', { name: /export to calendar/i })).not.toBeVisible({ timeout: 10_000 });
-    // Empty state message should be shown instead
-    await expect(page.getByText(/no registered sessions yet|no sessions yet/i)).toBeVisible({ timeout: 10_000 });
+    // Export button is only rendered when sessions.length > 0 — should be hidden
+    await expect(page.getByRole('heading', { name: /my schedule/i })).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByRole('button', { name: /export to calendar/i })).not.toBeVisible();
+    // Empty-state message should appear instead
+    await expect(
+      page.getByText(/no registered sessions yet|no sessions yet/i)
+    ).toBeVisible({ timeout: 10_000 });
   });
 });
 
-test.describe('iCal export – authenticated with sessions', () => {
-  test('Export to Calendar button is visible when user has registered sessions', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
-
-    await loginAsAdmin(page);
-    await page.goto('/my-schedule');
-    await expect(page).toHaveURL(/\/my-schedule/, { timeout: 10_000 });
-
-    // Wait for page to finish loading
-    await expect(
-      page.locator('.animate-spin').or(page.getByRole('heading', { name: /my schedule/i }))
-    ).toBeVisible({ timeout: 15_000 });
-
-    // If admin has registered sessions, the Export button should be shown
-    const sessions = page.locator('tbody tr, [class*="rounded-xl"][class*="border"]').filter({ hasText: /remove from schedule/i });
-    const sessionCount = await sessions.count();
-
-    if (sessionCount === 0) {
-      // Admin has no registered sessions — skip the download check but verify page loaded
-      await expect(page.getByRole('heading', { name: /my schedule/i })).toBeVisible();
-      test.skip(); // Skip download assertion as there are no sessions to export
-      return;
-    }
-
-    await expect(page.getByRole('button', { name: /export to calendar/i })).toBeVisible({ timeout: 10_000 });
-  });
-
-  test('Export to Calendar button triggers a download when clicked', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+// ──────────────────────────────────────────────────────────────────────────────
+// 3. Export button has correct aria / text label
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('iCal export – button label', () => {
+  test('Export to Calendar button has correct accessible text label', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
 
-    // First register for a session via the schedule page so the export button appears
+    // Register admin for a session so the export button renders
     await page.goto('/schedule');
     const firstSessionLink = page.locator('a[href*="/sessions/"]').first();
     const hasSession = await firstSessionLink.isVisible({ timeout: 10_000 }).catch(() => false);
-
-    if (!hasSession) {
-      test.skip();
-      return;
-    }
+    if (!hasSession) { test.skip(); return; }
 
     await firstSessionLink.click();
     await expect(page).toHaveURL(/\/sessions\/[^/]+$/, { timeout: 10_000 });
 
-    const registerBtn = page.getByRole('button', { name: /register/i });
-    const isRegisterVisible = await registerBtn.isVisible({ timeout: 5_000 }).catch(() => false);
-    if (isRegisterVisible) {
+    const registerBtn = page.getByRole('button', { name: /^register$/i });
+    const canRegister = await registerBtn.isVisible({ timeout: 5_000 }).catch(() => false);
+    if (canRegister) {
       await registerBtn.click();
       await expect(page.getByRole('button', { name: /cancel registration/i })).toBeVisible({ timeout: 10_000 });
     }
 
-    // Now check the my-schedule page for the export button
     await page.goto('/my-schedule');
     await expect(page).toHaveURL(/\/my-schedule/);
+    await expect(page.getByRole('heading', { name: /my schedule/i })).toBeVisible({ timeout: 15_000 });
 
     const exportBtn = page.getByRole('button', { name: /export to calendar/i });
-    const exportVisible = await exportBtn.isVisible({ timeout: 15_000 }).catch(() => false);
+    const isVisible = await exportBtn.isVisible({ timeout: 10_000 }).catch(() => false);
+    if (!isVisible) { test.skip(); return; } // admin has no registered sessions
 
-    if (!exportVisible) {
-      test.skip();
-      return;
+    // Verify the accessible text label exactly
+    await expect(exportBtn).toBeVisible();
+    await expect(exportBtn).toHaveText(/export to calendar/i);
+  });
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 4. Export button triggers an .ics file download
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('iCal export – download', () => {
+  test('clicking Export to Calendar triggers a .ics download', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
+
+    await loginAsAdmin(page);
+
+    // Ensure admin is registered for at least one session
+    await page.goto('/schedule');
+    const firstSessionLink = page.locator('a[href*="/sessions/"]').first();
+    const hasSession = await firstSessionLink.isVisible({ timeout: 10_000 }).catch(() => false);
+    if (!hasSession) { test.skip(); return; }
+
+    await firstSessionLink.click();
+    await expect(page).toHaveURL(/\/sessions\/[^/]+$/, { timeout: 10_000 });
+
+    const registerBtn = page.getByRole('button', { name: /^register$/i });
+    const canRegister = await registerBtn.isVisible({ timeout: 5_000 }).catch(() => false);
+    if (canRegister) {
+      await registerBtn.click();
+      await expect(page.getByRole('button', { name: /cancel registration/i })).toBeVisible({ timeout: 10_000 });
     }
 
-    // Listen for the download event triggered by the programmatic anchor click
+    await page.goto('/my-schedule');
+    await expect(page).toHaveURL(/\/my-schedule/);
+    await expect(page.getByRole('heading', { name: /my schedule/i })).toBeVisible({ timeout: 15_000 });
+
+    const exportBtn = page.getByRole('button', { name: /export to calendar/i });
+    const isVisible = await exportBtn.isVisible({ timeout: 10_000 }).catch(() => false);
+    if (!isVisible) { test.skip(); return; }
+
+    // handleExport does a programmatic anchor click — listen for download event
     const [download] = await Promise.all([
       page.waitForEvent('download', { timeout: 15_000 }),
       exportBtn.click(),
     ]);
 
     expect(download.suggestedFilename()).toBe('my-schedule.ics');
-  });
-});
-
-test.describe('iCal export – my schedule page structure', () => {
-  test('my schedule page renders heading and loading state correctly', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
-
-    await loginAsAdmin(page);
-    await page.goto('/my-schedule');
-    await expect(page).toHaveURL(/\/my-schedule/);
-
-    // Page heading should always be present once loaded
-    await expect(page.getByRole('heading', { name: /my schedule/i })).toBeVisible({ timeout: 15_000 });
   });
 });

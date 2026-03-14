@@ -28,46 +28,65 @@ async function registerAndLoginAsUser(page: import('@playwright/test').Page, ema
   await expect(page).not.toHaveURL(/\/register/, { timeout: 10_000 });
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 1. Route protection (no API needed — client-side guard in AdminLayout)
+// ──────────────────────────────────────────────────────────────────────────────
 test.describe('Admin – route protection', () => {
-  test('unauthenticated user visiting /admin is redirected away', async ({ page }) => {
-    // AdminLayout redirects to "/" when not authenticated — not /login
+  test('unauthenticated user visiting /admin is redirected away from /admin', async ({ page }) => {
+    // AdminLayout checks isAuthenticated; redirects to "/" when false
     await page.goto('/admin');
+    await expect(page).not.toHaveURL(/\/admin/, { timeout: 10_000 });
+  });
+
+  test('unauthenticated user visiting /admin/conferences is redirected away', async ({ page }) => {
+    await page.goto('/admin/conferences');
     await expect(page).not.toHaveURL(/\/admin/, { timeout: 10_000 });
   });
 });
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 2. Admin can reach /admin/conferences
+// ──────────────────────────────────────────────────────────────────────────────
 test.describe('Admin – login and dashboard', () => {
-  test('admin can log in and access admin dashboard', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+  test('admin user can reach /admin/conferences', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
     await page.goto('/admin/conferences');
     await expect(page).toHaveURL(/\/admin\/conferences/, { timeout: 10_000 });
-    // Admin sidebar should be visible
+    // Sidebar nav links confirm admin layout rendered
     await expect(page.getByRole('link', { name: /conferences/i }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: /sessions/i }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: /speakers/i }).first()).toBeVisible();
-    // Page heading
     await expect(page.getByRole('heading', { name: /conferences/i })).toBeVisible();
   });
 });
 
-test.describe('Admin – conference CRUD', () => {
-  test('admin can create a new conference', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+// ──────────────────────────────────────────────────────────────────────────────
+// 3. Conference list renders a table
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('Admin – conference list', () => {
+  test('conferences list page renders a table/list element', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
     await page.goto('/admin/conferences');
-    await page.getByRole('link', { name: /new conference/i }).click();
-    await expect(page).toHaveURL(/\/admin\/conferences\/new/, { timeout: 10_000 });
+    await expect(page.locator('table')).toBeVisible({ timeout: 10_000 });
+    await expect(page.locator('th', { hasText: /name/i }).first()).toBeVisible();
+    await expect(page.locator('th', { hasText: /location/i }).first()).toBeVisible();
+  });
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 4. Create conference
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('Admin – create conference', () => {
+  test('fill form at /admin/conferences/new, submit, assert success toast or redirect', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
+
+    await loginAsAdmin(page);
+    await page.goto('/admin/conferences/new');
+    await expect(page.getByRole('heading', { name: /new conference/i })).toBeVisible({ timeout: 10_000 });
 
     const uniqueName = `E2E Conference ${Date.now()}`;
     await page.getByLabel(/name/i).fill(uniqueName);
@@ -76,140 +95,126 @@ test.describe('Admin – conference CRUD', () => {
     await page.getByLabel(/location/i).fill('E2E Test City');
     await page.getByRole('button', { name: /create conference/i }).click();
 
-    // Should redirect back to list after save
+    // Either a success toast appears or the page redirects back to the list
     await expect(page).toHaveURL(/\/admin\/conferences$/, { timeout: 15_000 });
-    // New conference should appear in the table
     await expect(page.getByRole('cell', { name: uniqueName })).toBeVisible({ timeout: 10_000 });
   });
 
-  test('conference form validates required fields', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+  test('conference form shows validation errors when required fields are empty', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
     await page.goto('/admin/conferences/new');
-    // Submit without filling any fields
     await page.getByRole('button', { name: /create conference/i }).click();
-    // Validation errors should be shown
     await expect(page.locator('p.text-red-600').first()).toBeVisible();
   });
 });
 
-test.describe('Admin – session edit', () => {
-  test('admin can edit a session title', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+// ──────────────────────────────────────────────────────────────────────────────
+// 5. Edit conference
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('Admin – edit conference', () => {
+  test('navigate to edit form, change name, save, assert toast', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
-    await page.goto('/admin/sessions');
-    await expect(page.getByRole('heading', { name: /sessions/i })).toBeVisible();
+    await page.goto('/admin/conferences');
+    await expect(page.locator('table')).toBeVisible({ timeout: 10_000 });
 
-    // Wait for sessions to load and click Edit on the first one
-    const firstEditLink = page.getByRole('link', { name: /edit/i }).first();
-    await expect(firstEditLink).toBeVisible({ timeout: 15_000 });
+    // Click the first Edit link
+    const firstEditLink = page.locator('a', { hasText: /edit/i }).first();
+    await expect(firstEditLink).toBeVisible({ timeout: 10_000 });
     await firstEditLink.click();
 
-    await expect(page).toHaveURL(/\/admin\/sessions\/[^/]+$/, { timeout: 10_000 });
-    await expect(page.getByRole('heading', { name: /edit session/i })).toBeVisible();
+    await expect(page).toHaveURL(/\/admin\/conferences\/[^/]+$/, { timeout: 10_000 });
+    await expect(page.getByRole('heading', { name: /edit conference/i })).toBeVisible();
 
-    // Change the title
-    const titleInput = page.getByLabel(/title/i);
-    const originalTitle = await titleInput.inputValue();
-    const updatedTitle = `${originalTitle} [E2E-edited]`;
-    await titleInput.fill(updatedTitle);
+    const nameInput = page.getByLabel(/name/i);
+    await nameInput.clear();
+    await nameInput.fill(`E2E Renamed ${Date.now()}`);
     await page.getByRole('button', { name: /save changes/i }).click();
 
-    // Should redirect back to list
-    await expect(page).toHaveURL(/\/admin\/sessions$/, { timeout: 15_000 });
-    // Updated title should appear in the table
-    await expect(page.getByRole('cell', { name: updatedTitle })).toBeVisible({ timeout: 10_000 });
+    // Success toast: "Conference updated"
+    await expect(page.locator('text=Conference updated')).toBeVisible({ timeout: 10_000 });
   });
 });
 
-test.describe('Admin – speaker delete', () => {
-  test('admin can delete a speaker via confirm dialog', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+// ──────────────────────────────────────────────────────────────────────────────
+// 6. Delete conference
+// ──────────────────────────────────────────────────────────────────────────────
+test.describe('Admin – delete conference', () => {
+  test('click delete, confirm dialog appears, confirm, assert item removed', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
-    await page.goto('/admin/speakers');
-    await expect(page.getByRole('heading', { name: /speakers/i })).toBeVisible();
 
-    // Wait for speakers to load
-    const firstDeleteButton = page.getByRole('button', { name: /delete/i }).first();
-    await expect(firstDeleteButton).toBeVisible({ timeout: 15_000 });
+    // Create a disposable conference to delete
+    await page.goto('/admin/conferences/new');
+    const uniqueName = `E2E Delete Me ${Date.now()}`;
+    await page.getByLabel(/name/i).fill(uniqueName);
+    await page.getByLabel(/start date/i).fill('2025-10-01');
+    await page.getByLabel(/end date/i).fill('2025-10-02');
+    await page.getByLabel(/location/i).fill('Deleteville');
+    await page.getByRole('button', { name: /create conference/i }).click();
+    await page.waitForURL(/\/admin\/conferences$/, { timeout: 15_000 });
 
-    // Get the speaker name from the row before deleting
-    const firstRow = page.locator('tbody tr').first();
-    const speakerName = await firstRow.locator('td').first().textContent();
+    // Locate the row for the newly-created conference
+    await expect(page.locator('table')).toBeVisible({ timeout: 10_000 });
+    const row = page.locator('tr', { hasText: uniqueName });
+    await expect(row).toBeVisible({ timeout: 10_000 });
 
-    await firstDeleteButton.click();
+    // Click its Delete button
+    await row.locator('button', { hasText: /delete/i }).click();
 
-    // Confirm dialog should appear
-    await expect(page.getByRole('dialog')).toBeVisible({ timeout: 5_000 });
-    await expect(page.getByText(/are you sure/i)).toBeVisible();
+    // ConfirmDialog renders as a fixed overlay — check for its heading and message
+    // (ConfirmDialog does NOT use role="dialog"; detect by the dialog heading instead)
+    await expect(page.getByRole('heading', { name: /delete conference/i })).toBeVisible({ timeout: 5_000 });
+    await expect(page.getByText(/cannot be undone/i)).toBeVisible();
 
-    // Confirm the deletion
-    await page.getByRole('button', { name: /confirm|yes|delete/i }).last().click();
+    // Confirm by clicking the red "Delete" button at the bottom of the overlay
+    // Use the last "Delete" button on the page to target the confirm button (not the row button)
+    await page.getByRole('button', { name: /^delete$/i }).last().click();
 
-    // Speaker should be removed — toast appears and row disappears
-    await expect(page.getByText(/deleted successfully/i)).toBeVisible({ timeout: 10_000 });
-    if (speakerName) {
-      await expect(page.getByRole('cell', { name: speakerName })).not.toBeVisible({ timeout: 10_000 });
-    }
+    // Toast confirms deletion
+    await expect(page.locator('text=Conference deleted successfully')).toBeVisible({ timeout: 10_000 });
+    // Row should vanish from the table
+    await expect(row).not.toBeVisible({ timeout: 10_000 });
   });
 
-  test('admin can cancel the delete dialog without removing speaker', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+  test('cancelling the delete dialog keeps the conference in the list', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
-    await page.goto('/admin/speakers');
-
-    const firstDeleteButton = page.getByRole('button', { name: /delete/i }).first();
-    await expect(firstDeleteButton).toBeVisible({ timeout: 15_000 });
+    await page.goto('/admin/conferences');
+    await expect(page.locator('table')).toBeVisible({ timeout: 10_000 });
 
     const firstRow = page.locator('tbody tr').first();
-    const speakerName = await firstRow.locator('td').first().textContent();
+    const conferenceName = await firstRow.locator('td').first().textContent();
 
-    await firstDeleteButton.click();
-    await expect(page.getByRole('dialog')).toBeVisible({ timeout: 5_000 });
+    await firstRow.locator('button', { hasText: /delete/i }).click();
+    await expect(page.getByRole('heading', { name: /delete conference/i })).toBeVisible({ timeout: 5_000 });
 
-    // Cancel the dialog
+    // Cancel — dialog should close without deleting
     await page.getByRole('button', { name: /cancel/i }).click();
 
-    // Dialog should close and speaker should still be in the list
-    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 5_000 });
-    if (speakerName) {
-      await expect(page.getByRole('cell', { name: speakerName })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /delete conference/i })).not.toBeVisible({ timeout: 5_000 });
+    if (conferenceName) {
+      await expect(page.locator('td', { hasText: conferenceName }).first()).toBeVisible();
     }
   });
 });
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 7. Non-admin user cannot access /admin
+// ──────────────────────────────────────────────────────────────────────────────
 test.describe('Admin – non-admin access', () => {
-  test('regular user navigating to /admin is redirected away', async ({ page }) => {
-    const apiAvailable = await isApiAvailable();
-    if (!apiAvailable) {
-      test.skip();
-      return;
-    }
+  test('regular user navigating to /admin/conferences is redirected away', async ({ page }) => {
+    if (!(await isApiAvailable())) { test.skip(); return; }
 
     const uniqueEmail = `regular-${Date.now()}@e2e.test`;
     await registerAndLoginAsUser(page, uniqueEmail);
 
-    // Try to access admin area — AdminLayout redirects role !== Admin to "/"
+    // AdminLayout checks user.role !== 'Admin' and redirects to "/"
     await page.goto('/admin/conferences');
     await expect(page).not.toHaveURL(/\/admin/, { timeout: 10_000 });
   });
