@@ -37,3 +37,25 @@ Speaker listing page and individual speaker profile pages showing bio, photo, an
 4. Run build to confirm no TypeScript errors
 5. Mark ACs and close task
 <!-- SECTION:PLAN:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## Speaker Profile UI (TASK-3.4)
+
+Enhanced and verified the speaker profile pages in the React frontend.
+
+### Changes
+- **SpeakerDetailPage.tsx**: Updated `LargeAvatar` to accept `photoUrl` prop — renders `<img>` when URL is present, falls back to styled initials div otherwise. Avatar is passed the speaker's `photoUrl`.
+- **SpeakersPage.tsx**: Updated `SpeakerAvatar` with the same photo/initials logic for the speaker grid cards.
+
+### Features verified end-to-end
+- Speakers page lists all speakers with photo (or initials avatar), name, and company
+- Speaker detail page shows: photo/avatar, name, company, full bio, Twitter/LinkedIn social links (conditionally rendered), and a list of sessions
+- Each session card on the speaker detail page links to `/sessions/:id`
+- Loading and error states handled via `LoadingSpinner` and `ErrorMessage` components
+- Route `/speakers/:id` → `SpeakerDetailPage` confirmed in `App.tsx`
+
+### Tests
+- `npm run build` (tsc + vite) passes with zero errors
+<!-- SECTION:FINAL_SUMMARY:END -->
