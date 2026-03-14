@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@aspire-expert'
 created_date: '2026-03-14 22:26'
-updated_date: '2026-03-14 22:31'
+updated_date: '2026-03-14 23:48'
 labels:
   - testing
   - frontend
@@ -37,6 +37,11 @@ github_issue: 91
 
 <!-- SECTION:NOTES:BEGIN -->
 Run 1: 8 passed, 3 skipped (API unavailable). All nav, 404, back-button tests pass without backend.
+
+Re-run with live API (via local config pointing to port 5174): 8 passed, 3 skipped.
+Fixed hardcoded localhost:5173 URL patterns → now accept 5173 or 5174.
+Fixed API URL to use Vite proxy (http://localhost:5174/api/...) instead of dead localhost:5000.
+3 remaining skips caused by TASK-41 (GET /api/sessions → 500 AmbiguousMatchException).
 <!-- SECTION:NOTES:END -->
 
 ## Final Summary
