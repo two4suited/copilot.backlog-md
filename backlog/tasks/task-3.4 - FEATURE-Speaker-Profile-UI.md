@@ -3,9 +3,9 @@ id: TASK-3.4
 title: 'FEATURE: Speaker Profile UI'
 status: In Progress
 assignee:
-  - '@designer'
+  - '@copilot'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:37'
+updated_date: '2026-03-14 21:54'
 labels:
   - feature
   - frontend
