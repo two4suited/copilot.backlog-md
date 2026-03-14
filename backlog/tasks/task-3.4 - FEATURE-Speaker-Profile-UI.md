@@ -1,10 +1,11 @@
 ---
 id: TASK-3.4
 title: 'FEATURE: Speaker Profile UI'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@designer'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:37'
 labels:
   - feature
   - frontend
