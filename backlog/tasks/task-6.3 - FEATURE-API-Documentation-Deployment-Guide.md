@@ -1,9 +1,11 @@
 ---
 id: TASK-6.3
 title: 'FEATURE: API Documentation & Deployment Guide'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 21:13'
+updated_date: '2026-03-14 21:44'
 labels:
   - feature
   - docs
