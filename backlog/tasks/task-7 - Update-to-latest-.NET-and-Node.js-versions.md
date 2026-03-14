@@ -1,9 +1,11 @@
 ---
 id: TASK-7
 title: Update to latest .NET and Node.js versions
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@aspire-expert'
 created_date: '2026-03-14 21:39'
+updated_date: '2026-03-14 21:41'
 labels:
   - infrastructure
   - aspire
