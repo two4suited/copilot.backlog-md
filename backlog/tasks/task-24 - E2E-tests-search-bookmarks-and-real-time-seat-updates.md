@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:13'
-updated_date: '2026-03-14 22:19'
+updated_date: '2026-03-14 22:20'
 labels:
   - testing
   - frontend
@@ -30,5 +30,11 @@ Playwright e2e specs for the three newest features: (1) nav search bar with debo
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Added three Playwright e2e spec files for search, bookmarks, and seat availability. search.spec.ts covers: search input visibility, 1-char no-dropdown rule, dropdown appearance with 2+ chars, session/speaker click navigation, and Escape-to-close. bookmarks.spec.ts covers: bookmark toggle, offline_bookmarks localStorage persistence (unauthenticated), reload persistence, and API registration sync (authenticated). seats.spec.ts covers: seat count display, numeric validation, register-button decrement, LIVE SignalR badge, and full-session disabled state. All API-dependent tests skip gracefully when backend is unavailable. 2 offline-safe tests pass, 16 skip correctly without backend.
+3 new Playwright e2e spec files covering the newest features.
+
+- search.spec.ts (7 tests): nav search visibility, 1-char no-dropdown, 2+ char dropdown, session/speaker click navigation, Escape-to-close
+- bookmarks.spec.ts (6 tests): toggle state, localStorage offline_bookmarks, reload persistence, auth sync, toggle-off
+- seats.spec.ts (6 tests): seat count display, numeric validation, register decrement, SignalR LIVE badge, full-session disabled state
+
+2/18 pass offline (input visibility + 1-char guard); 16 skip gracefully without backend. No UI bugs found.
 <!-- SECTION:FINAL_SUMMARY:END -->
