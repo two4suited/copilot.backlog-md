@@ -1,11 +1,11 @@
 ---
 id: TASK-9
 title: Update orchestrator to push to remote after every commit
-status: In Progress
+status: Done
 assignee:
   - '@dotnet-developer'
 created_date: '2026-03-14 21:39'
-updated_date: '2026-03-14 21:41'
+updated_date: '2026-03-14 21:44'
 labels:
   - infrastructure
 dependencies: []
@@ -20,8 +20,8 @@ Add git push to orchestrator-cli.js: auto-push in ralph loop after changes, add 
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 gitPush() helper added to orchestrator-cli.js
-- [ ] #2 Ralph loop auto-pushes when tasks assigned or bugs filed
-- [ ] #3 'orchestrator push' command available
-- [ ] #4 All agent instruction files include git push step
+- [x] #1 gitPush() helper added to orchestrator-cli.js
+- [x] #2 Ralph loop auto-pushes when tasks assigned or bugs filed
+- [x] #3 'orchestrator push' command available
+- [x] #4 All agent instruction files include git push step
 <!-- AC:END -->
