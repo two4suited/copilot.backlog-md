@@ -4,8 +4,15 @@ on:
   push:
     branches: ['**']
     tags: ['**']
-    paths:
-      - 'backlog/tasks/**'
+  schedule:
+    # Daily full sync at 02:00 UTC to catch any tasks missed by push trigger
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual sync (optional)'
+        required: false
+        default: 'Manual full sync'
 
 permissions:
   issues: write
