@@ -262,7 +262,7 @@ $description"
 
   sleep "$SLEEP_BETWEEN_CALLS"
 
-  # --- Find existing issue (by stored number or by label lookup) ---
+  # --- Find existing issue (by stored number → label → title) ---
   existing_issue=""
 
   if [[ -n "$github_issue_num" ]]; then
@@ -274,13 +274,24 @@ $description"
     fi
   fi
 
+  # Second: search by task-identity label (catches issues created before frontmatter was written back)
   if [[ -z "$existing_issue" ]]; then
     existing_issue="$(gh issue list \
       --label "$task_label" \
       --state all \
       --json number \
-      --jq '.[0].number // empty' \
-      --limit 1 2>/dev/null || echo '')"
+      --jq 'sort_by(.number) | .[0].number // empty' \
+      --limit 10 2>/dev/null || echo '')"
+  fi
+
+  # Third: search by exact title (dedup guard against concurrent runs)
+  if [[ -z "$existing_issue" ]]; then
+    existing_issue="$(gh issue list \
+      --search "\"${issue_title}\" in:title" \
+      --state all \
+      --json number,title \
+      --jq --arg t "$issue_title" '[.[] | select(.title == $t)] | sort_by(.number) | .[0].number // empty' \
+      --limit 10 2>/dev/null || echo '')"
   fi
 
   sleep "$SLEEP_BETWEEN_CALLS"

@@ -14,6 +14,11 @@ on:
         required: false
         default: 'Manual full sync'
 
+# Only one sync run at a time — prevents race-condition duplicates
+concurrency:
+  group: sync-backlog-issues
+  cancel-in-progress: false   # queue rather than cancel so no tasks are missed
+
 permissions:
   issues: write
   contents: write   # needed to write github_issue field back to task files
