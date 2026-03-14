@@ -1,7 +1,7 @@
 ---
 id: TASK-20
 title: Backend unit tests — xUnit for API controllers and services
-status: In Progress
+status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
