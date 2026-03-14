@@ -28,19 +28,14 @@ Add a docker-compose.yml at repo root that runs the full stack: postgres, .NET A
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Added Docker Compose production deployment configuration.
+Full production Docker Compose stack delivered.
 
-## Changes
-- `Dockerfile.api`: Multi-stage .NET 10 build → aspnet:10.0 runtime, exposes port 8080
-- `Dockerfile.frontend`: Multi-stage node:20-alpine build → nginx:alpine runtime on port 80
-- `nginx.conf`: Serves React SPA with `/api/` and `/hubs/` proxied to the backend; SPA fallback to `index.html`
-- `docker-compose.yml`: Orchestrates postgres:16-alpine (with health check + named volume), api, and frontend services; api depends on healthy postgres
-- `.env.example`: Documents all required environment variables (PostgreSQL creds, connection string, JWT key/issuer/audience)
-- `README.md`: Added "Production Deployment" section with prerequisites, steps, URL table, env var reference, and cleanup commands
-- `.gitignore`: Added explicit `.env` entry alongside existing `*.env`
+- Dockerfile.api: multi-stage sdk:10.0→aspnet:10.0, port 8080
+- Dockerfile.frontend: node:20-alpine build → nginx:alpine, SPA fallback + /api /hubs proxy with WebSocket upgrade
+- docker-compose.yml: postgres:16 + api + frontend, health checks, named volume
+- .env.example: all required vars documented (POSTGRES_*, ConnectionStrings__conferencedb, Jwt__Key/Issuer/Audience)
+- README updated with Production Deployment section
+- .gitignore: .env entry added
 
-## Notes
-- JWT env vars aligned with actual config keys in `Program.cs` (`Jwt__Key`, `Jwt__Issuer`, `Jwt__Audience`)
-- YAML validated with `docker compose config -q` ✅
-- Frontend proxies `/api/` and `/hubs/` so the browser sees same-origin in production (no CORS issues)
+docker compose config validates cleanly.
 <!-- SECTION:FINAL_SUMMARY:END -->
