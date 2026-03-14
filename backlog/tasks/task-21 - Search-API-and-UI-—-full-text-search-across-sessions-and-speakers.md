@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
-updated_date: '2026-03-14 22:08'
+updated_date: '2026-03-14 22:09'
 labels:
   - backend
   - frontend
@@ -31,15 +31,11 @@ Add a GET /api/search?q=term endpoint that searches sessions (title, description
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-## Full-text Search — TASK-21
+Implemented full-text search across sessions and speakers.
 
-### What changed
-- **Backend**: Added `SearchController.cs` with `GET /api/search?q=term` endpoint. Uses PostgreSQL `ILike` for case-insensitive partial matching across sessions (Title, Description, Speaker names via join) and speakers (Name, Bio, Company). Returns up to 10 results each; rejects queries shorter than 2 characters with 400.
-- **API client** (`client.ts`): Added `SearchResultDto`, `SessionSearchItem`, `SpeakerSearchItem` interfaces and `searchApi(q)` helper.
-- **Frontend**: Extracted `SearchBar.tsx` component embedded in the nav header. Debounces input 300 ms, shows a dropdown with Sessions/Speakers sections, navigates to `/sessions/:id` or `/speakers/:id` on click, closes on Escape or outside click, shows "No results" when empty, requires ≥ 2 chars before firing.
-- **Layout.tsx**: Imported and placed `<SearchBar />` between the main nav and the auth buttons.
+**Backend**: GET /api/search?q=term with EF Core ILike matching on session title/description and speaker name/bio/company. Returns up to 10 results each; 400 if q < 2 chars.
 
-### Tests
-- `dotnet build ConferenceApp.sln -c Release` — 0 errors
-- `cd frontend && npm run build` — 0 errors, 0 unused imports
+**Frontend**: SearchBar component (300ms debounce, dropdown sections, Escape/click-outside close, navigation to detail pages) placed in center of nav Layout.
+
+Files: SearchController.cs, client.ts (searchApi), SearchBar.tsx, Layout.tsx.
 <!-- SECTION:FINAL_SUMMARY:END -->
