@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
-updated_date: '2026-03-14 22:06'
+updated_date: '2026-03-14 22:08'
 labels:
   - backend
   - frontend
@@ -22,8 +22,8 @@ Add a GET /api/search?q=term endpoint that searches sessions (title, description
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 GET /api/search?q= returns sessions and speakers matching the query
-- [ ] #2 Search is case-insensitive and matches partial words
-- [ ] #3 Frontend search bar shows live dropdown results
-- [ ] #4 Clicking a result navigates to the correct detail page
+- [x] #1 GET /api/search?q= returns sessions and speakers matching the query
+- [x] #2 Search is case-insensitive and matches partial words
+- [x] #3 Frontend search bar shows live dropdown results
+- [x] #4 Clicking a result navigates to the correct detail page
 <!-- AC:END -->
