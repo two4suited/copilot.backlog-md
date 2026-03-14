@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@tester'
 created_date: '2026-03-14 22:23'
-updated_date: '2026-03-14 22:24'
+updated_date: '2026-03-14 22:25'
 labels:
   - testing
   - backend
@@ -30,3 +30,13 @@ Playwright/xUnit tests for email features: (1) Playwright — register for a ses
 - [ ] #7 Cannot register when session is full
 - [ ] #8 My Schedule page shows registered sessions
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Write registration.spec.ts using isApiAvailable() pattern
+2. Cover: register for session, cancel registration, duplicate registration 409, full session, My Schedule view
+3. Run tests and observe results
+4. File bugs for any failures
+5. Mark done
+<!-- SECTION:PLAN:END -->
