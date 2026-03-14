@@ -1,10 +1,11 @@
 ---
 id: TASK-3.5
 title: 'FEATURE: Session Detail & Management UI'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@react-developer'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:44'
 labels:
   - feature
   - frontend
