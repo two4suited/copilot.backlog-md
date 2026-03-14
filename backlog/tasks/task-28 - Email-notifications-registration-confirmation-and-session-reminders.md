@@ -1,9 +1,11 @@
 ---
 id: TASK-28
 title: 'Email notifications: registration confirmation and session reminders'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 22:17'
+updated_date: '2026-03-14 22:20'
 labels:
   - backend
   - feature
