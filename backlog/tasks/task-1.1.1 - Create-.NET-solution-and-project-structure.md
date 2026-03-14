@@ -1,10 +1,11 @@
 ---
 id: TASK-1.1.1
 title: Create .NET solution and project structure
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@aspire-expert'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:20'
 labels:
   - task
   - infrastructure
