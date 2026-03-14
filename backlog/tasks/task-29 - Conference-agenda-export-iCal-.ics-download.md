@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@dotnet-developer'
 created_date: '2026-03-14 22:17'
-updated_date: '2026-03-14 22:17'
+updated_date: '2026-03-14 22:18'
 labels:
   - backend
   - frontend
@@ -22,7 +22,7 @@ Allow attendees to export their personal schedule as an iCal file. GET /api/regi
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 GET /api/registrations/export/ical returns valid .ics file for authenticated user
-- [ ] #2 Each VEVENT includes SUMMARY, DTSTART, DTEND, DESCRIPTION, LOCATION
-- [ ] #3 Export button on MySchedule page triggers download
+- [x] #1 GET /api/registrations/export/ical returns valid .ics file for authenticated user
+- [x] #2 Each VEVENT includes SUMMARY, DTSTART, DTEND, DESCRIPTION, LOCATION
+- [x] #3 Export button on MySchedule page triggers download
 <!-- AC:END -->
