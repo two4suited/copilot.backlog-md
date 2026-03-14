@@ -2,6 +2,52 @@
 
 Intelligent task assignment system that coordinates work across Copilot CLI agents (explore, task, code-review, general-purpose).
 
+## ⚠️ Rules for All Agents
+
+### Rule 1 — Create a Backlog Task Before Doing Any Work
+
+**When a user asks you to do something, always create a backlog task first. Never start implementation without a task.**
+
+```bash
+# User says "add dark mode support" — do this FIRST:
+backlog task create "Add dark mode support" \
+  -d "Why and what the feature is" \
+  --ac "Toggle in nav switches between light and dark" \
+  --ac "Preference persisted to localStorage" \
+  -l frontend,react
+
+# THEN move to In Progress and start implementing
+backlog task edit <new-id> -s "In Progress" -a @yourself
+```
+
+This ensures all work is tracked, reviewable, and part of the project history.
+
+---
+
+### Rule 2 — Task Hierarchy: EPIC → Feature → Story → Task
+
+All backlog work uses a four-level hierarchy. Choose the right level for what you're creating:
+
+| Level | ID pattern | What it is | Example |
+|-------|-----------|------------|---------|
+| **EPIC** | `TASK-N` | Large theme of work, weeks/months | "Conference & Track Management" |
+| **Feature** | `TASK-N.N` | Shippable capability, days/week | "Conference CRUD API" |
+| **Story** | `TASK-N.N.N` | User-facing slice of a feature, hours/day | "Paginated conference list endpoint" |
+| **Task** | `TASK-N.N.N.N` | Concrete implementation step, < 1 day | "Add index on Conference.StartDate" |
+
+**When to create each level:**
+- **EPIC**: User requests a major new domain (e.g., "add payment processing")
+- **Feature**: A distinct, deployable piece within an EPIC (e.g., "Stripe integration API")
+- **Story**: A user-visible slice within a Feature (e.g., "Checkout page")
+- **Task**: A single technical step too small for a Story on its own
+
+**Parent task convention:** Use `-p <parentId>` to link subtasks:
+```bash
+backlog task create "Add Stripe webhook handler" -p 7.2  # Story under Feature 7.2
+```
+
+---
+
 ## What is the Orchestrator?
 
 The Orchestrator analyzes task properties and automatically recommends the best-suited agent for each task. It manages assignments, tracks progress, and suggests reassignments when tasks become stalled or blocked.

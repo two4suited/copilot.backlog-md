@@ -43,11 +43,18 @@ export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
-  reporter: [['html', { outputFolder: 'playwright-report' }], ['list']],
+  outputDir: 'test-results/',
+  reporter: [
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['list'],
+  ],
   use: {
     baseURL: process.env.APP_URL ?? 'http://localhost:5173',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    // Always capture screenshots — on failure automatically, plus manual calls at key steps
+    screenshot: 'on',
+    // Record video on first retry so failures are fully reproducible
+    video: 'on-first-retry',
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
@@ -55,12 +62,66 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'cd ../frontend && npm run dev',
+      // Use aspire run to start the full stack (API + frontend + DB)
+      command: 'aspire run',
       url: 'http://localhost:5173',
       reuseExistingServer: !process.env.CI,
+      timeout: 60_000,
     },
   ],
 });
+```
+
+## Screenshot Standards
+
+Screenshots are your primary evidence when filing bugs. Follow these rules:
+
+### Automatic screenshots
+Playwright captures a screenshot automatically on every test failure when `screenshot: 'on'` is set. These land in `test-results/<test-name>/`.
+
+### Manual screenshots at key steps
+
+Take manual screenshots at important assertions so there is visual proof even when tests pass:
+
+```typescript
+test('conference list loads and displays cards', async ({ page }) => {
+  const conferencesPage = new ConferencesPage(page);
+  await conferencesPage.goto();
+  await conferencesPage.waitForLoaded();
+
+  // Screenshot after initial load
+  await page.screenshot({ path: 'test-results/screenshots/conferences-loaded.png', fullPage: true });
+
+  await expect(conferencesPage.conferenceCards).toHaveCountGreaterThan(0);
+
+  // Screenshot of first card detail
+  await conferencesPage.conferenceCards.first().click();
+  await page.waitForURL(/\/conferences\/\d+/);
+  await page.screenshot({ path: 'test-results/screenshots/conference-detail.png', fullPage: true });
+});
+```
+
+### Screenshot naming convention
+```
+test-results/screenshots/<feature>-<scenario>-<step>.png
+
+Examples:
+  auth-login-success.png
+  auth-login-error-invalid-password.png
+  conferences-list-loaded.png
+  sessions-register-confirmation.png
+  mobile-schedule-grid.png
+```
+
+### Attach screenshots to bug reports
+
+When filing a bug, always include the screenshot path in the description:
+
+```bash
+backlog task create "[BUG] Conference cards overflow on mobile" \
+  --label bug,tester \
+  --priority medium \
+  -d "**Steps:**\n1. Open /conferences on iPhone 13 viewport\n2. Observe card layout\n\n**Expected:** Single-column card grid\n**Actual:** Cards overflow horizontally\n\n**Screenshot:** test-results/screenshots/mobile-conferences-overflow.png\n**Trace:** test-results/conferences-mobile/trace.zip\n\n**Test:** tests/e2e/conferences.spec.ts — 'mobile layout'"
 ```
 
 ## Page Object Pattern
@@ -160,7 +221,8 @@ orchestrator bug "[BUG] Conference list fails to load on mobile" \
 
 **Test:** tests/e2e/conferences.spec.ts:45 — "mobile layout"
 **Environment:** Playwright, iPhone 13 viewport
-**Screenshot:** attached
+**Screenshot:** test-results/screenshots/mobile-conferences-overflow.png
+**Trace:** test-results/conferences-mobile/trace.zip
 ```
 
 ## Test Execution Commands
