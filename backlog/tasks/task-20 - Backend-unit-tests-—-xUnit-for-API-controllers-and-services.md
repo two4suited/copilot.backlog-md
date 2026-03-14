@@ -1,9 +1,11 @@
 ---
 id: TASK-20
 title: Backend unit tests — xUnit for API controllers and services
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 22:05'
+updated_date: '2026-03-14 22:06'
 labels:
   - backend
   - testing
