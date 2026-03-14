@@ -3,9 +3,9 @@ id: TASK-11
 title: 'Research: backlog.md to GitHub Issues sync options'
 status: In Progress
 assignee:
-  - '@explore'
+  - '@copilot'
 created_date: '2026-03-14 21:46'
-updated_date: '2026-03-14 21:46'
+updated_date: '2026-03-14 21:47'
 labels:
   - research
   - infrastructure
