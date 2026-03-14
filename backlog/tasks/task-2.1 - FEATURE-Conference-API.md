@@ -1,10 +1,11 @@
 ---
 id: TASK-2.1
 title: 'FEATURE: Conference API'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@dotnet-developer'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:19'
+updated_date: '2026-03-14 21:30'
 labels:
   - feature
   - backend
