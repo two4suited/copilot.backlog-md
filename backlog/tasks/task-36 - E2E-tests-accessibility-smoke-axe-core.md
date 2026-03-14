@@ -15,7 +15,7 @@ priority: high
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Install @axe-core/playwright
+- [x] #1 Install @axe-core/playwright
 - [ ] #2 Run axe on Schedule page - assert zero critical violations
 - [ ] #3 Run axe on Session Detail page - assert zero critical violations
 - [ ] #4 Run axe on Speaker Detail page - assert zero critical violations
