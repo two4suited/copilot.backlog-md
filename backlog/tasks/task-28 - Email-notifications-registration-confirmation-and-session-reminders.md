@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@dotnet-developer'
 created_date: '2026-03-14 22:17'
-updated_date: '2026-03-14 22:22'
+updated_date: '2026-03-14 22:23'
 labels:
   - backend
   - feature
@@ -30,5 +30,11 @@ Send transactional emails using MailKit/SMTP. (1) Confirmation email when user r
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-Implemented MailKit-based email notifications. Added IEmailService/EmailService (reads Smtp__ config; graceful no-op when host is empty). Created SessionReminderService (BackgroundService polling every 5 min, sends reminders for sessions starting 55-65 min out, marks ReminderSent=true). Added ReminderSent column to Registration with EF migration. Hooked fire-and-forget confirmation email in RegistrationsController.Register. Registered services in Program.cs. Added Smtp section to appsettings.json with empty dev defaults. Added NoOpEmailService test helper; all existing tests pass. Build: 0 errors.
+Email notifications implemented with MailKit.
+
+New files: IEmailService, EmailService (MailKit, Smtp__ config, dev no-op when host empty), SessionReminderService (BackgroundService polls every 5min for sessions starting in 55-65min, sets ReminderSent=true), NoOpEmailService test double.
+
+Changes: Registration.cs + ReminderSent bool, EF migration AddReminderSentToRegistration, Program.cs DI registration, RegistrationsController fire-and-forget confirmation on POST, appsettings.json Smtp section with empty dev defaults.
+
+Build: 0 errors.
 <!-- SECTION:FINAL_SUMMARY:END -->
