@@ -1,9 +1,11 @@
 ---
 id: TASK-34
 title: 'E2E tests: auth edge cases'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@tester'
 created_date: '2026-03-14 22:25'
+updated_date: '2026-03-14 22:25'
 labels:
   - testing
   - frontend
@@ -19,3 +21,13 @@ priority: high
 - [ ] #4 Logged-in user sees name in nav
 - [ ] #5 Logout clears session and redirects
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Write auth-edge-cases.spec.ts
+2. Cover weak password, duplicate email, wrong password, name in nav, logout
+3. Run tests
+4. File bugs for failures
+5. Mark done
+<!-- SECTION:PLAN:END -->
