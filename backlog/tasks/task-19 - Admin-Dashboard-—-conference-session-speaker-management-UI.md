@@ -1,9 +1,11 @@
 ---
 id: TASK-19
 title: Admin Dashboard — conference/session/speaker management UI
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 22:05'
+updated_date: '2026-03-14 22:06'
 labels:
   - frontend
   - react
