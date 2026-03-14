@@ -1,7 +1,7 @@
 ---
 id: TASK-12
 title: 'Design: backlog.md ↔ GitHub Issues sync schema'
-status: In Progress
+status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 21:46'
