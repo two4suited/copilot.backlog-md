@@ -9,35 +9,36 @@
     },
     "31": {
       "agent": "code-review",
-      "cycle": 1,
-      "assignedAt": "2026-03-14T23:30:10.100Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-14T23:30:42.143Z"
     },
     "32": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-14T23:30:10.100Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-14T23:30:42.143Z"
     },
     "33": {
       "agent": "task",
-      "cycle": 1,
-      "assignedAt": "2026-03-14T23:30:10.101Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-14T23:30:42.143Z"
     },
     "35": {
       "seenInProgress": 1773531010101
     },
     "37": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-14T23:30:10.101Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-14T23:30:42.144Z"
     },
     "39": {
       "seenInProgress": 1773531010101
     },
     "40": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-14T23:30:10.101Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-14T23:30:42.144Z"
     }
   },
-  "bugs": []
+  "bugs": [],
+  "ciChecked": {}
 }
