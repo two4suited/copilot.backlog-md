@@ -3,9 +3,11 @@ id: TASK-18
 title: >-
   [BUG] sync-issues.yml fails — gh issue create exits 1 when body contains
   newlines
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-14 22:00'
+updated_date: '2026-03-14 22:00'
 labels:
   - bug
   - ci
