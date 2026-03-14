@@ -1,7 +1,7 @@
 ---
 id: TASK-21
 title: Search API and UI — full-text search across sessions and speakers
-status: In Progress
+status: Done
 assignee:
   - '@copilot'
 created_date: '2026-03-14 22:05'
