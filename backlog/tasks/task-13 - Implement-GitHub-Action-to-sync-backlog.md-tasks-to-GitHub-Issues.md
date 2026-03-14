@@ -53,26 +53,5 @@ Implement a GitHub Actions workflow and supporting script that syncs backlog.md 
 ## Final Summary
 
 <!-- SECTION:FINAL_SUMMARY:BEGIN -->
-## GitHub Issues Sync – TASK-13
-
-### What changed
-- Added `scripts/sync-backlog-issues.sh`: a bash script that reads all `backlog/tasks/task-*.md` files and creates or updates the corresponding GitHub Issue via `gh` CLI.
-- Added `.github/workflows/sync-issues.yml`: a GitHub Actions workflow that triggers on every push to any branch/tag when task files change.
-
-### How it works
-1. **Trigger**: `on: push` with `paths: backlog/tasks/**` covering all branches and tags.
-2. **Script**: for each task file, parses YAML frontmatter (id, title, status, priority, labels) and the `## Description` section using `awk`/`sed` — no extra dependencies.
-3. **Idempotent**: looks up existing issue by stored `github_issue:` field in frontmatter, or falls back to label search (`task:TASK-N`).
-4. **Labels created**: `task:TASK-N`, `status:*`, `priority:*`, `branch:BRANCHNAME` (sanitised `/` → `-`).
-5. **Open/close**: Done/Archived tasks → closed; all others → open.
-6. **Write-back**: after creating a new issue, the script updates the task file with `github_issue: <number>` in frontmatter; the workflow then commits and pushes those changes with `[skip ci]`.
-
-### Files created
-- `scripts/sync-backlog-issues.sh` (executable)
-- `.github/workflows/sync-issues.yml`
-
-### Tests
-- Bash syntax validated with `bash -n`
-- Frontmatter parsing and Description extraction verified locally against real task files
-- `gh auth status` confirmed CLI is authenticated
+Created scripts/sync-backlog-issues.sh (bash) and .github/workflows/sync-issues.yml. Syncs all backlog tasks to GitHub Issues on every push when backlog/tasks/** changes. Idempotent via task:TASK-N label lookup. Parses frontmatter, builds label taxonomy, syncs open/closed state, writes github_issue field back to task files.
 <!-- SECTION:FINAL_SUMMARY:END -->
