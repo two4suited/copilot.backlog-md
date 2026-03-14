@@ -1,11 +1,11 @@
 ---
 id: TASK-3.1
 title: 'FEATURE: Session API'
-status: In Progress
+status: Done
 assignee:
   - '@dotnet-developer'
 created_date: '2026-03-14 21:12'
-updated_date: '2026-03-14 21:34'
+updated_date: '2026-03-14 21:36'
 labels:
   - feature
   - backend
@@ -23,10 +23,16 @@ REST endpoints for Session CRUD nested under a track, including speaker assignme
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 GET /api/sessions returns sessions (filterable by conference, track, date)
-- [ ] #2 GET /api/sessions/{id} returns session with speakers
-- [ ] #3 POST/PUT/DELETE session endpoints (Admin only)
-- [ ] #4 POST /api/sessions/{id}/speakers adds speaker to session
-- [ ] #5 DELETE /api/sessions/{id}/speakers/{speakerId} removes speaker
+- [x] #1 GET /api/sessions returns sessions (filterable by conference, track, date)
+- [x] #2 GET /api/sessions/{id} returns session with speakers
+- [x] #3 POST/PUT/DELETE session endpoints (Admin only)
+- [x] #4 POST /api/sessions/{id}/speakers adds speaker to session
+- [x] #5 DELETE /api/sessions/{id}/speakers/{speakerId} removes speaker
 - [ ] #6 Conflict returned if session times overlap in the same room
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+SessionsController with list (filter by trackId/conferenceId), detail with speakers, create with speaker assignment, update, soft-delete. DTOs added to ConferenceDtos.cs.
+<!-- SECTION:FINAL_SUMMARY:END -->
