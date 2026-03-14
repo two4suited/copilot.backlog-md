@@ -1,7 +1,7 @@
 ---
 id: TASK-35
 title: 'E2E tests: navigation and routing'
-status: In Progress
+status: Done
 assignee:
   - '@aspire-expert'
 created_date: '2026-03-14 22:26'
