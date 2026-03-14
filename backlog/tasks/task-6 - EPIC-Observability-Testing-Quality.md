@@ -1,9 +1,10 @@
 ---
 id: TASK-6
 title: 'EPIC: Observability, Testing & Quality'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 21:11'
+updated_date: '2026-03-14 22:04'
 labels:
   - epic
   - quality
@@ -25,3 +26,9 @@ OpenTelemetry wiring, health checks, unit/integration tests, Swagger docs, and d
 - [ ] #4 Swagger UI fully documents all API endpoints
 - [ ] #5 Deployment guide covers local dev and production
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+All sub-tasks completed.
+<!-- SECTION:FINAL_SUMMARY:END -->
