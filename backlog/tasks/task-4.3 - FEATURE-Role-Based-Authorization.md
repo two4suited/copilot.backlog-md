@@ -3,9 +3,9 @@ id: TASK-4.3
 title: 'FEATURE: Role-Based Authorization'
 status: In Progress
 assignee:
-  - '@dotnet-developer'
+  - '@copilot'
 created_date: '2026-03-14 21:13'
-updated_date: '2026-03-14 21:44'
+updated_date: '2026-03-14 21:45'
 labels:
   - feature
   - backend
