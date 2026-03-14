@@ -1,9 +1,10 @@
 ---
 id: TASK-1
 title: 'EPIC: Infrastructure & Developer Experience'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 21:10'
+updated_date: '2026-03-14 22:04'
 labels:
   - epic
   - infrastructure
@@ -25,3 +26,9 @@ All work required to stand up the Aspire-based solution skeleton: AppHost, Postg
 - [ ] #4 All services visible in Aspire Dashboard
 - [ ] #5 GitHub Actions CI pipeline passes
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+All sub-tasks completed.
+<!-- SECTION:FINAL_SUMMARY:END -->
