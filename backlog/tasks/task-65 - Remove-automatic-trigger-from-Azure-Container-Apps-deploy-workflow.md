@@ -1,9 +1,10 @@
 ---
 id: TASK-65
 title: Remove automatic trigger from Azure Container Apps deploy workflow
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-15 01:44'
+updated_date: '2026-03-15 01:44'
 labels:
   - infrastructure
   - github-actions
@@ -38,7 +39,13 @@ Target:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 deploy-aca.yml push trigger removed — only workflow_dispatch remains
-- [ ] #2 workflow_dispatch has an optional environment input for targeting different environments
-- [ ] #3 Workflow file committed and pushed
+- [x] #1 deploy-aca.yml push trigger removed — only workflow_dispatch remains
+- [x] #2 workflow_dispatch has an optional environment input for targeting different environments
+- [x] #3 Workflow file committed and pushed
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Removed push trigger from deploy-aca.yml — now manual dispatch only with optional environment input.
+<!-- SECTION:FINAL_SUMMARY:END -->
