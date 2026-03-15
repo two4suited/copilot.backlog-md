@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-frontend'
 created_date: '2026-03-15 00:44'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:53'
 labels:
   - bug
 dependencies: []
@@ -27,7 +27,7 @@ Fix: Replace <> with <Fragment key={time}> (importing Fragment from 'react')
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Console error about missing key prop is gone
-- [ ] #2 Schedule page renders correctly with keyed fragments
-- [ ] #3 No regression on schedule grid layout
+- [x] #1 Console error about missing key prop is gone
+- [x] #2 Schedule page renders correctly with keyed fragments
+- [x] #3 No regression on schedule grid layout
 <!-- AC:END -->
