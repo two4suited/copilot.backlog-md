@@ -129,12 +129,12 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone, hasFilterBar = 
           className="grid min-w-max"
           style={{ gridTemplateColumns: `80px repeat(${visibleTracks.length}, minmax(180px, 1fr))` }}
         >
-          {/* Header row — sticky below nav (and filter bar when present) */}
-          <div className={`sticky ${headerTop} bg-brand-surface dark:bg-[#2c1810] z-20`} />
+          {/* Header row */}
+          <div className="bg-brand-surface dark:bg-[#2c1810]" />
           {visibleTracks.map(track => (
             <div
               key={track.id}
-              className={`sticky ${headerTop} z-20 px-3 py-2.5 border-b-2 border-brand-border dark:border-[#4a2e20] bg-brand-surface dark:bg-[#2c1810] text-center`}
+              className="px-3 py-2.5 border-b-2 border-brand-border dark:border-[#4a2e20] bg-brand-surface dark:bg-[#2c1810] text-center"
             >
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"
