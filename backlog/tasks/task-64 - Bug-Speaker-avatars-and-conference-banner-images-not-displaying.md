@@ -39,11 +39,11 @@ Tester should:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Conference API response includes imageUrl field with picsum.photos URL
-- [ ] #2 Speakers API response includes photoUrl field with pravatar.cc URL
-- [ ] #3 Conference cards on home/conferences page display banner images
-- [ ] #4 Speaker avatars render on speaker list and session detail pages
-- [ ] #5 Root cause documented and fixed end-to-end
+- [x] #1 Conference API response includes imageUrl field with picsum.photos URL
+- [x] #2 Speakers API response includes photoUrl field with pravatar.cc URL
+- [x] #3 Conference cards on home/conferences page display banner images
+- [x] #4 Speaker avatars render on speaker list and session detail pages
+- [x] #5 Root cause documented and fixed end-to-end
 <!-- AC:END -->
 
 ## Implementation Plan
