@@ -81,13 +81,13 @@
     },
     "50": {
       "agent": "explore",
-      "cycle": 107,
-      "assignedAt": "2026-03-15T01:03:01.681Z"
+      "cycle": 108,
+      "assignedAt": "2026-03-15T01:03:31.682Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 107,
-      "assignedAt": "2026-03-15T01:03:01.682Z"
+      "cycle": 108,
+      "assignedAt": "2026-03-15T01:03:31.683Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -97,8 +97,7 @@
     "53": {
       "agent": "task",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.659Z",
-      "seenInProgress": 1773535951657
+      "assignedAt": "2026-03-15T00:52:01.659Z"
     },
     "54": {
       "agent": "general-purpose",
@@ -107,8 +106,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 107,
-      "assignedAt": "2026-03-15T01:03:01.682Z"
+      "cycle": 108,
+      "assignedAt": "2026-03-15T01:03:31.684Z"
     },
     "56": {
       "agent": "general-purpose",
