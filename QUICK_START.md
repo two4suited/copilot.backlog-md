@@ -122,7 +122,7 @@ orchestrator-monitor help
 ## Running the App (Aspire)
 
 ```bash
-cd ConferenceApp.AppHost
+cd Sessionize.AppHost
 dotnet run
 ```
 

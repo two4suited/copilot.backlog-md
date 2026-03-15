@@ -14,9 +14,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      - run: dotnet restore ConferenceApp.sln
-      - run: dotnet build ConferenceApp.sln --no-restore --configuration Release
-      - run: dotnet test ConferenceApp.sln --no-build --configuration Release || true
+      - run: dotnet restore Sessionize.sln
+      - run: dotnet build Sessionize.sln --no-restore --configuration Release
+      - run: dotnet test Sessionize.sln --no-build --configuration Release || true
 
   build-frontend:
     runs-on: ubuntu-latest

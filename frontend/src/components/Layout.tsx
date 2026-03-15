@@ -30,7 +30,7 @@ export function Layout() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 shrink-0">
               <CalendarDays className="w-7 h-7 text-brand-accent" />
-              <span className="font-bold text-brand-primary dark:text-[#f5f0eb] text-lg tracking-tight">ConferenceApp</span>
+              <span className="font-bold text-brand-primary dark:text-[#f5f0eb] text-lg tracking-tight">Sessionize</span>
             </Link>
 
             {/* Desktop nav */}

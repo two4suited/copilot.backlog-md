@@ -3,19 +3,19 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy solution and project files for layer-cached restore
-COPY ConferenceApp.sln ./
-COPY ConferenceApp.Api/ConferenceApp.Api.csproj ConferenceApp.Api/
-COPY ConferenceApp.Models/ConferenceApp.Models.csproj ConferenceApp.Models/
-COPY ConferenceApp.ServiceDefaults/ConferenceApp.ServiceDefaults.csproj ConferenceApp.ServiceDefaults/
+COPY Sessionize.sln ./
+COPY Sessionize.Api/Sessionize.Api.csproj Sessionize.Api/
+COPY Sessionize.Models/Sessionize.Models.csproj Sessionize.Models/
+COPY Sessionize.ServiceDefaults/Sessionize.ServiceDefaults.csproj Sessionize.ServiceDefaults/
 
-RUN dotnet restore ConferenceApp.Api/ConferenceApp.Api.csproj
+RUN dotnet restore Sessionize.Api/Sessionize.Api.csproj
 
 # Copy remaining source and publish
-COPY ConferenceApp.Api/ ConferenceApp.Api/
-COPY ConferenceApp.Models/ ConferenceApp.Models/
-COPY ConferenceApp.ServiceDefaults/ ConferenceApp.ServiceDefaults/
+COPY Sessionize.Api/ Sessionize.Api/
+COPY Sessionize.Models/ Sessionize.Models/
+COPY Sessionize.ServiceDefaults/ Sessionize.ServiceDefaults/
 
-RUN dotnet publish ConferenceApp.Api/ConferenceApp.Api.csproj \
+RUN dotnet publish Sessionize.Api/Sessionize.Api.csproj \
     -c Release \
     -o /app/publish \
     --no-restore
@@ -29,4 +29,4 @@ EXPOSE 8080
 
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "ConferenceApp.Api.dll"]
+ENTRYPOINT ["dotnet", "Sessionize.Api.dll"]

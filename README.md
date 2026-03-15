@@ -1,4 +1,4 @@
-# ConferenceApp
+# Sessionize
 
 A full-stack conference management web app built with **React + .NET Aspire + PostgreSQL**, managed by an AI orchestrator that assigns tasks to specialised agents and keeps work moving automatically.
 
@@ -16,9 +16,9 @@ Browse conferences, explore tracks and sessions, view speaker profiles, and regi
 ## Architecture
 
 ```
-ConferenceApp.AppHost   ← .NET Aspire orchestrator (starts everything)
-ConferenceApp.Api       ← ASP.NET Core 10 REST API + EF Core + JWT auth
-ConferenceApp.Models    ← Shared domain models
+Sessionize.AppHost   ← .NET Aspire orchestrator (starts everything)
+Sessionize.Api       ← ASP.NET Core 10 REST API + EF Core + JWT auth
+Sessionize.Models    ← Shared domain models
 frontend/               ← React 19 + Vite + TypeScript + Tailwind CSS
 PostgreSQL              ← Managed as an Aspire container resource
 ```
@@ -65,7 +65,7 @@ Aspire wires up the API, database, and frontend in a single process and exposes 
 cd frontend && npm install && cd ..
 
 # Start the full stack — API, PostgreSQL, and frontend together
-cd ConferenceApp.AppHost && dotnet run
+cd Sessionize.AppHost && dotnet run
 ```
 
 The API automatically runs EF migrations and seeds demo data (TechConf 2026) on first start.
@@ -168,14 +168,14 @@ Swagger UI: `https://localhost:7133/swagger` (development only)
 ## Project Structure
 
 ```
-ConferenceApp.sln
-├── ConferenceApp.AppHost/          # .NET Aspire orchestrator
-├── ConferenceApp.Api/              # ASP.NET Core Web API
+Sessionize.sln
+├── Sessionize.AppHost/          # .NET Aspire orchestrator
+├── Sessionize.Api/              # ASP.NET Core Web API
 │   ├── Controllers/                # Conferences, Tracks, Sessions, Speakers, Auth
 │   ├── Data/                       # DbContext, migrations, seeder
 │   ├── DTOs/                       # Request/response records
 │   └── Services/                   # TokenService (JWT)
-├── ConferenceApp.Models/           # Domain models (shared library)
+├── Sessionize.Models/           # Domain models (shared library)
 │   └── Conference, Track, Session, Speaker, User, Registration
 frontend/                           # React app
 │   └── src/

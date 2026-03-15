@@ -1,4 +1,4 @@
-name: conference-app
+name: sessionize
 
 # Azure Developer CLI (azd) integration with .NET Aspire.
 # Run `azd up` from the repository root to provision Azure resources
@@ -15,5 +15,5 @@ name: conference-app
 services:
   app:
     language: dotnet
-    project: ./ConferenceApp.AppHost/ConferenceApp.AppHost.csproj
+    project: ./Sessionize.AppHost/Sessionize.AppHost.csproj
     host: containerapp
