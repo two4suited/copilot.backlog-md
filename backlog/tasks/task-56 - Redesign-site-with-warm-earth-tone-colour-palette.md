@@ -56,3 +56,39 @@ Key areas to update:
 - [x] #9 No leftover navy (#0f172a) or teal (#0ea5e9) classes anywhere in the codebase
 - [x] #10 All pages pass 375px viewport check with no horizontal overflow
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Replaced entire navy/teal design with warm earth tone palette.
+
+**Palette tokens (tailwind.config.js):**
+- brand-bg: #faf7f2 (warm linen)
+- brand-surface: #f0ebe3 (cream)
+- brand-border: #d4c5b0 (warm tan)
+- brand-primary: #2c1810 (deep espresso)
+- brand-accent: #c2622d (terracotta)
+- brand-sage: #6b7c5c (sage green)
+- brand-muted: #8a7468 (warm grey-brown)
+
+**Changes by area:**
+- `tailwind.config.js`: Replaced flat navy/teal tokens with nested brand.* earth tone tokens
+- `index.css`: Added body background (#faf7f2) and text (#2c1810) base styles
+- `Layout.tsx`: Navbar changed from dark espresso to cream (brand-surface) with warm tan border; active links use terracotta, inactive use warm muted brown
+- `HomePage.tsx`: Hero changed from dark gradient to warm linen bg with espresso headline, terracotta CTA; feature cards use cream surface
+- `ConferencesPage.tsx`: Cards use cream surface/tan border; date badges are terracotta; gradients use warm amber/stone tones
+- `SchedulePage.tsx`: Track chips default to sage green (#6b7c5c); session cards use cream bg; day tabs and filters updated
+- `SpeakersPage.tsx`: Speaker cards use cream surface; avatar fallback uses terracotta bg
+- `SpeakerDetailPage.tsx`: Replaced all indigo with brand-accent; sessions use brand-sage for track names
+- `SessionDetailPage.tsx`: Track badge defaults to terracotta; seat availability bar uses sage/terracotta; speaker cards use cream surface
+- `ConferenceDetailPage.tsx`, `TrackDetailPage.tsx`: All indigo links/icons replaced with terracotta
+- `SearchBar.tsx`: Input uses cream bg/tan border; dropdown uses cream surface; highlights use terracotta
+- `LevelBadge.tsx`: Replaced green/blue/purple with brand-sage/brand-accent/brand-primary earth tones
+- `AdminLayout.tsx`: Sidebar uses warm muted text, active uses terracotta
+- All admin list/form pages: Indigo buttons replaced with terracotta; table rows use warm alternating bg; form inputs use tan borders
+- `LoginPage.tsx`, `RegisterPage.tsx`: Forms use cream surface; buttons use terracotta
+- `NotFoundPage.tsx`, `MySchedulePage.tsx`: Updated to earth tones throughout
+- `ConfirmDialog.tsx`, `LoadingSpinner.tsx`, `BookmarkButton.tsx`, `ErrorMessage.tsx`: Updated to brand tokens
+
+No navy (#0f172a) or teal (#0ea5e9) classes remain anywhere in the codebase. Build passes with 0 TypeScript errors.
+<!-- SECTION:FINAL_SUMMARY:END -->
