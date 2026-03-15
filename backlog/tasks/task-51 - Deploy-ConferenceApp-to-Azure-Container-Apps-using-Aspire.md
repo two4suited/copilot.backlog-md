@@ -1,7 +1,7 @@
 ---
 id: TASK-51
 title: Deploy ConferenceApp to Azure Container Apps using Aspire
-status: In Progress
+status: Done
 assignee:
   - '@agent-aca'
 created_date: '2026-03-15 00:47'
