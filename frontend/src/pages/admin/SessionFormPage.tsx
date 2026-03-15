@@ -277,14 +277,14 @@ export function SessionFormPage() {
             {errors.room && <p className="mt-1 text-xs text-red-600">{errors.room}</p>}
           </div>
           <div>
-            <label htmlFor="session-capacity" className="block text-sm font-medium text-slate-700 mb-1">Capacity *</label>
+            <label htmlFor="session-capacity" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Capacity *</label>
             <input
               id="session-capacity"
               type="number"
               min={1}
               value={form.capacity}
               onChange={e => setForm(f => ({ ...f, capacity: parseInt(e.target.value) || 1 }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.capacity ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.capacity ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             />
             {errors.capacity && <p className="mt-1 text-xs text-red-600">{errors.capacity}</p>}
           </div>
@@ -292,24 +292,24 @@ export function SessionFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="session-type" className="block text-sm font-medium text-slate-700 mb-1">Session Type *</label>
+            <label htmlFor="session-type" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Session Type *</label>
             <select
               id="session-type"
               value={form.sessionType}
               onChange={e => setForm(f => ({ ...f, sessionType: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.sessionType ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.sessionType ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             >
               {SESSION_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
             {errors.sessionType && <p className="mt-1 text-xs text-red-600">{errors.sessionType}</p>}
           </div>
           <div>
-            <label htmlFor="session-level" className="block text-sm font-medium text-slate-700 mb-1">Level *</label>
+            <label htmlFor="session-level" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Level *</label>
             <select
               id="session-level"
               value={form.level}
               onChange={e => setForm(f => ({ ...f, level: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.level ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.level ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             >
               {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
             </select>
@@ -320,33 +320,33 @@ export function SessionFormPage() {
         {!isNew && (
           <>
             <div>
-              <label htmlFor="session-slides-url" className="block text-sm font-medium text-slate-700 mb-1">Slides URL</label>
+              <label htmlFor="session-slides-url" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Slides URL</label>
               <input
                 id="session-slides-url"
                 type="url"
                 value={form.slidesUrl}
                 onChange={e => setForm(f => ({ ...f, slidesUrl: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
               />
             </div>
             <div>
-              <label htmlFor="session-recording-url" className="block text-sm font-medium text-slate-700 mb-1">Recording URL</label>
+              <label htmlFor="session-recording-url" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Recording URL</label>
               <input
                 id="session-recording-url"
                 type="url"
                 value={form.recordingUrl}
                 onChange={e => setForm(f => ({ ...f, recordingUrl: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
               />
             </div>
           </>
         )}
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Speakers</label>
-          <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-brand-border rounded-lg p-3">
+          <label className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-2">Speakers</label>
+          <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-brand-border dark:border-[#4a2e20] rounded-lg p-3">
             {speakers?.map(speaker => (
-              <label key={speaker.id} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+              <label key={speaker.id} className="flex items-center gap-2 text-sm text-slate-700 dark:text-[#f5f0eb] cursor-pointer">
                 <input
                   type="checkbox"
                   checked={form.speakerIds.includes(speaker.id)}
@@ -357,13 +357,13 @@ export function SessionFormPage() {
               </label>
             ))}
             {(!speakers || speakers.length === 0) && (
-              <p className="text-slate-400 text-sm col-span-2">No speakers available</p>
+              <p className="text-slate-400 dark:text-[#c4a882] text-sm col-span-2">No speakers available</p>
             )}
           </div>
         </div>
 
         <div className="flex justify-end gap-3 pt-2">
-          <Link to="/admin/sessions" className="px-4 py-2 rounded-lg border border-brand-border text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+          <Link to="/admin/sessions" className="px-4 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] text-slate-700 dark:text-[#f5f0eb] text-sm font-medium hover:bg-slate-50 dark:hover:bg-[#4a2e20]/40 transition-colors">
             Cancel
           </Link>
           <button

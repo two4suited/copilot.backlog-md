@@ -106,40 +106,40 @@ export function SpeakerFormPage() {
 
   return (
     <div className="max-w-2xl">
-      <Link to="/admin/speakers" className="flex items-center gap-1 text-sm text-brand-muted hover:text-brand-primary mb-6">
+      <Link to="/admin/speakers" className="flex items-center gap-1 text-sm text-brand-muted dark:text-[#c4a882] hover:text-brand-primary dark:hover:text-[#f5f0eb] mb-6">
         <ChevronLeft className="w-4 h-4" />
         Back to Speakers
       </Link>
 
-      <h1 className="text-2xl font-bold text-brand-primary mb-6">
+      <h1 className="text-2xl font-bold text-brand-primary dark:text-[#f5f0eb] mb-6">
         {isNew ? 'New Speaker' : speaker?.name ? `Edit Speaker: ${speaker.name}` : 'Edit Speaker'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-brand-surface rounded-xl border border-brand-border p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-6 space-y-5">
         <div>
-          <label htmlFor="speaker-name" className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+          <label htmlFor="speaker-name" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Name *</label>
           <input
             id="speaker-name"
             type="text"
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.name ? 'border-red-400' : 'border-brand-border'}`}
+            className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.name ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
           />
           {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
         </div>
 
         <div>
-          <label htmlFor="speaker-email" className="block text-sm font-medium text-slate-700 mb-1">Email {isNew ? '*' : ''}</label>
+          <label htmlFor="speaker-email" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Email {isNew ? '*' : ''}</label>
           <input
             id="speaker-email"
             type="email"
             value={form.email}
             disabled={!isNew}
             onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.email ? 'border-red-400' : 'border-brand-border'} ${!isNew ? 'bg-brand-bg text-brand-muted cursor-not-allowed' : ''}`}
+            className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.email ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'} ${!isNew ? 'text-brand-muted dark:text-[#c4a882] cursor-not-allowed' : 'text-brand-primary dark:text-[#f5f0eb]'}`}
           />
           {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
-          {!isNew && <p className="mt-1 text-xs text-slate-400">Email cannot be changed after creation</p>}
+          {!isNew && <p className="mt-1 text-xs text-slate-400 dark:text-[#c4a882]">Email cannot be changed after creation</p>}
         </div>
 
         <div>
