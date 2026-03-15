@@ -1,7 +1,7 @@
 ---
 id: TASK-54
 title: Redesign the site with a fresh modern visual identity
-status: In Progress
+status: Done
 assignee:
   - '@agent-designer'
 created_date: '2026-03-15 00:50'
