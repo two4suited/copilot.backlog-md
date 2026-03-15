@@ -1,7 +1,7 @@
 ---
 id: TASK-76
 title: Remove docker-compose deployment and update README to use azd/Aspire deploy
-status: In Progress
+status: Done
 assignee:
   - '@agent-cleanup'
 created_date: '2026-03-15 03:04'
