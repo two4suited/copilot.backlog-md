@@ -54,35 +54,35 @@ export function SessionAdminPage() {
       <div className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-brand-border bg-brand-bg">
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Title</th>
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Track</th>
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Start Time</th>
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Room</th>
+            <tr className="border-b border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a]">
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Title</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Track</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Start Time</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Room</th>
               <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
             {sessions?.map((session, idx) => (
-              <tr key={session.id} className={`border-b border-brand-border last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
-                <td className="px-4 py-3 font-medium text-brand-primary">{session.title}</td>
-                <td className="px-4 py-3 text-brand-muted">{session.track?.name ?? ''}</td>
-                <td className="px-4 py-3 text-brand-muted">
+              <tr key={session.id} className={`border-b border-brand-border dark:border-[#4a2e20] last:border-0 hover:bg-brand-border/20 dark:hover:bg-[#4a2e20]/30 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50 dark:bg-[#1a0f0a]/50' : 'bg-brand-surface dark:bg-[#2c1810]'}`}>
+                <td className="px-4 py-3 font-medium text-brand-primary dark:text-[#f5f0eb]">{session.title}</td>
+                <td className="px-4 py-3 text-brand-muted dark:text-[#c4a882]">{session.track?.name ?? ''}</td>
+                <td className="px-4 py-3 text-brand-muted dark:text-[#c4a882]">
                   {new Date(session.startTime).toLocaleString()}
                 </td>
-                <td className="px-4 py-3 text-brand-muted">{session.room}</td>
+                <td className="px-4 py-3 text-brand-muted dark:text-[#c4a882]">{session.room}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       to={`/admin/sessions/${session.id}`}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-brand-border text-brand-muted text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-brand-border dark:border-[#4a2e20] text-brand-muted dark:text-[#c4a882] text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
                     >
                       <Pencil className="w-3 h-3" />
                       Edit
                     </Link>
                     <button
                       onClick={() => setDeleteId(session.id)}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-red-200 text-red-600 text-xs font-medium hover:bg-red-50 transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 text-xs font-medium hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
                     >
                       <Trash2 className="w-3 h-3" />
                       Delete
@@ -93,7 +93,7 @@ export function SessionAdminPage() {
             ))}
             {sessions?.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-slate-400">No sessions yet</td>
+                <td colSpan={5} className="px-4 py-8 text-center text-slate-400 dark:text-[#c4a882]">No sessions yet</td>
               </tr>
             )}
           </tbody>
