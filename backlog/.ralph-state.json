@@ -86,8 +86,8 @@
     },
     "51": {
       "agent": "task",
-      "cycle": 75,
-      "assignedAt": "2026-03-15T01:18:08.883Z"
+      "cycle": 76,
+      "assignedAt": "2026-03-15T01:18:18.886Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -106,8 +106,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 75,
-      "assignedAt": "2026-03-15T01:18:08.884Z"
+      "cycle": 76,
+      "assignedAt": "2026-03-15T01:18:18.886Z"
     },
     "56": {
       "agent": "general-purpose",
