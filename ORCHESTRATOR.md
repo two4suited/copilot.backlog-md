@@ -24,7 +24,30 @@ This ensures all work is tracked, reviewable, and part of the project history.
 
 ---
 
-### Rule 2 — Task Hierarchy: EPIC → Feature → Story → Task
+### Rule 2 — Push to GitHub After Every Task or Issue Creation
+
+**Whenever you create a backlog task OR file a GitHub issue, immediately commit and push so the change is visible to everyone.**
+
+```bash
+# After creating a task or filing a bug:
+git add -A
+git commit -m "backlog: add TASK-<id> <short title>
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+git push origin main
+```
+
+**This rule applies to:**
+- `backlog task create ...` — any new task, story, feature, or epic
+- `backlog task edit ...` — status changes, final summaries, marking Done
+- `gh issue create ...` — any GitHub issue filed manually or by a script
+- Any batch operations (bulk-assign, sync, etc.) that modify backlog files
+
+**Never leave backlog changes uncommitted.** The backlog lives in `backlog/tasks/` as markdown files — they are source code and must be in git.
+
+---
+
+### Rule 3 — Task Hierarchy: EPIC → Feature → Story → Task
 
 All backlog work uses a four-level hierarchy. Choose the right level for what you're creating:
 
