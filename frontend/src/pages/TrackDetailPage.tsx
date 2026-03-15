@@ -27,13 +27,13 @@ export function TrackDetailPage() {
       </Link>
       <div className="flex items-center gap-3 mt-2 mb-6">
         <div className="w-4 h-4 rounded-full shrink-0" style={{ backgroundColor: track.color }} />
-        <h1 className="text-3xl font-bold text-brand-primary">{track.name}</h1>
+        <h1 className="text-3xl font-bold text-brand-primary dark:text-[#f5f0eb]">{track.name}</h1>
       </div>
       {track.description && (
-        <p className="text-brand-muted mb-6 max-w-2xl">{track.description}</p>
+        <p className="text-brand-muted dark:text-[#c4a882] mb-6 max-w-2xl">{track.description}</p>
       )}
 
-      <h2 className="text-xl font-semibold text-brand-primary mb-4">Sessions</h2>
+      <h2 className="text-xl font-semibold text-brand-primary dark:text-[#f5f0eb] mb-4">Sessions</h2>
       <div className="space-y-3">
         {track.sessions?.map(session => {
           const tz = session.conferenceTimezone ?? 'UTC';
