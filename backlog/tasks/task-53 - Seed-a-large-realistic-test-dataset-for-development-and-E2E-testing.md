@@ -1,9 +1,11 @@
 ---
 id: TASK-53
 title: Seed a large realistic test dataset for development and E2E testing
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-seeder'
 created_date: '2026-03-15 00:49'
+updated_date: '2026-03-15 00:52'
 labels:
   - testing
   - data
