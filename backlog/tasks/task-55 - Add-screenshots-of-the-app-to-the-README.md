@@ -31,10 +31,10 @@ Store screenshots under docs/screenshots/. Use descriptive filenames like home.p
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Screenshots captured for Home, Schedule, Session Detail, Speakers, and Admin pages
-- [ ] #2 Screenshots stored in docs/screenshots/ with descriptive filenames
-- [ ] #3 README.md embeds screenshots with captions using Markdown image syntax
-- [ ] #4 Screenshots reflect the TASK-54 redesign and TASK-53 seed data
+- [x] #1 Screenshots captured for Home, Schedule, Session Detail, Speakers, and Admin pages
+- [x] #2 Screenshots stored in docs/screenshots/ with descriptive filenames
+- [x] #3 README.md embeds screenshots with captions using Markdown image syntax
+- [x] #4 Screenshots reflect the TASK-54 redesign and TASK-53 seed data
 <!-- AC:END -->
 
 ## Implementation Plan
