@@ -14,7 +14,7 @@ public class RegistrationsControllerTests
     // ── helpers ──────────────────────────────────────────────────────────────
 
     private static RegistrationsController BuildController(
-        ConferenceApp.Api.Data.ConferenceDbContext db, Guid userId)
+        Sessionize.Api.Data.ConferenceDbContext db, Guid userId)
     {
         var controller = new RegistrationsController(db, new FakeSessionHubContext(), new NoOpEmailService());
         controller.ControllerContext = new ControllerContext
@@ -32,7 +32,7 @@ public class RegistrationsControllerTests
 
     /// <summary>Seeds a Track + Session pair and returns the session.</summary>
     private static async Task<Session> SeedSessionAsync(
-        ConferenceApp.Api.Data.ConferenceDbContext db, int capacity = 10)
+        Sessionize.Api.Data.ConferenceDbContext db, int capacity = 10)
     {
         var conference = new Conference { Name = "Conf", StartDate = DateTime.UtcNow, EndDate = DateTime.UtcNow.AddDays(1), Location = "Online" };
         db.Conferences.Add(conference);
@@ -53,7 +53,7 @@ public class RegistrationsControllerTests
         return session;
     }
 
-    private static User SeedUser(ConferenceApp.Api.Data.ConferenceDbContext db)
+    private static User SeedUser(Sessionize.Api.Data.ConferenceDbContext db)
     {
         var user = new User { Name = "Test User", Email = $"user-{Guid.NewGuid()}@test.com", PasswordHash = "x" };
         db.Users.Add(user);

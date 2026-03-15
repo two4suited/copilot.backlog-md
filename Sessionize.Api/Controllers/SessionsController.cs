@@ -66,7 +66,7 @@ public class SessionsController : ControllerBase
         var track = await _db.Tracks.FindAsync([req.TrackId], ct);
         if (track is null) return BadRequest(new { message = "Track not found." });
 
-        var session = new ConferenceApp.Models.Session
+        var session = new Sessionize.Models.Session
         {
             TrackId = req.TrackId,
             Title = req.Title,
@@ -85,7 +85,7 @@ public class SessionsController : ControllerBase
         {
             foreach (var speakerId in req.SpeakerIds)
             {
-                _db.SessionSpeakers.Add(new ConferenceApp.Models.SessionSpeaker
+                _db.SessionSpeakers.Add(new Sessionize.Models.SessionSpeaker
                 {
                     SessionId = session.Id,
                     SpeakerId = speakerId,
@@ -149,13 +149,13 @@ public class SessionsController : ControllerBase
         
         _db.SessionSpeakers.RemoveRange(session.SessionSpeakers);
         foreach (var speakerId in req.SpeakerIds ?? [])
-            _db.SessionSpeakers.Add(new ConferenceApp.Models.SessionSpeaker { SessionId = id, SpeakerId = speakerId });
+            _db.SessionSpeakers.Add(new Sessionize.Models.SessionSpeaker { SessionId = id, SpeakerId = speakerId });
         
         await _db.SaveChangesAsync(ct);
         return NoContent();
     }
 
-    private static SessionDto MapToDto(ConferenceApp.Models.Session s)
+    private static SessionDto MapToDto(Sessionize.Models.Session s)
     {
         var regCount = s.Registrations?.Count ?? 0;
         return new(

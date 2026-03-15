@@ -62,7 +62,7 @@ public class TracksController : ControllerBase
         var exists = await _db.Conferences.AnyAsync(c => c.Id == conferenceId, ct);
         if (!exists) return NotFound();
 
-        var track = new ConferenceApp.Models.Track
+        var track = new Sessionize.Models.Track
         {
             ConferenceId = conferenceId,
             Name = req.Name,

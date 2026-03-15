@@ -60,7 +60,7 @@ public class SpeakersController : ControllerBase
     public async Task<ActionResult<SpeakerDto>> Create(
         [FromBody] CreateSpeakerRequest req, CancellationToken ct)
     {
-        var speaker = new ConferenceApp.Models.Speaker
+        var speaker = new Sessionize.Models.Speaker
         {
             Name = req.Name,
             Bio = req.Bio,

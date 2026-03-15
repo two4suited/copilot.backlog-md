@@ -13,7 +13,7 @@ public class SessionsControllerTests
 {
     // ── helpers ───────────────────────────────────────────────────────────────
 
-    private static SessionsController BuildAdminController(ConferenceApp.Api.Data.ConferenceDbContext db)
+    private static SessionsController BuildAdminController(Sessionize.Api.Data.ConferenceDbContext db)
     {
         var controller = new SessionsController(db);
         controller.ControllerContext = new ControllerContext
@@ -31,7 +31,7 @@ public class SessionsControllerTests
     }
 
     private static async Task<(Conference conf, Track track, Session session)> SeedAsync(
-        ConferenceApp.Api.Data.ConferenceDbContext db)
+        Sessionize.Api.Data.ConferenceDbContext db)
     {
         var conf = new Conference
         {

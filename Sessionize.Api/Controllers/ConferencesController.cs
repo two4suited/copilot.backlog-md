@@ -71,7 +71,7 @@ public class ConferencesController : ControllerBase
     public async Task<ActionResult<ConferenceDto>> Create(
         [FromBody] CreateConferenceRequest req, CancellationToken ct)
     {
-        var conference = new ConferenceApp.Models.Conference
+        var conference = new Sessionize.Models.Conference
         {
             Name = req.Name,
             Description = req.Description ?? string.Empty,

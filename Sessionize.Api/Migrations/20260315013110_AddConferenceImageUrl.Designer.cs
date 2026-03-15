@@ -25,7 +25,7 @@ namespace Sessionize.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ConferenceApp.Models.Conference", b =>
+            modelBuilder.Entity("Sessionize.Models.Conference", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +77,7 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("Conferences");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Registration", b =>
+            modelBuilder.Entity("Sessionize.Models.Registration", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("Registrations");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Session", b =>
+            modelBuilder.Entity("Sessionize.Models.Session", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -179,7 +179,7 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.SessionSpeaker", b =>
+            modelBuilder.Entity("Sessionize.Models.SessionSpeaker", b =>
                 {
                     b.Property<Guid>("SessionId")
                         .HasColumnType("uuid");
@@ -194,7 +194,7 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("SessionSpeakers");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Speaker", b =>
+            modelBuilder.Entity("Sessionize.Models.Speaker", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,7 +242,7 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("Speakers");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Track", b =>
+            modelBuilder.Entity("Sessionize.Models.Track", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -282,7 +282,7 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("Tracks");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.User", b =>
+            modelBuilder.Entity("Sessionize.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -323,15 +323,15 @@ namespace Sessionize.Api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Registration", b =>
+            modelBuilder.Entity("Sessionize.Models.Registration", b =>
                 {
-                    b.HasOne("ConferenceApp.Models.Session", "Session")
+                    b.HasOne("Sessionize.Models.Session", "Session")
                         .WithMany("Registrations")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConferenceApp.Models.User", "User")
+                    b.HasOne("Sessionize.Models.User", "User")
                         .WithMany("Registrations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -342,9 +342,9 @@ namespace Sessionize.Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Session", b =>
+            modelBuilder.Entity("Sessionize.Models.Session", b =>
                 {
-                    b.HasOne("ConferenceApp.Models.Track", "Track")
+                    b.HasOne("Sessionize.Models.Track", "Track")
                         .WithMany("Sessions")
                         .HasForeignKey("TrackId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -353,15 +353,15 @@ namespace Sessionize.Api.Migrations
                     b.Navigation("Track");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.SessionSpeaker", b =>
+            modelBuilder.Entity("Sessionize.Models.SessionSpeaker", b =>
                 {
-                    b.HasOne("ConferenceApp.Models.Session", "Session")
+                    b.HasOne("Sessionize.Models.Session", "Session")
                         .WithMany("SessionSpeakers")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConferenceApp.Models.Speaker", "Speaker")
+                    b.HasOne("Sessionize.Models.Speaker", "Speaker")
                         .WithMany("SessionSpeakers")
                         .HasForeignKey("SpeakerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -372,9 +372,9 @@ namespace Sessionize.Api.Migrations
                     b.Navigation("Speaker");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Track", b =>
+            modelBuilder.Entity("Sessionize.Models.Track", b =>
                 {
-                    b.HasOne("ConferenceApp.Models.Conference", "Conference")
+                    b.HasOne("Sessionize.Models.Conference", "Conference")
                         .WithMany("Tracks")
                         .HasForeignKey("ConferenceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,29 +383,29 @@ namespace Sessionize.Api.Migrations
                     b.Navigation("Conference");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Conference", b =>
+            modelBuilder.Entity("Sessionize.Models.Conference", b =>
                 {
                     b.Navigation("Tracks");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Session", b =>
+            modelBuilder.Entity("Sessionize.Models.Session", b =>
                 {
                     b.Navigation("Registrations");
 
                     b.Navigation("SessionSpeakers");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Speaker", b =>
+            modelBuilder.Entity("Sessionize.Models.Speaker", b =>
                 {
                     b.Navigation("SessionSpeakers");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.Track", b =>
+            modelBuilder.Entity("Sessionize.Models.Track", b =>
                 {
                     b.Navigation("Sessions");
                 });
 
-            modelBuilder.Entity("ConferenceApp.Models.User", b =>
+            modelBuilder.Entity("Sessionize.Models.User", b =>
                 {
                     b.Navigation("Registrations");
                 });
