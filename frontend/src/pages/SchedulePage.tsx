@@ -39,7 +39,7 @@ function SessionCard({ session }: { session: Session }) {
   return (
     <Link
       to={`/sessions/${session.id}`}
-      className="group relative block h-full bg-white rounded-xl border border-slate-200 p-3 hover:shadow-md hover:border-brand-accent/40 transition-all"
+      className="group relative block h-full bg-brand-surface rounded-xl border border-brand-border p-3 hover:shadow-md hover:border-brand-accent/40 transition-all"
     >
       {/* Bookmark button – stops propagation so the link doesn't fire */}
       <div className="absolute top-2 right-2">
@@ -47,19 +47,19 @@ function SessionCard({ session }: { session: Session }) {
       </div>
       <div className="flex items-start gap-1 mb-1.5 pr-8">
         <LevelBadge level={session.level} />
-        <span className="ml-auto text-xs text-slate-400 shrink-0 tabular-nums">{mins}m</span>
+        <span className="ml-auto text-xs text-brand-muted shrink-0 tabular-nums">{mins}m</span>
       </div>
-      <p className="text-sm font-semibold text-slate-900 group-hover:text-brand-accent leading-snug line-clamp-3 mb-1.5 transition-colors">
+      <p className="text-sm font-semibold text-brand-primary group-hover:text-brand-accent leading-snug line-clamp-3 mb-1.5 transition-colors">
         {session.title}
       </p>
       {speakers.length > 0 && (
-        <p className="text-xs text-slate-500 truncate mb-2">
+        <p className="text-xs text-brand-muted truncate mb-2">
           {speakers.map(s => s.name).join(', ')}
         </p>
       )}
       <div className="flex flex-wrap items-center gap-1.5 mt-auto text-xs text-slate-400">
         {session.room && (
-          <span className="flex items-center gap-1 bg-slate-50 px-1.5 py-0.5 rounded-md border border-slate-100">
+          <span className="flex items-center gap-1 bg-brand-bg px-1.5 py-0.5 rounded-md border border-brand-border">
             <DoorOpen className="w-3 h-3 text-brand-accent" /> {session.room}
           </span>
         )}
@@ -76,7 +76,7 @@ function SessionCard({ session }: { session: Session }) {
 // ── empty placeholder ──────────────────────────────────────────────────────
 
 function EmptyCell() {
-  return <div className="h-full min-h-[80px] rounded-xl bg-slate-50 border border-dashed border-slate-200" />;
+  return <div className="h-full min-h-[80px] rounded-xl bg-brand-bg border border-dashed border-brand-border" />;
 }
 
 // ── schedule grid for one day ─────────────────────────────────────────────
@@ -112,7 +112,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
   }, [sessions, timezone]);
 
   if (timeSlots.length === 0) {
-    return <p className="text-slate-500 text-sm">No sessions scheduled for this day.</p>;
+    return <p className="text-brand-muted text-sm">No sessions scheduled for this day.</p>;
   }
 
   return (
@@ -133,7 +133,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
             >
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"
-                style={{ backgroundColor: track.color || '#0ea5e9' }}
+                style={{ backgroundColor: track.color || '#6b7c5c' }}
               >
                 {track.name}
               </span>
@@ -145,7 +145,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
             <Fragment key={time}>
               {/* Time label */}
               <div
-                className="sticky left-0 bg-brand-surface flex items-start justify-end pr-3 pt-3 text-xs font-semibold text-slate-500 border-b border-slate-100 z-10"
+                className="sticky left-0 bg-brand-surface flex items-start justify-end pr-3 pt-3 text-xs font-semibold text-brand-muted border-b border-brand-border z-10"
               >
                 <span className="flex items-center gap-1">
                   <Clock className="w-3 h-3 text-brand-accent" /> {time}
@@ -179,7 +179,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
                 if (!session) return null;
                 return (
                   <div key={track.id}>
-                    <p className="text-xs font-medium text-slate-400 mb-1">
+                    <p className="text-xs font-medium text-brand-muted mb-1">
                       <span
                         className="inline-block w-2 h-2 rounded-full mr-1 align-middle"
                         style={{ backgroundColor: track.color }}
@@ -273,8 +273,8 @@ export function SchedulePage() {
       {/* Page header */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900">Schedule</h1>
-          <p className="text-slate-500 mt-1">Browse sessions across tracks and days.</p>
+          <h1 className="text-3xl font-extrabold text-brand-primary">Schedule</h1>
+          <p className="text-brand-muted mt-1">Browse sessions across tracks and days.</p>
         </div>
 
         {/* Conference selector (only show if multiple) */}
@@ -287,7 +287,7 @@ export function SchedulePage() {
               setFilteredTrackIds(null);
             }}
             aria-label="Select conference"
-            className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="text-sm border border-brand-border rounded-lg px-3 py-1.5 bg-brand-surface text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-accent"
           >
             {conferences.map(c => (
               <option key={c.id} value={c.id}>{c.name}</option>
@@ -306,7 +306,7 @@ export function SchedulePage() {
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 d === activeDay
                   ? 'bg-brand-accent text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:border-brand-accent hover:text-brand-accent'
+                  : 'bg-brand-surface border border-brand-border text-brand-muted hover:border-brand-accent hover:text-brand-accent'
               }`}
             >
               Day {i + 1} — {fmtDayLabel(`${d}T00:00:00`, timezone)}
@@ -318,7 +318,7 @@ export function SchedulePage() {
       {/* Track filter bar */}
       {tracks.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6 items-center">
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Filter:</span>
+          <span className="text-xs font-semibold text-brand-muted uppercase tracking-wider">Filter:</span>
           {tracks.map(track => {
             const active = filteredTrackIds === null || filteredTrackIds.has(track.id);
             return (
@@ -328,9 +328,9 @@ export function SchedulePage() {
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
                   active
                     ? 'border-transparent text-white shadow-sm'
-                    : 'bg-slate-50 border-slate-200 text-slate-400 opacity-50'
+                    : 'bg-brand-bg border-brand-border text-brand-muted opacity-50'
                 }`}
-                style={active ? { backgroundColor: track.color || '#0ea5e9' } : undefined}
+                style={active ? { backgroundColor: track.color || '#6b7c5c' } : undefined}
               >
                 {track.name}
               </button>
@@ -348,7 +348,7 @@ export function SchedulePage() {
           timezone={timezone}
         />
       ) : (
-        <p className="text-slate-500">No sessions scheduled yet.</p>
+        <p className="text-brand-muted">No sessions scheduled yet.</p>
       )}
     </div>
   );
