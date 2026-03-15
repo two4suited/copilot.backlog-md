@@ -3,9 +3,11 @@ id: TASK-59
 title: >-
   Bug: TASK-53 seed data never loaded — idempotent guard fires on stale
   pre-existing conference
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-15 01:14'
+updated_date: '2026-03-15 01:16'
 labels:
   - bug
   - data
