@@ -16,27 +16,26 @@ priority: high
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Production deployment for Sessionize uses `azd up` (Azure Developer CLI + .NET Aspire), NOT docker-compose. Several files need cleanup:
+Production deployment for Sessionize uses the built-in Aspire deploy command, NOT docker-compose or azd.
+
+The deploy command is:
+  dotnet run --project Sessionize.AppHost -- --publisher=manifest
+  OR: dotnet aspire deploy (if Aspire CLI tools installed)
+
+Aspire handles containerisation, Azure Container Apps provisioning, and deployment automatically via its built-in Azure publisher (AddAzureContainerAppEnvironment in Program.cs).
 
 ## Files to remove
-- `docker-compose.yml` — not needed for production (Aspire handles orchestration locally; azd handles cloud)
-- `Dockerfile.api` — Aspire/azd builds containers automatically, no manual Dockerfiles needed
-- `Dockerfile.frontend` — same as above
-- `docs/deployment.md` — references Docker Compose workflow, replace with azd instructions
+- docker-compose.yml — not needed
+- Dockerfile.api — Aspire builds containers automatically
+- Dockerfile.frontend — same
+- docs/deployment.md — rewrite for Aspire deploy only
 
-## README.md changes
-- Remove the entire 'Production Deployment' section that references docker-compose
-- Replace with a clean 'Deploy to Azure' section explaining azd workflow:
-  1. `azd auth login`
-  2. `azd up` (provisions Azure Container Apps + PostgreSQL + ACR)
-  3. `azd deploy` for subsequent deploys
-- Remove Docker Desktop from the prerequisites table (not needed for dev, Aspire manages its own containers)
-- Keep the local dev section (Aspire run) unchanged
-
-## docs/deployment.md
-- Rewrite entirely to cover only the azd deployment flow
-- Remove all Docker Compose references
-- Cover: prerequisites (azd CLI, Azure subscription), first-time setup, ongoing deploys, teardown
+## README changes
+- Remove docker-compose Production Deployment section
+- Replace with Aspire deploy instructions:
+  1. dotnet aspire deploy (or equivalent publish command)
+  2. No azd needed
+- Remove Docker Desktop from prerequisites
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria
