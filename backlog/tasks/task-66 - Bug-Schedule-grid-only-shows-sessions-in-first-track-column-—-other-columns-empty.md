@@ -36,3 +36,15 @@ File: frontend/src/pages/SchedulePage.tsx — check DayGrid column/session rende
 - [x] #2 Sessions are correctly mapped to track columns by trackId
 - [x] #3 No empty placeholder columns visible when sessions exist for that track
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Root cause: tracks returned from GET /api/conferences/{id} were not ordered by sortOrder. EF navigation collections have no guaranteed ordering, so tracks arrived in arbitrary DB order. When rendering the schedule grid, Backend & APIs (sortOrder=1) could appear as column 6 while tracks with no sessions on that day occupied columns 1–4. Users saw sessions only in the first visible populated column with empty dashed boxes in between.
+
+Fix:
+- ConferencesController.Get: added .OrderBy(t => t.SortOrder) before mapping the Tracks collection to TrackDto. This ensures all clients receive tracks in intended order (Backend=1, Frontend=2, DevOps=3, Security=4, Data=5, Architecture=6).
+- SchedulePage.tsx: replaced the plain tracks array assignment with a useMemo that spreads and sorts conference.tracks by sortOrder, providing a client-side safety net.
+
+All 19 API tests pass. TypeScript compiles clean.
+<!-- SECTION:FINAL_SUMMARY:END -->
