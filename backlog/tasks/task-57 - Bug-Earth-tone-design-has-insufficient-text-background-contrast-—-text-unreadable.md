@@ -3,7 +3,7 @@ id: TASK-57
 title: >-
   Bug: Earth tone design has insufficient text/background contrast — text
   unreadable
-status: In Progress
+status: Done
 assignee:
   - '@agent-contrast'
 created_date: '2026-03-15 01:06'
