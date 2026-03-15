@@ -3,7 +3,7 @@ id: TASK-75
 title: >-
   Fix GitHub Issues sync — bidirectional status reconciliation instead of
   20-issue cap
-status: In Progress
+status: Done
 assignee:
   - '@agent-sync'
 created_date: '2026-03-15 02:58'
