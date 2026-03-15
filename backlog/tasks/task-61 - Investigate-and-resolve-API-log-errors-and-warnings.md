@@ -55,3 +55,30 @@ Action: update MimeKit to a patched version or evaluate if it can be removed if 
 6. Run dotnet build to confirm clean
 7. Verify 10622 warning absent at runtime
 <!-- SECTION:PLAN:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## TASK-61: Resolve API log errors and warnings
+
+### Changes
+
+**1. EF Core warning 10622 — fixed in `ConferenceDbContext.cs`**
+Added a matching `HasQueryFilter` for `SessionSpeaker` that mirrors the `Session` and `Speaker` soft-delete filters:
+```csharp
+modelBuilder.Entity<SessionSpeaker>()
+    .HasQueryFilter(ss => !ss.Session.IsDeleted && !ss.Speaker.IsDeleted);
+```
+This resolves the "required end of a relationship" mismatch that caused the 10622 validation warning on startup.
+
+**2. BackgroundService cancellation — fixed in `SessionReminderService.cs`**
+The error-recovery `Task.Delay(30s)` inside the `catch (Exception)` block could throw `OperationCanceledException` on host shutdown, which propagated unhandled. Wrapped the entire `while` loop in a top-level `try/catch (OperationCanceledException)` so both the normal-shutdown path and the error-recovery delay path exit cleanly without an exception propagating to BackgroundService.
+
+**3. MimeKit NU1902 — already resolved**
+`MailKit 4.15.1` (existing reference) transitively brings in `MimeKit 4.15.1`, which is the patched version. `dotnet build` confirms zero NU1902 warnings.
+
+### Verification
+- `dotnet build` → Build succeeded, zero warnings
+- Runtime startup log no longer contains event ID 10622
+- No NU1902 security advisory warning
+<!-- SECTION:FINAL_SUMMARY:END -->
