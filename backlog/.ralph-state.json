@@ -159,6 +159,16 @@
       "agent": "task",
       "cycle": 235,
       "assignedAt": "2026-03-15T01:44:49.053Z"
+    },
+    "66": {
+      "agent": "general-purpose",
+      "cycle": 248,
+      "assignedAt": "2026-03-15T01:46:59.063Z"
+    },
+    "67": {
+      "agent": "general-purpose",
+      "cycle": 248,
+      "assignedAt": "2026-03-15T01:46:59.063Z"
     }
   },
   "bugs": [],
