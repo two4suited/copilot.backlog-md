@@ -162,18 +162,18 @@
     },
     "66": {
       "agent": "general-purpose",
-      "cycle": 249,
-      "assignedAt": "2026-03-15T01:47:09.073Z"
+      "cycle": 250,
+      "assignedAt": "2026-03-15T01:47:19.067Z"
     },
     "67": {
       "agent": "general-purpose",
-      "cycle": 249,
-      "assignedAt": "2026-03-15T01:47:09.073Z"
+      "cycle": 250,
+      "assignedAt": "2026-03-15T01:47:19.067Z"
     },
     "68": {
       "agent": "task",
-      "cycle": 249,
-      "assignedAt": "2026-03-15T01:47:09.074Z"
+      "cycle": 250,
+      "assignedAt": "2026-03-15T01:47:19.067Z"
     }
   },
   "bugs": [],
