@@ -80,6 +80,7 @@ export function SpeakerFormPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin', 'speakers'] });
+      queryClient.invalidateQueries({ queryKey: ['speakers'] }); // also refresh session form picker
       showToast(isNew ? 'Speaker created' : 'Speaker updated');
       setTimeout(() => navigate('/admin/speakers'), 1200);
     },

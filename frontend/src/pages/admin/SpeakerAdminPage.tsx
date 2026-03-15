@@ -24,6 +24,7 @@ export function SpeakerAdminPage() {
     mutationFn: (id: string) => api.speakers.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin', 'speakers'] });
+      queryClient.invalidateQueries({ queryKey: ['speakers'] }); // refresh session form picker
       setDeleteId(null);
       showToast('Speaker deleted successfully');
     },
