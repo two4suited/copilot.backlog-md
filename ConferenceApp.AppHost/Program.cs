@@ -13,7 +13,7 @@ if (builder.ExecutionContext.IsPublishMode)
     // ── Azure publish mode ────────────────────────────────────────────────
     // Registers the Azure Container Apps environment and all provisioning
     // infrastructure (ACR, Log Analytics workspace, managed identity).
-    builder.AddAzureContainerAppsInfrastructure();
+    builder.AddAzureContainerAppEnvironment("aca-env");
 
     // Azure Database for PostgreSQL Flexible Server (replaces local container).
     // pgPassword is stored in Azure Key Vault and injected as a connection-string secret.
