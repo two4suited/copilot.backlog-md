@@ -3,9 +3,10 @@ id: TASK-43
 title: >-
   [BUG] Session and Speaker detail pages show 'not found' due to wrong API base
   URL in .env.development
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-15 00:26'
+updated_date: '2026-03-15 00:27'
 labels:
   - bug
   - tester
@@ -42,3 +43,11 @@ paths that the Vite proxy intercepts and forwards correctly to the real API.
 Or remove VITE_API_URL from .env.development and update the fallback in api.ts
 from 'http://localhost:5000' to '' (empty string).
 <!-- SECTION:DESCRIPTION:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Fixed two issues:
+1. .env.development: cleared VITE_API_URL (was http://localhost:5000) — axios now uses relative paths forwarded by the Vite proxy
+2. vite.config.ts: deduplicated proxy target into apiTarget const, removed stale VITE_API_URL fallback, corrected fallback port from 5110 to https://localhost:7133
+<!-- SECTION:FINAL_SUMMARY:END -->
