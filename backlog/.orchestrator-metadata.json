@@ -12,6 +12,8 @@
     "33": "task",
     "37": "general-purpose",
     "40": "general-purpose",
+    "41": "general-purpose",
+    "42": "general-purpose",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -39,174 +41,6 @@
     "6.3": "dotnet-developer"
   },
   "history": [
-    {
-      "taskId": "1",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.590Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "1",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.590Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "1",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.590Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "1",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.590Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "1",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.590Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "2",
-      "oldAgent": null,
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.590Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "2",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "2",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "2",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "2",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "3",
-      "oldAgent": null,
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "3",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "3",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "3",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "3",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "3",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.591Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "4",
-      "oldAgent": null,
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.592Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "4",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.592Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "4",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.592Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "4",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.592Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "5",
-      "oldAgent": null,
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.592Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "5",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.593Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "5",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.593Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
-    {
-      "taskId": "5",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-14T21:19:48.593Z",
-      "reason": "Auto-assigned via bulk-assign"
-    },
     {
       "taskId": "6",
       "oldAgent": null,
@@ -738,6 +572,174 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-14T23:30:42.144Z",
       "reason": "Ralph loop cycle 2"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-14T23:30:52.822Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:30:52.822Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-14T23:30:52.823Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "37",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:30:52.823Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "40",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:30:52.823Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-14T23:40:17.855Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:40:17.856Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-14T23:40:17.856Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "37",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:40:17.856Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "40",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:40:17.856Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-14T23:52:09.978Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:52:09.979Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-14T23:52:09.979Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "37",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:52:09.979Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "40",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:52:09.980Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "41",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:52:09.980Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "42",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-14T23:52:09.980Z",
+      "reason": "Auto-assigned via bulk-assign"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-15T00:10:00.041Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:10:00.041Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:10:00.041Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "37",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:10:00.042Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "40",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:10:00.042Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "41",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:10:00.042Z",
+      "reason": "Ralph loop cycle 1"
+    },
+    {
+      "taskId": "42",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:10:00.043Z",
+      "reason": "Ralph loop cycle 1"
     }
   ],
   "config": {
