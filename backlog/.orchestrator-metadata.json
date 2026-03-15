@@ -20,6 +20,7 @@
     "46": "task",
     "47": "general-purpose",
     "48": "task",
+    "49": "general-purpose",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -47,41 +48,6 @@
     "6.3": "dotnet-developer"
   },
   "history": [
-    {
-      "taskId": "5.2",
-      "oldAgent": "react-developer",
-      "newAgent": "react-developer",
-      "timestamp": "2026-03-14T21:20:04.834Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "5.3",
-      "oldAgent": "dotnet-developer",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:04.881Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "6.1",
-      "oldAgent": "aspire-expert",
-      "newAgent": "aspire-expert",
-      "timestamp": "2026-03-14T21:20:04.928Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "6.2",
-      "oldAgent": "dotnet-developer",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:04.974Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "6.3",
-      "oldAgent": "explore",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:05.021Z",
-      "reason": "User assignment via CLI"
-    },
     {
       "taskId": "30",
       "oldAgent": null,
@@ -746,6 +712,41 @@
       "newAgent": "task",
       "timestamp": "2026-03-15T00:45:01.645Z",
       "reason": "Ralph loop cycle 71"
+    },
+    {
+      "taskId": "45",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:45:31.646Z",
+      "reason": "Ralph loop cycle 72"
+    },
+    {
+      "taskId": "46",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:45:31.647Z",
+      "reason": "Ralph loop cycle 72"
+    },
+    {
+      "taskId": "47",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:45:31.648Z",
+      "reason": "Ralph loop cycle 72"
+    },
+    {
+      "taskId": "48",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:45:31.648Z",
+      "reason": "Ralph loop cycle 72"
+    },
+    {
+      "taskId": "49",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:45:31.648Z",
+      "reason": "Ralph loop cycle 72"
     }
   ],
   "config": {
