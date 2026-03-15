@@ -35,3 +35,20 @@ Verify: curl -k 'https://localhost:7133/api/sessions?conferenceId=<id>' | python
 - [x] #3 ConferenceTimezone is included in SessionDto API response
 - [x] #4 Fallback gracefully shows UTC label if timezone is genuinely unknown
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Fixed session times displaying as UTC on the Schedule page instead of venue timezone.
+
+**Root cause:** DbSeeder.cs created all conferences without a `Timezone` property, so they all defaulted to "UTC". The API, DTOs, and frontend code were all correct — the data was just missing.
+
+**Changes:**
+- `ConferenceApp.Api/Data/DbSeeder.cs`: Added `Timezone` property to all three seeded conferences based on their location:
+  - TechConf 2023 (New York, NY) → `America/New_York`
+  - DevSummit 2025 (Chicago, IL) → `America/Chicago`
+  - TechConf 2026 (San Francisco, CA) → `America/Los_Angeles`
+- Updated existing DB records via SQL to match.
+
+**Verification:** API now returns correct IANA timezone identifiers; `date-fns-tz` on the frontend renders e.g. "01:00 PM CDT" instead of "01:00 PM UTC". All 19 existing tests pass.
+<!-- SECTION:FINAL_SUMMARY:END -->
