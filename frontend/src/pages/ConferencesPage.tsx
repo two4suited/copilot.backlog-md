@@ -24,7 +24,7 @@ function ConferenceCard({ conference, index }: { conference: Conference; index: 
   return (
     <Link
       to={`/conferences/${conference.id}`}
-      className="group block bg-brand-surface rounded-2xl border border-brand-border overflow-hidden hover:shadow-xl hover:border-brand-accent/40 transition-all duration-200"
+      className="group block bg-brand-surface dark:bg-[#2c1810] rounded-2xl border border-brand-border dark:border-[#4a2e20] overflow-hidden hover:shadow-xl hover:border-brand-accent/40 transition-all duration-200"
       data-testid="conference-card"
     >
       {/* Gradient image placeholder */}
@@ -47,15 +47,15 @@ function ConferenceCard({ conference, index }: { conference: Conference; index: 
 
       {/* Card body */}
       <div className="p-5">
-        <h3 className="font-semibold text-brand-primary text-lg leading-snug group-hover:text-brand-accent transition-colors line-clamp-2">
+        <h3 className="font-semibold text-brand-primary dark:text-[#f5f0eb] text-lg leading-snug group-hover:text-brand-accent transition-colors line-clamp-2">
           {conference.name}
         </h3>
         {conference.description && (
-          <p className="text-brand-muted text-sm mt-1.5 line-clamp-2 leading-relaxed">{conference.description}</p>
+          <p className="text-brand-muted dark:text-[#c4a882] text-sm mt-1.5 line-clamp-2 leading-relaxed">{conference.description}</p>
         )}
         <div className="mt-4 flex flex-wrap gap-2">
           {/* Location pill */}
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-bg border border-brand-border text-xs text-brand-muted font-medium">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-bg dark:bg-[#1a0f0a] border border-brand-border dark:border-[#4a2e20] text-xs text-brand-muted dark:text-[#c4a882] font-medium">
             <MapPin className="w-3 h-3 text-brand-accent shrink-0" />
             {conference.location}
           </span>
@@ -84,8 +84,8 @@ export function ConferencesPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-extrabold text-brand-primary">Conferences</h1>
-        <p className="text-brand-muted mt-1">Explore upcoming tech events and plan your schedule.</p>
+        <h1 className="text-3xl font-extrabold text-brand-primary dark:text-[#f5f0eb]">Conferences</h1>
+        <p className="text-brand-muted dark:text-[#c4a882] mt-1">Explore upcoming tech events and plan your schedule.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {items.map((c, i) => <ConferenceCard key={c.id} conference={c} index={i} />)}
