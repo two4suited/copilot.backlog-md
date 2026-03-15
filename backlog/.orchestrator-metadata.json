@@ -30,6 +30,7 @@
     "56": "general-purpose",
     "57": "general-purpose",
     "58": "general-purpose",
+    "59": "general-purpose",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -57,27 +58,6 @@
     "6.3": "dotnet-developer"
   },
   "history": [
-    {
-      "taskId": "51",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T01:09:38.842Z",
-      "reason": "Ralph loop cycle 24"
-    },
-    {
-      "taskId": "55",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T01:09:38.843Z",
-      "reason": "Ralph loop cycle 24"
-    },
-    {
-      "taskId": "57",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T01:09:38.843Z",
-      "reason": "Ralph loop cycle 24"
-    },
     {
       "taskId": "58",
       "oldAgent": "general-purpose",
@@ -756,6 +736,27 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-15T01:14:38.866Z",
       "reason": "Ralph loop cycle 54"
+    },
+    {
+      "taskId": "51",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T01:14:48.869Z",
+      "reason": "Ralph loop cycle 55"
+    },
+    {
+      "taskId": "55",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:14:48.870Z",
+      "reason": "Ralph loop cycle 55"
+    },
+    {
+      "taskId": "59",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:14:48.870Z",
+      "reason": "Ralph loop cycle 55"
     }
   ],
   "config": {
