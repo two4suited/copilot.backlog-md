@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-tester64'
 created_date: '2026-03-15 01:38'
-updated_date: '2026-03-15 01:40'
+updated_date: '2026-03-15 01:42'
 labels:
   - bug
   - frontend
@@ -45,3 +45,13 @@ Tester should:
 - [ ] #4 Speaker avatars render on speaker list and session detail pages
 - [ ] #5 Root cause documented and fixed end-to-end
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Identified root cause: seeder guard only checked conference name existence (not ImageUrl), preventing re-seed with new image URLs after TASK-60
+2. Seeder guard fix was already committed (f4deb8d) but app had not been restarted
+3. Fixed live DB directly via SQL UPDATE for Conferences (ImageUrl) and Speakers (PhotoUrl)
+4. Verified API /api/conferences returns picsum.photos imageUrl, /api/speakers returns pravatar.cc photoUrl
+5. Frontend types and components already correct (imageUrl in Conference interface, photoUrl in Speaker interface)
+<!-- SECTION:PLAN:END -->
