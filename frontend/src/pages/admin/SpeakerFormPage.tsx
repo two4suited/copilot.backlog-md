@@ -115,7 +115,7 @@ export function SpeakerFormPage() {
         {isNew ? 'New Speaker' : speaker?.name ? `Edit Speaker: ${speaker.name}` : 'Edit Speaker'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-brand-border p-6 space-y-5">
         <div>
           <label htmlFor="speaker-name" className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
           <input
@@ -123,7 +123,7 @@ export function SpeakerFormPage() {
             type="text"
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.name ? 'border-red-400' : 'border-slate-200'}`}
+            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.name ? 'border-red-400' : 'border-brand-border'}`}
           />
           {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
         </div>
@@ -136,7 +136,7 @@ export function SpeakerFormPage() {
             value={form.email}
             disabled={!isNew}
             onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.email ? 'border-red-400' : 'border-slate-200'} ${!isNew ? 'bg-slate-50 text-slate-400 cursor-not-allowed' : ''}`}
+            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.email ? 'border-red-400' : 'border-brand-border'} ${!isNew ? 'bg-brand-bg text-brand-muted cursor-not-allowed' : ''}`}
           />
           {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
           {!isNew && <p className="mt-1 text-xs text-slate-400">Email cannot be changed after creation</p>}
@@ -149,7 +149,7 @@ export function SpeakerFormPage() {
             type="text"
             value={form.company}
             onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
@@ -160,7 +160,7 @@ export function SpeakerFormPage() {
             rows={4}
             value={form.bio}
             onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
@@ -171,7 +171,7 @@ export function SpeakerFormPage() {
             type="url"
             value={form.photoUrl}
             onChange={e => setForm(f => ({ ...f, photoUrl: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
@@ -184,7 +184,7 @@ export function SpeakerFormPage() {
               value={form.twitterHandle}
               onChange={e => setForm(f => ({ ...f, twitterHandle: e.target.value }))}
               placeholder="@username"
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
             />
           </div>
           <div>
@@ -194,19 +194,19 @@ export function SpeakerFormPage() {
               type="url"
               value={form.linkedInUrl}
               onChange={e => setForm(f => ({ ...f, linkedInUrl: e.target.value }))}
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
             />
           </div>
         </div>
 
         <div className="flex justify-end gap-3 pt-2">
-          <Link to="/admin/speakers" className="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+          <Link to="/admin/speakers" className="px-4 py-2 rounded-lg border border-brand-border text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
             Cancel
           </Link>
           <button
             type="submit"
             disabled={saveMutation.isPending}
-            className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors disabled:opacity-50"
           >
             {saveMutation.isPending ? 'Saving...' : isNew ? 'Create Speaker' : 'Save Changes'}
           </button>

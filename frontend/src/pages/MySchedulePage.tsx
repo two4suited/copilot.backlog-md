@@ -65,8 +65,8 @@ export function MySchedulePage() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">My Schedule</h1>
-            <p className="mt-1 text-slate-500">
+            <h1 className="text-3xl font-bold text-brand-primary">My Schedule</h1>
+            <p className="mt-1 text-brand-muted">
               {sessions.length === 0
                 ? 'You have no registered sessions yet.'
                 : `${sessions.length} session${sessions.length !== 1 ? 's' : ''} registered`}
@@ -75,7 +75,7 @@ export function MySchedulePage() {
           {sessions.length > 0 && (
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-brand-border text-brand-primary hover:bg-brand-border/30 transition-colors"
             >
               <Download className="w-4 h-4" />
               Export to Calendar
@@ -94,7 +94,7 @@ export function MySchedulePage() {
         <div className="space-y-8">
           {Array.from(grouped.entries()).map(([day, daySessions]) => (
             <div key={day}>
-              <h2 className="text-lg font-semibold text-slate-700 mb-3 border-b border-slate-200 pb-2">
+              <h2 className="text-lg font-semibold text-brand-primary mb-3 border-b border-brand-border pb-2">
                 {day}
               </h2>
               <div className="space-y-3">
@@ -108,13 +108,13 @@ export function MySchedulePage() {
                   return (
                     <div
                       key={session.id}
-                      className="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-4"
+                      className="bg-brand-surface rounded-xl border border-brand-border p-4 flex items-start gap-4"
                     >
                       <div className="text-slate-400 text-sm font-mono min-w-[80px] shrink-0">
                         {start}<br />{end}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-slate-900">{session.title}</h3>
+                        <h3 className="font-semibold text-brand-primary">{session.title}</h3>
                         <div className="flex flex-wrap items-center gap-3 mt-2 text-slate-500 text-sm">
                           <span className="flex items-center gap-1">
                             <DoorOpen className="w-3.5 h-3.5" /> {session.room}

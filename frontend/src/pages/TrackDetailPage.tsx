@@ -22,18 +22,18 @@ export function TrackDetailPage() {
 
   return (
     <div>
-      <Link to={`/conferences/${id}`} className="text-sm text-indigo-600 hover:underline">
+      <Link to={`/conferences/${id}`} className="text-sm text-brand-accent hover:underline">
         ← Back to conference
       </Link>
       <div className="flex items-center gap-3 mt-2 mb-6">
         <div className="w-4 h-4 rounded-full shrink-0" style={{ backgroundColor: track.color }} />
-        <h1 className="text-3xl font-bold text-slate-900">{track.name}</h1>
+        <h1 className="text-3xl font-bold text-brand-primary">{track.name}</h1>
       </div>
       {track.description && (
         <p className="text-slate-600 mb-6 max-w-2xl">{track.description}</p>
       )}
 
-      <h2 className="text-xl font-semibold text-slate-900 mb-4">Sessions</h2>
+      <h2 className="text-xl font-semibold text-brand-primary mb-4">Sessions</h2>
       <div className="space-y-3">
         {track.sessions?.map(session => {
           const tz = session.conferenceTimezone ?? 'UTC';
@@ -42,7 +42,7 @@ export function TrackDetailPage() {
           return (
             <div
               key={session.id}
-              className="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-4"
+              className="bg-brand-surface rounded-xl border border-brand-border p-4 flex items-start gap-4"
               data-testid="session-card"
             >
               <div className="text-slate-400 text-sm font-mono min-w-[80px] shrink-0">

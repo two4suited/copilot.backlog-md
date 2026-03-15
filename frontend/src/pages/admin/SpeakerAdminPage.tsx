@@ -64,7 +64,7 @@ export function SpeakerAdminPage() {
           </thead>
           <tbody>
             {speakers?.map((speaker, idx) => (
-              <tr key={speaker.id} className={`border-b border-slate-100 last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
+              <tr key={speaker.id} className={`border-b border-brand-border last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
                 <td className="px-4 py-3 font-medium text-brand-primary">{speaker.name}</td>
                 <td className="px-4 py-3 text-brand-muted">{speaker.company}</td>
                 <td className="px-4 py-3 text-brand-muted">{speaker.email}</td>

@@ -157,7 +157,7 @@ export function SearchBar() {
                       role="option"
                       aria-selected={activeIndex === sessionCount + i}
                       onClick={() => handleSelect(`/speakers/${sp.id}`)}
-                      className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === sessionCount + i ? 'bg-indigo-50' : 'hover:bg-indigo-50'}`}
+                      className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === sessionCount + i ? 'bg-brand-accent/10' : 'hover:bg-brand-accent/10'}`}
                     >
                       <p className="text-sm font-medium text-slate-800">{sp.name}</p>
                       <p className="text-xs text-slate-500">{sp.company}</p>

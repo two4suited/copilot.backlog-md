@@ -183,7 +183,7 @@ export function SessionFormPage() {
         {isNew ? 'New Session' : session?.title ? `Edit Session: ${session.title}` : 'Edit Session'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-brand-border p-6 space-y-5">
         <div>
           <label htmlFor="session-title" className="block text-sm font-medium text-slate-700 mb-1">Title *</label>
           <input
@@ -191,7 +191,7 @@ export function SessionFormPage() {
             type="text"
             value={form.title}
             onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.title ? 'border-red-400' : 'border-slate-200'}`}
+            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.title ? 'border-red-400' : 'border-brand-border'}`}
           />
           {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
         </div>
@@ -203,7 +203,7 @@ export function SessionFormPage() {
             rows={3}
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
@@ -213,7 +213,7 @@ export function SessionFormPage() {
             id="session-conference"
             value={form.conferenceId}
             onChange={e => setForm(f => ({ ...f, conferenceId: e.target.value, trackId: '' }))}
-            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           >
             <option value="">Select a conference...</option>
             {conferences?.map(c => (
@@ -229,7 +229,7 @@ export function SessionFormPage() {
             value={form.trackId}
             onChange={e => setForm(f => ({ ...f, trackId: e.target.value }))}
             disabled={!form.conferenceId}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.trackId ? 'border-red-400' : 'border-slate-200'} ${!form.conferenceId ? 'bg-slate-50 text-slate-400' : ''}`}
+            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.trackId ? 'border-red-400' : 'border-brand-border'} ${!form.conferenceId ? 'bg-brand-bg text-brand-muted' : ''}`}
           >
             <option value="">Select a track...</option>
             {tracks?.map(t => (
@@ -247,7 +247,7 @@ export function SessionFormPage() {
               type="datetime-local"
               value={form.startTime}
               onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.startTime ? 'border-red-400' : 'border-slate-200'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.startTime ? 'border-red-400' : 'border-brand-border'}`}
             />
             {errors.startTime && <p className="mt-1 text-xs text-red-600">{errors.startTime}</p>}
           </div>
@@ -258,7 +258,7 @@ export function SessionFormPage() {
               type="datetime-local"
               value={form.endTime}
               onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.endTime ? 'border-red-400' : 'border-slate-200'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.endTime ? 'border-red-400' : 'border-brand-border'}`}
             />
             {errors.endTime && <p className="mt-1 text-xs text-red-600">{errors.endTime}</p>}
           </div>
@@ -272,7 +272,7 @@ export function SessionFormPage() {
               type="text"
               value={form.room}
               onChange={e => setForm(f => ({ ...f, room: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.room ? 'border-red-400' : 'border-slate-200'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.room ? 'border-red-400' : 'border-brand-border'}`}
             />
             {errors.room && <p className="mt-1 text-xs text-red-600">{errors.room}</p>}
           </div>
@@ -284,7 +284,7 @@ export function SessionFormPage() {
               min={1}
               value={form.capacity}
               onChange={e => setForm(f => ({ ...f, capacity: parseInt(e.target.value) || 1 }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.capacity ? 'border-red-400' : 'border-slate-200'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.capacity ? 'border-red-400' : 'border-brand-border'}`}
             />
             {errors.capacity && <p className="mt-1 text-xs text-red-600">{errors.capacity}</p>}
           </div>
@@ -297,7 +297,7 @@ export function SessionFormPage() {
               id="session-type"
               value={form.sessionType}
               onChange={e => setForm(f => ({ ...f, sessionType: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.sessionType ? 'border-red-400' : 'border-slate-200'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.sessionType ? 'border-red-400' : 'border-brand-border'}`}
             >
               {SESSION_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -309,7 +309,7 @@ export function SessionFormPage() {
               id="session-level"
               value={form.level}
               onChange={e => setForm(f => ({ ...f, level: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.level ? 'border-red-400' : 'border-slate-200'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.level ? 'border-red-400' : 'border-brand-border'}`}
             >
               {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
             </select>
@@ -326,7 +326,7 @@ export function SessionFormPage() {
                 type="url"
                 value={form.slidesUrl}
                 onChange={e => setForm(f => ({ ...f, slidesUrl: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
               />
             </div>
             <div>
@@ -336,7 +336,7 @@ export function SessionFormPage() {
                 type="url"
                 value={form.recordingUrl}
                 onChange={e => setForm(f => ({ ...f, recordingUrl: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
               />
             </div>
           </>
@@ -344,14 +344,14 @@ export function SessionFormPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Speakers</label>
-          <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-slate-200 rounded-lg p-3">
+          <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-brand-border rounded-lg p-3">
             {speakers?.map(speaker => (
               <label key={speaker.id} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={form.speakerIds.includes(speaker.id)}
                   onChange={() => toggleSpeaker(speaker.id)}
-                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-brand-border text-brand-accent focus:ring-brand-accent"
                 />
                 <span>{speaker.name}</span>
               </label>
@@ -363,13 +363,13 @@ export function SessionFormPage() {
         </div>
 
         <div className="flex justify-end gap-3 pt-2">
-          <Link to="/admin/sessions" className="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+          <Link to="/admin/sessions" className="px-4 py-2 rounded-lg border border-brand-border text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
             Cancel
           </Link>
           <button
             type="submit"
             disabled={saveMutation.isPending}
-            className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors disabled:opacity-50"
           >
             {saveMutation.isPending ? 'Saving...' : isNew ? 'Create Session' : 'Save Changes'}
           </button>

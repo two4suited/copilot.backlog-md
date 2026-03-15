@@ -64,7 +64,7 @@ export function ConferenceAdminPage() {
           </thead>
           <tbody>
             {conferences?.map((conference, idx) => (
-              <tr key={conference.id} className={`border-b border-slate-100 last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
+              <tr key={conference.id} className={`border-b border-brand-border last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
                 <td className="px-4 py-3 font-medium text-brand-primary">{conference.name}</td>
                 <td className="px-4 py-3 text-brand-muted">{conference.location}</td>
                 <td className="px-4 py-3 text-brand-muted">
