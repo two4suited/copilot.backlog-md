@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@accessibility-expert'
 created_date: '2026-03-14 22:23'
-updated_date: '2026-03-15 00:14'
+updated_date: '2026-03-15 00:22'
 labels:
   - frontend
   - testing
@@ -25,3 +25,13 @@ Run axe-core accessibility audit across all main pages. Fix any critical/serious
 - [ ] #2 All icon-only buttons have aria-label
 - [ ] #3 Search bar and bookmark button are keyboard accessible
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Fix Toast close button (icon-only, missing aria-label)
+2. Fix SearchBar: add aria-label to input, add ARIA combobox pattern, add keyboard nav for dropdown
+3. Fix SchedulePage conference select (missing aria-label)
+4. Re-run a11y smoke tests
+5. Mark ACs and finalize task
+<!-- SECTION:PLAN:END -->
