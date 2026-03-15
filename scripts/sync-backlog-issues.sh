@@ -351,7 +351,7 @@ for task_file in "${task_files[@]}"; do
   fi
 
   # Normalise task ID to uppercase for consistency
-  task_id_upper="${task_id^^}"  # e.g. task-13 → TASK-13
+  task_id_upper="$(echo "$task_id" | tr '[:lower:]' '[:upper:]')"  # e.g. task-13 → TASK-13
 
   # Skip Done and Archived tasks — Phase 1 already closes their issues
   case "${task_status,,}" in
