@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-fix68'
 created_date: '2026-03-15 01:46'
-updated_date: '2026-03-15 01:54'
+updated_date: '2026-03-15 01:56'
 labels:
   - bug
   - frontend
@@ -30,8 +30,8 @@ Verify: curl -k 'https://localhost:7133/api/sessions?conferenceId=<id>' | python
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Session times displayed in venue timezone (e.g. PDT, EST) not UTC
-- [ ] #2 Conference.Timezone is populated in the database for all seeded conferences
-- [ ] #3 ConferenceTimezone is included in SessionDto API response
-- [ ] #4 Fallback gracefully shows UTC label if timezone is genuinely unknown
+- [x] #1 Session times displayed in venue timezone (e.g. PDT, EST) not UTC
+- [x] #2 Conference.Timezone is populated in the database for all seeded conferences
+- [x] #3 ConferenceTimezone is included in SessionDto API response
+- [x] #4 Fallback gracefully shows UTC label if timezone is genuinely unknown
 <!-- AC:END -->
