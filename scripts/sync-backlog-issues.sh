@@ -187,7 +187,7 @@ fi
 #   - If CHANGED_FILES is unset (full / scheduled mode): use every task file.
 declare -a task_files=()
 
-if [[ -n "${CHANGED_FILES:-}" ]]; then
+if [[ "${INCREMENTAL:-false}" == "true" ]]; then
   log "Incremental mode — processing changed files + any unsynced tasks."
 
   # Add explicitly changed task files (filter to only files that exist)
