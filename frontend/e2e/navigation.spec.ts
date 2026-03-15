@@ -45,7 +45,7 @@ test.describe('Navigation and Routing', () => {
   test('ConferenceApp logo link navigates back to home', async ({ page }) => {
     await page.goto('/conferences');
     await page.getByRole('link', { name: /conferenceapp/i }).click();
-    await expect(page).toHaveURL(/^\/?$|localhost:517[34]\/?$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/^\/?$|localhost:[0-9]+\/?$/, { timeout: 10_000 });
   });
 
   test('404 route shows not-found message with Go home link', async ({ page }) => {
@@ -59,7 +59,7 @@ test.describe('Navigation and Routing', () => {
     await page.goto('/completely-invalid/path/xyz');
     await expect(page.locator('h1').filter({ hasText: '404' })).toBeVisible();
     await page.getByRole('link', { name: /go home/i }).click();
-    await expect(page).toHaveURL(/^\/?$|localhost:517[34]\/?$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/^\/?$|localhost:[0-9]+\/?$/, { timeout: 10_000 });
   });
 
   test('back button works after navigating to conferences list', async ({ page }) => {
@@ -68,7 +68,7 @@ test.describe('Navigation and Routing', () => {
     await expect(page).toHaveURL(/\/conferences/);
 
     await page.goBack();
-    await expect(page).toHaveURL(/^\/?$|localhost:517[34]\/?$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/^\/?$|localhost:[0-9]+\/?$/, { timeout: 10_000 });
   });
 
   test('deep link to /sessions/:id works without prior navigation', async ({ page }) => {
