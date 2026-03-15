@@ -355,32 +355,30 @@ $description"
   existing_issue=""
 
   if [[ -n "$github_issue_num" ]]; then
-    # Verify the stored issue number still exists
-    if gh issue view "$github_issue_num" --json number --jq '.number' >/dev/null 2>&1; then
+    # Verify the stored issue number still exists (REST)
+    if gh api "/repos/two4suited/copilot.backlog-md/issues/$github_issue_num" --jq '.number' >/dev/null 2>&1; then
       existing_issue="$github_issue_num"
     else
       warn "Stored github_issue $github_issue_num not found; will search by label."
     fi
   fi
 
-  # Second: search by task-identity label (catches issues created before frontmatter was written back)
+  # Second: search by task-identity label via REST
   if [[ -z "$existing_issue" ]]; then
-    existing_issue="$(gh issue list \
-      --label "$task_label" \
-      --state all \
-      --json number \
-      --jq 'sort_by(.number) | .[0].number // empty' \
-      --limit 10 2>/dev/null || echo '')"
+    existing_issue="$(gh api \
+      "/repos/two4suited/copilot.backlog-md/issues?labels=${task_label}&state=all&per_page=10" \
+      --jq 'sort_by(.number) | .[0].number // empty' 2>/dev/null || echo '')"
   fi
 
-  # Third: search by exact title (dedup guard against concurrent runs)
+  # Third: search by exact title via REST search API
   if [[ -z "$existing_issue" ]]; then
-    existing_issue="$(gh issue list \
-      --search "\"${issue_title}\" in:title" \
-      --state all \
-      --json number,title \
-      --jq --arg t "$issue_title" '[.[] | select(.title == $t)] | sort_by(.number) | .[0].number // empty' \
-      --limit 10 2>/dev/null || echo '')"
+    encoded_title="$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$issue_title" 2>/dev/null || echo '')"
+    if [[ -n "$encoded_title" ]]; then
+      existing_issue="$(gh api \
+        "/search/issues?q=${encoded_title}+in:title+repo:two4suited/copilot.backlog-md&per_page=5" \
+        --jq --arg t "$issue_title" '[.items[] | select(.title == $t)] | sort_by(.number) | .[0].number // empty' \
+        2>/dev/null || echo '')"
+    fi
   fi
 
   sleep "$SLEEP_BETWEEN_CALLS"
@@ -426,14 +424,14 @@ $description"
 
   # --- Open / close ---
   if [[ "$should_close" == "true" ]]; then
-    current_state="$(gh issue view "$existing_issue" --json state --jq '.state' 2>/dev/null || echo 'OPEN')"
-    if [[ "${current_state^^}" != "CLOSED" ]]; then
+    current_state="$(gh api "/repos/two4suited/copilot.backlog-md/issues/$existing_issue" --jq '.state' 2>/dev/null || echo 'open')"
+    if [[ "${current_state}" != "closed" ]]; then
       log "Closing issue #$existing_issue (status: $task_status)"
       gh issue close "$existing_issue" >/dev/null 2>&1 || warn "Failed to close issue #$existing_issue"
     fi
   else
-    current_state="$(gh issue view "$existing_issue" --json state --jq '.state' 2>/dev/null || echo 'OPEN')"
-    if [[ "${current_state^^}" == "CLOSED" ]]; then
+    current_state="$(gh api "/repos/two4suited/copilot.backlog-md/issues/$existing_issue" --jq '.state' 2>/dev/null || echo 'open')"
+    if [[ "${current_state}" == "closed" ]]; then
       log "Re-opening issue #$existing_issue (status: $task_status)"
       gh issue reopen "$existing_issue" >/dev/null 2>&1 || warn "Failed to reopen issue #$existing_issue"
     fi
