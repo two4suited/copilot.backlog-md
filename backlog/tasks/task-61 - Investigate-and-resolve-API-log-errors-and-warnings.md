@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-api-errors'
 created_date: '2026-03-15 01:25'
-updated_date: '2026-03-15 01:26'
+updated_date: '2026-03-15 01:30'
 labels:
   - bug
   - backend
@@ -38,8 +38,8 @@ Action: update MimeKit to a patched version or evaluate if it can be removed if 
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 MimeKit updated to a version with no known vulnerabilities (or removed if unused)
-- [ ] #2 EF Core model validation warning identified and resolved
-- [ ] #3 BackgroundService handles CancellationToken gracefully — no exception on clean shutdown
-- [ ] #4 API starts with zero warnings and zero errors in normal operation
+- [x] #1 MimeKit updated to a version with no known vulnerabilities (or removed if unused)
+- [x] #2 EF Core model validation warning identified and resolved
+- [x] #3 BackgroundService handles CancellationToken gracefully — no exception on clean shutdown
+- [x] #4 API starts with zero warnings and zero errors in normal operation
 <!-- AC:END -->
