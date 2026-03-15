@@ -86,8 +86,8 @@
     },
     "51": {
       "agent": "task",
-      "cycle": 100,
-      "assignedAt": "2026-03-15T01:22:18.903Z"
+      "cycle": 101,
+      "assignedAt": "2026-03-15T01:22:28.904Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -106,8 +106,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 100,
-      "assignedAt": "2026-03-15T01:22:18.904Z"
+      "cycle": 101,
+      "assignedAt": "2026-03-15T01:22:28.905Z"
     },
     "56": {
       "agent": "general-purpose",
@@ -128,13 +128,12 @@
     "59": {
       "agent": "general-purpose",
       "cycle": 62,
-      "assignedAt": "2026-03-15T01:15:58.873Z",
-      "seenInProgress": 1773537368874
+      "assignedAt": "2026-03-15T01:15:58.873Z"
     },
     "60": {
       "agent": "general-purpose",
-      "cycle": 100,
-      "assignedAt": "2026-03-15T01:22:18.904Z"
+      "cycle": 101,
+      "assignedAt": "2026-03-15T01:22:28.905Z"
     }
   },
   "bugs": [],
