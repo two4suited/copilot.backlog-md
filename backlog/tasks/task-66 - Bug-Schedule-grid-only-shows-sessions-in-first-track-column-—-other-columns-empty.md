@@ -3,7 +3,7 @@ id: TASK-66
 title: >-
   Bug: Schedule grid only shows sessions in first track column — other columns
   empty
-status: In Progress
+status: Done
 assignee:
   - '@agent-fix66'
 created_date: '2026-03-15 01:46'
