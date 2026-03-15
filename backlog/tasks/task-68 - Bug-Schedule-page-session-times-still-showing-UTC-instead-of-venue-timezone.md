@@ -1,16 +1,17 @@
 ---
 id: TASK-68
 title: 'Bug: Schedule page session times still showing UTC instead of venue timezone'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-fix68'
 created_date: '2026-03-15 01:46'
+updated_date: '2026-03-15 01:54'
 labels:
   - bug
   - frontend
   - timezone
 dependencies: []
 priority: high
-github_issue: 130
 ---
 
 ## Description
