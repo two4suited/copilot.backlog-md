@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-screenshots'
 created_date: '2026-03-15 01:55'
-updated_date: '2026-03-15 02:23'
+updated_date: '2026-03-15 02:25'
 labels:
   - docs
   - readme
@@ -27,7 +27,7 @@ Update docs/screenshots/ with fresh captures and ensure README.md embeds them co
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 All 7 README screenshots retaken against the fixed app
-- [ ] #2 docs/screenshots/ updated with new images
-- [ ] #3 README.md screenshot section reflects current UI
+- [x] #1 All 7 README screenshots retaken against the fixed app
+- [x] #2 docs/screenshots/ updated with new images
+- [x] #3 README.md screenshot section reflects current UI
 <!-- AC:END -->
