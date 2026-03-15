@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # sync-backlog-issues.sh
 # Syncs backlog/tasks/task-*.md files to GitHub Issues.
+#
+# Modes:
+#   FULL SYNC (default / scheduled):   processes every task file
+#   INCREMENTAL (on push):             set CHANGED_FILES env var to a
+#       newline-separated list of task file paths; only those files plus
+#       any task that has never been synced (no github_issue: field) are
+#       processed.  Tasks whose status hasn't changed are skipped entirely.
+#
 # Usage: BRANCH="main" scripts/sync-backlog-issues.sh
 # Requires: gh CLI authenticated (GH_TOKEN or gh auth login)
 set -euo pipefail
@@ -163,17 +171,54 @@ done
 sleep "$SLEEP_BETWEEN_CALLS"
 
 # ---------------------------------------------------------------------------
-# Process each task file
+# Determine which task files to process
 # ---------------------------------------------------------------------------
 shopt -s nullglob
-task_files=("$TASKS_DIR"/task-*.md)
+all_task_files=("$TASKS_DIR"/task-*.md)
 
-if [[ ${#task_files[@]} -eq 0 ]]; then
+if [[ ${#all_task_files[@]} -eq 0 ]]; then
   log "No task files found in $TASKS_DIR – nothing to sync."
   exit 0
 fi
 
-log "Found ${#task_files[@]} task file(s) to sync."
+# Build the candidate list:
+#   - If CHANGED_FILES is set (incremental push mode): start with only those files,
+#     then add any task that has never been synced (no github_issue: in frontmatter).
+#   - If CHANGED_FILES is unset (full / scheduled mode): use every task file.
+declare -a task_files=()
+
+if [[ -n "${CHANGED_FILES:-}" ]]; then
+  log "Incremental mode — processing changed files + any unsynced tasks."
+
+  # Add explicitly changed task files (filter to only files that exist)
+  while IFS= read -r f; do
+    [[ -z "$f" ]] && continue
+    [[ -f "$f" ]] && task_files+=("$f")
+  done <<< "$CHANGED_FILES"
+
+  # Also add any task file that has never been synced (no github_issue field)
+  for f in "${all_task_files[@]}"; do
+    issue_num="$(get_field 'github_issue' "$f")"
+    if [[ -z "$issue_num" ]]; then
+      # Avoid duplicates
+      already=false
+      for existing in "${task_files[@]+"${task_files[@]}"}"; do
+        [[ "$existing" == "$f" ]] && { already=true; break; }
+      done
+      [[ "$already" == false ]] && task_files+=("$f")
+    fi
+  done
+else
+  log "Full sync mode — processing all ${#all_task_files[@]} task file(s)."
+  task_files=("${all_task_files[@]}")
+fi
+
+if [[ ${#task_files[@]} -eq 0 ]]; then
+  log "Nothing to sync (no changed files and no unsynced tasks)."
+  exit 0
+fi
+
+log "Syncing ${#task_files[@]} of ${#all_task_files[@]} task file(s)."
 
 for task_file in "${task_files[@]}"; do
   log "Processing: $task_file"

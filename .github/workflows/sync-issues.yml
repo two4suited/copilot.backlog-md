@@ -34,10 +34,31 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Detect changed task files (incremental mode)
+        id: changed
+        if: github.event_name == 'push'
+        run: |
+          # Get task files touched in this push (between before..after SHAs)
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.event.after }}"
+
+          # If before is all-zeros this is the first push to a new branch — fall back to full sync
+          if [[ "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+            echo "changed_files=" >> "$GITHUB_OUTPUT"
+          else
+            FILES=$(git diff --name-only "$BEFORE" "$AFTER" -- 'backlog/tasks/task-*.md' 2>/dev/null || true)
+            # Output as newline-separated, URL-encoded for env var safety
+            echo "changed_files<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$FILES" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Sync backlog tasks to GitHub Issues
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: ${{ github.ref_name }}
+          # Pass changed files only on push; empty = full sync on schedule/manual
+          CHANGED_FILES: ${{ github.event_name == 'push' && steps.changed.outputs.changed_files || '' }}
         run: |
           chmod +x scripts/sync-backlog-issues.sh
           scripts/sync-backlog-issues.sh
