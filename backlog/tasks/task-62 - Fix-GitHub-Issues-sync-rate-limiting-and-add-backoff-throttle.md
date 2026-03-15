@@ -1,7 +1,7 @@
 ---
 id: TASK-62
 title: Fix GitHub Issues sync rate limiting and add backoff/throttle
-status: In Progress
+status: Done
 assignee:
   - '@agent-sync'
 created_date: '2026-03-15 01:30'
