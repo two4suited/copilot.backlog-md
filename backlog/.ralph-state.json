@@ -198,6 +198,11 @@
       "agent": "general-purpose",
       "cycle": 401,
       "assignedAt": "2026-03-15T02:12:29.161Z"
+    },
+    "75": {
+      "agent": "general-purpose",
+      "cycle": 676,
+      "assignedAt": "2026-03-15T02:58:19.452Z"
     }
   },
   "bugs": [],
