@@ -3,9 +3,10 @@ id: TASK-72
 title: >-
   Bug: Schedule page — sticky column headers intercept pointer events on session
   cards
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-15 01:52'
+updated_date: '2026-03-15 01:55'
 labels:
   - bug
   - frontend
@@ -25,3 +26,9 @@ The schedule grid at /schedule uses sticky column headers (track names) with z-2
 - [ ] #2 Playwright test 'can click through to a session detail page' passes without timeouts
 - [ ] #3 Clicking a session from /schedule navigates to /sessions/:id in both headed and headless browser
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Duplicate of TASK-70 which is already fixed in commit 3d16ca6. TASK-70 removed the sticky positioning from column headers, fixing both the visual overlap and pointer-event interception issue.
+<!-- SECTION:NOTES:END -->
