@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-timezone'
 created_date: '2026-03-15 00:44'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:53'
 labels:
   - bug
   - ux
@@ -39,3 +39,17 @@ Fix options:
 - [ ] #2 Times are not misleadingly shown in browser-local timezone without indication
 - [ ] #3 Schedule page is consistent with session detail page times
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Add Timezone field to Conference model
+2. Update DTOs (ConferenceDto, SessionDto, SessionSummaryDto)
+3. Update all controllers to pass timezone
+4. Update DbSeeder with timezone
+5. Add EF Core migration
+6. Install date-fns-tz in frontend
+7. Update TypeScript types
+8. Create shared time formatting utility
+9. Update all frontend pages to use venue timezone
+<!-- SECTION:PLAN:END -->
