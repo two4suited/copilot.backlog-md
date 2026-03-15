@@ -9,40 +9,40 @@
     },
     "31": {
       "agent": "code-review",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.041Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.620Z"
     },
     "32": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.041Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.621Z"
     },
     "33": {
       "agent": "task",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.041Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.621Z"
     },
     "35": {},
     "37": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.042Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.622Z"
     },
     "39": {},
     "40": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.042Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.623Z"
     },
     "41": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.042Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.624Z"
     },
     "42": {
       "agent": "general-purpose",
-      "cycle": 1,
-      "assignedAt": "2026-03-15T00:10:00.043Z"
+      "cycle": 2,
+      "assignedAt": "2026-03-15T00:10:31.624Z"
     }
   },
   "bugs": [],
