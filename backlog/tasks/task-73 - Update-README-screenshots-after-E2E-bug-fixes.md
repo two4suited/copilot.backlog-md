@@ -1,10 +1,11 @@
 ---
 id: TASK-73
 title: Update README screenshots after E2E bug fixes
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-screenshots'
 created_date: '2026-03-15 01:55'
-updated_date: '2026-03-15 02:00'
+updated_date: '2026-03-15 02:23'
 labels:
   - docs
   - readme
