@@ -1,15 +1,16 @@
 ---
 id: TASK-31
 title: 'Accessibility audit: WCAG 2.1 AA compliance pass'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@accessibility-expert'
 created_date: '2026-03-14 22:23'
+updated_date: '2026-03-15 00:14'
 labels:
   - frontend
   - testing
 dependencies: []
 priority: medium
-github_issue: 87
 ---
 
 ## Description
