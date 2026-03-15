@@ -46,3 +46,13 @@ Also check any sticky header logic in `frontend/src/components/` related to sche
 4. Run npm run build to verify
 5. Mark all ACs and set Done
 <!-- SECTION:PLAN:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+- Root cause: filter bar lacked sticky positioning; grid column headers used top-16 (nav only) without accounting for filter bar height
+- Fix: filter bar → sticky top-16 z-30 with matching background + border-b
+- Fix: DayGrid gains hasFilterBar prop; column headers use top-[116px] (64+52px) when filter bar present, top-16 otherwise
+- Mobile stacked view unaffected (no sticky headers in stacked layout)
+- Build passes cleanly
+<!-- SECTION:NOTES:END -->
