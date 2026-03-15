@@ -1,7 +1,7 @@
 ---
 id: TASK-58
 title: Add dark mode theme toggle
-status: In Progress
+status: Done
 assignee:
   - '@agent-darkmode'
 created_date: '2026-03-15 01:06'
