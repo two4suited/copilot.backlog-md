@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-darkmode'
 created_date: '2026-03-15 01:06'
-updated_date: '2026-03-15 01:11'
+updated_date: '2026-03-15 01:27'
 labels:
   - design
   - frontend
@@ -47,3 +47,16 @@ Implementation:
 - [ ] #6 Dark mode text passes WCAG AA contrast on all dark surfaces
 - [ ] #7 tailwind.config.js uses darkMode: 'class' strategy
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. tailwind.config.js: add darkMode: "class"
+2. Create ThemeContext.tsx: reads localStorage, falls back to prefers-color-scheme, toggles dark class on <html>
+3. Wrap app in ThemeProvider in main.tsx
+4. Layout.tsx: import Sun/Moon from lucide-react, add toggle button, add dark: variants throughout
+5. Add dark: variants to all pages: HomePage, ConferencesPage, ConferenceDetailPage, TrackDetailPage, SessionDetailPage, SpeakersPage, SpeakerDetailPage, MySchedulePage, LoginPage, RegisterPage, SchedulePage
+6. Add dark: variants to shared components: LevelBadge, ErrorMessage, ConfirmDialog, SearchBar, BookmarkButton
+7. Add dark: variants to admin: AdminLayout, ConferenceAdminPage, SessionAdminPage, SpeakerAdminPage, ConferenceFormPage, SessionFormPage, SpeakerFormPage
+8. Build passes: npm run build
+<!-- SECTION:PLAN:END -->
