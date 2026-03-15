@@ -1,7 +1,7 @@
 ---
 id: TASK-70
 title: 'Bug: Schedule page track column headers overlap first session row'
-status: In Progress
+status: Done
 assignee:
   - '@agent-fix70'
 created_date: '2026-03-15 01:48'
