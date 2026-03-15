@@ -4,6 +4,10 @@
 
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', sans-serif;
+  }
+  body {
+    background-color: #faf7f2;
+    color: #2c1810;
   }
 }

@@ -4,13 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-primary': '#0f172a',
-        'brand-accent':  '#0ea5e9',
-        'brand-surface': '#f8fafc',
-        'brand-muted':   '#94a3b8',
+        brand: {
+          bg:      '#faf7f2',
+          surface: '#f0ebe3',
+          border:  '#d4c5b0',
+          primary: '#2c1810',
+          accent:  '#c2622d',
+          sage:    '#6b7c5c',
+          muted:   '#8a7468',
+        },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
     },
   },
