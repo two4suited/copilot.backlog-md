@@ -3,16 +3,17 @@ id: TASK-66
 title: >-
   Bug: Schedule grid only shows sessions in first track column — other columns
   empty
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-fix66'
 created_date: '2026-03-15 01:46'
+updated_date: '2026-03-15 01:54'
 labels:
   - bug
   - frontend
   - schedule
 dependencies: []
 priority: high
-github_issue: 128
 ---
 
 ## Description
