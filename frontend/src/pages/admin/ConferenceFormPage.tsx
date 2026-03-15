@@ -100,30 +100,30 @@ export function ConferenceFormPage() {
 
   return (
     <div className="max-w-2xl">
-      <Link to="/admin/conferences" className="flex items-center gap-1 text-sm text-brand-muted hover:text-brand-primary mb-6">
+      <Link to="/admin/conferences" className="flex items-center gap-1 text-sm text-brand-muted dark:text-[#c4a882] hover:text-brand-primary dark:hover:text-[#f5f0eb] mb-6">
         <ChevronLeft className="w-4 h-4" />
         Back to Conferences
       </Link>
 
-      <h1 className="text-2xl font-bold text-brand-primary mb-6">
+      <h1 className="text-2xl font-bold text-brand-primary dark:text-[#f5f0eb] mb-6">
         {isNew ? 'New Conference' : conference?.name ? `Edit Conference: ${conference.name}` : 'Edit Conference'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-brand-surface rounded-xl border border-brand-border p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-6 space-y-5">
         <div>
-          <label htmlFor="conf-name" className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+          <label htmlFor="conf-name" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Name *</label>
           <input
             id="conf-name"
             type="text"
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.name ? 'border-red-400' : 'border-brand-border'}`}
+            className={`w-full px-3 py-2 rounded-lg border text-sm bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.name ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
           />
           {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
         </div>
 
         <div>
-          <label htmlFor="conf-description" className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+          <label htmlFor="conf-description" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Description</label>
           <textarea
             id="conf-description"
             rows={3}
@@ -135,7 +135,7 @@ export function ConferenceFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="conf-start-date" className="block text-sm font-medium text-slate-700 mb-1">Start Date *</label>
+            <label htmlFor="conf-start-date" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Start Date *</label>
             <input
               id="conf-start-date"
               type="date"
@@ -146,7 +146,7 @@ export function ConferenceFormPage() {
             {errors.startDate && <p className="mt-1 text-xs text-red-600">{errors.startDate}</p>}
           </div>
           <div>
-            <label htmlFor="conf-end-date" className="block text-sm font-medium text-slate-700 mb-1">End Date *</label>
+            <label htmlFor="conf-end-date" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">End Date *</label>
             <input
               id="conf-end-date"
               type="date"
@@ -159,7 +159,7 @@ export function ConferenceFormPage() {
         </div>
 
         <div>
-          <label htmlFor="conf-location" className="block text-sm font-medium text-slate-700 mb-1">Location *</label>
+          <label htmlFor="conf-location" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Location *</label>
           <input
             id="conf-location"
             type="text"
@@ -171,7 +171,7 @@ export function ConferenceFormPage() {
         </div>
 
         <div>
-          <label htmlFor="conf-website-url" className="block text-sm font-medium text-slate-700 mb-1">Website URL</label>
+          <label htmlFor="conf-website-url" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Website URL</label>
           <input
             id="conf-website-url"
             type="url"
