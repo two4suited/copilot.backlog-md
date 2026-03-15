@@ -15,6 +15,7 @@
     "41": "general-purpose",
     "42": "general-purpose",
     "43": "general-purpose",
+    "44": "general-purpose",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -42,13 +43,6 @@
     "6.3": "dotnet-developer"
   },
   "history": [
-    {
-      "taskId": "3.3",
-      "oldAgent": "react-developer",
-      "newAgent": "react-developer",
-      "timestamp": "2026-03-14T21:20:04.500Z",
-      "reason": "User assignment via CLI"
-    },
     {
       "taskId": "3.4",
       "oldAgent": "react-developer",
@@ -741,6 +735,13 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-15T00:27:31.614Z",
       "reason": "Ralph loop cycle 36"
+    },
+    {
+      "taskId": "44",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:43:01.639Z",
+      "reason": "Ralph loop cycle 67"
     }
   ],
   "config": {
