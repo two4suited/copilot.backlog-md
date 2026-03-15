@@ -1,9 +1,11 @@
 ---
 id: TASK-55
 title: Add screenshots of the app to the README
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-screenshots'
 created_date: '2026-03-15 00:50'
+updated_date: '2026-03-15 01:46'
 labels:
   - documentation
   - readme
@@ -11,7 +13,6 @@ dependencies:
   - TASK-53
   - TASK-54
 priority: low
-github_issue: 111
 ---
 
 ## Description
