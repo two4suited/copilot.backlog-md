@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-aca'
 created_date: '2026-03-15 00:47'
-updated_date: '2026-03-15 01:32'
+updated_date: '2026-03-15 01:33'
 labels:
   - azure
   - deployment
@@ -66,3 +66,42 @@ Reference: https://learn.microsoft.com/en-us/dotnet/aspire/deployment/azure/aca-
 8. Create .github/workflows/deploy-aca.yml (OIDC login + azd deploy on push to main)
 9. Update docs/deployment.md with full Azure section including architecture table, OIDC setup guide, required secrets
 <!-- SECTION:PLAN:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## Azure Container Apps Deployment Setup
+
+Configured end-to-end deployment pipeline for ConferenceApp on Azure Container Apps using .NET Aspire 13 and azd.
+
+### What changed
+
+**ConferenceApp.AppHost**
+- Added packages: `Aspire.Hosting.Azure`, `Aspire.Hosting.Azure.AppContainers`, `Aspire.Hosting.Azure.PostgreSQL`
+- `Program.cs` now branches on `builder.ExecutionContext.IsPublishMode`:
+  - **Publish**: `AddAzureContainerAppEnvironment`, `AddAzurePostgresFlexibleServer` + `WithPasswordAuthentication`, `PublishAsAzureContainerApp` on API and frontend Dockerfile container
+  - **Dev**: unchanged local postgres + Vite dev server
+- `jwt-key` added as a secret parameter (stored in Azure Key Vault at deploy time)
+
+**frontend/**
+- `Dockerfile.frontend.prod` — multi-stage: node build → nginx runtime with `gettext` for envsubst
+- `nginx.prod.conf` — template with `${API_SERVICE_URL}` placeholder for `/api/` and `/hubs/` proxy locations
+- `docker-entrypoint.sh` — reads `services__api__http__0` (Aspire-injected), runs `envsubst`, then starts nginx
+
+**Root**
+- `azure.yaml` — azd project definition pointing at AppHost; `azd up` from repo root provisions all resources
+
+**.github/workflows/deploy-aca.yml**
+- Triggers on push to `main` and `workflow_dispatch`
+- Uses OIDC (`azure/login`) — no long-lived secrets needed
+- Runs `azd deploy` after authenticating; requires `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` secrets
+
+**docs/deployment.md**
+- Full Azure section: provisioned resources table, architecture dev-vs-prod comparison, CI/CD setup, OIDC federated credential instructions
+
+### Notes on ACs 6 & 7
+AC #6 (azd up runs) and AC #7 (app accessible at ACA URL) cannot be verified here — no Azure credentials are available locally (per task instructions). All configuration is in place; `azd up` should succeed once credentials are configured.
+
+### Tests
+- `dotnet build ConferenceApp.sln` — 0 errors, 0 warnings
+<!-- SECTION:FINAL_SUMMARY:END -->
