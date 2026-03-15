@@ -1,7 +1,7 @@
 ---
 id: TASK-31
 title: 'Accessibility audit: WCAG 2.1 AA compliance pass'
-status: In Progress
+status: Done
 assignee:
   - '@accessibility-expert'
 created_date: '2026-03-14 22:23'
