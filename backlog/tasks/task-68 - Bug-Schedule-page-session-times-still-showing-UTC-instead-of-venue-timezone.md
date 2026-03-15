@@ -1,7 +1,7 @@
 ---
 id: TASK-68
 title: 'Bug: Schedule page session times still showing UTC instead of venue timezone'
-status: In Progress
+status: Done
 assignee:
   - '@agent-fix68'
 created_date: '2026-03-15 01:46'
