@@ -5,13 +5,12 @@ status: In Progress
 assignee:
   - '@agent-screenshots'
 created_date: '2026-03-15 00:50'
-updated_date: '2026-03-15 01:46'
+updated_date: '2026-03-15 01:47'
 labels:
   - documentation
   - readme
 dependencies:
-  - TASK-53
-  - TASK-54
+  - TASK-69
 priority: low
 ---
 
