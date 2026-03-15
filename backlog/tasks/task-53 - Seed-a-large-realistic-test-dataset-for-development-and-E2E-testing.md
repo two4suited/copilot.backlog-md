@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-seeder'
 created_date: '2026-03-15 00:49'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:54'
 labels:
   - testing
   - data
@@ -43,3 +43,12 @@ The seeder should be idempotent — safe to run multiple times without duplicati
 - [ ] #8 Seeder is idempotent — re-running does not duplicate data
 - [ ] #9 E2E tests that relied on specific seed IDs are updated to query dynamically
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Rewrite DbSeeder.cs with 3 conferences (past 2023/current 2025/future 2026), 17 speakers, 6 tracks per conference, 14 sessions per conference (42 total), 3 test users + registrations, one sold-out session
+2. Update comprehensive-audit.spec.ts to fetch conference/session/speaker IDs dynamically via API in beforeAll instead of using hardcoded constants
+3. Build API to verify no compile errors
+4. Check all ACs and finalize
+<!-- SECTION:PLAN:END -->
