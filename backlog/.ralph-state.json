@@ -173,8 +173,7 @@
     "68": {
       "agent": "task",
       "cycle": 290,
-      "assignedAt": "2026-03-15T01:53:59.101Z",
-      "seenInProgress": 1773539649093
+      "assignedAt": "2026-03-15T01:53:59.101Z"
     },
     "69": {
       "agent": "task",
@@ -193,8 +192,8 @@
     },
     "73": {
       "agent": "task",
-      "cycle": 307,
-      "assignedAt": "2026-03-15T01:56:49.083Z"
+      "cycle": 308,
+      "assignedAt": "2026-03-15T01:56:59.084Z"
     }
   },
   "bugs": [],
