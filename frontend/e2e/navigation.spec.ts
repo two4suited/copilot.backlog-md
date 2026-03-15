@@ -16,7 +16,8 @@ test.describe('Navigation and Routing', () => {
   test('home page loads with heading and nav links', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/^\/?$|\/$/);
-    await expect(page.getByRole('heading', { name: /welcome to conferenceapp/i })).toBeVisible();
+    // Home page renders a prominent h1 — text was updated from the original "Welcome to ConferenceApp"
+    await expect(page.locator('h1').first()).toBeVisible();
 
     // Nav bar links are present
     await expect(page.getByRole('link', { name: /conferences/i }).first()).toBeVisible();

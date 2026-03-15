@@ -119,24 +119,44 @@ test.describe('Admin – edit conference', () => {
     if (!(await isApiAvailable())) { test.skip(); return; }
 
     await loginAsAdmin(page);
-    await page.goto('/admin/conferences');
-    await expect(page.locator('table')).toBeVisible({ timeout: 10_000 });
 
-    // Click the first Edit link
-    const firstEditLink = page.locator('a', { hasText: /edit/i }).first();
-    await expect(firstEditLink).toBeVisible({ timeout: 10_000 });
-    await firstEditLink.click();
+    // Create a disposable conference to rename so we don't pollute shared seed data
+    await page.goto('/admin/conferences/new');
+    const originalName = `E2E Edit Base ${Date.now()}`;
+    await page.getByLabel(/name/i).fill(originalName);
+    await page.getByLabel(/start date/i).fill('2025-11-01');
+    await page.getByLabel(/end date/i).fill('2025-11-02');
+    await page.getByLabel(/location/i).fill('Edit City');
+    await page.getByRole('button', { name: /create conference/i }).click();
+    await page.waitForURL(/\/admin\/conferences$/, { timeout: 15_000 });
+
+    // Find and click the edit link for our newly created conference
+    const confRow = page.locator('tr', { hasText: originalName });
+    const editLink = confRow.locator('a', { hasText: /edit/i });
+    await expect(editLink).toBeVisible({ timeout: 10_000 });
+    await editLink.click();
 
     await expect(page).toHaveURL(/\/admin\/conferences\/[^/]+$/, { timeout: 10_000 });
     await expect(page.getByRole('heading', { name: /edit conference/i })).toBeVisible();
 
     const nameInput = page.getByLabel(/name/i);
     await nameInput.clear();
-    await nameInput.fill(`E2E Renamed ${Date.now()}`);
+    const renamedName = `E2E Renamed ${Date.now()}`;
+    await nameInput.fill(renamedName);
     await page.getByRole('button', { name: /save changes/i }).click();
 
     // Success toast: "Conference updated"
     await expect(page.locator('text=Conference updated')).toBeVisible({ timeout: 10_000 });
+
+    // Clean up: delete the test conference
+    await page.goto('/admin/conferences');
+    const renamedRow = page.locator('tr', { hasText: renamedName });
+    const deleteBtn = renamedRow.locator('button', { hasText: /delete/i });
+    if (await deleteBtn.count() > 0) {
+      await deleteBtn.click();
+      page.once('dialog', d => d.accept());
+      await page.waitForTimeout(2000);
+    }
   });
 });
 

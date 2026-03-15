@@ -57,7 +57,7 @@ test.describe('iCal export – authenticated, empty schedule', () => {
     await expect(page.getByRole('button', { name: /export to calendar/i })).not.toBeVisible();
     // Empty-state message should appear instead
     await expect(
-      page.getByText(/no registered sessions yet|no sessions yet/i)
+      page.getByText(/no registered sessions yet|no sessions yet/i).first()
     ).toBeVisible({ timeout: 10_000 });
   });
 });
