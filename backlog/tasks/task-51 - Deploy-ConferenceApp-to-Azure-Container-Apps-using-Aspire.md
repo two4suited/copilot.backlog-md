@@ -43,14 +43,14 @@ Reference: https://learn.microsoft.com/en-us/dotnet/aspire/deployment/azure/aca-
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Aspire.Hosting.Azure package added to ConferenceApp.AppHost.csproj
-- [ ] #2 AppHost Program.cs uses AddAzureContainerAppEnvironment() and PublishAsAzureContainerApp() on api and frontend
-- [ ] #3 PostgreSQL replaced with AddAzurePostgresFlexibleServer() when running in publish/deploy mode (keep local postgres for dev)
-- [ ] #4 Secrets (JWT signing key, pg password) stored as ACA secrets or Azure Key Vault references — not hardcoded
-- [ ] #5 Frontend has a production Dockerfile or nginx container for serving built Vite assets
+- [x] #1 Aspire.Hosting.Azure package added to ConferenceApp.AppHost.csproj
+- [x] #2 AppHost Program.cs uses AddAzureContainerAppEnvironment() and PublishAsAzureContainerApp() on api and frontend
+- [x] #3 PostgreSQL replaced with AddAzurePostgresFlexibleServer() when running in publish/deploy mode (keep local postgres for dev)
+- [x] #4 Secrets (JWT signing key, pg password) stored as ACA secrets or Azure Key Vault references — not hardcoded
+- [x] #5 Frontend has a production Dockerfile or nginx container for serving built Vite assets
 - [ ] #6 'azd up' or 'aspire deploy' successfully provisions all Azure resources and deploys containers
 - [ ] #7 App is accessible via the ACA-assigned public URL after deployment
-- [ ] #8 GitHub Actions workflow added for CI/CD: build → push to ACR → azd deploy on merge to main
+- [x] #8 GitHub Actions workflow added for CI/CD: build → push to ACR → azd deploy on merge to main
 <!-- AC:END -->
 
 ## Implementation Plan
