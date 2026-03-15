@@ -86,10 +86,9 @@ interface DayGridProps {
   tracks: Track[];
   filteredTrackIds: Set<string> | null;
   timezone: string;
-  hasFilterBar?: boolean;
 }
 
-function DayGrid({ sessions, tracks, filteredTrackIds, timezone, hasFilterBar = false }: DayGridProps) {
+function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps) {
   const visibleTracks = filteredTrackIds
     ? tracks.filter(t => filteredTrackIds.has(t.id))
     : tracks;
@@ -347,7 +346,6 @@ export function SchedulePage() {
           tracks={tracks}
           filteredTrackIds={filteredTrackIds}
           timezone={timezone}
-          hasFilterBar={tracks.length > 1}
         />
       ) : (
         <p className="text-brand-muted">No sessions scheduled yet.</p>

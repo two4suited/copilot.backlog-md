@@ -171,28 +171,28 @@ public static class DbSeeder
             new() { ConferenceId = confId, Name = name, Description = desc, Color = color, SortOrder = sort };
 
         // TechConf 2023 tracks
-        var t23Backend  = MakeTrack(conf2023Id, "Backend & APIs",    "Server-side development, REST, gRPC, databases.",            "#6366f1", 1);
-        var t23Frontend = MakeTrack(conf2023Id, "Frontend & UX",     "React, TypeScript, design systems, and accessibility.",      "#8b5cf6", 2);
-        var t23DevOps   = MakeTrack(conf2023Id, "DevOps & Cloud",    "CI/CD, containers, Kubernetes, cloud platforms.",            "#ec4899", 3);
-        var t23Security = MakeTrack(conf2023Id, "Security",          "AppSec, OWASP, zero-trust, and supply-chain security.",      "#ef4444", 4);
-        var t23Data     = MakeTrack(conf2023Id, "Data & AI",         "Data pipelines, ML ops, and AI-assisted development.",       "#f59e0b", 5);
-        var t23Mobile   = MakeTrack(conf2023Id, "Mobile",            "iOS, Android, React Native, and cross-platform strategies.", "#14b8a6", 6);
+        var t23Backend  = MakeTrack(conf2023Id, "Backend & APIs",    "Server-side development, REST, gRPC, databases.",            "#9e4820", 1);
+        var t23Frontend = MakeTrack(conf2023Id, "Frontend & UX",     "React, TypeScript, design systems, and accessibility.",      "#7a5040", 2);
+        var t23DevOps   = MakeTrack(conf2023Id, "DevOps & Cloud",    "CI/CD, containers, Kubernetes, cloud platforms.",            "#6b5a3e", 3);
+        var t23Security = MakeTrack(conf2023Id, "Security",          "AppSec, OWASP, zero-trust, and supply-chain security.",      "#7a3b2e", 4);
+        var t23Data     = MakeTrack(conf2023Id, "Data & AI",         "Data pipelines, ML ops, and AI-assisted development.",       "#556b45", 5);
+        var t23Mobile   = MakeTrack(conf2023Id, "Mobile",            "iOS, Android, React Native, and cross-platform strategies.", "#8a6a3a", 6);
 
         // DevSummit 2025 tracks
-        var t25Backend  = MakeTrack(conf2025Id, "Backend & APIs",    "Deep dives into .NET, APIs, databases, and cloud services.", "#6366f1", 1);
-        var t25Frontend = MakeTrack(conf2025Id, "Frontend & UX",     "Everything React, TypeScript, design systems, and accessibility.", "#8b5cf6", 2);
-        var t25DevOps   = MakeTrack(conf2025Id, "DevOps & Cloud",    "Modern CI/CD, GitOps, Kubernetes, and platform engineering.", "#ec4899", 3);
-        var t25Security = MakeTrack(conf2025Id, "Security",          "Securing APIs, containers, and the software supply chain.", "#ef4444", 4);
-        var t25Data     = MakeTrack(conf2025Id, "Data & AI",         "Vector databases, LLM integration, and ML pipelines.",      "#f59e0b", 5);
-        var t25Arch     = MakeTrack(conf2025Id, "Architecture",      "System design patterns, event-driven systems, CQRS/ES.",    "#10b981", 6);
+        var t25Backend  = MakeTrack(conf2025Id, "Backend & APIs",    "Deep dives into .NET, APIs, databases, and cloud services.", "#9e4820", 1);
+        var t25Frontend = MakeTrack(conf2025Id, "Frontend & UX",     "Everything React, TypeScript, design systems, and accessibility.", "#7a5040", 2);
+        var t25DevOps   = MakeTrack(conf2025Id, "DevOps & Cloud",    "Modern CI/CD, GitOps, Kubernetes, and platform engineering.", "#6b5a3e", 3);
+        var t25Security = MakeTrack(conf2025Id, "Security",          "Securing APIs, containers, and the software supply chain.", "#7a3b2e", 4);
+        var t25Data     = MakeTrack(conf2025Id, "Data & AI",         "Vector databases, LLM integration, and ML pipelines.",      "#556b45", 5);
+        var t25Arch     = MakeTrack(conf2025Id, "Architecture",      "System design patterns, event-driven systems, CQRS/ES.",    "#8a6a3a", 6);
 
         // TechConf 2026 tracks
-        var t26Backend  = MakeTrack(conf2026Id, "Backend & APIs",    "Next-generation server-side patterns and .NET innovations.", "#6366f1", 1);
-        var t26Frontend = MakeTrack(conf2026Id, "Frontend & UX",     "The future of the web: React 19, edge rendering, and AI UI.", "#8b5cf6", 2);
-        var t26DevOps   = MakeTrack(conf2026Id, "DevOps & Cloud",    "Platform engineering, internal developer platforms, FinOps.", "#ec4899", 3);
-        var t26Security = MakeTrack(conf2026Id, "Security",          "Post-quantum crypto, zero-trust, and AI-driven threat detection.", "#ef4444", 4);
-        var t26Data     = MakeTrack(conf2026Id, "Data & AI",         "Production AI systems, RAG architectures, and fine-tuning.", "#f59e0b", 5);
-        var t26Platform = MakeTrack(conf2026Id, "Platform Engineering", "Internal developer platforms, golden paths, and paved roads.", "#10b981", 6);
+        var t26Backend  = MakeTrack(conf2026Id, "Backend & APIs",    "Next-generation server-side patterns and .NET innovations.", "#9e4820", 1);
+        var t26Frontend = MakeTrack(conf2026Id, "Frontend & UX",     "The future of the web: React 19, edge rendering, and AI UI.", "#7a5040", 2);
+        var t26DevOps   = MakeTrack(conf2026Id, "DevOps & Cloud",    "Platform engineering, internal developer platforms, FinOps.", "#6b5a3e", 3);
+        var t26Security = MakeTrack(conf2026Id, "Security",          "Post-quantum crypto, zero-trust, and AI-driven threat detection.", "#7a3b2e", 4);
+        var t26Data     = MakeTrack(conf2026Id, "Data & AI",         "Production AI systems, RAG architectures, and fine-tuning.", "#556b45", 5);
+        var t26Platform = MakeTrack(conf2026Id, "Platform Engineering", "Internal developer platforms, golden paths, and paved roads.", "#4a6741", 6);
 
         db.Tracks.AddRange(
             t23Backend, t23Frontend, t23DevOps, t23Security, t23Data, t23Mobile,
