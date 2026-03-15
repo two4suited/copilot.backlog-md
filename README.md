@@ -13,86 +13,114 @@ Browse conferences, explore tracks and sessions, view speaker profiles, and regi
 | Database | PostgreSQL (via Aspire container) |
 | Orchestration | .NET Aspire 13 (AppHost) |
 
-## Running Locally
+## Architecture
 
-### Prerequisites
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- [Node.js 24+](https://nodejs.org)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (for Aspire PostgreSQL container)
-- Aspire CLI: `dotnet tool install -g aspire`
-
-### Start everything with Aspire
-
-```bash
-# Install frontend dependencies once
-cd frontend && npm install && cd ..
-
-# Run the entire app — starts API, PostgreSQL, and frontend together
-aspire run
+```
+ConferenceApp.AppHost   ← .NET Aspire orchestrator (starts everything)
+ConferenceApp.Api       ← ASP.NET Core 10 REST API + EF Core + JWT auth
+ConferenceApp.Models    ← Shared domain models
+frontend/               ← React 19 + Vite + TypeScript + Tailwind CSS
+PostgreSQL              ← Managed as an Aspire container resource
 ```
 
-Aspire Dashboard opens at **http://localhost:15888** — shows logs, traces, and service health.
+Aspire wires up the API, database, and frontend in a single process and exposes a dashboard for logs, traces, and health.
 
-The API auto-runs EF migrations and seeds demo data (TechConf 2026) on first start.
+## Getting Started
 
-### Environment variables
+### Prerequisites
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `ConnectionStrings__conferencedb` | (Aspire-injected) | PostgreSQL connection string |
-| `Jwt__Key` | dev key in appsettings.json | JWT signing key — **change in production** |
-| `VITE_API_URL` | `http://localhost:5000` | API base URL for the frontend |
+| Tool | Version |
+|------|---------|
+| [.NET 10 SDK](https://dotnet.microsoft.com/download) | 10.x |
+| [Node.js](https://nodejs.org) | 20+ |
+| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | latest (for the PostgreSQL container) |
+
+### Run with Aspire
+
+```bash
+# Install frontend dependencies (first time only)
+cd frontend && npm install && cd ..
+
+# Start the full stack — API, PostgreSQL, and frontend together
+cd ConferenceApp.AppHost && dotnet run
+```
+
+The API automatically runs EF migrations and seeds demo data (TechConf 2026) on first start.
+
+### Aspire Dashboard
+
+Look for a line like this in the terminal output:
+
+```
+Login to the dashboard at https://localhost:17187/login?t=<token>
+```
+
+Open that URL — the token is required on first load. The dashboard shows resource health, logs, and distributed traces.
+
+### Finding the frontend URL
+
+Aspire assigns the Vite dev server a **dynamic port** on each run. Discover it two ways:
+
+```bash
+# Option 1 — check running node processes
+lsof -i TCP -P -n | grep LISTEN | grep node
+
+# Option 2 — Aspire dashboard → Resources tab → frontend → Endpoints column
+```
+
+### Fixed URLs
+
+| Service | URL |
+|---------|-----|
+| API | https://localhost:7133 |
+| Aspire dashboard | https://localhost:17187 (token in terminal) |
+| Swagger UI | https://localhost:7133/swagger (dev only) |
+
+### Seeded credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | `admin@conference.dev` | `Admin123!` |
+| Test user | `user1@test.dev` | `Test123!` |
+| Test user | `user2@test.dev` | `Test123!` |
+| Test user | `user3@test.dev` | `Test123!` |
+
+### Running E2E tests
+
+E2E tests use Playwright against the live Aspire stack. Find the frontend port first (see above), then:
+
+```bash
+cd frontend
+APP_URL=http://localhost:<frontend-port> npx playwright test --config playwright.local.config.ts
+```
+
+> See [QUICK_START.md](./QUICK_START.md) for more detail.
 
 ## Production Deployment
 
-Deploy the full stack (API + PostgreSQL + frontend) with Docker Compose.
-
-### Prerequisites
-- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/) v2+
-
-### Steps
+> **Note:** Production deployment uses Docker Compose. This is separate from the local Aspire dev workflow above.
 
 ```bash
 # 1. Copy the example env file and fill in your secrets
 cp .env.example .env
+# Edit .env — change POSTGRES_PASSWORD and Jwt__Key (must be ≥ 32 chars)
 
-# 2. Edit .env — at minimum change POSTGRES_PASSWORD and Jwt__Key
-#    Jwt__Key must be at least 32 characters long
-
-# 3. Start all services in the background
+# 2. Start all services
 docker compose up -d
 
-# 4. Follow logs (optional)
+# 3. Follow logs (optional)
 docker compose logs -f
 ```
 
 | Service | URL |
 |---------|-----|
 | Frontend | http://localhost:3000 |
-| API (direct) | http://localhost:8080 |
+| API | http://localhost:8080 |
 | API health | http://localhost:8080/health |
 
-> **Note:** Swagger UI is disabled in Production mode. Use `/health` to verify the API is up.
-
-### Environment variables
-
-All variables are defined in `.env` (copy from `.env.example`):
-
-| Variable | Description |
-|----------|-------------|
-| `POSTGRES_USER` | PostgreSQL username |
-| `POSTGRES_PASSWORD` | PostgreSQL password — **change this** |
-| `POSTGRES_DB` | PostgreSQL database name |
-| `ConnectionStrings__conferencedb` | Full Npgsql connection string for the API |
-| `Jwt__Key` | JWT signing secret — **must be ≥ 32 chars, change this** |
-| `Jwt__Issuer` | JWT issuer claim (default: `ConferenceApp`) |
-| `Jwt__Audience` | JWT audience claim (default: `ConferenceApp`) |
-
-### Stopping and cleaning up
-
 ```bash
-docker compose down          # stop containers
-docker compose down -v       # stop and remove the postgres data volume
+docker compose down      # stop
+docker compose down -v   # stop and delete postgres volume
 ```
 
 ## API Endpoints
@@ -112,7 +140,7 @@ docker compose down -v       # stop and remove the postgres data volume
 | `POST` | `/api/auth/login` | Login → JWT |
 | `GET` | `/api/auth/me` | Current user profile (🔒) |
 
-Swagger UI: `http://localhost:5000/swagger` (development only)
+Swagger UI: `https://localhost:7133/swagger` (development only)
 
 ## Project Structure
 
