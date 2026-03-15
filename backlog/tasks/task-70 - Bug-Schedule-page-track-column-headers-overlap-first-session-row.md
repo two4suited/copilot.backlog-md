@@ -33,3 +33,9 @@ Fix candidates in frontend/src/pages/SchedulePage.tsx:
 - [x] #2 Headers are visible and fixed when scrolling horizontally and vertically
 - [x] #3 First session time slot is fully visible below the header row
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Removed sticky positioning from track column headers in DayGrid. The headers were using 'sticky top-[116px]' which caused them to float over (not push down) the first time-slot row in the CSS grid. Fixed by making the header row a normal non-sticky first row — it now renders above session rows as expected. Also removed the now-unused hasFilterBar prop and headerTop variable from DayGrid.
+<!-- SECTION:FINAL_SUMMARY:END -->
