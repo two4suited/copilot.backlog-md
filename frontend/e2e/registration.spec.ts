@@ -163,9 +163,11 @@ test.describe('Session Registration', () => {
 
     let foundFull = false;
     const count = await sessionLinks.count();
-    for (let i = 0; i < Math.min(count, 15); i++) {
+    for (let i = 0; i < Math.min(count, 20); i++) {
       await page.goto('/schedule');
-      await expect(sessionLinks.nth(i)).toBeVisible({ timeout: 10_000 });
+      // Skip hidden links (desktop-grid vs mobile-stacked duplicates)
+      const isVisible = await sessionLinks.nth(i).isVisible().catch(() => false);
+      if (!isVisible) continue;
       await sessionLinks.nth(i).click();
       await expect(page).toHaveURL(/\/sessions\/[^/]+$/, { timeout: 10_000 });
 
