@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Fragment } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { Clock, DoorOpen, Users } from 'lucide-react';
@@ -143,10 +143,9 @@ function DayGrid({ sessions, tracks, filteredTrackIds }: DayGridProps) {
 
           {/* Time slot rows */}
           {timeSlots.map(time => (
-            <>
+            <Fragment key={time}>
               {/* Time label */}
               <div
-                key={`time-${time}`}
                 className="sticky left-0 bg-slate-50 flex items-start justify-end pr-3 pt-3 text-xs font-medium text-slate-400 border-b border-slate-100 z-10"
               >
                 <span className="flex items-center gap-1">
@@ -163,7 +162,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds }: DayGridProps) {
                   </div>
                 );
               })}
-            </>
+            </Fragment>
           ))}
         </div>
       </div>

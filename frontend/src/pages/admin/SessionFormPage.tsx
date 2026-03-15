@@ -179,7 +179,9 @@ export function SessionFormPage() {
         Back to Sessions
       </Link>
 
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">{isNew ? 'New Session' : 'Edit Session'}</h1>
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">
+        {isNew ? 'New Session' : session?.title ? `Edit Session: ${session.title}` : 'Edit Session'}
+      </h1>
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
         <div>

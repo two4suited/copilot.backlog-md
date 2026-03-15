@@ -57,8 +57,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: ${{ github.ref_name }}
-          # Pass changed files only on push; empty = full sync on schedule/manual
-          CHANGED_FILES: ${{ github.event_name == 'push' && steps.changed.outputs.changed_files || '' }}
+          # INCREMENTAL=true on push so the script knows to limit scope even when
+          # CHANGED_FILES is empty (no task files in this push — only sync unsynced tasks).
+          # Schedule/manual runs leave INCREMENTAL unset → full sync.
+          INCREMENTAL: ${{ github.event_name == 'push' && 'true' || 'false' }}
+          CHANGED_FILES: ${{ steps.changed.outputs.changed_files }}
         run: |
           chmod +x scripts/sync-backlog-issues.sh
           scripts/sync-backlog-issues.sh

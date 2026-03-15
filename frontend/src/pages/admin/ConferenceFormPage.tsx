@@ -105,7 +105,9 @@ export function ConferenceFormPage() {
         Back to Conferences
       </Link>
 
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">{isNew ? 'New Conference' : 'Edit Conference'}</h1>
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">
+        {isNew ? 'New Conference' : conference?.name ? `Edit Conference: ${conference.name}` : 'Edit Conference'}
+      </h1>
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
         <div>

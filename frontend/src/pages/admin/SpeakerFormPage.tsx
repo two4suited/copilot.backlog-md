@@ -111,7 +111,9 @@ export function SpeakerFormPage() {
         Back to Speakers
       </Link>
 
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">{isNew ? 'New Speaker' : 'Edit Speaker'}</h1>
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">
+        {isNew ? 'New Speaker' : speaker?.name ? `Edit Speaker: ${speaker.name}` : 'Edit Speaker'}
+      </h1>
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
         <div>
