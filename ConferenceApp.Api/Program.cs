@@ -138,55 +138,6 @@ app.MapPost("/api/tracks", async (Track track, ConferenceDbContext db) =>
     return Results.Created($"/api/tracks/{track.Id}", track);
 }).WithName("CreateTrack");
 
-app.MapGet("/api/sessions", async (ConferenceDbContext db) =>
-    await db.Sessions
-        .Include(s => s.Track)
-        .Include(s => s.SessionSpeakers).ThenInclude(ss => ss.Speaker)
-        .ToListAsync())
-    .WithName("GetSessions");
-
-app.MapGet("/api/sessions/{id:guid}", async (Guid id, ConferenceDbContext db) =>
-    await db.Sessions
-        .Include(s => s.Track)
-        .Include(s => s.SessionSpeakers).ThenInclude(ss => ss.Speaker)
-        .Include(s => s.Registrations)
-        .FirstOrDefaultAsync(s => s.Id == id)
-        is Session session ? Results.Ok(session) : Results.NotFound())
-    .WithName("GetSessionById");
-
-app.MapGet("/api/tracks/{trackId:guid}/sessions", async (Guid trackId, ConferenceDbContext db) =>
-    await db.Sessions.Where(s => s.TrackId == trackId)
-        .Include(s => s.SessionSpeakers).ThenInclude(ss => ss.Speaker)
-        .ToListAsync())
-    .WithName("GetSessionsByTrack");
-
-app.MapPost("/api/sessions", async (Session session, ConferenceDbContext db) =>
-{
-    db.Sessions.Add(session);
-    await db.SaveChangesAsync();
-    return Results.Created($"/api/sessions/{session.Id}", session);
-}).WithName("CreateSession");
-
-app.MapGet("/api/speakers", async (ConferenceDbContext db) =>
-    await db.Speakers
-        .Include(sp => sp.SessionSpeakers).ThenInclude(ss => ss.Session)
-        .ToListAsync())
-    .WithName("GetSpeakers");
-
-app.MapGet("/api/speakers/{id:guid}", async (Guid id, ConferenceDbContext db) =>
-    await db.Speakers
-        .Include(sp => sp.SessionSpeakers).ThenInclude(ss => ss.Session)
-        .FirstOrDefaultAsync(sp => sp.Id == id)
-        is Speaker speaker ? Results.Ok(speaker) : Results.NotFound())
-    .WithName("GetSpeakerById");
-
-app.MapPost("/api/speakers", async (Speaker speaker, ConferenceDbContext db) =>
-{
-    db.Speakers.Add(speaker);
-    await db.SaveChangesAsync();
-    return Results.Created($"/api/speakers/{speaker.Id}", speaker);
-}).WithName("CreateSpeaker");
-
 app.MapGet("/api/users", async (ConferenceDbContext db) =>
     await db.Users.ToListAsync())
     .WithName("GetUsers");
