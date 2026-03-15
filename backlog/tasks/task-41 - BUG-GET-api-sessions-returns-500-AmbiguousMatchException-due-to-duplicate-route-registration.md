@@ -3,9 +3,10 @@ id: TASK-41
 title: >-
   [BUG] GET /api/sessions returns 500 AmbiguousMatchException due to duplicate
   route registration
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 23:47'
+updated_date: '2026-03-15 00:13'
 labels:
   - bug
   - tester
@@ -24,3 +25,9 @@ Impact: Schedule page shows no sessions, deep-link navigation to session detail 
 
 Fix: Remove the duplicate Minimal API session endpoints from Program.cs.
 <!-- SECTION:DESCRIPTION:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Removed duplicate Minimal API endpoints for /api/sessions and variants from Program.cs. SessionsController already handles these routes. AmbiguousMatchException resolved.
+<!-- SECTION:FINAL_SUMMARY:END -->
