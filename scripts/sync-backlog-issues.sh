@@ -17,7 +17,7 @@ set -euo pipefail
 # Config
 # ---------------------------------------------------------------------------
 TASKS_DIR="backlog/tasks"
-SLEEP_BETWEEN_CALLS=0.5   # seconds – stay well under GitHub's rate limit
+SLEEP_BETWEEN_CALLS=2   # seconds – stay well under GitHub's rate limit
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -25,6 +25,29 @@ SLEEP_BETWEEN_CALLS=0.5   # seconds – stay well under GitHub's rate limit
 
 log()  { echo "[sync] $*" >&2; }
 warn() { echo "[warn] $*" >&2; }
+
+# Retry wrapper with exponential backoff for rate-limited gh API calls.
+gh_with_backoff() {
+  local attempt=0
+  local max_attempts=4
+  local delay=2
+  until output=$(eval "$@" 2>&1); do
+    if echo "$output" | grep -q "rate limit"; then
+      attempt=$((attempt + 1))
+      if [[ $attempt -ge $max_attempts ]]; then
+        warn "Rate limit: max retries exceeded for: $*"
+        return 1
+      fi
+      warn "Rate limit hit — backing off ${delay}s (attempt $attempt/$max_attempts)"
+      sleep "$delay"
+      delay=$((delay * 2))
+    else
+      warn "Command failed: $output"
+      return 1
+    fi
+  done
+  echo "$output"
+}
 
 # Sanitize a string for use as a GitHub label: keep a-z 0-9 : / - .
 # Convert uppercase to lower, replace spaces and illegal chars with '-'.
@@ -169,6 +192,16 @@ for lbl in "${PRIORITY_LABELS[@]}"; do
 done
 
 sleep "$SLEEP_BETWEEN_CALLS"
+
+# ---------------------------------------------------------------------------
+# Check rate limit before starting bulk operations
+# ---------------------------------------------------------------------------
+remaining=$(gh api rate_limit --jq '.resources.graphql.remaining' 2>/dev/null || echo "999")
+if [[ "$remaining" -lt 100 ]]; then
+  warn "GitHub GraphQL rate limit too low ($remaining remaining) — aborting sync."
+  exit 0
+fi
+log "GitHub rate limit: $remaining GraphQL points remaining"
 
 # ---------------------------------------------------------------------------
 # Determine which task files to process
