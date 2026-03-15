@@ -129,7 +129,7 @@ export function ConferenceFormPage() {
             rows={3}
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
@@ -141,7 +141,7 @@ export function ConferenceFormPage() {
               type="date"
               value={form.startDate}
               onChange={e => setForm(f => ({ ...f, startDate: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.startDate ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.startDate ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             />
             {errors.startDate && <p className="mt-1 text-xs text-red-600">{errors.startDate}</p>}
           </div>
@@ -152,7 +152,7 @@ export function ConferenceFormPage() {
               type="date"
               value={form.endDate}
               onChange={e => setForm(f => ({ ...f, endDate: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.endDate ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border text-sm bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.endDate ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             />
             {errors.endDate && <p className="mt-1 text-xs text-red-600">{errors.endDate}</p>}
           </div>
@@ -165,7 +165,7 @@ export function ConferenceFormPage() {
             type="text"
             value={form.location}
             onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.location ? 'border-red-400' : 'border-brand-border'}`}
+            className={`w-full px-3 py-2 rounded-lg border text-sm bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.location ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
           />
           {errors.location && <p className="mt-1 text-xs text-red-600">{errors.location}</p>}
         </div>
@@ -177,12 +177,12 @@ export function ConferenceFormPage() {
             type="url"
             value={form.websiteUrl}
             onChange={e => setForm(f => ({ ...f, websiteUrl: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
         <div className="flex justify-end gap-3 pt-2">
-          <Link to="/admin/conferences" className="px-4 py-2 rounded-lg border border-brand-border text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+          <Link to="/admin/conferences" className="px-4 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] text-slate-700 dark:text-[#f5f0eb] text-sm font-medium hover:bg-slate-50 dark:hover:bg-[#4a2e20]/40 transition-colors">
             Cancel
           </Link>
           <button
