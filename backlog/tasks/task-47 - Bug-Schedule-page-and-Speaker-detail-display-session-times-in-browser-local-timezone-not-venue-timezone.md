@@ -3,9 +3,11 @@ id: TASK-47
 title: >-
   Bug: Schedule page and Speaker detail display session times in browser local
   timezone, not venue timezone
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-timezone'
 created_date: '2026-03-15 00:44'
+updated_date: '2026-03-15 00:52'
 labels:
   - bug
   - ux
