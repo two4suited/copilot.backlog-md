@@ -35,3 +35,9 @@ Fix: Add secure: false to the /hubs proxy entry in vite.config.ts.
 - [x] #2 isConnected state in useSessionSeats becomes true
 - [x] #3 Real-time seat updates work when another user registers
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Added secure: false to the /hubs proxy entry in vite.config.ts. The /api proxy already had this; /hubs was missing it, causing SignalR WebSocket negotiation to fail against the self-signed dev certificate. Now both proxy entries have secure: false and /hubs retains ws: true for WebSocket upgrade.
+<!-- SECTION:FINAL_SUMMARY:END -->
