@@ -32,6 +32,7 @@
     "58": "general-purpose",
     "59": "general-purpose",
     "60": "general-purpose",
+    "61": "explore",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -59,34 +60,6 @@
     "6.3": "dotnet-developer"
   },
   "history": [
-    {
-      "taskId": "55",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T01:19:08.887Z",
-      "reason": "Ralph loop cycle 81"
-    },
-    {
-      "taskId": "51",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T01:19:18.888Z",
-      "reason": "Ralph loop cycle 82"
-    },
-    {
-      "taskId": "55",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T01:19:18.888Z",
-      "reason": "Ralph loop cycle 82"
-    },
-    {
-      "taskId": "51",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T01:19:28.888Z",
-      "reason": "Ralph loop cycle 83"
-    },
     {
       "taskId": "55",
       "oldAgent": "general-purpose",
@@ -758,6 +731,34 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-15T01:25:08.915Z",
       "reason": "Ralph loop cycle 117"
+    },
+    {
+      "taskId": "51",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T01:25:18.914Z",
+      "reason": "Ralph loop cycle 118"
+    },
+    {
+      "taskId": "55",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:25:18.915Z",
+      "reason": "Ralph loop cycle 118"
+    },
+    {
+      "taskId": "60",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:25:18.915Z",
+      "reason": "Ralph loop cycle 118"
+    },
+    {
+      "taskId": "61",
+      "oldAgent": null,
+      "newAgent": "explore",
+      "timestamp": "2026-03-15T01:25:18.916Z",
+      "reason": "Ralph loop cycle 118"
     }
   ],
   "config": {
