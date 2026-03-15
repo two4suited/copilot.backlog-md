@@ -25,6 +25,29 @@ PostgreSQL              ← Managed as an Aspire container resource
 
 Aspire wires up the API, database, and frontend in a single process and exposes a dashboard for logs, traces, and health.
 
+## Screenshots
+
+### Home — Conference Listing
+![Home page](docs/screenshots/home.png)
+
+### Browse Conferences
+![Conferences page](docs/screenshots/conferences.png)
+
+### Conference Detail
+![Conference detail page](docs/screenshots/conference-detail.png)
+
+### Schedule
+![Schedule page](docs/screenshots/schedule.png)
+
+### Session Detail
+![Session detail page](docs/screenshots/session-detail.png)
+
+### Speakers
+![Speakers page](docs/screenshots/speakers.png)
+
+### Admin Dashboard
+![Admin page](docs/screenshots/admin.png)
+
 ## Getting Started
 
 ### Prerequisites
