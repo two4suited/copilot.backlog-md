@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-screenshots'
 created_date: '2026-03-15 00:50'
-updated_date: '2026-03-15 01:47'
+updated_date: '2026-03-15 01:49'
 labels:
   - documentation
   - readme
@@ -36,3 +36,15 @@ Store screenshots under docs/screenshots/. Use descriptive filenames like home.p
 - [ ] #3 README.md embeds screenshots with captions using Markdown image syntax
 - [ ] #4 Screenshots reflect the TASK-54 redesign and TASK-53 seed data
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Set task in progress
+2. Find Vite port (54690)
+3. Install Playwright in /tmp
+4. Create scripts/take-screenshots.js
+5. Capture: home, conferences, conference-detail, schedule, session-detail, speakers, admin
+6. Add Screenshots section to README.md after Architecture
+7. Check all ACs and mark Done
+<!-- SECTION:PLAN:END -->
