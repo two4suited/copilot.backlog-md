@@ -6,20 +6,11 @@ import type { Conference, PagedResult } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 
-// Warm earth tone gradient palettes cycled per card
-const CARD_GRADIENTS = [
-  'from-brand-primary to-stone-700',
-  'from-stone-700 to-amber-900',
-  'from-amber-900 to-brand-primary',
-  'from-stone-800 to-amber-800',
-];
-
-function ConferenceCard({ conference, index }: { conference: Conference; index: number }) {
+function ConferenceCard({ conference, index: _index }: { conference: Conference; index: number }) {
   const start = new Date(conference.startDate);
   const end = new Date(conference.endDate);
 
   const dateBadge = `${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${end.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
-  const gradient = CARD_GRADIENTS[index % CARD_GRADIENTS.length];
 
   return (
     <Link
@@ -27,8 +18,17 @@ function ConferenceCard({ conference, index }: { conference: Conference; index: 
       className="group block bg-brand-surface dark:bg-[#2c1810] rounded-2xl border border-brand-border dark:border-[#4a2e20] overflow-hidden hover:shadow-xl hover:border-brand-accent/40 transition-all duration-200"
       data-testid="conference-card"
     >
-      {/* Gradient image placeholder */}
-      <div className={`relative h-36 bg-gradient-to-br ${gradient} flex items-end p-3 overflow-hidden`}>
+      {/* Card header: banner image or gradient fallback */}
+      <div className="relative h-36 overflow-hidden flex items-end p-3">
+        {conference.imageUrl ? (
+          <img
+            src={conference.imageUrl}
+            alt={conference.name}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-r from-brand-accent to-brand-sage`} />
+        )}
         {/* Decorative grid dots */}
         <div
           className="absolute inset-0 opacity-10"
@@ -37,7 +37,6 @@ function ConferenceCard({ conference, index }: { conference: Conference; index: 
             backgroundSize: '20px 20px',
           }}
         />
-        <CalendarDays className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 text-white/10" />
         {/* Date badge — terracotta */}
         <span className="relative z-10 inline-flex items-center gap-1.5 bg-brand-accent text-white text-xs font-semibold px-2.5 py-1.5 rounded-lg shadow-sm">
           <CalendarDays className="w-3 h-3" />
