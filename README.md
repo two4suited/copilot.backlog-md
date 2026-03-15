@@ -56,7 +56,7 @@ Aspire wires up the API, database, and frontend in a single process and exposes 
 |------|---------|
 | [.NET 10 SDK](https://dotnet.microsoft.com/download) | 10.x |
 | [Node.js](https://nodejs.org) | 20+ |
-| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | latest (for the PostgreSQL container) |
+| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | latest |
 
 ### Run with Aspire
 
@@ -119,32 +119,39 @@ APP_URL=http://localhost:<frontend-port> npx playwright test --config playwright
 
 > See [QUICK_START.md](./QUICK_START.md) for more detail.
 
-## Production Deployment
+## Deploy to Azure
 
-> **Note:** Production deployment uses Docker Compose. This is separate from the local Aspire dev workflow above.
+Sessionize uses [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) with the [Azure Developer CLI (`azd`)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) for one-command cloud deployment to Azure Container Apps.
 
-```bash
-# 1. Copy the example env file and fill in your secrets
-cp .env.example .env
-# Edit .env — change POSTGRES_PASSWORD and Jwt__Key (must be ≥ 32 chars)
+### Prerequisites
 
-# 2. Start all services
-docker compose up -d
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [Azure Developer CLI (`azd`)](https://aka.ms/azd)
+- An Azure subscription
 
-# 3. Follow logs (optional)
-docker compose logs -f
-```
-
-| Service | URL |
-|---------|-----|
-| Frontend | http://localhost:3000 |
-| API | http://localhost:8080 |
-| API health | http://localhost:8080/health |
+### First-time deploy
 
 ```bash
-docker compose down      # stop
-docker compose down -v   # stop and delete postgres volume
+# 1. Authenticate
+azd auth login
+
+# 2. Provision infrastructure and deploy (Container Apps + PostgreSQL + ACR)
+azd up
 ```
+
+### Subsequent deploys
+
+```bash
+azd deploy
+```
+
+### Tear down
+
+```bash
+azd down
+```
+
+> The `azure.yaml` at the repo root configures the Aspire AppHost as the deployment target. Aspire automatically containerises all services.
 
 ## API Endpoints
 
