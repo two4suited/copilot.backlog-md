@@ -3,9 +3,11 @@ id: TASK-52
 title: >-
   Bug: Admin Create Conference returns 500 - date fields sent as date-only
   string instead of ISO datetime
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-fix52'
 created_date: '2026-03-15 00:49'
+updated_date: '2026-03-15 00:51'
 labels:
   - bug
 dependencies: []
