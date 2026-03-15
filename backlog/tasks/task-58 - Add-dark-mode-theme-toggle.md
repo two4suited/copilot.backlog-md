@@ -39,13 +39,13 @@ Implementation:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Dark mode toggle (sun/moon icon) in navigation bar
-- [ ] #2 Dark palette uses warm espresso/charcoal backgrounds, not generic greys
-- [ ] #3 All pages render correctly in dark mode with no unthemed elements
-- [ ] #4 User preference persisted to localStorage
-- [ ] #5 Respects prefers-color-scheme on first visit if no saved preference
-- [ ] #6 Dark mode text passes WCAG AA contrast on all dark surfaces
-- [ ] #7 tailwind.config.js uses darkMode: 'class' strategy
+- [x] #1 Dark mode toggle (sun/moon icon) in navigation bar
+- [x] #2 Dark palette uses warm espresso/charcoal backgrounds, not generic greys
+- [x] #3 All pages render correctly in dark mode with no unthemed elements
+- [x] #4 User preference persisted to localStorage
+- [x] #5 Respects prefers-color-scheme on first visit if no saved preference
+- [x] #6 Dark mode text passes WCAG AA contrast on all dark surfaces
+- [x] #7 tailwind.config.js uses darkMode: 'class' strategy
 <!-- AC:END -->
 
 ## Implementation Plan
