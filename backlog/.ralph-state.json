@@ -10,7 +10,8 @@
     "31": {
       "agent": "code-review",
       "cycle": 10,
-      "assignedAt": "2026-03-15T00:14:31.629Z"
+      "assignedAt": "2026-03-15T00:14:31.629Z",
+      "seenInProgress": 1773533701630
     },
     "32": {
       "agent": "general-purpose",
