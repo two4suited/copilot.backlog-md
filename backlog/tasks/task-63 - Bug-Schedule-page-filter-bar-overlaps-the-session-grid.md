@@ -1,16 +1,17 @@
 ---
 id: TASK-63
 title: 'Bug: Schedule page filter bar overlaps the session grid'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-schedule'
 created_date: '2026-03-15 01:31'
+updated_date: '2026-03-15 01:41'
 labels:
   - bug
   - frontend
   - ui
 dependencies: []
 priority: high
-github_issue: 126
 ---
 
 ## Description
