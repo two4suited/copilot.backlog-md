@@ -143,64 +143,64 @@ export function SpeakerFormPage() {
         </div>
 
         <div>
-          <label htmlFor="speaker-company" className="block text-sm font-medium text-slate-700 mb-1">Company</label>
+          <label htmlFor="speaker-company" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Company</label>
           <input
             id="speaker-company"
             type="text"
             value={form.company}
             onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
         <div>
-          <label htmlFor="speaker-bio" className="block text-sm font-medium text-slate-700 mb-1">Bio</label>
+          <label htmlFor="speaker-bio" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Bio</label>
           <textarea
             id="speaker-bio"
             rows={4}
             value={form.bio}
             onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
         <div>
-          <label htmlFor="speaker-photo-url" className="block text-sm font-medium text-slate-700 mb-1">Photo URL</label>
+          <label htmlFor="speaker-photo-url" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Photo URL</label>
           <input
             id="speaker-photo-url"
             type="url"
             value={form.photoUrl}
             onChange={e => setForm(f => ({ ...f, photoUrl: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="speaker-twitter" className="block text-sm font-medium text-slate-700 mb-1">Twitter Handle</label>
+            <label htmlFor="speaker-twitter" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Twitter Handle</label>
             <input
               id="speaker-twitter"
               type="text"
               value={form.twitterHandle}
               onChange={e => setForm(f => ({ ...f, twitterHandle: e.target.value }))}
               placeholder="@username"
-              className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+              className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
             />
           </div>
           <div>
-            <label htmlFor="speaker-linkedin-url" className="block text-sm font-medium text-slate-700 mb-1">LinkedIn URL</label>
+            <label htmlFor="speaker-linkedin-url" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">LinkedIn URL</label>
             <input
               id="speaker-linkedin-url"
               type="url"
               value={form.linkedInUrl}
               onChange={e => setForm(f => ({ ...f, linkedInUrl: e.target.value }))}
-              className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+              className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
             />
           </div>
         </div>
 
         <div className="flex justify-end gap-3 pt-2">
-          <Link to="/admin/speakers" className="px-4 py-2 rounded-lg border border-brand-border text-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+          <Link to="/admin/speakers" className="px-4 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] text-slate-700 dark:text-[#f5f0eb] text-sm font-medium hover:bg-slate-50 dark:hover:bg-[#4a2e20]/40 transition-colors">
             Cancel
           </Link>
           <button
