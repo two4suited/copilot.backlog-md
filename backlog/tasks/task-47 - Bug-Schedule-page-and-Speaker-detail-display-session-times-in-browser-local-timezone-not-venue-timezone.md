@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-timezone'
 created_date: '2026-03-15 00:44'
-updated_date: '2026-03-15 00:53'
+updated_date: '2026-03-15 00:59'
 labels:
   - bug
   - ux
@@ -35,9 +35,9 @@ Fix options:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Session times are displayed with timezone context (e.g., UTC label or venue timezone)
-- [ ] #2 Times are not misleadingly shown in browser-local timezone without indication
-- [ ] #3 Schedule page is consistent with session detail page times
+- [x] #1 Session times are displayed with timezone context (e.g., UTC label or venue timezone)
+- [x] #2 Times are not misleadingly shown in browser-local timezone without indication
+- [x] #3 Schedule page is consistent with session detail page times
 <!-- AC:END -->
 
 ## Implementation Plan
