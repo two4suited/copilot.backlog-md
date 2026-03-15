@@ -1,50 +1,45 @@
 # Deploying Sessionize to Azure
 
-Sessionize uses .NET Aspire with the Azure Developer CLI (`azd`) for deployment to Azure Container Apps.
+Sessionize deploys to Azure Container Apps using the built-in .NET Aspire publish command.
 
 ## What gets provisioned
 
 - **Azure Container Apps** — API and frontend containers
-- **Azure Container Registry** — Docker images built and pushed automatically
+- **Azure Container Registry** — images built and pushed automatically by Aspire
 - **Azure Database for PostgreSQL Flexible Server** — managed database
-- **Azure Key Vault** — secrets (JWT key, connection strings)
+- **Azure Key Vault** — secrets (JWT signing key, DB password)
 
 ## Prerequisites
 
 | Tool | Install |
 |------|---------|
-| Azure Developer CLI | `winget install Microsoft.Azd` / `brew install azd` |
 | Azure CLI | https://docs.microsoft.com/en-us/cli/azure/install-azure-cli |
 | Azure subscription | https://azure.microsoft.com/free |
 
-## First-time setup
+## Deploy
 
 ```bash
 # 1. Login
-azd auth login
+az login
 
-# 2. Provision all infrastructure and deploy
-azd up
+# 2. Deploy — provisions all infrastructure and deploys all services
+aspire deploy
 ```
 
-`azd up` will:
-1. Ask for environment name and Azure region
-2. Provision all Azure resources via Bicep templates
-3. Build and push container images
-4. Deploy the Aspire app
+Aspire will prompt for environment name and Azure region on first run, then provision and deploy everything.
 
-## Ongoing deploys
+## Subsequent deploys
 
 ```bash
-# Deploy latest code (infrastructure already provisioned)
-azd deploy
+aspire deploy
 ```
+
+Re-running `aspire deploy` updates containers without reprovisioning infrastructure.
 
 ## Tear down
 
 ```bash
-# Delete all Azure resources
-azd down
+az group delete --name <resource-group-name>
 ```
 
 ## CI/CD

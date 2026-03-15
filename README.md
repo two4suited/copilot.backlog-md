@@ -121,34 +121,27 @@ APP_URL=http://localhost:<frontend-port> npx playwright test --config playwright
 
 ## Deploy to Azure
 
-Sessionize uses [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) with the [Azure Developer CLI (`azd`)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) for one-command cloud deployment to Azure Container Apps.
+Sessionize deploys to Azure Container Apps using the built-in [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) publish command. No additional tooling required beyond the Azure CLI.
 
 ### Prerequisites
 
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-- [Azure Developer CLI (`azd`)](https://aka.ms/azd)
 - An Azure subscription
 
-### First-time deploy
+### Deploy
 
 ```bash
-# 1. Authenticate
-azd auth login
+# 1. Login to Azure
+az login
 
-# 2. Provision infrastructure and deploy (Container Apps + PostgreSQL + ACR)
-azd up
-```
-
-### Subsequent deploys
-
-```bash
-azd deploy
+# 2. Publish — provisions Container Apps, PostgreSQL, ACR and deploys all services
+aspire deploy
 ```
 
 ### Tear down
 
 ```bash
-azd down
+az group delete --name <resource-group-name>
 ```
 
 > The `azure.yaml` at the repo root configures the Aspire AppHost as the deployment target. Aspire automatically containerises all services.

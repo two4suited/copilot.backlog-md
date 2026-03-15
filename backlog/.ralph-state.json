@@ -207,8 +207,7 @@
     "76": {
       "agent": "task",
       "cycle": 716,
-      "assignedAt": "2026-03-15T03:04:59.493Z",
-      "seenInProgress": 1773543909491
+      "assignedAt": "2026-03-15T03:04:59.493Z"
     }
   },
   "bugs": [],
