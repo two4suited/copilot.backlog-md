@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@accessibility-expert'
 created_date: '2026-03-14 22:23'
-updated_date: '2026-03-15 00:22'
+updated_date: '2026-03-15 00:23'
 labels:
   - frontend
   - testing
@@ -21,9 +21,9 @@ Run axe-core accessibility audit across all main pages. Fix any critical/serious
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 axe-core reports zero critical violations on Schedule, Session Detail, Speaker pages
-- [ ] #2 All icon-only buttons have aria-label
-- [ ] #3 Search bar and bookmark button are keyboard accessible
+- [x] #1 axe-core reports zero critical violations on Schedule, Session Detail, Speaker pages
+- [x] #2 All icon-only buttons have aria-label
+- [x] #3 Search bar and bookmark button are keyboard accessible
 <!-- AC:END -->
 
 ## Implementation Plan
