@@ -81,13 +81,13 @@
     },
     "50": {
       "agent": "explore",
-      "cycle": 24,
-      "assignedAt": "2026-03-15T01:09:38.842Z"
+      "cycle": 25,
+      "assignedAt": "2026-03-15T01:09:48.840Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 24,
-      "assignedAt": "2026-03-15T01:09:38.842Z"
+      "cycle": 25,
+      "assignedAt": "2026-03-15T01:09:48.841Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -106,8 +106,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 24,
-      "assignedAt": "2026-03-15T01:09:38.843Z"
+      "cycle": 25,
+      "assignedAt": "2026-03-15T01:09:48.841Z"
     },
     "56": {
       "agent": "general-purpose",
@@ -116,13 +116,13 @@
     },
     "57": {
       "agent": "general-purpose",
-      "cycle": 24,
-      "assignedAt": "2026-03-15T01:09:38.843Z"
+      "cycle": 25,
+      "assignedAt": "2026-03-15T01:09:48.842Z"
     },
     "58": {
       "agent": "general-purpose",
-      "cycle": 24,
-      "assignedAt": "2026-03-15T01:09:38.844Z"
+      "cycle": 25,
+      "assignedAt": "2026-03-15T01:09:48.842Z"
     }
   },
   "bugs": [],
