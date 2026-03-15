@@ -58,7 +58,7 @@ public class ConferencesController : ControllerBase
             conference.Id, conference.Name, conference.Description,
             conference.StartDate, conference.EndDate, conference.Location,
             conference.WebsiteUrl, conference.ImageUrl, conference.Timezone,
-            conference.Tracks.Select(t => new TrackDto(
+            conference.Tracks.OrderBy(t => t.SortOrder).Select(t => new TrackDto(
                 t.Id, t.ConferenceId, t.Name, t.Description, t.Color, t.SortOrder,
                 t.Sessions.Count)).ToList(),
             conference.CreatedAt);

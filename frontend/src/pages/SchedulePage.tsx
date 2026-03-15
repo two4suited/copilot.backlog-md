@@ -242,7 +242,10 @@ export function SchedulePage() {
   const days = useMemo(() => Object.keys(sessionsByDay).sort(), [sessionsByDay]);
   const activeDay = selectedDay ?? days[0] ?? null;
 
-  const tracks: Track[] = conference?.tracks ?? [];
+  const tracks: Track[] = useMemo(
+    () => [...(conference?.tracks ?? [])].sort((a, b) => a.sortOrder - b.sortOrder),
+    [conference?.tracks],
+  );
 
   // Toggle track filter
   function toggleTrack(trackId: string) {
