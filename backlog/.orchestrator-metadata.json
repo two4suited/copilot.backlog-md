@@ -70,34 +70,6 @@
   },
   "history": [
     {
-      "taskId": "64",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T01:40:09.033Z",
-      "reason": "Ralph loop cycle 207"
-    },
-    {
-      "taskId": "55",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T01:40:19.032Z",
-      "reason": "Ralph loop cycle 208"
-    },
-    {
-      "taskId": "63",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T01:40:19.033Z",
-      "reason": "Ralph loop cycle 208"
-    },
-    {
-      "taskId": "64",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T01:40:19.034Z",
-      "reason": "Ralph loop cycle 208"
-    },
-    {
       "taskId": "55",
       "oldAgent": "general-purpose",
       "newAgent": "general-purpose",
@@ -768,6 +740,34 @@
       "newAgent": "task",
       "timestamp": "2026-03-15T01:49:09.074Z",
       "reason": "Ralph loop cycle 261"
+    },
+    {
+      "taskId": "66",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:49:19.074Z",
+      "reason": "Ralph loop cycle 262"
+    },
+    {
+      "taskId": "67",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:49:19.075Z",
+      "reason": "Ralph loop cycle 262"
+    },
+    {
+      "taskId": "68",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T01:49:19.075Z",
+      "reason": "Ralph loop cycle 262"
+    },
+    {
+      "taskId": "70",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T01:49:19.075Z",
+      "reason": "Ralph loop cycle 262"
     }
   ],
   "config": {
