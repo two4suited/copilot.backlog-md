@@ -3,9 +3,10 @@ id: TASK-42
 title: >-
   [BUG] GET /api/speakers returns 500 AmbiguousMatchException due to duplicate
   route registration
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 23:48'
+updated_date: '2026-03-15 00:13'
 labels:
   - bug
   - tester
@@ -24,3 +25,9 @@ Impact: Speakers page fails to load, speaker detail navigation broken, E2E tests
 
 Fix: Remove the duplicate Minimal API speaker endpoints from Program.cs.
 <!-- SECTION:DESCRIPTION:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Removed duplicate Minimal API endpoints for /api/speakers and variants from Program.cs. SpeakersController already handles these routes. AmbiguousMatchException resolved.
+<!-- SECTION:FINAL_SUMMARY:END -->
