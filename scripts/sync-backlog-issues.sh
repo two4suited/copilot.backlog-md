@@ -60,12 +60,16 @@ sanitize_label() {
 }
 
 # Ensure a label exists in the repo; create it if missing.
+# Uses REST API (gh label list uses GraphQL; we use gh api instead).
 ensure_label() {
   local name="$1"
   local color="${2:-ededed}"
-  if ! gh label list --limit 500 --json name --jq '.[].name' 2>/dev/null | grep -qx "$name"; then
+  local encoded_name
+  encoded_name="$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$name" 2>/dev/null || echo "$name")"
+  if ! gh api "/repos/two4suited/copilot.backlog-md/labels/${encoded_name}" --jq '.name' >/dev/null 2>&1; then
     log "Creating label: $name"
-    gh label create "$name" --color "$color" --force >/dev/null 2>&1 || true
+    gh api --method POST "/repos/two4suited/copilot.backlog-md/labels" \
+      --field name="$name" --field color="$color" >/dev/null 2>&1 || true
   fi
 }
 
@@ -194,14 +198,14 @@ done
 sleep "$SLEEP_BETWEEN_CALLS"
 
 # ---------------------------------------------------------------------------
-# Check rate limit before starting bulk operations
+# Check rate limit before starting bulk operations (use REST core, not GraphQL)
 # ---------------------------------------------------------------------------
-remaining=$(gh api rate_limit --jq '.resources.graphql.remaining' 2>/dev/null || echo "999")
+remaining=$(gh api rate_limit --jq '.resources.core.remaining' 2>/dev/null || echo "999")
 if [[ "$remaining" -lt 100 ]]; then
-  warn "GitHub GraphQL rate limit too low ($remaining remaining) — aborting sync."
+  warn "GitHub REST core rate limit too low ($remaining remaining) — aborting sync."
   exit 0
 fi
-log "GitHub rate limit: $remaining GraphQL points remaining"
+log "GitHub rate limit: $remaining REST core points remaining"
 
 # ---------------------------------------------------------------------------
 # Determine which task files to process
