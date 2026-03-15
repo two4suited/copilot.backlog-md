@@ -43,3 +43,15 @@ Action: update MimeKit to a patched version or evaluate if it can be removed if 
 - [x] #3 BackgroundService handles CancellationToken gracefully — no exception on clean shutdown
 - [x] #4 API starts with zero warnings and zero errors in normal operation
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Run dotnet run to capture full EF warning message
+2. Identify warning 10622: Session has query filter but SessionSpeaker (join entity) does not
+3. Add matching HasQueryFilter to SessionSpeaker in DbContext
+4. Fix SessionReminderService BackgroundService: wrap outer while-loop in try/catch(OperationCanceledException) so error-recovery Task.Delay cancellation is also handled cleanly
+5. Verify MimeKit: MailKit 4.15.1 already pulls in MimeKit 4.15.1 (patched), no NU1902 in build
+6. Run dotnet build to confirm clean
+7. Verify 10622 warning absent at runtime
+<!-- SECTION:PLAN:END -->
