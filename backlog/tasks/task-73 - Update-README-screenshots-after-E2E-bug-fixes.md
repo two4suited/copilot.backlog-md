@@ -5,14 +5,13 @@ status: Done
 assignee:
   - '@agent-screenshots'
 created_date: '2026-03-15 01:55'
-updated_date: '2026-03-15 02:25'
+updated_date: '2026-03-15 02:36'
 labels:
   - docs
   - readme
 dependencies:
   - TASK-74
 priority: low
-github_issue: 133
 ---
 
 ## Description
@@ -32,6 +31,12 @@ Update docs/screenshots/ with fresh captures and ensure README.md embeds them co
 - [x] #2 docs/screenshots/ updated with new images
 - [x] #3 README.md screenshot section reflects current UI
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Retaking screenshots with clean Docker/volume wipe — 3 seed conferences only
+<!-- SECTION:NOTES:END -->
 
 ## Final Summary
 
