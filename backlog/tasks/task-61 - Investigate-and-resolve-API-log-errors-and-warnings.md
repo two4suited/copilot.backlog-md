@@ -1,9 +1,11 @@
 ---
 id: TASK-61
 title: Investigate and resolve API log errors and warnings
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-api-errors'
 created_date: '2026-03-15 01:25'
+updated_date: '2026-03-15 01:26'
 labels:
   - bug
   - backend
