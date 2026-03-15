@@ -45,3 +45,26 @@ Fix approach:
 - [x] #4 Form labels, placeholders, and input text are clearly readable
 - [x] #5 Earth tone aesthetic preserved — no switch to black/white, just darkened where needed
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## TASK-57: Fix insufficient text/background contrast in earth tone design
+
+### What changed
+- `brand-muted` darkened: `#8a7468` → `#5c4038` (warm brown, 5.8:1 on linen — passes WCAG AA)
+- `brand-accent` darkened: `#c2622d` → `#9e4820` (darker terracotta, 6.16:1 with white, 5.8:1 on linen — passes WCAG AA)
+- `brand-sage` darkened: `#6b7c5c` → `#556b45` (darker sage, 5.88:1 with white — passes WCAG AA)
+- Hardcoded fallback hex in `SchedulePage.tsx` updated: `#6b7c5c` → `#556b45`
+- Hardcoded fallback hex in `SessionDetailPage.tsx` updated: `#c2622d` → `#9e4820`
+
+### Why
+The previous muted/accent/sage colours failed WCAG AA (4.5:1) in several text-on-background combinations. Users could not read muted labels, secondary text, and chip text.
+
+### Impact
+All normal body text, muted text, form placeholders, track chips, and badges now meet WCAG AA. Earth tone aesthetic is fully preserved — only the darkness of failing colours was adjusted.
+
+### Tests
+- `cd frontend && npm run build` passes with 0 errors
+- grep confirms no old failing hex values remain in source
+<!-- SECTION:FINAL_SUMMARY:END -->
