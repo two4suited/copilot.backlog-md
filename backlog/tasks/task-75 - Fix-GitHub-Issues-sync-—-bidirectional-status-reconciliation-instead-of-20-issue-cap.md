@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-sync'
 created_date: '2026-03-15 02:58'
-updated_date: '2026-03-15 02:59'
+updated_date: '2026-03-15 03:00'
 labels:
   - bug
   - ci
@@ -49,9 +49,9 @@ This keeps GitHub Issues as a live view of the backlog without stale open issues
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Open GitHub issues for Done/Archived backlog tasks are automatically closed
-- [ ] #2 Open GitHub issues for tasks that no longer exist in backlog are closed
-- [ ] #3 MAX_ISSUES_PER_RUN cap removed
-- [ ] #4 Active (non-Done) tasks always get a GitHub issue created/updated
-- [ ] #5 Sync completes cleanly with 0 stale open issues after a full run
+- [x] #1 Open GitHub issues for Done/Archived backlog tasks are automatically closed
+- [x] #2 Open GitHub issues for tasks that no longer exist in backlog are closed
+- [x] #3 MAX_ISSUES_PER_RUN cap removed
+- [x] #4 Active (non-Done) tasks always get a GitHub issue created/updated
+- [x] #5 Sync completes cleanly with 0 stale open issues after a full run
 <!-- AC:END -->
