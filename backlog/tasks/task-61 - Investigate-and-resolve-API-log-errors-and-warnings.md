@@ -1,7 +1,7 @@
 ---
 id: TASK-61
 title: Investigate and resolve API log errors and warnings
-status: In Progress
+status: Done
 assignee:
   - '@agent-api-errors'
 created_date: '2026-03-15 01:25'
