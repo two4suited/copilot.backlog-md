@@ -56,3 +56,22 @@ Also check any sticky header logic in `frontend/src/components/` related to sche
 - Mobile stacked view unaffected (no sticky headers in stacked layout)
 - Build passes cleanly
 <!-- SECTION:NOTES:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## Fix: Schedule filter bar no longer overlaps session grid
+
+### What changed
+- `SchedulePage.tsx` — filter bar wrapper gains `sticky top-16 z-30` with a matching background colour and `border-b` so content can scroll behind it cleanly; replaced `mb-6` with `mb-4` and added negative-margin bleed for full-width sticky band
+- `DayGrid` — new optional `hasFilterBar` prop; desktop grid column headers switch from `sticky top-16` to `sticky top-[116px]` (nav 64 px + filter bar ~52 px) when the filter bar is present, preventing them from sliding underneath the sticky filter bar
+- `SchedulePage` passes `hasFilterBar={tracks.length > 1}` to `DayGrid`
+
+### Why
+The filter bar had no `position: sticky`, so it scrolled away. The grid column headers were already sticky at `top-16` (accounting for the nav only). With the filter bar now sticky at the same `top-16` offset, the column headers would have been hidden behind it. The new `top-[116px]` offset puts the column headers cleanly below both the nav and the filter bar.
+
+### Tests / verification
+- `npm run build` — TypeScript + Vite build passes with 0 errors
+- Responsive: filter bar at `top-16 z-30` on all viewports; desktop grid headers at `top-[116px]`, mobile stacked view has no sticky headers and is unaffected
+- Single-track conferences: `hasFilterBar=false` → headers stay at `top-16`, no regression
+<!-- SECTION:FINAL_SUMMARY:END -->
