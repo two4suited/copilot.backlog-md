@@ -86,8 +86,8 @@
     },
     "51": {
       "agent": "task",
-      "cycle": 91,
-      "assignedAt": "2026-03-15T01:20:48.895Z"
+      "cycle": 92,
+      "assignedAt": "2026-03-15T01:20:58.895Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -106,8 +106,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 91,
-      "assignedAt": "2026-03-15T01:20:48.895Z"
+      "cycle": 92,
+      "assignedAt": "2026-03-15T01:20:58.896Z"
     },
     "56": {
       "agent": "general-purpose",
@@ -133,8 +133,8 @@
     },
     "60": {
       "agent": "general-purpose",
-      "cycle": 91,
-      "assignedAt": "2026-03-15T01:20:48.895Z"
+      "cycle": 92,
+      "assignedAt": "2026-03-15T01:20:58.896Z"
     }
   },
   "bugs": [],
