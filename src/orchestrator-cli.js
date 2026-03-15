@@ -523,7 +523,7 @@ async function cmdRalph(params) {
           const bugTitle = `[BUG] Task ${issue.taskId} stuck in In Progress`;
           const bugDesc = issue.message + "\n\nAuto-filed by Ralph loop.";
           execSync(
-            `cd "${projectRoot}" && backlog task create "${bugTitle}" --label bug,ralph -d "${bugDesc.replace(/"/g, '\\"')}" --priority high`,
+            `cd "${projectRoot}" && backlog task create "${bugTitle}" --labels bug,ralph -d "${bugDesc.replace(/"/g, '\\"')}" --priority high`,
             { stdio: "pipe" }
           );
           state.bugs.push({ taskId: issue.taskId, type: issue.type, filedAt: new Date().toISOString() });
@@ -610,7 +610,7 @@ function checkCIAndFileBugs(state, saveState, log, ok, warn, err, dryRun) {
       if (!dryRun) {
         try {
           execSync(
-            `cd "${projectRoot}" && backlog task create "${bugTitle}" --label bug,ci,infrastructure --priority high -d "${bugDesc.replace(/"/g, "'")}" --ac "CI job passes green" --ac "Root cause identified and fixed"`,
+            `cd "${projectRoot}" && backlog task create "${bugTitle}" --labels bug,ci,infrastructure --priority high -d "${bugDesc.replace(/"/g, "'")}" --ac "CI job passes green" --ac "Root cause identified and fixed"`,
             { stdio: "pipe" }
           );
           state.ciChecked[runId] = { filedAt: new Date().toISOString(), title: bugTitle };
@@ -690,7 +690,7 @@ function cmdBug(params) {
   const { execSync } = require("child_process");
   try {
     const result = execSync(
-      `cd "${projectRoot}" && backlog task create "${title}" --label bug,ralph -d "${fullDesc.replace(/"/g, '\\"')}" --priority ${priority}`,
+      `cd "${projectRoot}" && backlog task create "${title}" --labels bug,ralph -d "${fullDesc.replace(/"/g, '\\"')}" --priority ${priority}`,
       { encoding: "utf8" }
     );
     console.log(`\n✓ Bug filed: ${title}`);
