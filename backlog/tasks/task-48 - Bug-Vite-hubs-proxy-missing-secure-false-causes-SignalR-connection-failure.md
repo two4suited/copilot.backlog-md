@@ -1,11 +1,11 @@
 ---
 id: TASK-48
 title: 'Bug: Vite /hubs proxy missing secure:false causes SignalR connection failure'
-status: In Progress
+status: Done
 assignee:
   - '@agent-frontend'
 created_date: '2026-03-15 00:44'
-updated_date: '2026-03-15 00:53'
+updated_date: '2026-03-15 00:54'
 labels:
   - bug
 dependencies: []
