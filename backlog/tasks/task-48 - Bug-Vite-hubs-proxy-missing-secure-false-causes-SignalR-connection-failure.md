@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-frontend'
 created_date: '2026-03-15 00:44'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:53'
 labels:
   - bug
 dependencies: []
@@ -31,7 +31,7 @@ Fix: Add secure: false to the /hubs proxy entry in vite.config.ts.
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 No SignalR connection error in browser console on session detail page
-- [ ] #2 isConnected state in useSessionSeats becomes true
-- [ ] #3 Real-time seat updates work when another user registers
+- [x] #1 No SignalR connection error in browser console on session detail page
+- [x] #2 isConnected state in useSessionSeats becomes true
+- [x] #3 Real-time seat updates work when another user registers
 <!-- AC:END -->
