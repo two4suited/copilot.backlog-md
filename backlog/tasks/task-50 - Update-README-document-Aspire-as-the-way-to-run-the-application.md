@@ -8,6 +8,7 @@ labels:
   - docs
 dependencies: []
 priority: medium
+github_issue: 106
 ---
 
 ## Description

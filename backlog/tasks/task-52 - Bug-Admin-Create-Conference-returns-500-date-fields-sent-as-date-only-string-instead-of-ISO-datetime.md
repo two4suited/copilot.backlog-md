@@ -12,6 +12,7 @@ labels:
   - bug
 dependencies: []
 priority: high
+github_issue: 108
 ---
 
 ## Description
