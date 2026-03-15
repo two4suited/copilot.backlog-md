@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-cleanup'
 created_date: '2026-03-15 03:04'
-updated_date: '2026-03-15 03:05'
+updated_date: '2026-03-15 03:06'
 labels:
   - docs
   - cleanup
@@ -40,9 +40,9 @@ Aspire handles containerisation, Azure Container Apps provisioning, and deployme
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 docker-compose.yml removed from repo
-- [ ] #2 Dockerfile.api and Dockerfile.frontend removed
-- [ ] #3 README Production Deployment section updated to azd workflow, no docker-compose
-- [ ] #4 docs/deployment.md rewritten for azd only
-- [ ] #5 No docker-compose references remain in README or docs
+- [x] #1 docker-compose.yml removed from repo
+- [x] #2 Dockerfile.api and Dockerfile.frontend removed
+- [x] #3 README Production Deployment section updated to azd workflow, no docker-compose
+- [x] #4 docs/deployment.md rewritten for azd only
+- [x] #5 No docker-compose references remain in README or docs
 <!-- AC:END -->
