@@ -3,9 +3,11 @@ id: TASK-67
 title: >-
   Bug: Schedule track chip colors are bright/random — should use earth tone
   palette
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-fix67'
 created_date: '2026-03-15 01:46'
+updated_date: '2026-03-15 01:54'
 labels:
   - bug
   - design
@@ -13,7 +15,6 @@ labels:
   - frontend
 dependencies: []
 priority: high
-github_issue: 129
 ---
 
 ## Description
