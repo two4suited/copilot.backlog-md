@@ -9,6 +9,7 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
 import { useAuth } from '../context/AuthContext';
 import { useSessionSeats } from '../hooks/useSessionSeats';
+import { fmtDayLabelTz, fmtTimeRangeTz } from '../utils/time';
 
 function SpeakerAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0f172a&color=0ea5e9&size=96&font-size=0.38&bold=true`;
@@ -68,12 +69,9 @@ export function SessionDetailPage() {
   if (isPending) return <LoadingSpinner />;
   if (isError || !session) return <ErrorMessage message="Session not found." />;
 
-  const startTime = new Date(session.startTime);
-  const endTime = new Date(session.endTime);
-  const dateStr = startTime.toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric',
-  });
-  const timeStr = `${startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} – ${endTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+  const tz = session.conferenceTimezone ?? 'UTC';
+  const dateStr = fmtDayLabelTz(session.startTime, tz);
+  const timeStr = fmtTimeRangeTz(session.startTime, session.endTime, tz);
 
   const isFull = seatsAvailable !== null && seatsAvailable <= 0;
 
@@ -117,6 +115,14 @@ export function SessionDetailPage() {
               {session.sessionType}
             </span>
           )}
+          {session.track && (
+            <span
+              className="text-xs font-semibold px-2 py-0.5 rounded-full text-white"
+              style={{ backgroundColor: session.track.color || '#0ea5e9' }}
+            >
+              {session.track.name}
+            </span>
+          )}
         </div>
         <h1 className="text-3xl font-bold text-slate-900">{session.title}</h1>
       </div>
@@ -124,11 +130,11 @@ export function SessionDetailPage() {
       {/* Meta */}
       <div className="flex flex-wrap gap-4 text-slate-500 text-sm mb-6">
         <span className="flex items-center gap-1.5">
-          <Clock className="w-4 h-4 text-indigo-400" />
+          <Clock className="w-4 h-4 text-brand-accent" />
           {dateStr}, {timeStr}
         </span>
         <span className="flex items-center gap-1.5">
-          <DoorOpen className="w-4 h-4 text-indigo-400" />
+          <DoorOpen className="w-4 h-4 text-brand-accent" />
           {session.room}
         </span>
         {seatsAvailable !== null && (
@@ -136,8 +142,8 @@ export function SessionDetailPage() {
             <Users className="w-4 h-4" />
             {isFull ? 'Full' : `${seatsAvailable} seat${seatsAvailable !== 1 ? 's' : ''} remaining`}
             {isConnected && (
-              <span className="inline-flex items-center gap-1 ml-1 text-xs font-semibold text-indigo-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+              <span className="inline-flex items-center gap-1 ml-1 text-xs font-semibold text-brand-accent">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                 LIVE
               </span>
             )}
@@ -145,13 +151,31 @@ export function SessionDetailPage() {
         )}
       </div>
 
+      {/* Seat availability progress bar */}
+      {seatsAvailable !== null && session.seatsTotal > 0 && (
+        <div className="mb-6">
+          <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
+            <span className="font-medium">Seat availability</span>
+            <span>{seatsAvailable} / {session.seatsTotal} remaining</span>
+          </div>
+          <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all ${
+                isFull ? 'bg-red-500' : seatsAvailable / session.seatsTotal < 0.2 ? 'bg-amber-500' : 'bg-emerald-500'
+              }`}
+              style={{ width: `${Math.max(0, (seatsAvailable / session.seatsTotal) * 100)}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Track link */}
       {session.track && conferenceId && (
         <div className="mb-6">
           <span className="text-slate-500 text-sm">Track: </span>
           <Link
             to={`/conferences/${conferenceId}/tracks/${trackId}`}
-            className="text-sm text-indigo-600 hover:underline font-medium"
+            className="text-sm text-brand-accent hover:underline font-medium"
           >
             {session.track.name}
           </Link>
@@ -183,7 +207,7 @@ export function SessionDetailPage() {
             <button
               onClick={() => registerMutation.mutate()}
               disabled={isFull || registerMutation.isPending}
-              className="px-5 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-5 py-2.5 rounded-lg bg-brand-accent text-white font-semibold text-sm hover:bg-sky-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {registerMutation.isPending ? 'Registering…' : isFull ? 'Session Full' : 'Register for this session'}
             </button>
@@ -203,16 +227,18 @@ export function SessionDetailPage() {
           <div className="space-y-4">
             {session.speakers.map(speaker => (
               <div key={speaker.id} className="bg-white rounded-xl border border-slate-200 p-5 flex gap-4">
-                <SpeakerAvatar name={speaker.name} />
+                <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
                 <div className="flex-1 min-w-0">
                   <Link
                     to={`/speakers/${speaker.id}`}
-                    className="font-semibold text-slate-900 hover:text-indigo-600 hover:underline"
+                    className="font-semibold text-slate-900 hover:text-brand-accent hover:underline"
                   >
                     {speaker.name}
                   </Link>
                   {speaker.company && (
-                    <p className="text-sm text-slate-500 mt-0.5">{speaker.company}</p>
+                    <span className="inline-block mt-1 px-2 py-0.5 rounded-md bg-brand-accent/10 text-brand-accent text-xs font-medium">
+                      {speaker.company}
+                    </span>
                   )}
                   {speaker.bio && (
                     <p className="text-sm text-slate-600 mt-2 line-clamp-3">{speaker.bio}</p>

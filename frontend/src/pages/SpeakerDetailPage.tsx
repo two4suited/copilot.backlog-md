@@ -6,6 +6,7 @@ import type { Speaker, Session } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
+import { fmtShortDateTz, fmtTimeRangeTz } from '../utils/time';
 
 function LargeAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   const initials = name
@@ -104,10 +105,9 @@ export function SpeakerDetailPage() {
           <h2 className="text-xl font-semibold text-slate-900 mb-4">Sessions</h2>
           <div className="space-y-3">
             {speaker.sessions.map(session => {
-              const start = new Date(session.startTime);
-              const end = new Date(session.endTime);
-              const timeStr = `${start.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} – ${end.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
-              const dateStr = start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+              const tz = session.conferenceTimezone ?? 'UTC';
+              const timeStr = fmtTimeRangeTz(session.startTime, session.endTime, tz);
+              const dateStr = fmtShortDateTz(session.startTime, tz);
               return (
                 <Link
                   key={session.id}

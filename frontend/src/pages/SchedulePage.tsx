@@ -8,23 +8,20 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
 import { BookmarkButton } from '../components/BookmarkButton';
+import { fmtTimeTz, fmtDayLabelTz, dayKeyTz } from '../utils/time';
 
 // ── helpers ────────────────────────────────────────────────────────────────
 
-function fmtTime(iso: string) {
-  return new Date(iso).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+function fmtTime(iso: string, tz: string) {
+  return fmtTimeTz(iso, tz);
 }
 
-function fmtDayLabel(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric',
-  });
+function fmtDayLabel(iso: string, tz: string) {
+  return fmtDayLabelTz(iso, tz);
 }
 
-function dayKey(iso: string) {
-  // YYYY-MM-DD in local time
-  const d = new Date(iso);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+function dayKey(iso: string, tz: string) {
+  return dayKeyTz(iso, tz);
 }
 
 function durationMins(start: string, end: string) {
@@ -42,32 +39,32 @@ function SessionCard({ session }: { session: Session }) {
   return (
     <Link
       to={`/sessions/${session.id}`}
-      className="group relative block h-full bg-white rounded-xl border border-slate-200 p-3 hover:shadow-md hover:border-indigo-300 transition-all"
+      className="group relative block h-full bg-white rounded-xl border border-slate-200 p-3 hover:shadow-md hover:border-brand-accent/40 transition-all"
     >
       {/* Bookmark button – stops propagation so the link doesn't fire */}
       <div className="absolute top-2 right-2">
         <BookmarkButton sessionId={session.id} />
       </div>
-      <div className="flex items-start gap-1 mb-1 pr-8">
+      <div className="flex items-start gap-1 mb-1.5 pr-8">
         <LevelBadge level={session.level} />
-        <span className="ml-auto text-xs text-slate-400 shrink-0">{mins}m</span>
+        <span className="ml-auto text-xs text-slate-400 shrink-0 tabular-nums">{mins}m</span>
       </div>
-      <p className="text-sm font-semibold text-slate-900 group-hover:text-indigo-600 leading-snug line-clamp-3 mb-1.5 transition-colors">
+      <p className="text-sm font-semibold text-slate-900 group-hover:text-brand-accent leading-snug line-clamp-3 mb-1.5 transition-colors">
         {session.title}
       </p>
       {speakers.length > 0 && (
-        <p className="text-xs text-slate-500 truncate mb-1">
+        <p className="text-xs text-slate-500 truncate mb-2">
           {speakers.map(s => s.name).join(', ')}
         </p>
       )}
-      <div className="flex flex-wrap items-center gap-2 mt-auto text-xs text-slate-400">
+      <div className="flex flex-wrap items-center gap-1.5 mt-auto text-xs text-slate-400">
         {session.room && (
-          <span className="flex items-center gap-1">
-            <DoorOpen className="w-3 h-3" /> {session.room}
+          <span className="flex items-center gap-1 bg-slate-50 px-1.5 py-0.5 rounded-md border border-slate-100">
+            <DoorOpen className="w-3 h-3 text-brand-accent" /> {session.room}
           </span>
         )}
         {seats !== null && (
-          <span className={`flex items-center gap-1 font-medium ${isFull ? 'text-red-500' : 'text-emerald-600'}`}>
+          <span className={`flex items-center gap-1 font-medium px-1.5 py-0.5 rounded-md ${isFull ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50'}`}>
             <Users className="w-3 h-3" /> {isFull ? 'Full' : `${seats} left`}
           </span>
         )}
@@ -88,30 +85,31 @@ interface DayGridProps {
   sessions: Session[];
   tracks: Track[];
   filteredTrackIds: Set<string> | null;
+  timezone: string;
 }
 
-function DayGrid({ sessions, tracks, filteredTrackIds }: DayGridProps) {
+function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps) {
   const visibleTracks = filteredTrackIds
     ? tracks.filter(t => filteredTrackIds.has(t.id))
     : tracks;
 
   // Unique sorted time slots for the day
   const timeSlots = useMemo(() => {
-    const times = [...new Set(sessions.map(s => fmtTime(s.startTime)))];
+    const times = [...new Set(sessions.map(s => fmtTime(s.startTime, timezone)))];
     times.sort();
     return times;
-  }, [sessions]);
+  }, [sessions, timezone]);
 
   // Index: timeSlot → trackId → session
   const index = useMemo(() => {
     const map: Record<string, Record<string, Session>> = {};
     for (const s of sessions) {
-      const t = fmtTime(s.startTime);
+      const t = fmtTime(s.startTime, timezone);
       if (!map[t]) map[t] = {};
       map[t][s.trackId] = s;
     }
     return map;
-  }, [sessions]);
+  }, [sessions, timezone]);
 
   if (timeSlots.length === 0) {
     return <p className="text-slate-500 text-sm">No sessions scheduled for this day.</p>;
@@ -126,18 +124,19 @@ function DayGrid({ sessions, tracks, filteredTrackIds }: DayGridProps) {
           className="grid min-w-max"
           style={{ gridTemplateColumns: `80px repeat(${visibleTracks.length}, minmax(180px, 1fr))` }}
         >
-          {/* Header row */}
-          <div className="sticky left-0 bg-slate-50 z-10" />
+          {/* Header row — sticky at top */}
+          <div className="sticky top-16 bg-brand-surface z-20" />
           {visibleTracks.map(track => (
             <div
               key={track.id}
-              className="px-3 py-2 text-xs font-semibold text-slate-600 uppercase tracking-wide border-b border-slate-200 text-center"
+              className="sticky top-16 z-20 px-3 py-2.5 border-b-2 border-slate-200 bg-brand-surface text-center"
             >
               <span
-                className="inline-block w-2 h-2 rounded-full mr-1.5 align-middle"
-                style={{ backgroundColor: track.color }}
-              />
-              {track.name}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"
+                style={{ backgroundColor: track.color || '#0ea5e9' }}
+              >
+                {track.name}
+              </span>
             </div>
           ))}
 
@@ -146,10 +145,10 @@ function DayGrid({ sessions, tracks, filteredTrackIds }: DayGridProps) {
             <Fragment key={time}>
               {/* Time label */}
               <div
-                className="sticky left-0 bg-slate-50 flex items-start justify-end pr-3 pt-3 text-xs font-medium text-slate-400 border-b border-slate-100 z-10"
+                className="sticky left-0 bg-brand-surface flex items-start justify-end pr-3 pt-3 text-xs font-semibold text-slate-500 border-b border-slate-100 z-10"
               >
                 <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" /> {time}
+                  <Clock className="w-3 h-3 text-brand-accent" /> {time}
                 </span>
               </div>
 
@@ -172,7 +171,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds }: DayGridProps) {
         {timeSlots.map(time => (
           <div key={time}>
             <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-slate-500">
-              <Clock className="w-4 h-4 text-indigo-400" /> {time}
+              <Clock className="w-4 h-4 text-brand-accent" /> {time}
             </div>
             <div className="space-y-2 pl-6">
               {visibleTracks.map(track => {
@@ -229,15 +228,16 @@ export function SchedulePage() {
   });
 
   // Group sessions by day
+  const timezone = conference?.timezone ?? 'UTC';
   const sessionsByDay = useMemo(() => {
     const map: Record<string, Session[]> = {};
     for (const s of sessions) {
-      const k = dayKey(s.startTime);
+      const k = dayKey(s.startTime, timezone);
       if (!map[k]) map[k] = [];
       map[k].push(s);
     }
     return map;
-  }, [sessions]);
+  }, [sessions, timezone]);
 
   const days = useMemo(() => Object.keys(sessionsByDay).sort(), [sessionsByDay]);
   const activeDay = selectedDay ?? days[0] ?? null;
@@ -306,7 +306,7 @@ export function SchedulePage() {
                   : 'bg-white border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600'
               }`}
             >
-              Day {i + 1} — {fmtDayLabel(`${d}T00:00:00`)}
+              Day {i + 1} — {fmtDayLabel(`${d}T00:00:00`, timezone)}
             </button>
           ))}
         </div>
@@ -345,6 +345,7 @@ export function SchedulePage() {
           sessions={sessionsByDay[activeDay] ?? []}
           tracks={tracks}
           filteredTrackIds={filteredTrackIds}
+          timezone={timezone}
         />
       ) : (
         <p className="text-slate-500">No sessions scheduled yet.</p>
