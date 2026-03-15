@@ -118,7 +118,7 @@ export function SessionDetailPage() {
           {session.track && (
             <span
               className="text-xs font-semibold px-2 py-0.5 rounded-full text-white"
-              style={{ backgroundColor: session.track.color || '#c2622d' }}
+              style={{ backgroundColor: session.track.color || '#9e4820' }}
             >
               {session.track.name}
             </span>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { CalendarDays, Mic2, LayoutGrid, LogIn, BookMarked, Settings, Menu, X } from 'lucide-react';
+import { CalendarDays, Mic2, LayoutGrid, LogIn, BookMarked, Settings, Menu, X, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { SearchBar } from './SearchBar';
 
 const navItems = [
@@ -13,6 +14,7 @@ const navItems = [
 export function Layout() {
   const location = useLocation();
   const { user, logout, isAuthenticated } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isActive = (path: string) =>

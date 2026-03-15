@@ -133,7 +133,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
             >
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"
-                style={{ backgroundColor: track.color || '#6b7c5c' }}
+                style={{ backgroundColor: track.color || '#556b45' }}
               >
                 {track.name}
               </span>
@@ -330,7 +330,7 @@ export function SchedulePage() {
                     ? 'border-transparent text-white shadow-sm'
                     : 'bg-brand-bg border-brand-border text-brand-muted opacity-50'
                 }`}
-                style={active ? { backgroundColor: track.color || '#6b7c5c' } : undefined}
+                style={active ? { backgroundColor: track.color || '#556b45' } : undefined}
               >
                 {track.name}
               </button>
