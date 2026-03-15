@@ -1,7 +1,7 @@
 ---
 id: TASK-64
 title: 'Bug: Speaker avatars and conference banner images not displaying'
-status: In Progress
+status: Done
 assignee:
   - '@agent-tester64'
 created_date: '2026-03-15 01:38'
