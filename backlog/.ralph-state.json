@@ -107,7 +107,8 @@
     "55": {
       "agent": "general-purpose",
       "cycle": 245,
-      "assignedAt": "2026-03-15T01:46:29.061Z"
+      "assignedAt": "2026-03-15T01:46:29.061Z",
+      "seenInProgress": 1773539199061
     },
     "56": {
       "agent": "general-purpose",
