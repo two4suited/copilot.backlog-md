@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-fix67'
 created_date: '2026-03-15 01:46'
-updated_date: '2026-03-15 01:54'
+updated_date: '2026-03-15 01:55'
 labels:
   - bug
   - design
@@ -40,7 +40,7 @@ File: ConferenceApp.Api/Data/DbSeeder.cs
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 All track chips in filter bar use earth tone compatible hex colors
-- [ ] #2 Track labels in session grid use the updated colors
-- [ ] #3 DB updated with new track colors (direct SQL or seeder reset)
+- [x] #1 All track chips in filter bar use earth tone compatible hex colors
+- [x] #2 Track labels in session grid use the updated colors
+- [x] #3 DB updated with new track colors (direct SQL or seeder reset)
 <!-- AC:END -->
