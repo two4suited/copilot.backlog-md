@@ -1,9 +1,11 @@
 ---
 id: TASK-69
 title: Run full Playwright E2E suite and file bugs for every failure
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-tester'
 created_date: '2026-03-15 01:47'
+updated_date: '2026-03-15 01:48'
 labels:
   - testing
   - e2e
