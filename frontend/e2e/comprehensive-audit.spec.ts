@@ -689,17 +689,17 @@ test.describe('Admin – New Speaker (/admin/speakers/new)', () => {
     await page.goto('/admin/speakers/new');
     await waitForContent(page);
 
-    // Labels have no htmlFor (TASK-46) so locate inputs by position
-    // Speaker form: Name(text), Email(email), Company(text), Bio(textarea), Photo(url), Twitter(text), LinkedIn(url)
-    const textInputs = page.locator('input[type="text"]');
-    if (await textInputs.count() === 0) return;
+    // Labels have no htmlFor (TASK-46) so locate inputs scoped to the form
+    // Speaker form: Name(text), Company(text), Photo(url), Twitter(text), LinkedIn(url) + email(email) + bio(textarea)
+    const formTextInputs = page.locator('form input[type="text"]');
+    if (await formTextInputs.count() === 0) return;
 
-    await textInputs.first().fill(`Audit Speaker ${Date.now()}`);
+    await formTextInputs.first().fill(`Audit Speaker ${Date.now()}`);
 
-    const emailInput = page.locator('input[type="email"]').first();
+    const emailInput = page.locator('form input[type="email"]').first();
     if (await emailInput.count() > 0) await emailInput.fill(`audit-spk-${Date.now()}@test.com`);
 
-    const textareaField = page.locator('textarea').first();
+    const textareaField = page.locator('form textarea').first();
     if (await textareaField.count() > 0) await textareaField.fill('Test bio for audit speaker.');
 
     const submitBtn = page.getByRole('button', { name: /save|create|submit/i }).first();
