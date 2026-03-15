@@ -5,7 +5,7 @@ status: To Do
 assignee:
   - '@agent-tester'
 created_date: '2026-03-15 01:47'
-updated_date: '2026-03-15 01:53'
+updated_date: '2026-03-15 01:54'
 labels:
   - testing
   - e2e
@@ -59,11 +59,11 @@ Home, Conferences list, Conference detail, Schedule, Session detail, Speakers li
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Full Playwright suite executed against live Aspire stack
-- [ ] #2 Every real app bug from test failures has a filed backlog task
-- [ ] #3 Test-only issues (wrong selectors etc.) fixed in spec files
-- [ ] #4 Final pass/fail/skip counts reported in task final summary
-- [ ] #5 All bug tasks committed and pushed to main
+- [x] #1 Full Playwright suite executed against live Aspire stack
+- [x] #2 Every real app bug from test failures has a filed backlog task
+- [x] #3 Test-only issues (wrong selectors etc.) fixed in spec files
+- [x] #4 Final pass/fail/skip counts reported in task final summary
+- [x] #5 All bug tasks committed and pushed to main
 <!-- AC:END -->
 
 ## Implementation Notes
