@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000';
+// Empty string → relative paths → Vite proxy forwards to the API.
+// VITE_API_URL should be left empty in .env.development.
+const BASE_URL = import.meta.env.VITE_API_URL || '';
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -30,7 +32,8 @@ apiClient.interceptors.response.use(
 
 export const api = {
   conferences: {
-    list: () => apiClient.get('/api/conferences').then(r => r.data),
+    list: () => apiClient.get('/api/conferences').then(r =>
+      Array.isArray(r.data) ? r.data : (r.data.items ?? r.data)),
     get: (id: string) => apiClient.get(`/api/conferences/${id}`).then(r => r.data),
     create: (data: unknown) => apiClient.post('/api/conferences', data).then(r => r.data),
     update: (id: string, data: unknown) => apiClient.put(`/api/conferences/${id}`, data).then(r => r.data),
@@ -47,7 +50,7 @@ export const api = {
   sessions: {
     list: (trackId?: string) => apiClient.get('/api/sessions', { params: { trackId } }).then(r => r.data),
     listByConference: (conferenceId: string) =>
-      apiClient.get(`/api/conferences/${conferenceId}/sessions`).then(r => r.data),
+      apiClient.get('/api/sessions', { params: { conferenceId } }).then(r => r.data),
     listAll: () => apiClient.get('/api/sessions').then(r => r.data),
     get: (id: string) => apiClient.get(`/api/sessions/${id}`).then(r => r.data),
     register: (id: string) => apiClient.post(`/api/sessions/${id}/register`).then(r => r.data),
