@@ -1,14 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { searchApi, type SearchResultDto } from '../api/client'
+
+type FlatResult = { id: string; label: string; sub: string; path: string }
 
 export function SearchBar() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResultDto | null>(null)
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(-1)
   const containerRef = useRef<HTMLDivElement>(null)
+  const listboxId = useId()
   const navigate = useNavigate()
 
   // Debounce search
@@ -16,6 +20,7 @@ export function SearchBar() {
     if (query.trim().length < 2) {
       setResults(null)
       setOpen(false)
+      setActiveIndex(-1)
       return
     }
     const timer = setTimeout(async () => {
@@ -24,6 +29,7 @@ export function SearchBar() {
         const data = await searchApi(query.trim())
         setResults(data)
         setOpen(true)
+        setActiveIndex(-1)
       } catch {
         setResults(null)
       } finally {
@@ -44,28 +50,55 @@ export function SearchBar() {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
+  const flatResults: FlatResult[] = results
+    ? [
+        ...results.sessions.map(s => ({ id: `session-${s.id}`, label: s.title, sub: s.conferenceName, path: `/sessions/${s.id}` })),
+        ...results.speakers.map(sp => ({ id: `speaker-${sp.id}`, label: sp.name, sub: sp.company, path: `/speakers/${sp.id}` })),
+      ]
+    : []
+
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Escape') {
       setOpen(false)
       setQuery('')
+      setActiveIndex(-1)
+      return
+    }
+    if (!open || flatResults.length === 0) return
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setActiveIndex(i => (i + 1) % flatResults.length)
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveIndex(i => (i <= 0 ? flatResults.length - 1 : i - 1))
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault()
+      handleSelect(flatResults[activeIndex].path)
     }
   }
 
   function handleSelect(path: string) {
     setOpen(false)
     setQuery('')
+    setActiveIndex(-1)
     navigate(path)
   }
 
-  const hasResults =
-    results && (results.sessions.length > 0 || results.speakers.length > 0)
+  const hasResults = results && (results.sessions.length > 0 || results.speakers.length > 0)
+  const sessionCount = results?.sessions.length ?? 0
 
   return (
     <div ref={containerRef} className="relative w-64 hidden md:block">
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" aria-hidden="true" />
         <input
           type="text"
+          role="combobox"
+          aria-label="Search sessions and speakers"
+          aria-autocomplete="list"
+          aria-expanded={open}
+          aria-controls={open ? listboxId : undefined}
+          aria-activedescendant={activeIndex >= 0 ? flatResults[activeIndex]?.id : undefined}
           value={query}
           onChange={e => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -73,26 +106,38 @@ export function SearchBar() {
           className="w-full pl-9 pr-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
         />
         {loading && (
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
+          <span
+            role="status"
+            aria-label="Searching…"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"
+          />
         )}
       </div>
 
       {open && (
-        <div className="absolute top-full mt-1 left-0 w-80 bg-white border border-slate-200 rounded-xl shadow-lg z-50 overflow-hidden">
+        <div
+          id={listboxId}
+          role="listbox"
+          aria-label="Search results"
+          className="absolute top-full mt-1 left-0 w-80 bg-white border border-slate-200 rounded-xl shadow-lg z-50 overflow-hidden"
+        >
           {!hasResults ? (
-            <p className="px-4 py-3 text-sm text-slate-500">No results found.</p>
+            <p role="status" className="px-4 py-3 text-sm text-slate-500">No results found.</p>
           ) : (
             <div className="max-h-96 overflow-y-auto">
               {results!.sessions.length > 0 && (
-                <section>
-                  <div className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wide bg-slate-50 border-b border-slate-100">
+                <section aria-label="Sessions">
+                  <div className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wide bg-slate-50 border-b border-slate-100" aria-hidden="true">
                     Sessions
                   </div>
-                  {results!.sessions.map(s => (
+                  {results!.sessions.map((s, i) => (
                     <button
                       key={s.id}
+                      id={`session-${s.id}`}
+                      role="option"
+                      aria-selected={activeIndex === i}
                       onClick={() => handleSelect(`/sessions/${s.id}`)}
-                      className="w-full text-left px-4 py-2.5 hover:bg-indigo-50 transition-colors"
+                      className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === i ? 'bg-indigo-50' : 'hover:bg-indigo-50'}`}
                     >
                       <p className="text-sm font-medium text-slate-800 truncate">{s.title}</p>
                       <p className="text-xs text-slate-500 truncate">{s.conferenceName}</p>
@@ -101,15 +146,18 @@ export function SearchBar() {
                 </section>
               )}
               {results!.speakers.length > 0 && (
-                <section>
-                  <div className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wide bg-slate-50 border-b border-slate-100">
+                <section aria-label="Speakers">
+                  <div className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wide bg-slate-50 border-b border-slate-100" aria-hidden="true">
                     Speakers
                   </div>
-                  {results!.speakers.map(sp => (
+                  {results!.speakers.map((sp, i) => (
                     <button
                       key={sp.id}
+                      id={`speaker-${sp.id}`}
+                      role="option"
+                      aria-selected={activeIndex === sessionCount + i}
                       onClick={() => handleSelect(`/speakers/${sp.id}`)}
-                      className="w-full text-left px-4 py-2.5 hover:bg-indigo-50 transition-colors"
+                      className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === sessionCount + i ? 'bg-indigo-50' : 'hover:bg-indigo-50'}`}
                     >
                       <p className="text-sm font-medium text-slate-800">{sp.name}</p>
                       <p className="text-xs text-slate-500">{sp.company}</p>
