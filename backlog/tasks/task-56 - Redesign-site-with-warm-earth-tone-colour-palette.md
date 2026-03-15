@@ -1,9 +1,11 @@
 ---
 id: TASK-56
 title: Redesign site with warm earth tone colour palette
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-designer'
 created_date: '2026-03-15 00:58'
+updated_date: '2026-03-15 00:59'
 labels:
   - design
   - frontend
