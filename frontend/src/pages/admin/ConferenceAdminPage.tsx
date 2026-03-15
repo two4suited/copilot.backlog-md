@@ -51,38 +51,38 @@ export function ConferenceAdminPage() {
         </Link>
       </div>
 
-      <div className="bg-brand-surface rounded-xl border border-brand-border overflow-hidden">
+      <div className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-brand-border bg-brand-bg">
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Name</th>
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Location</th>
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Dates</th>
-              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Tracks</th>
+            <tr className="border-b border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a]">
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Name</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Location</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Dates</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted dark:text-[#c4a882]">Tracks</th>
               <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
             {conferences?.map((conference, idx) => (
-              <tr key={conference.id} className={`border-b border-brand-border last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
-                <td className="px-4 py-3 font-medium text-brand-primary">{conference.name}</td>
-                <td className="px-4 py-3 text-brand-muted">{conference.location}</td>
-                <td className="px-4 py-3 text-brand-muted">
+              <tr key={conference.id} className={`border-b border-brand-border dark:border-[#4a2e20] last:border-0 hover:bg-brand-border/20 dark:hover:bg-[#4a2e20]/30 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50 dark:bg-[#1a0f0a]/50' : 'bg-brand-surface dark:bg-[#2c1810]'}`}>
+                <td className="px-4 py-3 font-medium text-brand-primary dark:text-[#f5f0eb]">{conference.name}</td>
+                <td className="px-4 py-3 text-brand-muted dark:text-[#c4a882]">{conference.location}</td>
+                <td className="px-4 py-3 text-brand-muted dark:text-[#c4a882]">
                   {new Date(conference.startDate).toLocaleDateString()} – {new Date(conference.endDate).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-3 text-brand-muted">{conference.trackCount}</td>
+                <td className="px-4 py-3 text-brand-muted dark:text-[#c4a882]">{conference.trackCount}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       to={`/admin/conferences/${conference.id}`}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-brand-border text-brand-muted text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-brand-border dark:border-[#4a2e20] text-brand-muted dark:text-[#c4a882] text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
                     >
                       <Pencil className="w-3 h-3" />
                       Edit
                     </Link>
                     <button
                       onClick={() => setDeleteId(conference.id)}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-red-200 text-red-600 text-xs font-medium hover:bg-red-50 transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 text-xs font-medium hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
                     >
                       <Trash2 className="w-3 h-3" />
                       Delete

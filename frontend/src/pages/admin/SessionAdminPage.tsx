@@ -41,7 +41,7 @@ export function SessionAdminPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-brand-primary">Sessions</h1>
+        <h1 className="text-2xl font-bold text-brand-primary dark:text-[#f5f0eb]">Sessions</h1>
         <Link
           to="/admin/sessions/new"
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors"
@@ -51,7 +51,7 @@ export function SessionAdminPage() {
         </Link>
       </div>
 
-      <div className="bg-brand-surface rounded-xl border border-brand-border overflow-hidden">
+      <div className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-brand-border bg-brand-bg">
