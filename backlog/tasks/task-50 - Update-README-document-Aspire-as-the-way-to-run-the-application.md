@@ -26,3 +26,21 @@ The README currently does not clearly explain that .NET Aspire is the primary wa
 - [x] #4 README includes E2E test run command with APP_URL env var
 - [x] #5 Old docker-compose or manual setup instructions removed or clearly marked as legacy
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Updated README to document .NET Aspire as the primary local run method.
+
+**Changes:**
+- Added "Architecture" section describing Aspire + React + PostgreSQL layout
+- Replaced old `aspire run` / wrong dashboard URL (port 15888) with `cd ConferenceApp.AppHost && dotnet run`
+- Documented Aspire dashboard URL (https://localhost:17187) and token-based login
+- Documented dynamic frontend port discovery via lsof or Aspire dashboard
+- Added fixed URLs table (API: https://localhost:7133)
+- Added seeded credentials table (admin + 3 test users)
+- Added E2E test run command with APP_URL env var
+- Condensed Production Deployment section with a clear note that it is separate from the Aspire dev workflow
+- Removed stale env variable tables that duplicated appsettings/docker info
+- Fixed Swagger URL to https://localhost:7133/swagger
+<!-- SECTION:FINAL_SUMMARY:END -->
