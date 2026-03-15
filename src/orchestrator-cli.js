@@ -385,7 +385,7 @@ function cmdTagTasks(params) {
  * Named after the continuous improvement loop concept.
  */
 async function cmdRalph(params) {
-  const intervalSec = parseInt(params.interval || "30", 10);
+  const intervalSec = parseInt(params.interval || "10", 10);
   const maxCycles = params.cycles ? parseInt(params.cycles, 10) : Infinity;
   const dryRun = !!params["dry-run"];
 
@@ -748,8 +748,8 @@ RALPH LOOP:
   - Press Ctrl+C to stop
 
 EXAMPLES:
-  orchestrator ralph                      # Run forever (30s interval)
-  orchestrator ralph --interval 60        # Check every 60s
+  orchestrator ralph                      # Run forever (10s interval)
+  orchestrator ralph --interval 30        # Check every 30s
   orchestrator ralph --cycles 5 --dry-run # 5 dry-run cycles
   orchestrator bug "Login fails on mobile" --task 4.2 --priority high
   orchestrator tag                        # Assign all tasks by label
