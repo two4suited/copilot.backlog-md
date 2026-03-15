@@ -1,9 +1,11 @@
 ---
 id: TASK-74
 title: Give the app a better name than 'ConferenceApp'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-rename'
 created_date: '2026-03-15 01:57'
+updated_date: '2026-03-15 02:12'
 labels:
   - enhancement
   - branding
@@ -44,3 +46,9 @@ Suggested names to consider (pick the best or propose alternatives):
 - [ ] #5 README, docker-compose, azure.yaml updated
 - [ ] #6 App builds and runs successfully after rename
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Name chosen: Sessionize
+<!-- SECTION:NOTES:END -->
