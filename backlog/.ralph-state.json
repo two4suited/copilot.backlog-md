@@ -82,13 +82,13 @@
     },
     "50": {
       "agent": "explore",
-      "cycle": 91,
-      "assignedAt": "2026-03-15T00:55:01.665Z"
+      "cycle": 92,
+      "assignedAt": "2026-03-15T00:55:31.662Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 91,
-      "assignedAt": "2026-03-15T00:55:01.665Z"
+      "cycle": 92,
+      "assignedAt": "2026-03-15T00:55:31.662Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -109,8 +109,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 91,
-      "assignedAt": "2026-03-15T00:55:01.666Z"
+      "cycle": 92,
+      "assignedAt": "2026-03-15T00:55:31.663Z"
     }
   },
   "bugs": [],
