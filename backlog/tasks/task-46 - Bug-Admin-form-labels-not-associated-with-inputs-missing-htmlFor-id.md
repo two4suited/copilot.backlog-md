@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-frontend'
 created_date: '2026-03-15 00:44'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:53'
 labels:
   - bug
   - accessibility
@@ -37,8 +37,8 @@ Fix: Add unique id attributes to each form field and matching htmlFor on the lab
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 All admin form labels have htmlFor matching a corresponding input id
-- [ ] #2 Clicking a label focuses the associated input
-- [ ] #3 Playwright getByLabel() can locate each field
-- [ ] #4 No regression on form submission or validation
+- [x] #1 All admin form labels have htmlFor matching a corresponding input id
+- [x] #2 Clicking a label focuses the associated input
+- [x] #3 Playwright getByLabel() can locate each field
+- [x] #4 No regression on form submission or validation
 <!-- AC:END -->
