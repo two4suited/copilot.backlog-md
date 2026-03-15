@@ -31,3 +31,9 @@ Fix: Replace <> with <Fragment key={time}> (importing Fragment from 'react')
 - [x] #2 Schedule page renders correctly with keyed fragments
 - [x] #3 No regression on schedule grid layout
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Replaced bare <> Fragment with <Fragment key={time}> in SchedulePage DayGrid desktop grid time-slot rows. Added Fragment to the React import. This eliminates the 'Each child in a list should have a unique key prop' console error.
+<!-- SECTION:FINAL_SUMMARY:END -->
