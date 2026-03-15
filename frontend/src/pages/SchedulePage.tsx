@@ -59,12 +59,12 @@ function SessionCard({ session }: { session: Session }) {
       )}
       <div className="flex flex-wrap items-center gap-1.5 mt-auto text-xs text-slate-400 dark:text-[#c4a882]">
         {session.room && (
-          <span className="flex items-center gap-1 bg-brand-bg px-1.5 py-0.5 rounded-md border border-brand-border">
+          <span className="flex items-center gap-1 bg-brand-bg dark:bg-[#1a0f0a] px-1.5 py-0.5 rounded-md border border-brand-border dark:border-[#4a2e20]">
             <DoorOpen className="w-3 h-3 text-brand-accent" /> {session.room}
           </span>
         )}
         {seats !== null && (
-          <span className={`flex items-center gap-1 font-medium px-1.5 py-0.5 rounded-md ${isFull ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50'}`}>
+          <span className={`flex items-center gap-1 font-medium px-1.5 py-0.5 rounded-md ${isFull ? 'text-red-500 bg-red-50 dark:bg-red-900/20' : 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20'}`}>
             <Users className="w-3 h-3" /> {isFull ? 'Full' : `${seats} left`}
           </span>
         )}
@@ -76,7 +76,7 @@ function SessionCard({ session }: { session: Session }) {
 // ── empty placeholder ──────────────────────────────────────────────────────
 
 function EmptyCell() {
-  return <div className="h-full min-h-[80px] rounded-xl bg-brand-bg border border-dashed border-brand-border" />;
+  return <div className="h-full min-h-[80px] rounded-xl bg-brand-bg dark:bg-[#1a0f0a] border border-dashed border-brand-border dark:border-[#4a2e20]" />;
 }
 
 // ── schedule grid for one day ─────────────────────────────────────────────
@@ -125,11 +125,11 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
           style={{ gridTemplateColumns: `80px repeat(${visibleTracks.length}, minmax(180px, 1fr))` }}
         >
           {/* Header row — sticky at top */}
-          <div className="sticky top-16 bg-brand-surface z-20" />
+          <div className="sticky top-16 bg-brand-surface dark:bg-[#2c1810] z-20" />
           {visibleTracks.map(track => (
             <div
               key={track.id}
-              className="sticky top-16 z-20 px-3 py-2.5 border-b-2 border-brand-border bg-brand-surface text-center"
+              className="sticky top-16 z-20 px-3 py-2.5 border-b-2 border-brand-border dark:border-[#4a2e20] bg-brand-surface dark:bg-[#2c1810] text-center"
             >
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"
@@ -145,7 +145,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
             <Fragment key={time}>
               {/* Time label */}
               <div
-                className="sticky left-0 bg-brand-surface flex items-start justify-end pr-3 pt-3 text-xs font-semibold text-brand-muted border-b border-brand-border z-10"
+                className="sticky left-0 bg-brand-surface dark:bg-[#2c1810] flex items-start justify-end pr-3 pt-3 text-xs font-semibold text-brand-muted dark:text-[#c4a882] border-b border-brand-border dark:border-[#4a2e20] z-10"
               >
                 <span className="flex items-center gap-1">
                   <Clock className="w-3 h-3 text-brand-accent" /> {time}
@@ -156,7 +156,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
               {visibleTracks.map(track => {
                 const session = index[time]?.[track.id];
                 return (
-                  <div key={`${time}-${track.id}`} className="p-1.5 border-b border-slate-100">
+                  <div key={`${time}-${track.id}`} className="p-1.5 border-b border-slate-100 dark:border-[#4a2e20]">
                     {session ? <SessionCard session={session} /> : <EmptyCell />}
                   </div>
                 );
@@ -170,7 +170,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
       <div className="md:hidden space-y-6">
         {timeSlots.map(time => (
           <div key={time}>
-            <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-slate-500">
+            <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-slate-500 dark:text-[#c4a882]">
               <Clock className="w-4 h-4 text-brand-accent" /> {time}
             </div>
             <div className="space-y-2 pl-6">
@@ -179,7 +179,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
                 if (!session) return null;
                 return (
                   <div key={track.id}>
-                    <p className="text-xs font-medium text-brand-muted mb-1">
+                    <p className="text-xs font-medium text-brand-muted dark:text-[#c4a882] mb-1">
                       <span
                         className="inline-block w-2 h-2 rounded-full mr-1 align-middle"
                         style={{ backgroundColor: track.color }}
@@ -287,7 +287,7 @@ export function SchedulePage() {
               setFilteredTrackIds(null);
             }}
             aria-label="Select conference"
-            className="text-sm border border-brand-border rounded-lg px-3 py-1.5 bg-brand-surface text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="text-sm border border-brand-border dark:border-[#4a2e20] rounded-lg px-3 py-1.5 bg-brand-surface dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] focus:outline-none focus:ring-2 focus:ring-brand-accent"
           >
             {conferences.map(c => (
               <option key={c.id} value={c.id}>{c.name}</option>
@@ -306,7 +306,7 @@ export function SchedulePage() {
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 d === activeDay
                   ? 'bg-brand-accent text-white shadow-sm'
-                  : 'bg-brand-surface border border-brand-border text-brand-muted hover:border-brand-accent hover:text-brand-accent'
+                  : 'bg-brand-surface dark:bg-[#2c1810] border border-brand-border dark:border-[#4a2e20] text-brand-muted dark:text-[#c4a882] hover:border-brand-accent hover:text-brand-accent'
               }`}
             >
               Day {i + 1} — {fmtDayLabel(`${d}T00:00:00`, timezone)}
@@ -318,7 +318,7 @@ export function SchedulePage() {
       {/* Track filter bar */}
       {tracks.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6 items-center">
-          <span className="text-xs font-semibold text-brand-muted uppercase tracking-wider">Filter:</span>
+          <span className="text-xs font-semibold text-brand-muted dark:text-[#c4a882] uppercase tracking-wider">Filter:</span>
           {tracks.map(track => {
             const active = filteredTrackIds === null || filteredTrackIds.has(track.id);
             return (
@@ -328,7 +328,7 @@ export function SchedulePage() {
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
                   active
                     ? 'border-transparent text-white shadow-sm'
-                    : 'bg-brand-bg border-brand-border text-brand-muted opacity-50'
+                    : 'bg-brand-bg dark:bg-[#1a0f0a] border-brand-border dark:border-[#4a2e20] text-brand-muted dark:text-[#c4a882] opacity-50'
                 }`}
                 style={active ? { backgroundColor: track.color || '#556b45' } : undefined}
               >
