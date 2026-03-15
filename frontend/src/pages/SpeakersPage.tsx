@@ -7,7 +7,7 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { Mic2 } from 'lucide-react';
 
 function SpeakerAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
-  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0f172a&color=0ea5e9&size=112&font-size=0.38&bold=true`;
+  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=c2622d&color=faf7f2&size=112&font-size=0.38&bold=true`;
   return (
     <img
       src={photoUrl || fallback}
@@ -30,8 +30,8 @@ export function SpeakersPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-extrabold text-slate-900">Speakers</h1>
-        <p className="text-slate-500 mt-1">Meet the experts presenting at this year's events.</p>
+        <h1 className="text-3xl font-extrabold text-brand-primary">Speakers</h1>
+        <p className="text-brand-muted mt-1">Meet the experts presenting at this year's events.</p>
       </div>
 
       {!speakers || speakers.length === 0 ? (
@@ -45,12 +45,12 @@ export function SpeakersPage() {
             <Link
               key={speaker.id}
               to={`/speakers/${speaker.id}`}
-              className="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-brand-accent/30 transition-all flex gap-4 items-start"
+              className="group bg-brand-surface rounded-2xl border border-brand-border p-5 hover:shadow-md hover:border-brand-accent/40 transition-all flex gap-4 items-start"
               data-testid="speaker-card"
             >
               <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900 group-hover:text-brand-accent transition-colors leading-snug">
+                <h3 className="font-semibold text-brand-primary group-hover:text-brand-accent transition-colors leading-snug">
                   {speaker.name}
                 </h3>
                 {speaker.company && (
@@ -59,7 +59,7 @@ export function SpeakersPage() {
                   </span>
                 )}
                 {speaker.bio && (
-                  <p className="text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">{speaker.bio}</p>
+                  <p className="text-sm text-brand-muted mt-2 line-clamp-2 leading-relaxed">{speaker.bio}</p>
                 )}
               </div>
             </Link>
