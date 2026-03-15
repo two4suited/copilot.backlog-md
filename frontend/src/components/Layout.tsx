@@ -21,14 +21,14 @@ export function Layout() {
       : location.pathname.startsWith(path);
 
   return (
-    <div className="min-h-screen bg-brand-surface">
-      <header className="bg-brand-primary sticky top-0 z-40 shadow-md">
+    <div className="min-h-screen bg-brand-bg">
+      <header className="bg-brand-surface border-b border-brand-border sticky top-0 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 shrink-0">
               <CalendarDays className="w-7 h-7 text-brand-accent" />
-              <span className="font-bold text-white text-lg tracking-tight">ConferenceApp</span>
+              <span className="font-bold text-brand-primary text-lg tracking-tight">ConferenceApp</span>
             </Link>
 
             {/* Desktop nav */}
@@ -39,15 +39,12 @@ export function Layout() {
                   to={to}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive(to)
-                      ? 'text-brand-accent bg-white/10'
-                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                      ? 'text-brand-accent bg-brand-accent/10'
+                      : 'text-brand-muted hover:text-brand-primary hover:bg-brand-border/30'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   {label}
-                  {isActive(to) && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-accent rounded-full" />
-                  )}
                 </Link>
               ))}
             </nav>
@@ -61,8 +58,8 @@ export function Layout() {
                     to="/my-schedule"
                     className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                       isActive('/my-schedule')
-                        ? 'text-brand-accent bg-white/10'
-                        : 'text-slate-300 hover:text-white hover:bg-white/10'
+                        ? 'text-brand-accent bg-brand-accent/10'
+                        : 'text-brand-muted hover:text-brand-primary hover:bg-brand-border/30'
                     }`}
                   >
                     <BookMarked className="w-4 h-4" />
@@ -73,18 +70,18 @@ export function Layout() {
                       to="/admin"
                       className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                         isActive('/admin')
-                          ? 'text-brand-accent bg-white/10'
-                          : 'text-slate-300 hover:text-white hover:bg-white/10'
+                          ? 'text-brand-accent bg-brand-accent/10'
+                          : 'text-brand-muted hover:text-brand-primary hover:bg-brand-border/30'
                       }`}
                     >
                       <Settings className="w-4 h-4" />
                       Admin
                     </Link>
                   )}
-                  <span className="text-sm text-slate-400 hidden lg:block">{user?.name}</span>
+                  <span className="text-sm text-brand-muted hidden lg:block">{user?.name}</span>
                   <button
                     onClick={logout}
-                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 text-slate-300 text-sm font-medium hover:bg-white/10 hover:text-white transition-colors"
+                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-brand-border text-brand-muted text-sm font-medium hover:bg-brand-border/30 hover:text-brand-primary transition-colors"
                   >
                     Sign Out
                   </button>
@@ -92,7 +89,7 @@ export function Layout() {
               ) : (
                 <Link
                   to="/login"
-                  className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-sky-400 transition-colors"
+                  className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   Sign In
@@ -101,7 +98,7 @@ export function Layout() {
 
               {/* Hamburger — mobile only */}
               <button
-                className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+                className="md:hidden p-2 rounded-lg text-brand-muted hover:text-brand-primary hover:bg-brand-border/30 transition-colors"
                 onClick={() => setMenuOpen(o => !o)}
                 aria-label="Toggle menu"
               >
@@ -113,7 +110,7 @@ export function Layout() {
 
         {/* Mobile dropdown */}
         {menuOpen && (
-          <div className="md:hidden border-t border-white/10 bg-brand-primary/95 backdrop-blur-sm">
+          <div className="md:hidden border-t border-brand-border bg-brand-surface">
             <div className="px-4 py-3 space-y-1">
               {navItems.map(({ to, label, icon: Icon }) => (
                 <Link
@@ -122,8 +119,8 @@ export function Layout() {
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive(to)
-                      ? 'bg-brand-accent/20 text-brand-accent'
-                      : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                      ? 'bg-brand-accent/10 text-brand-accent'
+                      : 'text-brand-muted hover:bg-brand-border/30 hover:text-brand-primary'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -137,8 +134,8 @@ export function Layout() {
                     onClick={() => setMenuOpen(false)}
                     className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       isActive('/my-schedule')
-                        ? 'bg-brand-accent/20 text-brand-accent'
-                        : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                        ? 'bg-brand-accent/10 text-brand-accent'
+                        : 'text-brand-muted hover:bg-brand-border/30 hover:text-brand-primary'
                     }`}
                   >
                     <BookMarked className="w-4 h-4" />
@@ -150,18 +147,18 @@ export function Layout() {
                       onClick={() => setMenuOpen(false)}
                       className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                         isActive('/admin')
-                          ? 'bg-brand-accent/20 text-brand-accent'
-                          : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                          ? 'bg-brand-accent/10 text-brand-accent'
+                          : 'text-brand-muted hover:bg-brand-border/30 hover:text-brand-primary'
                       }`}
                     >
                       <Settings className="w-4 h-4" />
                       Admin
                     </Link>
                   )}
-                  <div className="pt-2 border-t border-white/10">
+                  <div className="pt-2 border-t border-brand-border">
                     <button
                       onClick={() => { logout(); setMenuOpen(false); }}
-                      className="w-full text-left flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
+                      className="w-full text-left flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium text-brand-muted hover:bg-brand-border/30 hover:text-brand-primary transition-colors"
                     >
                       Sign Out
                     </button>
@@ -171,7 +168,7 @@ export function Layout() {
                 <Link
                   to="/login"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium bg-brand-accent/20 text-brand-accent"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium bg-brand-accent/10 text-brand-accent"
                 >
                   <LogIn className="w-4 h-4" />
                   Sign In
