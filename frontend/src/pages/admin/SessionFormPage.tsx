@@ -174,46 +174,46 @@ export function SessionFormPage() {
 
   return (
     <div className="max-w-2xl">
-      <Link to="/admin/sessions" className="flex items-center gap-1 text-sm text-brand-muted hover:text-brand-primary mb-6">
+      <Link to="/admin/sessions" className="flex items-center gap-1 text-sm text-brand-muted dark:text-[#c4a882] hover:text-brand-primary dark:hover:text-[#f5f0eb] mb-6">
         <ChevronLeft className="w-4 h-4" />
         Back to Sessions
       </Link>
 
-      <h1 className="text-2xl font-bold text-brand-primary mb-6">
+      <h1 className="text-2xl font-bold text-brand-primary dark:text-[#f5f0eb] mb-6">
         {isNew ? 'New Session' : session?.title ? `Edit Session: ${session.title}` : 'Edit Session'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-brand-surface rounded-xl border border-brand-border p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-6 space-y-5">
         <div>
-          <label htmlFor="session-title" className="block text-sm font-medium text-slate-700 mb-1">Title *</label>
+          <label htmlFor="session-title" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Title *</label>
           <input
             id="session-title"
             type="text"
             value={form.title}
             onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.title ? 'border-red-400' : 'border-brand-border'}`}
+            className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.title ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
           />
           {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
         </div>
 
         <div>
-          <label htmlFor="session-description" className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+          <label htmlFor="session-description" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Description</label>
           <textarea
             id="session-description"
             rows={3}
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
 
         <div>
-          <label htmlFor="session-conference" className="block text-sm font-medium text-slate-700 mb-1">Conference</label>
+          <label htmlFor="session-conference" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Conference</label>
           <select
             id="session-conference"
             value={form.conferenceId}
             onChange={e => setForm(f => ({ ...f, conferenceId: e.target.value, trackId: '' }))}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
           >
             <option value="">Select a conference...</option>
             {conferences?.map(c => (
@@ -223,13 +223,13 @@ export function SessionFormPage() {
         </div>
 
         <div>
-          <label htmlFor="session-track" className="block text-sm font-medium text-slate-700 mb-1">Track *</label>
+          <label htmlFor="session-track" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Track *</label>
           <select
             id="session-track"
             value={form.trackId}
             onChange={e => setForm(f => ({ ...f, trackId: e.target.value }))}
             disabled={!form.conferenceId}
-            className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.trackId ? 'border-red-400' : 'border-brand-border'} ${!form.conferenceId ? 'bg-brand-bg text-brand-muted' : ''}`}
+            className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.trackId ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'} ${!form.conferenceId ? 'text-brand-muted dark:text-[#c4a882]' : 'text-brand-primary dark:text-[#f5f0eb]'}`}
           >
             <option value="">Select a track...</option>
             {tracks?.map(t => (
@@ -241,24 +241,24 @@ export function SessionFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="session-start-time" className="block text-sm font-medium text-slate-700 mb-1">Start Time *</label>
+            <label htmlFor="session-start-time" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Start Time *</label>
             <input
               id="session-start-time"
               type="datetime-local"
               value={form.startTime}
               onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.startTime ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.startTime ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             />
             {errors.startTime && <p className="mt-1 text-xs text-red-600">{errors.startTime}</p>}
           </div>
           <div>
-            <label htmlFor="session-end-time" className="block text-sm font-medium text-slate-700 mb-1">End Time *</label>
+            <label htmlFor="session-end-time" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">End Time *</label>
             <input
               id="session-end-time"
               type="datetime-local"
               value={form.endTime}
               onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.endTime ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.endTime ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             />
             {errors.endTime && <p className="mt-1 text-xs text-red-600">{errors.endTime}</p>}
           </div>
@@ -266,13 +266,13 @@ export function SessionFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="session-room" className="block text-sm font-medium text-slate-700 mb-1">Room *</label>
+            <label htmlFor="session-room" className="block text-sm font-medium text-slate-700 dark:text-[#f5f0eb] mb-1">Room *</label>
             <input
               id="session-room"
               type="text"
               value={form.room}
               onChange={e => setForm(f => ({ ...f, room: e.target.value }))}
-              className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.room ? 'border-red-400' : 'border-brand-border'}`}
+              className={`w-full px-3 py-2 rounded-lg border bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent ${errors.room ? 'border-red-400' : 'border-brand-border dark:border-[#4a2e20]'}`}
             />
             {errors.room && <p className="mt-1 text-xs text-red-600">{errors.room}</p>}
           </div>
