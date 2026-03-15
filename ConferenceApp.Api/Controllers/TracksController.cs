@@ -37,17 +37,19 @@ public class TracksController : ControllerBase
     {
         var track = await _db.Tracks
             .AsNoTracking()
+            .Include(t => t.Conference)
             .Include(t => t.Sessions)
             .FirstOrDefaultAsync(t => t.Id == id && t.ConferenceId == conferenceId, ct);
 
         if (track is null) return NotFound();
 
+        var tz = track.Conference?.Timezone ?? "UTC";
         var dto = new TrackDetailDto(
             track.Id, track.ConferenceId, track.Name, track.Description,
             track.Color, track.SortOrder,
             track.Sessions.Select(s => new SessionSummaryDto(
                 s.Id, s.Title, s.StartTime, s.EndTime, s.Room,
-                s.Capacity, s.SessionType, s.Level)).ToList());
+                s.Capacity, s.SessionType, s.Level, tz)).ToList());
 
         return Ok(dto);
     }

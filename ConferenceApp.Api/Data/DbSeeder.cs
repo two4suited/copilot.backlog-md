@@ -37,6 +37,7 @@ public static class DbSeeder
             EndDate = new DateTime(2026, 6, 16, 18, 0, 0, DateTimeKind.Utc),
             Location = "San Francisco, CA",
             WebsiteUrl = "https://techconf2026.example.com",
+            Timezone = "America/Los_Angeles",
         };
 
         var speakers = new[]

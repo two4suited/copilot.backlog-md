@@ -4,29 +4,17 @@ import { api } from '../services/api';
 import type { Speaker } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { Mic2 } from 'lucide-react';
 
 function SpeakerAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
-  const initials = name
-    .split(' ')
-    .map(n => n[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
-
-  if (photoUrl) {
-    return (
-      <img
-        src={photoUrl}
-        alt={name}
-        className="w-14 h-14 rounded-full object-cover shrink-0"
-      />
-    );
-  }
-
+  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0f172a&color=0ea5e9&size=112&font-size=0.38&bold=true`;
   return (
-    <div className="w-14 h-14 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-semibold text-lg shrink-0">
-      {initials}
-    </div>
+    <img
+      src={photoUrl || fallback}
+      alt={name}
+      className="w-16 h-16 rounded-full object-cover shrink-0 border-2 border-slate-100 shadow-sm"
+      onError={e => { (e.currentTarget as HTMLImageElement).src = fallback; }}
+    />
   );
 }
 
@@ -41,28 +29,37 @@ export function SpeakersPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-900 mb-6">Speakers</h1>
+      <div className="mb-6">
+        <h1 className="text-3xl font-extrabold text-slate-900">Speakers</h1>
+        <p className="text-slate-500 mt-1">Meet the experts presenting at this year's events.</p>
+      </div>
+
       {!speakers || speakers.length === 0 ? (
-        <p className="text-slate-500">No speakers found.</p>
+        <div className="text-center py-16">
+          <Mic2 className="mx-auto w-12 h-12 text-slate-300 mb-3" />
+          <p className="text-slate-500">No speakers found.</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {speakers.map(speaker => (
             <Link
               key={speaker.id}
               to={`/speakers/${speaker.id}`}
-              className="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-indigo-200 transition-all flex gap-4 items-start"
+              className="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-brand-accent/30 transition-all flex gap-4 items-start"
               data-testid="speaker-card"
             >
               <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="font-semibold text-slate-900 group-hover:text-brand-accent transition-colors leading-snug">
                   {speaker.name}
                 </h3>
                 {speaker.company && (
-                  <p className="text-sm text-slate-500 mt-0.5">{speaker.company}</p>
+                  <span className="inline-block mt-1 px-2 py-0.5 rounded-md bg-brand-accent/10 text-brand-accent text-xs font-medium">
+                    {speaker.company}
+                  </span>
                 )}
                 {speaker.bio && (
-                  <p className="text-sm text-slate-600 mt-2 line-clamp-2">{speaker.bio}</p>
+                  <p className="text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">{speaker.bio}</p>
                 )}
               </div>
             </Link>

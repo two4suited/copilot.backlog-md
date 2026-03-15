@@ -10,17 +10,15 @@ import { LevelBadge } from '../components/LevelBadge';
 import { useAuth } from '../context/AuthContext';
 import { useSessionSeats } from '../hooks/useSessionSeats';
 
-function SpeakerAvatar({ name }: { name: string }) {
-  const initials = name
-    .split(' ')
-    .map(n => n[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
+function SpeakerAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
+  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0f172a&color=0ea5e9&size=96&font-size=0.38&bold=true`;
   return (
-    <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-semibold text-sm shrink-0">
-      {initials}
-    </div>
+    <img
+      src={photoUrl || fallback}
+      alt={name}
+      className="w-12 h-12 rounded-full object-cover shrink-0 border-2 border-slate-100 shadow-sm"
+      onError={e => { (e.currentTarget as HTMLImageElement).src = fallback; }}
+    />
   );
 }
 

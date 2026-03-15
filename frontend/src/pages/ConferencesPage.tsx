@@ -6,32 +6,64 @@ import type { Conference, PagedResult } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 
-function ConferenceCard({ conference }: { conference: Conference }) {
-  const start = new Date(conference.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  const end = new Date(conference.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+// Gradient palettes cycled per card for visual variety
+const CARD_GRADIENTS = [
+  'from-brand-primary to-slate-700',
+  'from-slate-800 to-cyan-900',
+  'from-sky-900 to-brand-primary',
+  'from-slate-900 to-sky-800',
+];
+
+function ConferenceCard({ conference, index }: { conference: Conference; index: number }) {
+  const start = new Date(conference.startDate);
+  const end = new Date(conference.endDate);
+
+  const dateBadge = `${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${end.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+  const gradient = CARD_GRADIENTS[index % CARD_GRADIENTS.length];
 
   return (
     <Link
       to={`/conferences/${conference.id}`}
-      className="block bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-indigo-200 transition-all duration-200"
+      className="group block bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-brand-accent/30 transition-all duration-200"
       data-testid="conference-card"
     >
-      <h3 className="font-semibold text-slate-900 text-xl leading-tight">{conference.name}</h3>
-      {conference.description && (
-        <p className="text-slate-500 text-sm mt-2 line-clamp-2">{conference.description}</p>
-      )}
-      <div className="mt-4 space-y-2">
-        <div className="flex items-center gap-2 text-slate-500 text-sm">
-          <CalendarDays className="w-4 h-4 text-indigo-400 shrink-0" />
-          <span>{start} – {end}</span>
-        </div>
-        <div className="flex items-center gap-2 text-slate-500 text-sm">
-          <MapPin className="w-4 h-4 text-indigo-400 shrink-0" />
-          <span>{conference.location}</span>
-        </div>
-        <div className="flex items-center gap-2 text-slate-500 text-sm">
-          <Layers className="w-4 h-4 text-indigo-400 shrink-0" />
-          <span>{conference.trackCount ?? 0} track{(conference.trackCount ?? 0) !== 1 ? 's' : ''}</span>
+      {/* Gradient image placeholder */}
+      <div className={`relative h-36 bg-gradient-to-br ${gradient} flex items-end p-3 overflow-hidden`}>
+        {/* Decorative grid dots */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
+            backgroundSize: '20px 20px',
+          }}
+        />
+        <CalendarDays className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 text-white/10" />
+        {/* Date badge */}
+        <span className="relative z-10 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-slate-700 text-xs font-semibold px-2.5 py-1.5 rounded-lg shadow-sm">
+          <CalendarDays className="w-3 h-3 text-brand-accent" />
+          {dateBadge}
+        </span>
+      </div>
+
+      {/* Card body */}
+      <div className="p-5">
+        <h3 className="font-semibold text-slate-900 text-lg leading-snug group-hover:text-brand-accent transition-colors line-clamp-2">
+          {conference.name}
+        </h3>
+        {conference.description && (
+          <p className="text-slate-500 text-sm mt-1.5 line-clamp-2 leading-relaxed">{conference.description}</p>
+        )}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {/* Location pill */}
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-xs text-slate-600 font-medium">
+            <MapPin className="w-3 h-3 text-brand-accent shrink-0" />
+            {conference.location}
+          </span>
+          {/* Tracks pill */}
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-accent/10 text-xs text-brand-accent font-medium">
+            <Layers className="w-3 h-3 shrink-0" />
+            {conference.trackCount ?? 0} track{(conference.trackCount ?? 0) !== 1 ? 's' : ''}
+          </span>
         </div>
       </div>
     </Link>
@@ -44,7 +76,6 @@ export function ConferencesPage() {
     queryFn: () => api.conferences.list(),
   });
 
-  // Support both paged results and plain arrays from the API
   const items: Conference[] = Array.isArray(data) ? data : (data?.items ?? []);
 
   if (isPending) return <LoadingSpinner />;
@@ -52,12 +83,15 @@ export function ConferencesPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-900">Conferences</h1>
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map(c => <ConferenceCard key={c.id} conference={c} />)}
+      <div className="mb-6">
+        <h1 className="text-3xl font-extrabold text-slate-900">Conferences</h1>
+        <p className="text-slate-500 mt-1">Explore upcoming tech events and plan your schedule.</p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {items.map((c, i) => <ConferenceCard key={c.id} conference={c} index={i} />)}
         {items.length === 0 && (
           <div className="col-span-full text-center py-16 text-slate-400">
-            <CalendarDays className="mx-auto w-12 h-12 mb-3" />
+            <CalendarDays className="mx-auto w-12 h-12 mb-3 text-slate-300" />
             <p className="font-medium text-slate-600">No conferences yet</p>
           </div>
         )}

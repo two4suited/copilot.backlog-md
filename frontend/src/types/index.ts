@@ -11,6 +11,7 @@ export interface Conference extends BaseEntity {
   endDate: string;
   location: string;
   websiteUrl?: string;
+  timezone: string;
   trackCount: number;
   tracks?: Track[];
 }
@@ -42,6 +43,7 @@ export interface SessionSummary {
   capacity: number;
   sessionType: string;
   level: string;
+  conferenceTimezone?: string;
 }
 
 export interface Speaker extends BaseEntity {
@@ -71,6 +73,7 @@ export interface Session extends BaseEntity {
   recordingUrl?: string;
   speakers?: Speaker[];
   isRegistered?: boolean;
+  conferenceTimezone?: string;
 }
 
 export interface User extends BaseEntity {
