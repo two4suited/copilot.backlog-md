@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-frontend'
 created_date: '2026-03-15 00:45'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:53'
 labels:
   - bug
   - ux
@@ -34,8 +34,8 @@ Fix: Update the h1 heading in ConferenceFormPage, SpeakerFormPage, and SessionFo
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Admin conference edit page heading shows the conference name
-- [ ] #2 Admin speaker edit page heading shows the speaker name
-- [ ] #3 Admin session edit page heading shows the session title
-- [ ] #4 New entity pages still show 'New Conference' / 'New Speaker' / 'New Session'
+- [x] #1 Admin conference edit page heading shows the conference name
+- [x] #2 Admin speaker edit page heading shows the speaker name
+- [x] #3 Admin session edit page heading shows the session title
+- [x] #4 New entity pages still show 'New Conference' / 'New Speaker' / 'New Session'
 <!-- AC:END -->
