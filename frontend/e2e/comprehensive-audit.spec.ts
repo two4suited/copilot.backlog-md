@@ -468,12 +468,20 @@ test.describe('Admin – New Conference (/admin/conferences/new)', () => {
     const nameField = page.locator('input[type="text"]').first();
     await expect(nameField).toBeVisible({ timeout: 10_000 });
 
-    // Fill form
+    // Fill form — Name is first text input (SearchBar is in nav, not in the form)
+    // Conference form fields: Name(text), Location(text), WebsiteUrl(url)
     const uniqueName = `Audit Conf ${Date.now()}`;
-    await nameField.fill(uniqueName);
+    const textInputs = page.locator('form input[type="text"]');
+    await textInputs.nth(0).fill(uniqueName);  // Name
 
-    const descField = page.locator('textarea').first();
+    const descField = page.locator('form textarea').first();
     if (await descField.count() > 0) await descField.fill('Audit test conference');
+
+    // Location (second text input in form)
+    const locationTextInputs = await textInputs.count();
+    if (locationTextInputs >= 2) {
+      await textInputs.nth(1).fill('Test City, TX');
+    }
 
     // Date fields
     const dateFields = page.locator('input[type="date"]');
