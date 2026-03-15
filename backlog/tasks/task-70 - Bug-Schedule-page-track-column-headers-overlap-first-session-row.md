@@ -29,7 +29,7 @@ Fix candidates in frontend/src/pages/SchedulePage.tsx:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Track column headers sit above all session rows, not overlapping the first row
-- [ ] #2 Headers are visible and fixed when scrolling horizontally and vertically
-- [ ] #3 First session time slot is fully visible below the header row
+- [x] #1 Track column headers sit above all session rows, not overlapping the first row
+- [x] #2 Headers are visible and fixed when scrolling horizontally and vertically
+- [x] #3 First session time slot is fully visible below the header row
 <!-- AC:END -->
