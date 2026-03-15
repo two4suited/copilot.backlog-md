@@ -1,9 +1,12 @@
 name: Deploy to Azure Container Apps
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment (e.g. production)'
+        required: false
+        default: 'production'
 
 permissions:
   id-token: write  # Required for OIDC token exchange with Azure

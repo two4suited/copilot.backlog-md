@@ -86,9 +86,10 @@ interface DayGridProps {
   tracks: Track[];
   filteredTrackIds: Set<string> | null;
   timezone: string;
+  hasFilterBar?: boolean;
 }
 
-function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps) {
+function DayGrid({ sessions, tracks, filteredTrackIds, timezone, hasFilterBar = false }: DayGridProps) {
   const visibleTracks = filteredTrackIds
     ? tracks.filter(t => filteredTrackIds.has(t.id))
     : tracks;
