@@ -64,8 +64,8 @@ export function ConferenceFormPage() {
       const payload = {
         name: data.name,
         description: data.description || null,
-        startDate: data.startDate,
-        endDate: data.endDate,
+        startDate: data.startDate ? data.startDate + 'T00:00:00Z' : '',
+        endDate: data.endDate ? data.endDate + 'T00:00:00Z' : '',
         location: data.location,
         websiteUrl: data.websiteUrl || null,
       };
