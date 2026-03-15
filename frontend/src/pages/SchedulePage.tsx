@@ -116,6 +116,10 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone, hasFilterBar = 
     return <p className="text-brand-muted text-sm">No sessions scheduled for this day.</p>;
   }
 
+  // When the filter bar is sticky above this grid, headers need to clear both
+  // the nav (64 px / top-16) and the filter bar (~52 px) → top-[116px].
+  const headerTop = hasFilterBar ? 'top-[116px]' : 'top-16';
+
   return (
     /* Desktop: CSS grid; mobile: stacked */
     <div>
@@ -125,12 +129,12 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone, hasFilterBar = 
           className="grid min-w-max"
           style={{ gridTemplateColumns: `80px repeat(${visibleTracks.length}, minmax(180px, 1fr))` }}
         >
-          {/* Header row — sticky at top */}
-          <div className="sticky top-16 bg-brand-surface dark:bg-[#2c1810] z-20" />
+          {/* Header row — sticky below nav (and filter bar when present) */}
+          <div className={`sticky ${headerTop} bg-brand-surface dark:bg-[#2c1810] z-20`} />
           {visibleTracks.map(track => (
             <div
               key={track.id}
-              className="sticky top-16 z-20 px-3 py-2.5 border-b-2 border-brand-border dark:border-[#4a2e20] bg-brand-surface dark:bg-[#2c1810] text-center"
+              className={`sticky ${headerTop} z-20 px-3 py-2.5 border-b-2 border-brand-border dark:border-[#4a2e20] bg-brand-surface dark:bg-[#2c1810] text-center`}
             >
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"
@@ -316,9 +320,9 @@ export function SchedulePage() {
         </div>
       )}
 
-      {/* Track filter bar */}
+      {/* Track filter bar — sticky below the nav so it stays reachable while scrolling */}
       {tracks.length > 1 && (
-        <div className="flex flex-wrap gap-2 mb-6 items-center">
+        <div className="sticky top-16 z-30 bg-brand-bg dark:bg-[#1a0f0a] py-3 mb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 border-b border-brand-border dark:border-[#4a2e20] flex flex-wrap gap-2 items-center">
           <span className="text-xs font-semibold text-brand-muted dark:text-[#c4a882] uppercase tracking-wider">Filter:</span>
           {tracks.map(track => {
             const active = filteredTrackIds === null || filteredTrackIds.has(track.id);
@@ -347,6 +351,7 @@ export function SchedulePage() {
           tracks={tracks}
           filteredTrackIds={filteredTrackIds}
           timezone={timezone}
+          hasFilterBar={tracks.length > 1}
         />
       ) : (
         <p className="text-brand-muted">No sessions scheduled yet.</p>
