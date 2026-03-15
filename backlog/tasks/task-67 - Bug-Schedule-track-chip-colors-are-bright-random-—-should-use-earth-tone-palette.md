@@ -44,3 +44,23 @@ File: ConferenceApp.Api/Data/DbSeeder.cs
 - [x] #2 Track labels in session grid use the updated colors
 - [x] #3 DB updated with new track colors (direct SQL or seeder reset)
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Updated track chip colors from vivid palette (blue, purple, pink, red, amber) to earth tones:
+
+- Backend & APIs: #9e4820 (terracotta)
+- Frontend & UX: #7a5040 (dusty rose-brown)
+- Data & AI: #556b45 (sage)
+- Security: #7a3b2e (dark terracotta)
+- DevOps & Cloud: #6b5a3e (warm brown)
+- Platform Engineering: #4a6741 (forest green)
+- Mobile / Architecture / others: #8a6a3a (golden brown)
+
+**Files changed:** `ConferenceApp.Api/Data/DbSeeder.cs` — all 18 track entries across 3 conferences updated.
+
+**Live DB:** Applied same mapping via SQL UPDATE on the running Aspire postgres container (18 rows updated).
+
+No tests broken; seeder changes take effect on next DB re-seed.
+<!-- SECTION:FINAL_SUMMARY:END -->
