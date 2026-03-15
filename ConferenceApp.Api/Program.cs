@@ -41,8 +41,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "https://localhost:5173",
-                           "http://localhost:5174", "https://localhost:5174")
+        // Allow any localhost origin so the port Aspire/Vite picks doesn't matter
+        policy.SetIsOriginAllowed(origin =>
+              {
+                  var uri = new Uri(origin);
+                  return uri.Host == "localhost" || uri.Host == "127.0.0.1";
+              })
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();

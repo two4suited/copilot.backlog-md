@@ -19,11 +19,11 @@ var api = builder
     .WithReference(db)
     .WaitFor(postgres);
 
-// React/Vite frontend (created later at ../frontend)
+// React/Vite frontend — uses AddViteApp (Aspire.Hosting.JavaScript)
+// which auto-configures the HTTP endpoint and sets the PORT env var.
 builder
-    .AddNpmApp("frontend", "../frontend", "dev")
+    .AddViteApp("frontend", "../frontend")
     .WithReference(api)
-    .WithHttpEndpoint(port: 5173, env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WaitFor(api);
 
