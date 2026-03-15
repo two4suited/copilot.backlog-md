@@ -18,23 +18,30 @@ public class SessionReminderService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        try
         {
-            try
+            while (!stoppingToken.IsCancellationRequested)
             {
-                await ProcessRemindersAsync(stoppingToken);
-                await Task.Delay(Interval, stoppingToken);
+                try
+                {
+                    await ProcessRemindersAsync(stoppingToken);
+                    await Task.Delay(Interval, stoppingToken);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Normal shutdown — exit gracefully
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error processing session reminders.");
+                    await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
+                }
             }
-            catch (OperationCanceledException)
-            {
-                // Normal shutdown — exit gracefully
-                break;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error processing session reminders.");
-                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken).ConfigureAwait(false);
-            }
+        }
+        catch (OperationCanceledException)
+        {
+            // Cancellation raised during error-recovery delay — exit gracefully
         }
     }
 

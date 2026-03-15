@@ -96,8 +96,8 @@ public static class DbSeeder
         }
 
         // ── Speakers ──────────────────────────────────────────────────────────
-        static string Avatar(string name) =>
-            $"https://ui-avatars.com/api/?name={Uri.EscapeDataString(name)}&size=200&background=random";
+        static string Avatar(string email) =>
+            $"https://i.pravatar.cc/200?u={Uri.EscapeDataString(email)}";
 
         var spAlice    = new Speaker { Name = "Alice Chen",          Bio = "Senior Software Engineer at Contoso, specialising in distributed systems and cloud-native architecture with 12 years of experience building high-throughput APIs.", Email = "alice@example.com",     Company = "Contoso",             TwitterHandle = "@alicechen",      PhotoUrl = Avatar("Alice Chen") };
         var spBob      = new Speaker { Name = "Bob Martinez",        Bio = "Full-stack developer and open-source contributor with 10 years of experience in .NET and React. Passionate about developer experience and tooling.", Email = "bob@example.com",       Company = "Fabrikam",            TwitterHandle = "@bobdev",         PhotoUrl = Avatar("Bob Martinez") };
