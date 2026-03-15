@@ -56,58 +56,58 @@
     },
     "45": {
       "agent": "task",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.658Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.659Z"
     },
     "46": {
       "agent": "task",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.659Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.659Z"
     },
     "47": {
       "agent": "general-purpose",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.659Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.660Z"
     },
     "48": {
       "agent": "task",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.660Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.660Z"
     },
     "49": {
       "agent": "general-purpose",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.660Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.661Z"
     },
     "50": {
       "agent": "explore",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.660Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.661Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.661Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.662Z"
     },
     "52": {
       "agent": "general-purpose",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.661Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.662Z"
     },
     "53": {
       "agent": "task",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.661Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.662Z"
     },
     "54": {
       "agent": "general-purpose",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.662Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.663Z"
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 83,
-      "assignedAt": "2026-03-15T00:51:01.662Z"
+      "cycle": 84,
+      "assignedAt": "2026-03-15T00:51:31.663Z"
     }
   },
   "bugs": [],
