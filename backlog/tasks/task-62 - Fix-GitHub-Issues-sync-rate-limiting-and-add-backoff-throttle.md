@@ -5,14 +5,13 @@ status: In Progress
 assignee:
   - '@agent-sync'
 created_date: '2026-03-15 01:30'
-updated_date: '2026-03-15 01:37'
+updated_date: '2026-03-15 01:40'
 labels:
   - bug
   - infrastructure
   - github-actions
 dependencies: []
 priority: high
-github_issue: 125
 ---
 
 ## Description
@@ -42,10 +41,10 @@ Or update the workflow file to re-enable push/schedule triggers.
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Incremental sync confirmed working — push events only process changed files + unsynced tasks
-- [ ] #2 Sleep between API calls increased to 2s minimum
-- [ ] #3 Exponential backoff implemented when rate limit error (rc=1, rate limit message) is detected
-- [ ] #4 Hard cap of 20 issues processed per run (configurable via MAX_ISSUES_PER_RUN env var)
-- [ ] #5 Rate limit remaining checked before bulk operations — pauses if below 100
-- [ ] #6 Workflow re-enabled and verified working without rate limit errors on next push
+- [x] #1 Incremental sync confirmed working — push events only process changed files + unsynced tasks
+- [x] #2 Sleep between API calls increased to 2s minimum
+- [x] #3 Exponential backoff implemented when rate limit error (rc=1, rate limit message) is detected
+- [x] #4 Hard cap of 20 issues processed per run (configurable via MAX_ISSUES_PER_RUN env var)
+- [x] #5 Rate limit remaining checked before bulk operations — pauses if below 100
+- [x] #6 Workflow re-enabled and verified working without rate limit errors on next push
 <!-- AC:END -->
