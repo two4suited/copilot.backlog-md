@@ -53,6 +53,16 @@
       "agent": "general-purpose",
       "cycle": 67,
       "assignedAt": "2026-03-15T00:43:01.639Z"
+    },
+    "45": {
+      "agent": "task",
+      "cycle": 70,
+      "assignedAt": "2026-03-15T00:44:31.641Z"
+    },
+    "46": {
+      "agent": "task",
+      "cycle": 70,
+      "assignedAt": "2026-03-15T00:44:31.641Z"
     }
   },
   "bugs": [],
