@@ -43,13 +43,6 @@
   },
   "history": [
     {
-      "taskId": "3.2",
-      "oldAgent": "dotnet-developer",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:04.451Z",
-      "reason": "User assignment via CLI"
-    },
-    {
       "taskId": "3.3",
       "oldAgent": "react-developer",
       "newAgent": "react-developer",
@@ -741,6 +734,13 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-15T00:27:01.613Z",
       "reason": "Ralph loop cycle 35"
+    },
+    {
+      "taskId": "43",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:27:31.614Z",
+      "reason": "Ralph loop cycle 36"
     }
   ],
   "config": {
