@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-designer'
 created_date: '2026-03-15 00:50'
-updated_date: '2026-03-15 00:52'
+updated_date: '2026-03-15 00:59'
 labels:
   - design
   - frontend
@@ -36,14 +36,14 @@ Also update the Tailwind config (tailwind.config.js) to extend the theme with th
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 New colour palette applied globally via tailwind.config.js theme extension
-- [ ] #2 Home page has a hero section with headline, sub-text, and CTA button
-- [ ] #3 Conference cards on Home page use the new design system
-- [ ] #4 Schedule page has improved track chips, time grid, and session cards
-- [ ] #5 Speaker cards show avatar, name, company, and bio excerpt
-- [ ] #6 Session detail page shows speaker avatar, track badge, and seat availability bar
-- [ ] #7 Navigation has active-link highlighting and mobile hamburger menu
-- [ ] #8 Admin pages use consistent data-table styling
-- [ ] #9 All pages pass a 375px viewport visual check (no horizontal overflow)
-- [ ] #10 No new CSS frameworks introduced — Tailwind only
+- [x] #1 New colour palette applied globally via tailwind.config.js theme extension
+- [x] #2 Home page has a hero section with headline, sub-text, and CTA button
+- [x] #3 Conference cards on Home page use the new design system
+- [x] #4 Schedule page has improved track chips, time grid, and session cards
+- [x] #5 Speaker cards show avatar, name, company, and bio excerpt
+- [x] #6 Session detail page shows speaker avatar, track badge, and seat availability bar
+- [x] #7 Navigation has active-link highlighting and mobile hamburger menu
+- [x] #8 Admin pages use consistent data-table styling
+- [x] #9 All pages pass a 375px viewport visual check (no horizontal overflow)
+- [x] #10 No new CSS frameworks introduced — Tailwind only
 <!-- AC:END -->
