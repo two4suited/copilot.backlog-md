@@ -81,7 +81,7 @@ export function SessionDetailPage() {
   return (
     <div className="max-w-3xl">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-1.5 text-sm text-slate-500 mb-6 flex-wrap">
+      <nav className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-[#c4a882] mb-6 flex-wrap">
         <Link to="/conferences" className="hover:text-brand-accent hover:underline">Conferences</Link>
         {conferenceId && (
           <>
@@ -103,7 +103,7 @@ export function SessionDetailPage() {
           </>
         )}
         <ChevronRight className="w-3.5 h-3.5" />
-        <span className="text-slate-700 font-medium truncate max-w-[200px]">{session.title}</span>
+        <span className="text-slate-700 dark:text-[#f5f0eb] font-medium truncate max-w-[200px]">{session.title}</span>
       </nav>
 
       {/* Title & badges */}
@@ -111,7 +111,7 @@ export function SessionDetailPage() {
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <LevelBadge level={session.level} />
           {session.sessionType && (
-            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-[#4a2e20] text-slate-600 dark:text-[#c4a882]">
               {session.sessionType}
             </span>
           )}
@@ -124,11 +124,11 @@ export function SessionDetailPage() {
             </span>
           )}
         </div>
-        <h1 className="text-3xl font-bold text-brand-primary">{session.title}</h1>
+        <h1 className="text-3xl font-bold text-brand-primary dark:text-[#f5f0eb]">{session.title}</h1>
       </div>
 
       {/* Meta */}
-      <div className="flex flex-wrap gap-4 text-slate-500 text-sm mb-6">
+      <div className="flex flex-wrap gap-4 text-slate-500 dark:text-[#c4a882] text-sm mb-6">
         <span className="flex items-center gap-1.5">
           <Clock className="w-4 h-4 text-brand-accent" />
           {dateStr}, {timeStr}
@@ -154,11 +154,11 @@ export function SessionDetailPage() {
       {/* Seat availability progress bar */}
       {seatsAvailable !== null && session.seatsTotal > 0 && (
         <div className="mb-6">
-          <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-[#c4a882] mb-1">
             <span className="font-medium">Seat availability</span>
             <span>{seatsAvailable} / {session.seatsTotal} remaining</span>
           </div>
-          <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-slate-200 dark:bg-[#4a2e20] rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all ${
                 isFull ? 'bg-red-500' : seatsAvailable / session.seatsTotal < 0.2 ? 'bg-brand-accent' : 'bg-brand-sage'
@@ -172,7 +172,7 @@ export function SessionDetailPage() {
       {/* Track link */}
       {session.track && conferenceId && (
         <div className="mb-6">
-          <span className="text-slate-500 text-sm">Track: </span>
+          <span className="text-slate-500 dark:text-[#c4a882] text-sm">Track: </span>
           <Link
             to={`/conferences/${conferenceId}/tracks/${trackId}`}
             className="text-sm text-brand-accent hover:underline font-medium"
@@ -184,7 +184,7 @@ export function SessionDetailPage() {
 
       {/* Description */}
       {session.description && (
-        <p className="text-slate-700 leading-relaxed mb-8 whitespace-pre-line">{session.description}</p>
+        <p className="text-slate-700 dark:text-[#f5f0eb] leading-relaxed mb-8 whitespace-pre-line">{session.description}</p>
       )}
 
       {/* Registration */}
@@ -221,17 +221,17 @@ export function SessionDetailPage() {
       {/* Speakers */}
       {session.speakers && session.speakers.length > 0 && (
         <section>
-          <h2 className="text-xl font-semibold text-brand-primary mb-4">
+          <h2 className="text-xl font-semibold text-brand-primary dark:text-[#f5f0eb] mb-4">
             Speaker{session.speakers.length !== 1 ? 's' : ''}
           </h2>
           <div className="space-y-4">
             {session.speakers.map(speaker => (
-              <div key={speaker.id} className="bg-brand-surface rounded-xl border border-brand-border p-5 flex gap-4">
+              <div key={speaker.id} className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-5 flex gap-4">
                 <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
                 <div className="flex-1 min-w-0">
                   <Link
                     to={`/speakers/${speaker.id}`}
-                    className="font-semibold text-slate-900 hover:text-brand-accent hover:underline"
+                    className="font-semibold text-slate-900 dark:text-[#f5f0eb] hover:text-brand-accent hover:underline"
                   >
                     {speaker.name}
                   </Link>
@@ -241,7 +241,7 @@ export function SessionDetailPage() {
                     </span>
                   )}
                   {speaker.bio && (
-                    <p className="text-sm text-slate-600 mt-2 line-clamp-3">{speaker.bio}</p>
+                    <p className="text-sm text-slate-600 dark:text-[#c4a882] mt-2 line-clamp-3">{speaker.bio}</p>
                   )}
                 </div>
               </div>

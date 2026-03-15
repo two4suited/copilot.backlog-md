@@ -57,6 +57,40 @@ public static class DbSeeder
         // so a stale pre-existing conference doesn't short-circuit seeding.
         if (await db.Conferences.IgnoreQueryFilters().AnyAsync(c => c.Name == "DevSummit 2025")) return;
 
+        // ── Purge stale partial data before re-seeding ───────────────────────
+        // Removes any conferences/speakers/tracks/sessions left from before TASK-53
+        // so that the full seed can be inserted cleanly without duplicates.
+        var staleConferences = await db.Conferences.IgnoreQueryFilters().ToListAsync();
+        if (staleConferences.Count > 0)
+        {
+            var staleConfIds = staleConferences.Select(c => c.Id).ToList();
+            var staleSessions = await db.Sessions.IgnoreQueryFilters()
+                .Where(s => staleConfIds.Contains(s.ConferenceId)).ToListAsync();
+            if (staleSessions.Count > 0)
+            {
+                var staleSessionIds = staleSessions.Select(s => s.Id).ToList();
+                var staleSessionSpeakers = await db.SessionSpeakers
+                    .Where(ss => staleSessionIds.Contains(ss.SessionId)).ToListAsync();
+                db.SessionSpeakers.RemoveRange(staleSessionSpeakers);
+                var staleRegistrations = await db.Registrations.IgnoreQueryFilters()
+                    .Where(r => staleSessionIds.Contains(r.SessionId)).ToListAsync();
+                db.Registrations.RemoveRange(staleRegistrations);
+                db.Sessions.RemoveRange(staleSessions);
+            }
+            var staleTracks = await db.Tracks.IgnoreQueryFilters()
+                .Where(t => staleConfIds.Contains(t.ConferenceId)).ToListAsync();
+            db.Tracks.RemoveRange(staleTracks);
+            db.Conferences.RemoveRange(staleConferences);
+            await db.SaveChangesAsync();
+        }
+
+        var staleSpeakers = await db.Speakers.IgnoreQueryFilters().ToListAsync();
+        if (staleSpeakers.Count > 0)
+        {
+            db.Speakers.RemoveRange(staleSpeakers);
+            await db.SaveChangesAsync();
+        }
+
         // ── Speakers ──────────────────────────────────────────────────────────
         static string Avatar(string name) =>
             $"https://ui-avatars.com/api/?name={Uri.EscapeDataString(name)}&size=200&background=random";

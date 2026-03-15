@@ -65,8 +65,8 @@ export function MySchedulePage() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-brand-primary">My Schedule</h1>
-            <p className="mt-1 text-brand-muted">
+            <h1 className="text-3xl font-bold text-brand-primary dark:text-[#f5f0eb]">My Schedule</h1>
+            <p className="mt-1 text-brand-muted dark:text-[#c4a882]">
               {sessions.length === 0
                 ? 'You have no registered sessions yet.'
                 : `${sessions.length} session${sessions.length !== 1 ? 's' : ''} registered`}
