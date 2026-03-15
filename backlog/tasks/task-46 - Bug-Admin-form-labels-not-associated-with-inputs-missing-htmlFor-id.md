@@ -1,9 +1,11 @@
 ---
 id: TASK-46
 title: 'Bug: Admin form labels not associated with inputs (missing htmlFor/id)'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-frontend'
 created_date: '2026-03-15 00:44'
+updated_date: '2026-03-15 00:52'
 labels:
   - bug
   - accessibility
