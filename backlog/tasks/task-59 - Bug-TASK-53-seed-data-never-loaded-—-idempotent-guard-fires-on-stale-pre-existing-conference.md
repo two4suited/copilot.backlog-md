@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@copilot'
 created_date: '2026-03-15 01:14'
-updated_date: '2026-03-15 01:16'
+updated_date: '2026-03-15 01:22'
 labels:
   - bug
   - data
@@ -24,11 +24,11 @@ The DbSeeder.cs rewrite from TASK-53 was never applied to the database. The guar
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 GET /api/conferences returns exactly 3 conferences: TechConf 2023, DevSummit 2025, TechConf 2026
-- [ ] #2 GET /api/speakers returns exactly 17 speakers (Alice Chen through Quinn Robinson)
-- [ ] #3 GET /api/tracks?conferenceId=<id> returns 6 tracks for each conference (18 total)
-- [ ] #4 GET /api/sessions returns 43 total sessions (14 for 2023, 15 for 2025, 14 for 2026)
-- [ ] #5 TechConf 2026 conference description matches the full text in DbSeeder.cs line 117
-- [ ] #6 Sessions have descriptions matching DbSeeder.cs (not the old shorter versions)
-- [ ] #7 user1@test.dev has expected seeded registrations from DbSeeder.cs
+- [x] #1 GET /api/conferences returns exactly 3 conferences: TechConf 2023, DevSummit 2025, TechConf 2026
+- [x] #2 GET /api/speakers returns exactly 17 speakers (Alice Chen through Quinn Robinson)
+- [x] #3 GET /api/tracks?conferenceId=<id> returns 6 tracks for each conference (18 total)
+- [x] #4 GET /api/sessions returns 43 total sessions (14 for 2023, 15 for 2025, 14 for 2026)
+- [x] #5 TechConf 2026 conference description matches the full text in DbSeeder.cs line 117
+- [x] #6 Sessions have descriptions matching DbSeeder.cs (not the old shorter versions)
+- [x] #7 user1@test.dev has expected seeded registrations from DbSeeder.cs
 <!-- AC:END -->
