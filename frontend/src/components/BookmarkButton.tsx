@@ -28,8 +28,8 @@ export function BookmarkButton({ sessionId, className = '' }: BookmarkButtonProp
       } disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     >
       {bookmarked
-        ? <BookmarkCheck className="w-4 h-4" />
-        : <Bookmark className="w-4 h-4" />
+        ? <BookmarkCheck className="w-4 h-4" aria-hidden="true" />
+        : <Bookmark className="w-4 h-4" aria-hidden="true" />
       }
     </button>
   );

@@ -284,6 +284,7 @@ export function SchedulePage() {
               setSelectedDay(null);
               setFilteredTrackIds(null);
             }}
+            aria-label="Select conference"
             className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           >
             {conferences.map(c => (
