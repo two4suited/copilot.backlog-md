@@ -116,10 +116,6 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone, hasFilterBar = 
     return <p className="text-brand-muted text-sm">No sessions scheduled for this day.</p>;
   }
 
-  // When the filter bar is sticky above this grid, headers need to clear both
-  // the nav (64 px / top-16) and the filter bar (~52 px) → top-[116px].
-  const headerTop = hasFilterBar ? 'top-[116px]' : 'top-16';
-
   return (
     /* Desktop: CSS grid; mobile: stacked */
     <div>
