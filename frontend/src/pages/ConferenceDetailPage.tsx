@@ -29,18 +29,18 @@ export function ConferenceDetailPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <Link to="/conferences" className="text-sm text-indigo-600 hover:underline">← All conferences</Link>
-        <h1 className="mt-2 text-4xl font-bold text-slate-900">{conference.name}</h1>
+        <Link to="/conferences" className="text-sm text-brand-accent hover:underline">← All conferences</Link>
+        <h1 className="mt-2 text-4xl font-bold text-brand-primary">{conference.name}</h1>
         {conference.description && (
           <p className="mt-3 text-lg text-slate-600 max-w-3xl">{conference.description}</p>
         )}
         <div className="mt-4 flex flex-wrap gap-4 text-slate-500 text-sm">
           <div className="flex items-center gap-2">
-            <CalendarDays className="w-4 h-4 text-indigo-400" />
+            <CalendarDays className="w-4 h-4 text-brand-accent" />
             <span>{start} – {end}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-indigo-400" />
+            <MapPin className="w-4 h-4 text-brand-accent" />
             <span>{conference.location}</span>
           </div>
           {conference.websiteUrl && (
@@ -48,7 +48,7 @@ export function ConferenceDetailPage() {
               href={conference.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-indigo-600 hover:underline"
+              className="flex items-center gap-1 text-brand-accent hover:underline"
             >
               <ExternalLink className="w-4 h-4" /> Website
             </a>
@@ -57,7 +57,7 @@ export function ConferenceDetailPage() {
       </div>
 
       {/* Tracks */}
-      <h2 className="text-2xl font-bold text-slate-900 mb-4">Tracks</h2>
+      <h2 className="text-2xl font-bold text-brand-primary mb-4">Tracks</h2>
       {!conference.tracks || conference.tracks.length === 0 ? (
         <p className="text-slate-500">No tracks yet.</p>
       ) : (
@@ -66,7 +66,7 @@ export function ConferenceDetailPage() {
             <Link
               key={track.id}
               to={`/conferences/${conference.id}/tracks/${track.id}`}
-              className="group flex items-start gap-4 bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-indigo-200 transition-all"
+              className="group flex items-start gap-4 bg-brand-surface rounded-2xl border border-brand-border p-5 hover:shadow-md hover:border-brand-accent/30 transition-all"
               data-testid="track-card"
             >
               <div
@@ -74,7 +74,7 @@ export function ConferenceDetailPage() {
                 style={{ backgroundColor: track.color }}
               />
               <div>
-                <h3 className="font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">
                   {track.name}
                 </h3>
                 {track.description && (

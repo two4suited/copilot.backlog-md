@@ -27,7 +27,7 @@ function LargeAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   }
 
   return (
-    <div className="w-24 h-24 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-2xl shrink-0">
+    <div className="w-24 h-24 rounded-full bg-brand-surface text-brand-accent flex items-center justify-center font-bold text-2xl shrink-0 border-2 border-brand-border">
       {initials}
     </div>
   );
@@ -52,7 +52,7 @@ export function SpeakerDetailPage() {
   return (
     <div className="max-w-3xl">
       {/* Back */}
-      <Link to="/speakers" className="text-sm text-indigo-600 hover:underline mb-6 inline-block">
+      <Link to="/speakers" className="text-sm text-brand-accent hover:underline mb-6 inline-block">
         ← All speakers
       </Link>
 
@@ -60,7 +60,7 @@ export function SpeakerDetailPage() {
       <div className="flex gap-6 items-start mb-8">
         <LargeAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
         <div className="flex-1 min-w-0">
-          <h1 className="text-3xl font-bold text-slate-900">{speaker.name}</h1>
+          <h1 className="text-3xl font-bold text-brand-primary">{speaker.name}</h1>
           {speaker.company && (
             <p className="text-slate-500 text-lg mt-1">{speaker.company}</p>
           )}
@@ -70,7 +70,7 @@ export function SpeakerDetailPage() {
                 href={`https://twitter.com/${speaker.twitterHandle.replace(/^@/, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-sky-600 hover:underline"
+                className="flex items-center gap-1.5 text-sm text-brand-accent hover:underline"
               >
                 <Twitter className="w-4 h-4" />
                 @{speaker.twitterHandle.replace(/^@/, '')}
@@ -81,7 +81,7 @@ export function SpeakerDetailPage() {
                 href={speaker.linkedInUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-blue-700 hover:underline"
+                className="flex items-center gap-1.5 text-sm text-brand-accent hover:underline"
               >
                 <Linkedin className="w-4 h-4" />
                 LinkedIn
@@ -94,15 +94,15 @@ export function SpeakerDetailPage() {
       {/* Bio */}
       {speaker.bio && (
         <section className="mb-8">
-          <h2 className="text-xl font-semibold text-slate-900 mb-3">About</h2>
-          <p className="text-slate-700 leading-relaxed whitespace-pre-line">{speaker.bio}</p>
+          <h2 className="text-xl font-semibold text-brand-primary mb-3">About</h2>
+          <p className="text-brand-primary leading-relaxed whitespace-pre-line">{speaker.bio}</p>
         </section>
       )}
 
       {/* Sessions */}
       {speaker.sessions && speaker.sessions.length > 0 && (
         <section>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4">Sessions</h2>
+          <h2 className="text-xl font-semibold text-brand-primary mb-4">Sessions</h2>
           <div className="space-y-3">
             {speaker.sessions.map(session => {
               const tz = session.conferenceTimezone ?? 'UTC';
@@ -112,10 +112,10 @@ export function SpeakerDetailPage() {
                 <Link
                   key={session.id}
                   to={`/sessions/${session.id}`}
-                  className="group block bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md hover:border-indigo-200 transition-all"
+                  className="group block bg-brand-surface rounded-xl border border-brand-border p-4 hover:shadow-md hover:border-brand-accent/30 transition-all"
                   data-testid="session-card"
                 >
-                  <h3 className="font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">
                     {session.title}
                   </h3>
                   <div className="flex flex-wrap items-center gap-3 mt-2 text-slate-500 text-sm">
@@ -127,7 +127,7 @@ export function SpeakerDetailPage() {
                       <DoorOpen className="w-3.5 h-3.5" /> {session.room}
                     </span>
                     {session.track?.name && (
-                      <span className="text-indigo-500">{session.track.name}</span>
+                      <span className="text-brand-sage">{session.track.name}</span>
                     )}
                     <LevelBadge level={session.level} />
                   </div>

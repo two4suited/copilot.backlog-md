@@ -12,7 +12,7 @@ import { useSessionSeats } from '../hooks/useSessionSeats';
 import { fmtDayLabelTz, fmtTimeRangeTz } from '../utils/time';
 
 function SpeakerAvatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
-  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0f172a&color=0ea5e9&size=96&font-size=0.38&bold=true`;
+  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=c2622d&color=faf7f2&size=96&font-size=0.38&bold=true`;
   return (
     <img
       src={photoUrl || fallback}
@@ -82,11 +82,11 @@ export function SessionDetailPage() {
     <div className="max-w-3xl">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-sm text-slate-500 mb-6 flex-wrap">
-        <Link to="/conferences" className="hover:text-indigo-600 hover:underline">Conferences</Link>
+        <Link to="/conferences" className="hover:text-brand-accent hover:underline">Conferences</Link>
         {conferenceId && (
           <>
             <ChevronRight className="w-3.5 h-3.5" />
-            <Link to={`/conferences/${conferenceId}`} className="hover:text-indigo-600 hover:underline">
+            <Link to={`/conferences/${conferenceId}`} className="hover:text-brand-accent hover:underline">
               Conference
             </Link>
           </>
@@ -96,7 +96,7 @@ export function SessionDetailPage() {
             <ChevronRight className="w-3.5 h-3.5" />
             <Link
               to={`/conferences/${conferenceId}/tracks/${trackId}`}
-              className="hover:text-indigo-600 hover:underline"
+              className="hover:text-brand-accent hover:underline"
             >
               {session.track?.name ?? 'Track'}
             </Link>
@@ -118,13 +118,13 @@ export function SessionDetailPage() {
           {session.track && (
             <span
               className="text-xs font-semibold px-2 py-0.5 rounded-full text-white"
-              style={{ backgroundColor: session.track.color || '#0ea5e9' }}
+              style={{ backgroundColor: session.track.color || '#c2622d' }}
             >
               {session.track.name}
             </span>
           )}
         </div>
-        <h1 className="text-3xl font-bold text-slate-900">{session.title}</h1>
+        <h1 className="text-3xl font-bold text-brand-primary">{session.title}</h1>
       </div>
 
       {/* Meta */}
@@ -161,7 +161,7 @@ export function SessionDetailPage() {
           <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all ${
-                isFull ? 'bg-red-500' : seatsAvailable / session.seatsTotal < 0.2 ? 'bg-amber-500' : 'bg-emerald-500'
+                isFull ? 'bg-red-500' : seatsAvailable / session.seatsTotal < 0.2 ? 'bg-brand-accent' : 'bg-brand-sage'
               }`}
               style={{ width: `${Math.max(0, (seatsAvailable / session.seatsTotal) * 100)}%` }}
             />
@@ -207,7 +207,7 @@ export function SessionDetailPage() {
             <button
               onClick={() => registerMutation.mutate()}
               disabled={isFull || registerMutation.isPending}
-              className="px-5 py-2.5 rounded-lg bg-brand-accent text-white font-semibold text-sm hover:bg-sky-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-5 py-2.5 rounded-lg bg-brand-accent text-white font-semibold text-sm hover:bg-brand-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {registerMutation.isPending ? 'Registering…' : isFull ? 'Session Full' : 'Register for this session'}
             </button>
@@ -221,12 +221,12 @@ export function SessionDetailPage() {
       {/* Speakers */}
       {session.speakers && session.speakers.length > 0 && (
         <section>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4">
+          <h2 className="text-xl font-semibold text-brand-primary mb-4">
             Speaker{session.speakers.length !== 1 ? 's' : ''}
           </h2>
           <div className="space-y-4">
             {session.speakers.map(speaker => (
-              <div key={speaker.id} className="bg-white rounded-xl border border-slate-200 p-5 flex gap-4">
+              <div key={speaker.id} className="bg-brand-surface rounded-xl border border-brand-border p-5 flex gap-4">
                 <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
                 <div className="flex-1 min-w-0">
                   <Link
