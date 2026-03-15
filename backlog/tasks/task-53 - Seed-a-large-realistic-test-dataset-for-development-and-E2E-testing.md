@@ -5,14 +5,13 @@ status: In Progress
 assignee:
   - '@agent-seeder'
 created_date: '2026-03-15 00:49'
-updated_date: '2026-03-15 00:54'
+updated_date: '2026-03-15 01:02'
 labels:
   - testing
   - data
   - backend
 dependencies: []
 priority: high
-github_issue: 109
 ---
 
 ## Description
@@ -34,15 +33,15 @@ The seeder should be idempotent — safe to run multiple times without duplicati
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 DbSeeder.cs creates 3 conferences with past/current/future dates
-- [ ] #2 15+ speakers seeded with name, bio, company, and placeholder photo URL
-- [ ] #3 Each conference has 6+ tracks with distinct colours
-- [ ] #4 40+ sessions across tracks with realistic titles, descriptions, levels, types, rooms
-- [ ] #5 3 regular user accounts seeded for testing registration flows
-- [ ] #6 Some sessions have registrations to test seat availability display
-- [ ] #7 At least one session is sold out (registrationCount == seatsTotal)
-- [ ] #8 Seeder is idempotent — re-running does not duplicate data
-- [ ] #9 E2E tests that relied on specific seed IDs are updated to query dynamically
+- [x] #1 DbSeeder.cs creates 3 conferences with past/current/future dates
+- [x] #2 15+ speakers seeded with name, bio, company, and placeholder photo URL
+- [x] #3 Each conference has 6+ tracks with distinct colours
+- [x] #4 40+ sessions across tracks with realistic titles, descriptions, levels, types, rooms
+- [x] #5 3 regular user accounts seeded for testing registration flows
+- [x] #6 Some sessions have registrations to test seat availability display
+- [x] #7 At least one session is sold out (registrationCount == seatsTotal)
+- [x] #8 Seeder is idempotent — re-running does not duplicate data
+- [x] #9 E2E tests that relied on specific seed IDs are updated to query dynamically
 <!-- AC:END -->
 
 ## Implementation Plan
