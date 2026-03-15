@@ -48,3 +48,18 @@ Or update the workflow file to re-enable push/schedule triggers.
 - [x] #5 Rate limit remaining checked before bulk operations — pauses if below 100
 - [x] #6 Workflow re-enabled and verified working without rate limit errors on next push
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+All 5 rate-limiting fixes implemented in scripts/sync-backlog-issues.sh:
+
+- **Sleep increased**: `SLEEP_BETWEEN_CALLS` raised from 0.5s to 2s
+- **Exponential backoff**: Added `gh_with_backoff()` wrapper that retries up to 4 times with doubling delay (2→4→8s) on rate-limit errors
+- **Hard cap**: `MAX_ISSUES_PER_RUN=20` (configurable) prevents runaway full syncs from exhausting quota; excess tasks deferred to next run
+- **Rate limit pre-check**: Before bulk operations, queries `gh api rate_limit` and aborts with a warning if GraphQL points < 100
+- **Incremental logging**: Added explicit log line in INCREMENTAL=true branch reporting number of changed files from env
+- **Workflow re-enabled**: `gh workflow enable "Sync Backlog to GitHub Issues"` — confirmed active
+
+Local test confirmed all new code paths execute correctly. The pre-existing `${task_id^^}` bash 4 syntax only affects macOS bash 3.2; GitHub Actions uses Ubuntu bash 5 where it works correctly.
+<!-- SECTION:FINAL_SUMMARY:END -->
