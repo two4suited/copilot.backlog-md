@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-designer'
 created_date: '2026-03-15 00:58'
-updated_date: '2026-03-15 00:59'
+updated_date: '2026-03-15 01:07'
 labels:
   - design
   - frontend
@@ -45,14 +45,14 @@ Key areas to update:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 tailwind.config.js brand tokens updated to earth tone values (linen, espresso, terracotta, sage)
-- [ ] #2 Navigation uses cream bg, espresso text, terracotta active/hover states
-- [ ] #3 Home hero uses linen bg with espresso headline and terracotta CTA button
-- [ ] #4 Conference cards use cream surface with tan border and terracotta date badge
-- [ ] #5 Schedule track chips use sage green; session cards use warm cream background
-- [ ] #6 Speaker cards show terracotta name highlight on warm surface
-- [ ] #7 Session detail page uses terracotta track badge and sage seat availability bar
-- [ ] #8 Admin tables use alternating warm row shading with terracotta action buttons
-- [ ] #9 No leftover navy (#0f172a) or teal (#0ea5e9) classes anywhere in the codebase
-- [ ] #10 All pages pass 375px viewport check with no horizontal overflow
+- [x] #1 tailwind.config.js brand tokens updated to earth tone values (linen, espresso, terracotta, sage)
+- [x] #2 Navigation uses cream bg, espresso text, terracotta active/hover states
+- [x] #3 Home hero uses linen bg with espresso headline and terracotta CTA button
+- [x] #4 Conference cards use cream surface with tan border and terracotta date badge
+- [x] #5 Schedule track chips use sage green; session cards use warm cream background
+- [x] #6 Speaker cards show terracotta name highlight on warm surface
+- [x] #7 Session detail page uses terracotta track badge and sage seat availability bar
+- [x] #8 Admin tables use alternating warm row shading with terracotta action buttons
+- [x] #9 No leftover navy (#0f172a) or teal (#0ea5e9) classes anywhere in the codebase
+- [x] #10 All pages pass 375px viewport check with no horizontal overflow
 <!-- AC:END -->
