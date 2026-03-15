@@ -42,15 +42,15 @@ export function TrackDetailPage() {
           return (
             <div
               key={session.id}
-              className="bg-brand-surface rounded-xl border border-brand-border p-4 flex items-start gap-4"
+              className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-4 flex items-start gap-4"
               data-testid="session-card"
             >
-              <div className="text-slate-400 text-sm font-mono min-w-[80px] shrink-0">
+              <div className="text-slate-400 dark:text-[#c4a882] text-sm font-mono min-w-[80px] shrink-0">
                 {start}<br />{end}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-brand-primary">{session.title}</h3>
-                <div className="flex flex-wrap items-center gap-3 mt-2 text-brand-muted text-sm">
+                <h3 className="font-semibold text-brand-primary dark:text-[#f5f0eb]">{session.title}</h3>
+                <div className="flex flex-wrap items-center gap-3 mt-2 text-brand-muted dark:text-[#c4a882] text-sm">
                   <span className="flex items-center gap-1">
                     <DoorOpen className="w-3.5 h-3.5" /> {session.room}
                   </span>
@@ -64,7 +64,7 @@ export function TrackDetailPage() {
           );
         })}
         {(!track.sessions || track.sessions.length === 0) && (
-          <p className="text-brand-muted text-sm">No sessions in this track yet.</p>
+          <p className="text-brand-muted dark:text-[#c4a882] text-sm">No sessions in this track yet.</p>
         )}
       </div>
     </div>

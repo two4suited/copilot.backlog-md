@@ -30,8 +30,8 @@ export function SpeakersPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-extrabold text-brand-primary">Speakers</h1>
-        <p className="text-brand-muted mt-1">Meet the experts presenting at this year's events.</p>
+        <h1 className="text-3xl font-extrabold text-brand-primary dark:text-[#f5f0eb]">Speakers</h1>
+        <p className="text-brand-muted dark:text-[#c4a882] mt-1">Meet the experts presenting at this year's events.</p>
       </div>
 
       {!speakers || speakers.length === 0 ? (
@@ -45,12 +45,12 @@ export function SpeakersPage() {
             <Link
               key={speaker.id}
               to={`/speakers/${speaker.id}`}
-              className="group bg-brand-surface rounded-2xl border border-brand-border p-5 hover:shadow-md hover:border-brand-accent/40 transition-all flex gap-4 items-start"
+              className="group bg-brand-surface dark:bg-[#2c1810] rounded-2xl border border-brand-border dark:border-[#4a2e20] p-5 hover:shadow-md hover:border-brand-accent/40 transition-all flex gap-4 items-start"
               data-testid="speaker-card"
             >
               <SpeakerAvatar name={speaker.name} photoUrl={speaker.photoUrl} />
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-brand-primary group-hover:text-brand-accent transition-colors leading-snug">
+                <h3 className="font-semibold text-brand-primary dark:text-[#f5f0eb] group-hover:text-brand-accent transition-colors leading-snug">
                   {speaker.name}
                 </h3>
                 {speaker.company && (
@@ -59,7 +59,7 @@ export function SpeakersPage() {
                   </span>
                 )}
                 {speaker.bio && (
-                  <p className="text-sm text-brand-muted mt-2 line-clamp-2 leading-relaxed">{speaker.bio}</p>
+                  <p className="text-sm text-brand-muted dark:text-[#c4a882] mt-2 line-clamp-2 leading-relaxed">{speaker.bio}</p>
                 )}
               </div>
             </Link>
