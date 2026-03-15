@@ -14,13 +14,14 @@ async function isApiAvailable(): Promise<boolean> {
   }
 }
 
-/** Inject a fake auth token into localStorage so the app renders admin pages */
+/** Log in as real admin so the app renders admin pages with a valid JWT */
 async function injectFakeAdminAuth(page: import('@playwright/test').Page) {
-  await page.goto('/');
-  await page.evaluate(() => {
-    localStorage.setItem('token', 'fake.invalid.jwt');
-    localStorage.setItem('user', JSON.stringify({ email: 'fake@test.com', name: 'Fake Admin', role: 'Admin' }));
-  });
+  await page.goto('/login');
+  await page.getByLabel(/email/i).fill('admin@conference.dev');
+  await page.getByLabel(/password/i).fill('Admin123!');
+  await page.getByRole('button', { name: /sign in|log in|login/i }).click();
+  // Wait for redirect away from login
+  await page.waitForURL(url => !url.pathname.includes('/login'), { timeout: 10_000 });
 }
 
 test.describe('API Error Handling', () => {
@@ -119,11 +120,12 @@ test.describe('API Error Handling', () => {
     // Track whether any API mutation/save call is made
     let apiCallMade = false;
     await page.route('**/api/conferences**', route => {
-      if (route.request().method() !== 'GET') {
+      if (route.request().method() === 'GET') {
+        route.continue(); // allow GETs so the form can load
+      } else {
         apiCallMade = true;
+        route.abort('failed');
       }
-      // Let GET calls pass (or abort if no API)
-      route.abort('failed');
     });
 
     await page.goto('/admin/conferences/new');
@@ -151,7 +153,13 @@ test.describe('API Error Handling', () => {
   test('conference form field-level error messages disappear when fields are filled', async ({ page }) => {
     await injectFakeAdminAuth(page);
 
-    await page.route('**/api/conferences**', route => route.abort('failed'));
+    await page.route('**/api/conferences**', route => {
+      if (route.request().method() === 'GET') {
+        route.continue();
+      } else {
+        route.abort('failed');
+      }
+    });
 
     await page.goto('/admin/conferences/new');
     await expect(page.locator('form').first()).toBeVisible({ timeout: 10_000 });

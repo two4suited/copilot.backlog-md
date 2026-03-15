@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = process.env.API_URL || 'https://localhost:7133';
 
 async function isApiAvailable(): Promise<boolean> {
   try {
