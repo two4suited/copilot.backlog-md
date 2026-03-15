@@ -63,8 +63,8 @@ export function SessionAdminPage() {
             </tr>
           </thead>
           <tbody>
-            {sessions?.map(session => (
-              <tr key={session.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
+            {sessions?.map((session, idx) => (
+              <tr key={session.id} className={`border-b border-slate-100 last:border-0 hover:bg-sky-50/50 transition-colors ${idx % 2 === 1 ? 'bg-slate-50/60' : 'bg-white'}`}>
                 <td className="px-4 py-3 font-medium text-slate-900">{session.title}</td>
                 <td className="px-4 py-3 text-slate-600">{session.track?.name ?? ''}</td>
                 <td className="px-4 py-3 text-slate-600">
@@ -75,7 +75,7 @@ export function SessionAdminPage() {
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       to={`/admin/sessions/${session.id}`}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-medium hover:bg-slate-50 transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
                     >
                       <Pencil className="w-3 h-3" />
                       Edit

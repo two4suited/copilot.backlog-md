@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
 import { useAuth } from '../context/AuthContext';
+import { fmtTimeTz, fmtDayLabelTz } from '../utils/time';
 
 interface MyRegistrationsResponse {
   sessions: Session[];
@@ -14,9 +15,9 @@ interface MyRegistrationsResponse {
 function groupByDay(sessions: Session[]): Map<string, Session[]> {
   const map = new Map<string, Session[]>();
   for (const session of sessions) {
-    const day = new Date(session.startTime).toLocaleDateString('en-US', {
-      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
-    });
+    const tz = session.conferenceTimezone ?? 'UTC';
+    const day = fmtDayLabelTz(session.startTime, tz) + ', ' +
+      new Date(session.startTime).getFullYear();
     if (!map.has(day)) map.set(day, []);
     map.get(day)!.push(session);
   }
@@ -98,12 +99,9 @@ export function MySchedulePage() {
               </h2>
               <div className="space-y-3">
                 {daySessions.map(session => {
-                  const start = new Date(session.startTime).toLocaleTimeString('en-US', {
-                    hour: '2-digit', minute: '2-digit',
-                  });
-                  const end = new Date(session.endTime).toLocaleTimeString('en-US', {
-                    hour: '2-digit', minute: '2-digit',
-                  });
+                  const tz = session.conferenceTimezone ?? 'UTC';
+                  const start = fmtTimeTz(session.startTime, tz);
+                  const end = fmtTimeTz(session.endTime, tz);
                   const isCancelling = cancelMutation.isPending &&
                     cancelMutation.variables === session.id;
 

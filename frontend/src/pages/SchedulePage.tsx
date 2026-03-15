@@ -272,7 +272,10 @@ export function SchedulePage() {
     <div>
       {/* Page header */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold text-slate-900">Schedule</h1>
+        <div>
+          <h1 className="text-3xl font-extrabold text-slate-900">Schedule</h1>
+          <p className="text-slate-500 mt-1">Browse sessions across tracks and days.</p>
+        </div>
 
         {/* Conference selector (only show if multiple) */}
         {conferences && conferences.length > 1 && (
@@ -284,7 +287,7 @@ export function SchedulePage() {
               setFilteredTrackIds(null);
             }}
             aria-label="Select conference"
-            className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent"
           >
             {conferences.map(c => (
               <option key={c.id} value={c.id}>{c.name}</option>
@@ -302,8 +305,8 @@ export function SchedulePage() {
               onClick={() => setSelectedDay(d)}
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 d === activeDay
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600'
+                  ? 'bg-brand-accent text-white shadow-sm'
+                  : 'bg-white border border-slate-200 text-slate-600 hover:border-brand-accent hover:text-brand-accent'
               }`}
             >
               Day {i + 1} — {fmtDayLabel(`${d}T00:00:00`, timezone)}
@@ -314,24 +317,21 @@ export function SchedulePage() {
 
       {/* Track filter bar */}
       {tracks.length > 1 && (
-        <div className="flex flex-wrap gap-2 mb-6">
-          <span className="text-xs font-medium text-slate-400 self-center">Filter tracks:</span>
+        <div className="flex flex-wrap gap-2 mb-6 items-center">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Filter:</span>
           {tracks.map(track => {
             const active = filteredTrackIds === null || filteredTrackIds.has(track.id);
             return (
               <button
                 key={track.id}
                 onClick={() => toggleTrack(track.id)}
-                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
                   active
-                    ? 'bg-white border-slate-300 text-slate-700'
-                    : 'bg-slate-50 border-slate-200 text-slate-400 opacity-60'
+                    ? 'border-transparent text-white shadow-sm'
+                    : 'bg-slate-50 border-slate-200 text-slate-400 opacity-50'
                 }`}
+                style={active ? { backgroundColor: track.color || '#0ea5e9' } : undefined}
               >
-                <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: track.color }}
-                />
                 {track.name}
               </button>
             );

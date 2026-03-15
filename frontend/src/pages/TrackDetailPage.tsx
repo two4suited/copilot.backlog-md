@@ -6,6 +6,7 @@ import type { TrackDetail } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
+import { fmtTimeTz } from '../utils/time';
 
 export function TrackDetailPage() {
   const { id, trackId } = useParams<{ id: string; trackId: string }>();
@@ -35,12 +36,9 @@ export function TrackDetailPage() {
       <h2 className="text-xl font-semibold text-slate-900 mb-4">Sessions</h2>
       <div className="space-y-3">
         {track.sessions?.map(session => {
-          const start = new Date(session.startTime).toLocaleTimeString('en-US', {
-            hour: '2-digit', minute: '2-digit',
-          });
-          const end = new Date(session.endTime).toLocaleTimeString('en-US', {
-            hour: '2-digit', minute: '2-digit',
-          });
+          const tz = session.conferenceTimezone ?? 'UTC';
+          const start = fmtTimeTz(session.startTime, tz);
+          const end = fmtTimeTz(session.endTime, tz);
           return (
             <div
               key={session.id}
