@@ -5,7 +5,7 @@ status: To Do
 assignee:
   - '@agent-tester'
 created_date: '2026-03-15 01:47'
-updated_date: '2026-03-15 01:52'
+updated_date: '2026-03-15 01:53'
 labels:
   - testing
   - e2e
@@ -65,3 +65,16 @@ Home, Conferences list, Conference detail, Schedule, Session detail, Speakers li
 - [ ] #4 Final pass/fail/skip counts reported in task final summary
 - [ ] #5 All bug tasks committed and pushed to main
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Full suite run: 107 passed, 15 failed, 12 skipped
+
+Failure categories:
+- 10 tests: sticky column header in schedule grid intercepts session card clicks (real app bug → TASK-72)
+- 1 test: navigation.spec.ts looking for stale heading text (test fix applied)
+- 1 test: comprehensive-audit.spec.ts hardcoded TechConf 2026 renamed by admin.spec.ts (test fix applied)
+- 1 test: ical-export.spec.ts strict mode violation with 2 matching empty-state elements (test fix applied)
+- admin.spec.ts: rename test pollutes shared data; refactored to use disposable conference
+<!-- SECTION:NOTES:END -->
