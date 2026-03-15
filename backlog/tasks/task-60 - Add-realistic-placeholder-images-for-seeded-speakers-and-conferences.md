@@ -1,9 +1,11 @@
 ---
 id: TASK-60
 title: Add realistic placeholder images for seeded speakers and conferences
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-images'
 created_date: '2026-03-15 01:20'
+updated_date: '2026-03-15 01:26'
 labels:
   - design
   - frontend
