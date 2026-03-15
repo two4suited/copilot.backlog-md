@@ -64,22 +64,26 @@ public static class DbSeeder
         if (staleConferences.Count > 0)
         {
             var staleConfIds = staleConferences.Select(c => c.Id).ToList();
-            var staleSessions = await db.Sessions.IgnoreQueryFilters()
-                .Where(s => staleConfIds.Contains(s.ConferenceId)).ToListAsync();
-            if (staleSessions.Count > 0)
-            {
-                var staleSessionIds = staleSessions.Select(s => s.Id).ToList();
-                var staleSessionSpeakers = await db.SessionSpeakers
-                    .Where(ss => staleSessionIds.Contains(ss.SessionId)).ToListAsync();
-                db.SessionSpeakers.RemoveRange(staleSessionSpeakers);
-                var staleRegistrations = await db.Registrations.IgnoreQueryFilters()
-                    .Where(r => staleSessionIds.Contains(r.SessionId)).ToListAsync();
-                db.Registrations.RemoveRange(staleRegistrations);
-                db.Sessions.RemoveRange(staleSessions);
-            }
             var staleTracks = await db.Tracks.IgnoreQueryFilters()
                 .Where(t => staleConfIds.Contains(t.ConferenceId)).ToListAsync();
-            db.Tracks.RemoveRange(staleTracks);
+            if (staleTracks.Count > 0)
+            {
+                var staleTrackIds = staleTracks.Select(t => t.Id).ToList();
+                var staleSessions = await db.Sessions.IgnoreQueryFilters()
+                    .Where(s => staleTrackIds.Contains(s.TrackId)).ToListAsync();
+                if (staleSessions.Count > 0)
+                {
+                    var staleSessionIds = staleSessions.Select(s => s.Id).ToList();
+                    var staleSessionSpeakers = await db.SessionSpeakers
+                        .Where(ss => staleSessionIds.Contains(ss.SessionId)).ToListAsync();
+                    db.SessionSpeakers.RemoveRange(staleSessionSpeakers);
+                    var staleRegistrations = await db.Registrations.IgnoreQueryFilters()
+                        .Where(r => staleSessionIds.Contains(r.SessionId)).ToListAsync();
+                    db.Registrations.RemoveRange(staleRegistrations);
+                    db.Sessions.RemoveRange(staleSessions);
+                }
+                db.Tracks.RemoveRange(staleTracks);
+            }
             db.Conferences.RemoveRange(staleConferences);
             await db.SaveChangesAsync();
         }

@@ -75,7 +75,7 @@ export function MySchedulePage() {
           {sessions.length > 0 && (
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-brand-border text-brand-primary hover:bg-brand-border/30 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-brand-border dark:border-[#4a2e20] text-brand-primary dark:text-[#f5f0eb] hover:bg-brand-border/30 dark:hover:bg-[#4a2e20]/40 transition-colors"
             >
               <Download className="w-4 h-4" />
               Export to Calendar
@@ -94,7 +94,7 @@ export function MySchedulePage() {
         <div className="space-y-8">
           {Array.from(grouped.entries()).map(([day, daySessions]) => (
             <div key={day}>
-              <h2 className="text-lg font-semibold text-brand-primary mb-3 border-b border-brand-border pb-2">
+              <h2 className="text-lg font-semibold text-brand-primary dark:text-[#f5f0eb] mb-3 border-b border-brand-border dark:border-[#4a2e20] pb-2">
                 {day}
               </h2>
               <div className="space-y-3">
@@ -108,14 +108,14 @@ export function MySchedulePage() {
                   return (
                     <div
                       key={session.id}
-                      className="bg-brand-surface rounded-xl border border-brand-border p-4 flex items-start gap-4"
+                      className="bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-4 flex items-start gap-4"
                     >
-                      <div className="text-slate-400 text-sm font-mono min-w-[80px] shrink-0">
+                      <div className="text-slate-400 dark:text-[#c4a882] text-sm font-mono min-w-[80px] shrink-0">
                         {start}<br />{end}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-brand-primary">{session.title}</h3>
-                        <div className="flex flex-wrap items-center gap-3 mt-2 text-slate-500 text-sm">
+                        <h3 className="font-semibold text-brand-primary dark:text-[#f5f0eb]">{session.title}</h3>
+                        <div className="flex flex-wrap items-center gap-3 mt-2 text-slate-500 dark:text-[#c4a882] text-sm">
                           <span className="flex items-center gap-1">
                             <DoorOpen className="w-3.5 h-3.5" /> {session.room}
                           </span>

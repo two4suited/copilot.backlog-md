@@ -31,31 +31,31 @@ export function LoginPage() {
 
   return (
     <div className="max-w-sm mx-auto mt-12">
-      <h1 className="text-2xl font-bold text-brand-primary text-center mb-6">Sign In</h1>
-      <form onSubmit={handleSubmit} className="bg-brand-surface rounded-2xl border border-brand-border p-6 space-y-4">
+      <h1 className="text-2xl font-bold text-brand-primary dark:text-[#f5f0eb] text-center mb-6">Sign In</h1>
+      <form onSubmit={handleSubmit} className="bg-brand-surface dark:bg-[#2c1810] rounded-2xl border border-brand-border dark:border-[#4a2e20] p-6 space-y-4">
         {error && (
           <p className="text-red-600 text-sm bg-red-50 rounded-lg px-4 py-2">{error}</p>
         )}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-brand-primary mb-1">Email</label>
+          <label htmlFor="email" className="block text-sm font-medium text-brand-primary dark:text-[#f5f0eb] mb-1">Email</label>
           <input
             id="email"
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-brand-primary placeholder:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] placeholder:text-brand-muted dark:placeholder:text-[#c4a882] focus:outline-none focus:ring-2 focus:ring-brand-accent"
             placeholder="you@example.com"
             required
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-brand-primary mb-1">Password</label>
+          <label htmlFor="password" className="block text-sm font-medium text-brand-primary dark:text-[#f5f0eb] mb-1">Password</label>
           <input
             id="password"
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-brand-border text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full px-3 py-2 rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-bg dark:bg-[#1a0f0a] text-brand-primary dark:text-[#f5f0eb] focus:outline-none focus:ring-2 focus:ring-brand-accent"
             placeholder="••••••••"
             required
           />
@@ -67,7 +67,7 @@ export function LoginPage() {
         >
           {loading ? 'Signing in…' : 'Sign In'}
         </button>
-        <p className="text-center text-sm text-brand-muted">
+        <p className="text-center text-sm text-brand-muted dark:text-[#c4a882]">
           No account?{' '}
           <Link to="/register" className="text-brand-accent hover:underline">Register</Link>
         </p>
