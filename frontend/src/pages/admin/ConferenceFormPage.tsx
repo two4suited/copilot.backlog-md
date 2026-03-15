@@ -111,8 +111,9 @@ export function ConferenceFormPage() {
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+          <label htmlFor="conf-name" className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
           <input
+            id="conf-name"
             type="text"
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -122,8 +123,9 @@ export function ConferenceFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+          <label htmlFor="conf-description" className="block text-sm font-medium text-slate-700 mb-1">Description</label>
           <textarea
+            id="conf-description"
             rows={3}
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
@@ -133,8 +135,9 @@ export function ConferenceFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Start Date *</label>
+            <label htmlFor="conf-start-date" className="block text-sm font-medium text-slate-700 mb-1">Start Date *</label>
             <input
+              id="conf-start-date"
               type="date"
               value={form.startDate}
               onChange={e => setForm(f => ({ ...f, startDate: e.target.value }))}
@@ -143,8 +146,9 @@ export function ConferenceFormPage() {
             {errors.startDate && <p className="mt-1 text-xs text-red-600">{errors.startDate}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">End Date *</label>
+            <label htmlFor="conf-end-date" className="block text-sm font-medium text-slate-700 mb-1">End Date *</label>
             <input
+              id="conf-end-date"
               type="date"
               value={form.endDate}
               onChange={e => setForm(f => ({ ...f, endDate: e.target.value }))}
@@ -155,8 +159,9 @@ export function ConferenceFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Location *</label>
+          <label htmlFor="conf-location" className="block text-sm font-medium text-slate-700 mb-1">Location *</label>
           <input
+            id="conf-location"
             type="text"
             value={form.location}
             onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
@@ -166,8 +171,9 @@ export function ConferenceFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Website URL</label>
+          <label htmlFor="conf-website-url" className="block text-sm font-medium text-slate-700 mb-1">Website URL</label>
           <input
+            id="conf-website-url"
             type="url"
             value={form.websiteUrl}
             onChange={e => setForm(f => ({ ...f, websiteUrl: e.target.value }))}

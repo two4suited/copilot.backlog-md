@@ -185,8 +185,9 @@ export function SessionFormPage() {
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Title *</label>
+          <label htmlFor="session-title" className="block text-sm font-medium text-slate-700 mb-1">Title *</label>
           <input
+            id="session-title"
             type="text"
             value={form.title}
             onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
@@ -196,8 +197,9 @@ export function SessionFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+          <label htmlFor="session-description" className="block text-sm font-medium text-slate-700 mb-1">Description</label>
           <textarea
+            id="session-description"
             rows={3}
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
@@ -206,8 +208,9 @@ export function SessionFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Conference</label>
+          <label htmlFor="session-conference" className="block text-sm font-medium text-slate-700 mb-1">Conference</label>
           <select
+            id="session-conference"
             value={form.conferenceId}
             onChange={e => setForm(f => ({ ...f, conferenceId: e.target.value, trackId: '' }))}
             className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -220,8 +223,9 @@ export function SessionFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Track *</label>
+          <label htmlFor="session-track" className="block text-sm font-medium text-slate-700 mb-1">Track *</label>
           <select
+            id="session-track"
             value={form.trackId}
             onChange={e => setForm(f => ({ ...f, trackId: e.target.value }))}
             disabled={!form.conferenceId}
@@ -237,8 +241,9 @@ export function SessionFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Start Time *</label>
+            <label htmlFor="session-start-time" className="block text-sm font-medium text-slate-700 mb-1">Start Time *</label>
             <input
+              id="session-start-time"
               type="datetime-local"
               value={form.startTime}
               onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
@@ -247,8 +252,9 @@ export function SessionFormPage() {
             {errors.startTime && <p className="mt-1 text-xs text-red-600">{errors.startTime}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">End Time *</label>
+            <label htmlFor="session-end-time" className="block text-sm font-medium text-slate-700 mb-1">End Time *</label>
             <input
+              id="session-end-time"
               type="datetime-local"
               value={form.endTime}
               onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
@@ -260,8 +266,9 @@ export function SessionFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Room *</label>
+            <label htmlFor="session-room" className="block text-sm font-medium text-slate-700 mb-1">Room *</label>
             <input
+              id="session-room"
               type="text"
               value={form.room}
               onChange={e => setForm(f => ({ ...f, room: e.target.value }))}
@@ -270,8 +277,9 @@ export function SessionFormPage() {
             {errors.room && <p className="mt-1 text-xs text-red-600">{errors.room}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Capacity *</label>
+            <label htmlFor="session-capacity" className="block text-sm font-medium text-slate-700 mb-1">Capacity *</label>
             <input
+              id="session-capacity"
               type="number"
               min={1}
               value={form.capacity}
@@ -284,8 +292,9 @@ export function SessionFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Session Type *</label>
+            <label htmlFor="session-type" className="block text-sm font-medium text-slate-700 mb-1">Session Type *</label>
             <select
+              id="session-type"
               value={form.sessionType}
               onChange={e => setForm(f => ({ ...f, sessionType: e.target.value }))}
               className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.sessionType ? 'border-red-400' : 'border-slate-200'}`}
@@ -295,8 +304,9 @@ export function SessionFormPage() {
             {errors.sessionType && <p className="mt-1 text-xs text-red-600">{errors.sessionType}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Level *</label>
+            <label htmlFor="session-level" className="block text-sm font-medium text-slate-700 mb-1">Level *</label>
             <select
+              id="session-level"
               value={form.level}
               onChange={e => setForm(f => ({ ...f, level: e.target.value }))}
               className={`w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${errors.level ? 'border-red-400' : 'border-slate-200'}`}
@@ -310,8 +320,9 @@ export function SessionFormPage() {
         {!isNew && (
           <>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Slides URL</label>
+              <label htmlFor="session-slides-url" className="block text-sm font-medium text-slate-700 mb-1">Slides URL</label>
               <input
+                id="session-slides-url"
                 type="url"
                 value={form.slidesUrl}
                 onChange={e => setForm(f => ({ ...f, slidesUrl: e.target.value }))}
@@ -319,8 +330,9 @@ export function SessionFormPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Recording URL</label>
+              <label htmlFor="session-recording-url" className="block text-sm font-medium text-slate-700 mb-1">Recording URL</label>
               <input
+                id="session-recording-url"
                 type="url"
                 value={form.recordingUrl}
                 onChange={e => setForm(f => ({ ...f, recordingUrl: e.target.value }))}

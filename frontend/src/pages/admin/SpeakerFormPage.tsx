@@ -117,8 +117,9 @@ export function SpeakerFormPage() {
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+          <label htmlFor="speaker-name" className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
           <input
+            id="speaker-name"
             type="text"
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -128,8 +129,9 @@ export function SpeakerFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Email {isNew ? '*' : ''}</label>
+          <label htmlFor="speaker-email" className="block text-sm font-medium text-slate-700 mb-1">Email {isNew ? '*' : ''}</label>
           <input
+            id="speaker-email"
             type="email"
             value={form.email}
             disabled={!isNew}
@@ -141,8 +143,9 @@ export function SpeakerFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Company</label>
+          <label htmlFor="speaker-company" className="block text-sm font-medium text-slate-700 mb-1">Company</label>
           <input
+            id="speaker-company"
             type="text"
             value={form.company}
             onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
@@ -151,8 +154,9 @@ export function SpeakerFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Bio</label>
+          <label htmlFor="speaker-bio" className="block text-sm font-medium text-slate-700 mb-1">Bio</label>
           <textarea
+            id="speaker-bio"
             rows={4}
             value={form.bio}
             onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
@@ -161,8 +165,9 @@ export function SpeakerFormPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Photo URL</label>
+          <label htmlFor="speaker-photo-url" className="block text-sm font-medium text-slate-700 mb-1">Photo URL</label>
           <input
+            id="speaker-photo-url"
             type="url"
             value={form.photoUrl}
             onChange={e => setForm(f => ({ ...f, photoUrl: e.target.value }))}
@@ -172,8 +177,9 @@ export function SpeakerFormPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Twitter Handle</label>
+            <label htmlFor="speaker-twitter" className="block text-sm font-medium text-slate-700 mb-1">Twitter Handle</label>
             <input
+              id="speaker-twitter"
               type="text"
               value={form.twitterHandle}
               onChange={e => setForm(f => ({ ...f, twitterHandle: e.target.value }))}
@@ -182,8 +188,9 @@ export function SpeakerFormPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">LinkedIn URL</label>
+            <label htmlFor="speaker-linkedin-url" className="block text-sm font-medium text-slate-700 mb-1">LinkedIn URL</label>
             <input
+              id="speaker-linkedin-url"
               type="url"
               value={form.linkedInUrl}
               onChange={e => setForm(f => ({ ...f, linkedInUrl: e.target.value }))}
