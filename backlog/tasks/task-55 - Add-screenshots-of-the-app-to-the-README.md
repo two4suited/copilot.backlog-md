@@ -48,3 +48,17 @@ Store screenshots under docs/screenshots/. Use descriptive filenames like home.p
 6. Add Screenshots section to README.md after Architecture
 7. Check all ACs and mark Done
 <!-- SECTION:PLAN:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Added app screenshots to README.md captured via Playwright against the live Vite dev server (port 54690).
+
+**What changed:**
+- Created scripts/take-screenshots.js — reusable Playwright script (APP_URL + OUT_DIR env vars)
+- Captured 7 screenshots: home, conferences, conference-detail, schedule, session-detail, speakers, admin
+- Stored under docs/screenshots/ with descriptive filenames
+- Added ## Screenshots section to README.md (after Architecture) with Markdown image embeds and captions
+
+**Coverage:** All 5 AC pages captured (Home, Schedule, Session Detail, Speakers, Admin) plus bonus Conference list and Conference detail views.
+<!-- SECTION:FINAL_SUMMARY:END -->
