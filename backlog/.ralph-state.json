@@ -81,13 +81,13 @@
     },
     "50": {
       "agent": "explore",
-      "cycle": 36,
-      "assignedAt": "2026-03-15T01:11:38.849Z"
+      "cycle": 124,
+      "assignedAt": "2026-03-15T01:11:31.694Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 138,
-      "assignedAt": "2026-03-15T01:28:38.932Z"
+      "cycle": 158,
+      "assignedAt": "2026-03-15T01:28:31.728Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -106,8 +106,8 @@
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 221,
-      "assignedAt": "2026-03-15T01:42:29.043Z"
+      "cycle": 186,
+      "assignedAt": "2026-03-15T01:42:31.779Z"
     },
     "56": {
       "agent": "general-purpose",
@@ -116,45 +116,45 @@
     },
     "57": {
       "agent": "general-purpose",
-      "cycle": 36,
-      "assignedAt": "2026-03-15T01:11:38.850Z"
+      "cycle": 124,
+      "assignedAt": "2026-03-15T01:11:31.695Z"
     },
     "58": {
       "agent": "general-purpose",
-      "cycle": 36,
-      "assignedAt": "2026-03-15T01:11:38.850Z"
+      "cycle": 124,
+      "assignedAt": "2026-03-15T01:11:31.695Z"
     },
     "59": {
       "agent": "general-purpose",
-      "cycle": 62,
-      "assignedAt": "2026-03-15T01:15:58.873Z"
+      "cycle": 133,
+      "assignedAt": "2026-03-15T01:16:01.709Z"
     },
     "60": {
       "agent": "general-purpose",
-      "cycle": 128,
-      "assignedAt": "2026-03-15T01:26:58.928Z"
+      "cycle": 154,
+      "assignedAt": "2026-03-15T01:26:31.721Z"
     },
     "61": {
       "agent": "explore",
-      "cycle": 128,
-      "assignedAt": "2026-03-15T01:26:58.928Z"
+      "cycle": 154,
+      "assignedAt": "2026-03-15T01:26:31.721Z"
     },
     "62": {
       "agent": "task",
-      "cycle": 192,
-      "assignedAt": "2026-03-15T01:37:39.014Z"
+      "cycle": 176,
+      "assignedAt": "2026-03-15T01:37:31.766Z"
     },
     "63": {
       "agent": "task",
-      "cycle": 213,
-      "assignedAt": "2026-03-15T01:41:09.040Z",
-      "seenInProgress": 1773538879037
+      "cycle": 183,
+      "assignedAt": "2026-03-15T01:41:01.773Z",
+      "seenInProgress": 1773538891775
     },
     "64": {
       "agent": "task",
-      "cycle": 209,
-      "assignedAt": "2026-03-15T01:40:29.031Z",
-      "seenInProgress": 1773538839033
+      "cycle": 182,
+      "assignedAt": "2026-03-15T01:40:31.778Z",
+      "seenInProgress": 1773538861773
     }
   },
   "bugs": [],
