@@ -1,7 +1,7 @@
 ---
 id: TASK-74
 title: Give the app a better name than 'ConferenceApp'
-status: In Progress
+status: Done
 assignee:
   - '@agent-rename'
 created_date: '2026-03-15 01:57'
