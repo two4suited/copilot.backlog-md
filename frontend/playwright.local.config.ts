@@ -1,6 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// Local config: Vite dev server is on 5174 (5173 is taken by Aspire dcpctrl)
+// When running under Aspire, the Vite dev server port is assigned dynamically
+// and injected as the PORT env var by AddViteApp. Pass it via APP_URL:
+//   APP_URL=http://localhost:<port> npx playwright test --config playwright.local.config.ts
+//
+// To find the current port: lsof -i TCP -P -n | grep LISTEN | grep node
+// Or check the Aspire dashboard resource endpoints.
+const baseURL = process.env.APP_URL ?? 'http://localhost:51127';
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -8,10 +15,11 @@ export default defineConfig({
   retries: 0,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:5174',
+    baseURL,
     trace: 'on-first-retry',
-    screenshot: 'on',
+    screenshot: 'only-on-failure',
     video: 'on-first-retry',
+    ignoreHTTPSErrors: true,
   },
   projects: [
     {
@@ -20,12 +28,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5174',
+    command: 'echo "Aspire manages the dev server"',
+    url: baseURL,
     reuseExistingServer: true,
-    timeout: 120_000,
-    env: {
-      PLAYWRIGHT_BASE_URL: 'http://localhost:5174',
-    },
+    timeout: 30_000,
   },
 });

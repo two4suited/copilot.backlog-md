@@ -116,3 +116,37 @@ orchestrator agents        # See what keywords agents look for
 orchestrator help
 orchestrator-monitor help
 ```
+
+---
+
+## Running the App (Aspire)
+
+```bash
+cd ConferenceApp.AppHost
+dotnet run
+```
+
+- **Dashboard**: https://localhost:17187 (token in console output)
+- **API**: https://localhost:7133
+- **Frontend**: Aspire assigns a dynamic port via `AddViteApp`. Discover it two ways:
+
+  ```bash
+  # Option 1 — check running node processes
+  lsof -i TCP -P -n | grep LISTEN | grep node
+
+  # Option 2 — look at the Aspire dashboard → frontend resource → Endpoints
+  ```
+
+- **Credentials**: `admin@conference.dev` / `Admin123!`
+
+## Running E2E Tests
+
+E2E tests use Playwright against the live Aspire stack. First find the frontend port (see above), then:
+
+```bash
+cd frontend
+APP_URL=http://localhost:<frontend-port> npx playwright test --config playwright.local.config.ts
+```
+
+The `APP_URL` env var is the source of truth for the Playwright base URL.
+Defaults to `http://localhost:51127` if not set (port changes on each Aspire restart).
