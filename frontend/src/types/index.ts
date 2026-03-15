@@ -11,6 +11,7 @@ export interface Conference extends BaseEntity {
   endDate: string;
   location: string;
   websiteUrl?: string;
+  imageUrl?: string;
   timezone: string;
   trackCount: number;
   tracks?: Track[];
