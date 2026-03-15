@@ -53,3 +53,25 @@ Fix options:
 8. Create shared time formatting utility
 9. Update all frontend pages to use venue timezone
 <!-- SECTION:PLAN:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## fix: display session times in venue timezone (TASK-47)
+
+### What changed
+- Added `Timezone` (IANA string, default `"UTC"`) to the `Conference` model, DTOs, and EF Core migration
+- Seed data sets `"America/Los_Angeles"` for TechConf 2026
+- `SessionDto` and `SessionSummaryDto` now include `ConferenceTimezone` propagated from the track→conference relationship
+- All API controllers (Conferences, Sessions, Speakers, Tracks) updated to pass timezone through
+- Installed `date-fns-tz` in the frontend
+- New `src/utils/time.ts` utility (`fmtTimeTz`, `fmtDayLabelTz`, `dayKeyTz`, `fmtTimeRangeTz`, `fmtShortDateTz`) formats times in the conference IANA timezone with abbreviation (e.g. "10:00 AM PDT")
+- Updated all pages that display session times: SchedulePage, SessionDetailPage, SpeakerDetailPage, TrackDetailPage, MySchedulePage
+
+### Why
+Session times were displayed using the browser local timezone via `toLocaleTimeString()` with no label, causing a San Francisco conference showing "03:00 AM" for a 10:00 AM PDT session for users outside Pacific time.
+
+### Tests
+- All 19 backend tests pass
+- Frontend TypeScript build succeeds with no errors
+<!-- SECTION:FINAL_SUMMARY:END -->
