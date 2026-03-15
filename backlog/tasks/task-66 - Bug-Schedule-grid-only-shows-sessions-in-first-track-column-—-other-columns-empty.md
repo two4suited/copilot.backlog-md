@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-fix66'
 created_date: '2026-03-15 01:46'
-updated_date: '2026-03-15 01:54'
+updated_date: '2026-03-15 02:10'
 labels:
   - bug
   - frontend
@@ -32,7 +32,7 @@ File: frontend/src/pages/SchedulePage.tsx — check DayGrid column/session rende
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 All 6 tracks show their sessions in the correct column
-- [ ] #2 Sessions are correctly mapped to track columns by trackId
-- [ ] #3 No empty placeholder columns visible when sessions exist for that track
+- [x] #1 All 6 tracks show their sessions in the correct column
+- [x] #2 Sessions are correctly mapped to track columns by trackId
+- [x] #3 No empty placeholder columns visible when sessions exist for that track
 <!-- AC:END -->
