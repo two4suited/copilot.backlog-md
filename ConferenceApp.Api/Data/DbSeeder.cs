@@ -54,8 +54,9 @@ public static class DbSeeder
 
         // ── Main conference data (idempotent guard) ───────────────────────────
         // Check for a record that only exists after the full TASK-53 seed runs,
-        // so a stale pre-existing conference doesn't short-circuit seeding.
-        if (await db.Conferences.IgnoreQueryFilters().AnyAsync(c => c.Name == "DevSummit 2025")) return;
+        // and that it has an ImageUrl (added in TASK-60) so a seed that ran before
+        // TASK-60 doesn't prevent the image URLs from being populated.
+        if (await db.Conferences.IgnoreQueryFilters().AnyAsync(c => c.Name == "DevSummit 2025" && c.ImageUrl != null)) return;
 
         // ── Purge stale partial data before re-seeding ───────────────────────
         // Removes any conferences/speakers/tracks/sessions left from before TASK-53
