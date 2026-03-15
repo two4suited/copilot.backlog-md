@@ -38,3 +38,18 @@ Fix: Append 'T00:00:00Z' or convert date string to ISO format before sending:
 - [x] #3 Edit conference form also handles date format correctly
 - [x] #4 No regression on existing conferences
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Fixed HTTP 500 on Create Conference form by converting date-only strings to ISO datetime format.
+
+**Root cause:** HTML `<input type="date">` returns `YYYY-MM-DD` strings; the .NET API's `CreateConferenceRequest` and `UpdateConferenceRequest` use `DateTime` and cannot parse bare date strings.
+
+**Change:** In `ConferenceFormPage.tsx`, the `saveMutation` payload now appends `T00:00:00Z` to both `startDate` and `endDate` before sending to the API:
+```
+startDate: data.startDate ? data.startDate + "T00:00:00Z" : ""
+endDate: data.endDate ? data.endDate + "T00:00:00Z" : ""
+```
+The existing `toDateInput()` helper already strips the time component when loading existing data for editing, so round-trip is correct for both create and edit flows.
+<!-- SECTION:FINAL_SUMMARY:END -->
