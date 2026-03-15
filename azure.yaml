@@ -1,0 +1,19 @@
+name: conference-app
+
+# Azure Developer CLI (azd) integration with .NET Aspire.
+# Run `azd up` from the repository root to provision Azure resources
+# (Container Apps environment, ACR, PostgreSQL Flexible Server, Key Vault)
+# and deploy all containers in one step.
+#
+# First-time setup:
+#   azd auth login
+#   azd up
+#
+# Subsequent deploys:
+#   azd deploy
+
+services:
+  app:
+    language: dotnet
+    project: ./ConferenceApp.AppHost/ConferenceApp.AppHost.csproj
+    host: containerapp

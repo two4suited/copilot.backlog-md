@@ -59,39 +59,89 @@ On first run the API automatically applies EF Core migrations and seeds demo dat
 
 ## Production Deployment — Azure Container Apps
 
-ConferenceApp is designed for cloud deployment via the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/).
+ConferenceApp deploys to Azure Container Apps via [.NET Aspire's Azure hosting integration](https://learn.microsoft.com/dotnet/aspire/deployment/azure/aca-deployment) and the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/).
+
+### What `azd up` provisions automatically
+
+| Azure resource | Purpose |
+|---|---|
+| Azure Container Apps environment | Hosts API + frontend container apps |
+| Azure Container Registry (ACR) | Stores built container images |
+| Azure Database for PostgreSQL Flexible Server | Production database |
+| Azure Key Vault | Stores `pg-password` and `jwt-key` secrets |
+| Azure Log Analytics workspace | Centralised logging |
+| User-assigned Managed Identity | ACR pull credentials for container apps |
 
 ### Prerequisites
 
-- Azure subscription
-- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+| Tool | Install |
+|---|---|
+| Azure subscription | [portal.azure.com](https://portal.azure.com) |
+| Azure CLI | `brew install azure-cli` |
+| Azure Developer CLI | `brew install azure-developer-cli` |
+| Docker Desktop | Required to build container images locally |
 
-### Deploy
+### First-time deploy
 
 ```bash
-# 1. Log in
+# 1. Authenticate
 az login
 azd auth login
 
-# 2. Initialise the project (first time only)
-azd init
-
-# 3. Provision Azure resources and deploy
+# 2. Provision all Azure resources and deploy (from repo root)
 azd up
 ```
 
-`azd up` provisions:
-- Azure Container Apps environment
-- Azure Container Registry
-- Azure Database for PostgreSQL Flexible Server
-- Azure Key Vault (for secrets)
+`azd up` will prompt for:
+- **Environment name** (e.g. `production`) — used to name Azure resource groups
+- **Azure location** (e.g. `eastus`)
+- **`pg-password`** — PostgreSQL admin password, stored in Key Vault
+- **`jwt-key`** — JWT signing secret (≥ 32 chars), stored in Key Vault
 
 ### Update a running deployment
 
 ```bash
+# Rebuild and push images, then update container apps
 azd deploy
 ```
+
+### Architecture: dev vs production
+
+| Concern | Local dev | Azure (publish mode) |
+|---|---|---|
+| PostgreSQL | Docker container (`AddPostgres`) | Azure Flexible Server (`AddAzurePostgresFlexibleServer`) |
+| Frontend | Vite dev server (`AddViteApp`) | nginx container (`Dockerfile.frontend.prod`) |
+| Secrets | `appsettings.json` defaults | Azure Key Vault |
+| API ingress | Aspire localhost proxy | ACA internal ingress |
+| Frontend ingress | Vite HMR port | ACA external HTTPS |
+
+### How the frontend production container works
+
+`frontend/Dockerfile.frontend.prod` builds the Vite app with `npm run build`, then serves the static assets with nginx. At container startup, `docker-entrypoint.sh` substitutes the API's internal URL (injected by Aspire as `services__api__http__0`) into the nginx config, so `/api/` and `/hubs/` requests are proxied to the API container app inside the same ACA environment.
+
+### CI/CD — GitHub Actions
+
+`.github/workflows/deploy-aca.yml` deploys on every push to `main` using OIDC (no long-lived credentials).
+
+**Required GitHub secrets** (Settings → Secrets → Actions):
+
+| Secret | Description |
+|---|---|
+| `AZURE_CLIENT_ID` | Client ID of the Azure AD app registration |
+| `AZURE_TENANT_ID` | Azure AD tenant ID |
+| `AZURE_SUBSCRIPTION_ID` | Target Azure subscription ID |
+
+**Optional GitHub variables** (Settings → Variables → Actions):
+
+| Variable | Default | Description |
+|---|---|---|
+| `AZURE_ENV_NAME` | `production` | azd environment name |
+| `AZURE_LOCATION` | `eastus` | Azure region |
+
+To set up OIDC for the app registration, add a federated credential for the GitHub Actions workflow:
+- **Issuer**: `https://token.actions.githubusercontent.com`
+- **Subject**: `repo:<org>/<repo>:ref:refs/heads/main`
+- **Audience**: `api://AzureADTokenExchange`
 
 ---
 
