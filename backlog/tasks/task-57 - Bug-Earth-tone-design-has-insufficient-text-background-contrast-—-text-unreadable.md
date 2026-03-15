@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-contrast'
 created_date: '2026-03-15 01:06'
-updated_date: '2026-03-15 01:11'
+updated_date: '2026-03-15 01:13'
 labels:
   - bug
   - design
@@ -39,9 +39,9 @@ Fix approach:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 All normal body text on any background passes WCAG AA (4.5:1 contrast ratio)
-- [ ] #2 Muted/secondary text passes WCAG AA on all surfaces it appears on
-- [ ] #3 Track chips and badges pass WCAG AA for their text colour
-- [ ] #4 Form labels, placeholders, and input text are clearly readable
-- [ ] #5 Earth tone aesthetic preserved — no switch to black/white, just darkened where needed
+- [x] #1 All normal body text on any background passes WCAG AA (4.5:1 contrast ratio)
+- [x] #2 Muted/secondary text passes WCAG AA on all surfaces it appears on
+- [x] #3 Track chips and badges pass WCAG AA for their text colour
+- [x] #4 Form labels, placeholders, and input text are clearly readable
+- [x] #5 Earth tone aesthetic preserved — no switch to black/white, just darkened where needed
 <!-- AC:END -->
