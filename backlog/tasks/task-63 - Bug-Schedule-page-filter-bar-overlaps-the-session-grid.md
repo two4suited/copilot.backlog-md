@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-schedule'
 created_date: '2026-03-15 01:31'
-updated_date: '2026-03-15 01:41'
+updated_date: '2026-03-15 01:44'
 labels:
   - bug
   - frontend
@@ -36,3 +36,13 @@ Also check any sticky header logic in `frontend/src/components/` related to sche
 - [ ] #3 Sticky positioning (if used) has correct top offset accounting for nav + filter bar height
 - [ ] #4 Fix verified at both desktop (1280px) and mobile (375px) viewport widths
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Make filter bar sticky at top-16 z-30 with matching background color and border-b
+2. Pass hasFilterBar prop to DayGrid based on tracks.length > 1
+3. Update DayGrid column header sticky top: top-16 when no filter bar, top-[116px] (64+52) when filter bar present
+4. Run npm run build to verify
+5. Mark all ACs and set Done
+<!-- SECTION:PLAN:END -->
