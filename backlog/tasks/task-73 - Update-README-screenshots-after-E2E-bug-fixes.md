@@ -4,12 +4,12 @@ title: Update README screenshots after E2E bug fixes
 status: To Do
 assignee: []
 created_date: '2026-03-15 01:55'
-updated_date: '2026-03-15 01:55'
+updated_date: '2026-03-15 02:00'
 labels:
   - docs
   - readme
 dependencies:
-  - TASK-69
+  - TASK-74
 priority: low
 ---
 
