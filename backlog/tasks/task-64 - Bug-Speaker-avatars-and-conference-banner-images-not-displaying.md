@@ -1,9 +1,11 @@
 ---
 id: TASK-64
 title: 'Bug: Speaker avatars and conference banner images not displaying'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-tester64'
 created_date: '2026-03-15 01:38'
+updated_date: '2026-03-15 01:40'
 labels:
   - bug
   - frontend
