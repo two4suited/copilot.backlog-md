@@ -18,6 +18,8 @@
     "44": "general-purpose",
     "45": "task",
     "46": "task",
+    "47": "general-purpose",
+    "48": "task",
     "1.1": "aspire-expert",
     "1.1.1": "aspire-expert",
     "1.1.2": "aspire-expert",
@@ -45,34 +47,6 @@
     "6.3": "dotnet-developer"
   },
   "history": [
-    {
-      "taskId": "4.1",
-      "oldAgent": "dotnet-developer",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:04.646Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "4.2",
-      "oldAgent": "react-developer",
-      "newAgent": "react-developer",
-      "timestamp": "2026-03-14T21:20:04.693Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "4.3",
-      "oldAgent": "dotnet-developer",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:04.740Z",
-      "reason": "User assignment via CLI"
-    },
-    {
-      "taskId": "5.1",
-      "oldAgent": "dotnet-developer",
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:04.786Z",
-      "reason": "User assignment via CLI"
-    },
     {
       "taskId": "5.2",
       "oldAgent": "react-developer",
@@ -744,6 +718,34 @@
       "newAgent": "task",
       "timestamp": "2026-03-15T00:44:31.641Z",
       "reason": "Ralph loop cycle 70"
+    },
+    {
+      "taskId": "45",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:45:01.643Z",
+      "reason": "Ralph loop cycle 71"
+    },
+    {
+      "taskId": "46",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:45:01.644Z",
+      "reason": "Ralph loop cycle 71"
+    },
+    {
+      "taskId": "47",
+      "oldAgent": null,
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:45:01.644Z",
+      "reason": "Ralph loop cycle 71"
+    },
+    {
+      "taskId": "48",
+      "oldAgent": null,
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:45:01.645Z",
+      "reason": "Ralph loop cycle 71"
     }
   ],
   "config": {
