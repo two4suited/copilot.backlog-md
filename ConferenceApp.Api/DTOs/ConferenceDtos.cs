@@ -8,6 +8,7 @@ public record ConferenceDto(
     DateTime EndDate,
     string Location,
     string? WebsiteUrl,
+    string? ImageUrl,
     string Timezone,
     int TrackCount,
     DateTime CreatedAt
@@ -21,6 +22,7 @@ public record ConferenceDetailDto(
     DateTime EndDate,
     string Location,
     string? WebsiteUrl,
+    string? ImageUrl,
     string Timezone,
     IReadOnlyList<TrackDto> Tracks,
     DateTime CreatedAt
