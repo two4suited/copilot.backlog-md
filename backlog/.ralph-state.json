@@ -57,37 +57,42 @@
     "45": {
       "agent": "task",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.657Z"
+      "assignedAt": "2026-03-15T00:52:01.657Z",
+      "seenInProgress": 1773535951657
     },
     "46": {
       "agent": "task",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.657Z"
+      "assignedAt": "2026-03-15T00:52:01.657Z",
+      "seenInProgress": 1773535951657
     },
     "47": {
       "agent": "general-purpose",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.658Z"
+      "assignedAt": "2026-03-15T00:52:01.658Z",
+      "seenInProgress": 1773535951657
     },
     "48": {
       "agent": "task",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.658Z"
+      "assignedAt": "2026-03-15T00:52:01.658Z",
+      "seenInProgress": 1773535951657
     },
     "49": {
       "agent": "general-purpose",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.658Z"
+      "assignedAt": "2026-03-15T00:52:01.658Z",
+      "seenInProgress": 1773535951657
     },
     "50": {
       "agent": "explore",
-      "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.658Z"
+      "cycle": 86,
+      "assignedAt": "2026-03-15T00:52:31.657Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.659Z"
+      "cycle": 86,
+      "assignedAt": "2026-03-15T00:52:31.657Z"
     },
     "52": {
       "agent": "general-purpose",
@@ -98,17 +103,18 @@
     "53": {
       "agent": "task",
       "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.659Z"
+      "assignedAt": "2026-03-15T00:52:01.659Z",
+      "seenInProgress": 1773535951657
     },
     "54": {
       "agent": "general-purpose",
-      "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.659Z"
+      "cycle": 86,
+      "assignedAt": "2026-03-15T00:52:31.657Z"
     },
     "55": {
       "agent": "general-purpose",
-      "cycle": 85,
-      "assignedAt": "2026-03-15T00:52:01.659Z"
+      "cycle": 86,
+      "assignedAt": "2026-03-15T00:52:31.658Z"
     }
   },
   "bugs": [],
