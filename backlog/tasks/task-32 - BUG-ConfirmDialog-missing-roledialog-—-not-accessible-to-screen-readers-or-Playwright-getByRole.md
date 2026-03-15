@@ -3,15 +3,15 @@ id: TASK-32
 title: >-
   [BUG] ConfirmDialog missing role=dialog — not accessible to screen readers or
   Playwright getByRole
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-14 22:25'
+updated_date: '2026-03-15 00:13'
 labels:
   - bug
   - frontend
 dependencies: []
 priority: medium
-github_issue: 88
 ---
 
 ## Description
@@ -22,7 +22,13 @@ ConfirmDialog component in frontend/src/components/ConfirmDialog.tsx has no role
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 ConfirmDialog has role="dialog" and aria-modal="true"
-- [ ] #2 ConfirmDialog has aria-labelledby referencing its heading id
-- [ ] #3 Playwright getByRole('dialog') successfully finds the component
+- [x] #1 ConfirmDialog has role="dialog" and aria-modal="true"
+- [x] #2 ConfirmDialog has aria-labelledby referencing its heading id
+- [x] #3 Playwright getByRole('dialog') successfully finds the component
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Added role="dialog" aria-modal="true" aria-labelledby to dialog container. Added id to h2 heading. Playwright getByRole('dialog') now works; screen readers correctly identify as dialog.
+<!-- SECTION:FINAL_SUMMARY:END -->
