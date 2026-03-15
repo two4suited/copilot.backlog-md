@@ -222,6 +222,7 @@ declare -a task_files=()
 
 if [[ "${INCREMENTAL:-false}" == "true" ]]; then
   log "Incremental mode — processing changed files + any unsynced tasks."
+  log "INCREMENTAL=true — changed files from env: $(echo "$CHANGED_FILES" | wc -l | tr -d ' ') file(s)"
 
   # Add explicitly changed task files (filter to only files that exist)
   while IFS= read -r f; do
@@ -249,6 +250,12 @@ fi
 if [[ ${#task_files[@]} -eq 0 ]]; then
   log "Nothing to sync (no changed files and no unsynced tasks)."
   exit 0
+fi
+
+MAX_ISSUES_PER_RUN="${MAX_ISSUES_PER_RUN:-20}"
+if [[ ${#task_files[@]} -gt $MAX_ISSUES_PER_RUN ]]; then
+  log "Capping to $MAX_ISSUES_PER_RUN files (MAX_ISSUES_PER_RUN). Full sync will continue on next run."
+  task_files=("${task_files[@]:0:$MAX_ISSUES_PER_RUN}")
 fi
 
 log "Syncing ${#task_files[@]} of ${#all_task_files[@]} task file(s)."
