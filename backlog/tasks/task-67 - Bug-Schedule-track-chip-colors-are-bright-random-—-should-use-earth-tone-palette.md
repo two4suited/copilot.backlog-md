@@ -3,7 +3,7 @@ id: TASK-67
 title: >-
   Bug: Schedule track chip colors are bright/random — should use earth tone
   palette
-status: In Progress
+status: Done
 assignee:
   - '@agent-fix67'
 created_date: '2026-03-15 01:46'
