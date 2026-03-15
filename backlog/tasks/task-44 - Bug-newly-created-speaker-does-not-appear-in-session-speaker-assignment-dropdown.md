@@ -3,9 +3,10 @@ id: TASK-44
 title: >-
   Bug: newly created speaker does not appear in session speaker assignment
   dropdown
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-03-15 00:42'
+updated_date: '2026-03-15 00:43'
 labels:
   - bug
   - admin
@@ -28,3 +29,15 @@ When a new speaker is created via the admin UI (/admin/speakers/new), the speake
 - [ ] #3 Session form speaker picker shows all speakers including newly created ones
 - [ ] #4 Selecting and saving a speaker on a session persists correctly
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Root cause: SpeakerFormPage and SpeakerAdminPage invalidated ['admin','speakers'] but SessionFormPage caches speakers under ['speakers']. Fixed by also invalidating ['speakers'] in both admin pages on save/delete.
+<!-- SECTION:NOTES:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Fixed stale speaker list in session form by adding invalidateQueries for the ['speakers'] cache key in SpeakerFormPage.tsx and SpeakerAdminPage.tsx. Previously only ['admin','speakers'] was invalidated, so the session speaker picker never refreshed after creating or deleting a speaker.
+<!-- SECTION:FINAL_SUMMARY:END -->
