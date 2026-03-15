@@ -86,9 +86,11 @@ test.describe('Seat Availability', () => {
     let initialSeats: number | null = null;
 
     const count = await sessionLinks.count();
-    for (let i = 0; i < Math.min(count, 5); i++) {
+    for (let i = 0; i < Math.min(count, 15); i++) {
       await page.goto('/schedule');
-      await expect(sessionLinks.nth(i)).toBeVisible({ timeout: 20_000 });
+      // Skip hidden links (schedule renders both desktop-grid and mobile-stacked links)
+      const isVisible = await sessionLinks.nth(i).isVisible().catch(() => false);
+      if (!isVisible) continue;
       await sessionLinks.nth(i).click();
       await expect(page).toHaveURL(/\/sessions\/[^/]+$/, { timeout: 10_000 });
 
@@ -174,9 +176,11 @@ test.describe('Seat Availability', () => {
     // Look for a session that shows "Full"
     let foundFull = false;
     const count = await sessionLinks.count();
-    for (let i = 0; i < Math.min(count, 10); i++) {
+    for (let i = 0; i < Math.min(count, 20); i++) {
       await page.goto('/schedule');
-      await expect(sessionLinks.nth(i)).toBeVisible({ timeout: 10_000 });
+      // Skip hidden links (schedule renders both desktop-grid and mobile-stacked links)
+      const isVisible = await sessionLinks.nth(i).isVisible().catch(() => false);
+      if (!isVisible) continue;
       await sessionLinks.nth(i).click();
       await expect(page).toHaveURL(/\/sessions\/[^/]+$/, { timeout: 10_000 });
 

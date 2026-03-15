@@ -27,9 +27,12 @@ async function findRegisterableSession(page: import('@playwright/test').Page): P
   await expect(sessionLinks.first()).toBeVisible({ timeout: 20_000 });
 
   const count = await sessionLinks.count();
-  for (let i = 0; i < Math.min(count, 10); i++) {
+  for (let i = 0; i < Math.min(count, 20); i++) {
     await page.goto('/schedule');
-    await expect(sessionLinks.nth(i)).toBeVisible({ timeout: 10_000 });
+    // Skip hidden links — the schedule renders both desktop-grid and mobile-stacked
+    // session links in the DOM; only one set is visible at the current viewport width.
+    const isVisible = await sessionLinks.nth(i).isVisible().catch(() => false);
+    if (!isVisible) continue;
     await sessionLinks.nth(i).click();
     await expect(page).toHaveURL(/\/sessions\/[^/]+$/, { timeout: 10_000 });
 
