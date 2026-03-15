@@ -30,7 +30,7 @@ export function TrackDetailPage() {
         <h1 className="text-3xl font-bold text-brand-primary">{track.name}</h1>
       </div>
       {track.description && (
-        <p className="text-slate-600 mb-6 max-w-2xl">{track.description}</p>
+        <p className="text-brand-muted mb-6 max-w-2xl">{track.description}</p>
       )}
 
       <h2 className="text-xl font-semibold text-brand-primary mb-4">Sessions</h2>
@@ -49,8 +49,8 @@ export function TrackDetailPage() {
                 {start}<br />{end}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900">{session.title}</h3>
-                <div className="flex flex-wrap items-center gap-3 mt-2 text-slate-500 text-sm">
+                <h3 className="font-semibold text-brand-primary">{session.title}</h3>
+                <div className="flex flex-wrap items-center gap-3 mt-2 text-brand-muted text-sm">
                   <span className="flex items-center gap-1">
                     <DoorOpen className="w-3.5 h-3.5" /> {session.room}
                   </span>
@@ -64,7 +64,7 @@ export function TrackDetailPage() {
           );
         })}
         {(!track.sessions || track.sessions.length === 0) && (
-          <p className="text-slate-500 text-sm">No sessions in this track yet.</p>
+          <p className="text-brand-muted text-sm">No sessions in this track yet.</p>
         )}
       </div>
     </div>

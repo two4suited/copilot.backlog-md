@@ -122,7 +122,7 @@ export function SearchBar() {
           className="absolute top-full mt-1 left-0 w-80 bg-brand-surface border border-brand-border rounded-xl shadow-lg z-50 overflow-hidden"
         >
           {!hasResults ? (
-            <p role="status" className="px-4 py-3 text-sm text-slate-500">No results found.</p>
+            <p role="status" className="px-4 py-3 text-sm text-brand-muted">No results found.</p>
           ) : (
             <div className="max-h-96 overflow-y-auto">
               {results!.sessions.length > 0 && (
@@ -140,7 +140,7 @@ export function SearchBar() {
                       className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === i ? 'bg-brand-accent/10' : 'hover:bg-brand-accent/10'}`}
                     >
                       <p className="text-sm font-medium text-slate-800 truncate">{s.title}</p>
-                      <p className="text-xs text-slate-500 truncate">{s.conferenceName}</p>
+                      <p className="text-xs text-brand-muted truncate">{s.conferenceName}</p>
                     </button>
                   ))}
                 </section>
@@ -160,7 +160,7 @@ export function SearchBar() {
                       className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === sessionCount + i ? 'bg-brand-accent/10' : 'hover:bg-brand-accent/10'}`}
                     >
                       <p className="text-sm font-medium text-slate-800">{sp.name}</p>
-                      <p className="text-xs text-slate-500">{sp.company}</p>
+                      <p className="text-xs text-brand-muted">{sp.company}</p>
                     </button>
                   ))}
                 </section>

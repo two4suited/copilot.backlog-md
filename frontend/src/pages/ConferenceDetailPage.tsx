@@ -32,9 +32,9 @@ export function ConferenceDetailPage() {
         <Link to="/conferences" className="text-sm text-brand-accent hover:underline">← All conferences</Link>
         <h1 className="mt-2 text-4xl font-bold text-brand-primary">{conference.name}</h1>
         {conference.description && (
-          <p className="mt-3 text-lg text-slate-600 max-w-3xl">{conference.description}</p>
+          <p className="mt-3 text-lg text-brand-muted max-w-3xl">{conference.description}</p>
         )}
-        <div className="mt-4 flex flex-wrap gap-4 text-slate-500 text-sm">
+        <div className="mt-4 flex flex-wrap gap-4 text-brand-muted text-sm">
           <div className="flex items-center gap-2">
             <CalendarDays className="w-4 h-4 text-brand-accent" />
             <span>{start} – {end}</span>
@@ -59,7 +59,7 @@ export function ConferenceDetailPage() {
       {/* Tracks */}
       <h2 className="text-2xl font-bold text-brand-primary mb-4">Tracks</h2>
       {!conference.tracks || conference.tracks.length === 0 ? (
-        <p className="text-slate-500">No tracks yet.</p>
+        <p className="text-brand-muted">No tracks yet.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {conference.tracks.map(track => (
@@ -78,9 +78,9 @@ export function ConferenceDetailPage() {
                   {track.name}
                 </h3>
                 {track.description && (
-                  <p className="text-slate-500 text-sm mt-1 line-clamp-2">{track.description}</p>
+                  <p className="text-brand-muted text-sm mt-1 line-clamp-2">{track.description}</p>
                 )}
-                <p className="text-slate-400 text-xs mt-2">
+                <p className="text-brand-muted text-xs mt-2">
                   {track.sessionCount ?? 0} session{(track.sessionCount ?? 0) !== 1 ? 's' : ''}
                 </p>
               </div>

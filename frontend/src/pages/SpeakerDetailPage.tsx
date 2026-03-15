@@ -62,7 +62,7 @@ export function SpeakerDetailPage() {
         <div className="flex-1 min-w-0">
           <h1 className="text-3xl font-bold text-brand-primary">{speaker.name}</h1>
           {speaker.company && (
-            <p className="text-slate-500 text-lg mt-1">{speaker.company}</p>
+            <p className="text-brand-muted text-lg mt-1">{speaker.company}</p>
           )}
           <div className="flex flex-wrap gap-3 mt-3">
             {speaker.twitterHandle && (
@@ -118,7 +118,7 @@ export function SpeakerDetailPage() {
                   <h3 className="font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">
                     {session.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-3 mt-2 text-slate-500 text-sm">
+                  <div className="flex flex-wrap items-center gap-3 mt-2 text-brand-muted text-sm">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" />
                       {dateStr}, {timeStr}

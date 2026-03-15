@@ -129,7 +129,7 @@ function DayGrid({ sessions, tracks, filteredTrackIds, timezone }: DayGridProps)
           {visibleTracks.map(track => (
             <div
               key={track.id}
-              className="sticky top-16 z-20 px-3 py-2.5 border-b-2 border-slate-200 bg-brand-surface text-center"
+              className="sticky top-16 z-20 px-3 py-2.5 border-b-2 border-brand-border bg-brand-surface text-center"
             >
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-sm"

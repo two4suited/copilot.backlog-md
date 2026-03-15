@@ -100,16 +100,16 @@ export function ConferenceFormPage() {
 
   return (
     <div className="max-w-2xl">
-      <Link to="/admin/conferences" className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-6">
+      <Link to="/admin/conferences" className="flex items-center gap-1 text-sm text-brand-muted hover:text-brand-primary mb-6">
         <ChevronLeft className="w-4 h-4" />
         Back to Conferences
       </Link>
 
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">
+      <h1 className="text-2xl font-bold text-brand-primary mb-6">
         {isNew ? 'New Conference' : conference?.name ? `Edit Conference: ${conference.name}` : 'Edit Conference'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-brand-border p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-brand-surface rounded-xl border border-brand-border p-6 space-y-5">
         <div>
           <label htmlFor="conf-name" className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
           <input
