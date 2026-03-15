@@ -1,16 +1,17 @@
 ---
 id: TASK-70
 title: 'Bug: Schedule page track column headers overlap first session row'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-fix70'
 created_date: '2026-03-15 01:48'
+updated_date: '2026-03-15 01:54'
 labels:
   - bug
   - frontend
   - schedule
 dependencies: []
 priority: high
-github_issue: 132
 ---
 
 ## Description
