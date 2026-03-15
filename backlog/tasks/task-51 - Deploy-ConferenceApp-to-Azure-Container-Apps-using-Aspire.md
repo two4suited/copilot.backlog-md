@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-aca'
 created_date: '2026-03-15 00:47'
-updated_date: '2026-03-15 01:28'
+updated_date: '2026-03-15 01:32'
 labels:
   - azure
   - deployment
@@ -52,3 +52,17 @@ Reference: https://learn.microsoft.com/en-us/dotnet/aspire/deployment/azure/aca-
 - [ ] #7 App is accessible via the ACA-assigned public URL after deployment
 - [ ] #8 GitHub Actions workflow added for CI/CD: build → push to ACR → azd deploy on merge to main
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Add Aspire.Hosting.Azure.AppContainers + Aspire.Hosting.Azure.PostgreSQL + Aspire.Hosting.Azure packages to AppHost
+2. Rewrite AppHost/Program.cs with IsPublishMode branch: Azure Flexible Server + AddAzureContainerAppEnvironment + PublishAsAzureContainerApp on api and frontend; local branch unchanged
+3. Add jwt-key parameter (secret) to both branches so the JWT key is stored as a Key Vault secret in production
+4. Create frontend/Dockerfile.frontend.prod (node build → nginx runtime with envsubst entrypoint)
+5. Create frontend/nginx.prod.conf (template with ${API_SERVICE_URL} placeholder for /api/ and /hubs/ proxying)
+6. Create frontend/docker-entrypoint.sh (reads services__api__http__0, runs envsubst, starts nginx)
+7. Create azure.yaml pointing azd at the AppHost project
+8. Create .github/workflows/deploy-aca.yml (OIDC login + azd deploy on push to main)
+9. Update docs/deployment.md with full Azure section including architecture table, OIDC setup guide, required secrets
+<!-- SECTION:PLAN:END -->
