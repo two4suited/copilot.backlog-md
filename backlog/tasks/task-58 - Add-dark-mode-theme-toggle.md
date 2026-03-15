@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-darkmode'
 created_date: '2026-03-15 01:06'
-updated_date: '2026-03-15 01:27'
+updated_date: '2026-03-15 01:28'
 labels:
   - design
   - frontend
@@ -60,3 +60,35 @@ Implementation:
 7. Add dark: variants to admin: AdminLayout, ConferenceAdminPage, SessionAdminPage, SpeakerAdminPage, ConferenceFormPage, SessionFormPage, SpeakerFormPage
 8. Build passes: npm run build
 <!-- SECTION:PLAN:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+## Dark Mode Theme Toggle
+
+Adds a warm espresso dark theme to ConferenceApp with a persistent sun/moon toggle in the nav bar.
+
+### What changed
+- **tailwind.config.js**: Added `darkMode: "class"` strategy
+- **ThemeContext.tsx** (new): `ThemeProvider` reads `localStorage("theme")`, falls back to `prefers-color-scheme` on first visit, toggles `dark` class on `<html>`, exposes `useTheme()` hook
+- **main.tsx**: Wrapped app in `<ThemeProvider>`
+- **Layout.tsx**: Added Sun/Moon toggle button (lucide-react) in the nav bar; complete dark: variants throughout nav, mobile menu, and page container
+- **All pages**: Added dark: variants — HomePage, ConferencesPage, ConferenceDetailPage, TrackDetailPage, SessionDetailPage, SpeakersPage, SpeakerDetailPage, SchedulePage (including complex DayGrid), MySchedulePage, LoginPage, RegisterPage
+- **Shared components**: LevelBadge, ErrorMessage, ConfirmDialog, SearchBar — all themed
+- **Admin**: AdminLayout, ConferenceAdminPage, SessionAdminPage, SpeakerAdminPage, ConferenceFormPage, SessionFormPage, SpeakerFormPage — all tables, forms, labels, inputs themed
+
+### Dark palette
+- Page bg: `#1a0f0a` (deep espresso)
+- Surface/card: `#2c1810` (warm dark brown)
+- Border: `#4a2e20` (muted brown)
+- Primary text: `#f5f0eb` (warm off-white)
+- Muted text: `#c4a882` (warm tan)
+- Accent: `#c2622d` terracotta (unchanged — works on dark)
+
+### Tests
+- `npm run build` passes (TypeScript + Vite) with 0 errors
+
+### Persistence
+- Preference saved to `localStorage("theme")`
+- Respects `prefers-color-scheme` on first visit when no stored preference
+<!-- SECTION:FINAL_SUMMARY:END -->
