@@ -58,41 +58,6 @@
   },
   "history": [
     {
-      "taskId": "55",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T00:58:01.669Z",
-      "reason": "Ralph loop cycle 97"
-    },
-    {
-      "taskId": "50",
-      "oldAgent": "explore",
-      "newAgent": "explore",
-      "timestamp": "2026-03-15T00:58:31.671Z",
-      "reason": "Ralph loop cycle 98"
-    },
-    {
-      "taskId": "51",
-      "oldAgent": "task",
-      "newAgent": "task",
-      "timestamp": "2026-03-15T00:58:31.672Z",
-      "reason": "Ralph loop cycle 98"
-    },
-    {
-      "taskId": "55",
-      "oldAgent": "general-purpose",
-      "newAgent": "general-purpose",
-      "timestamp": "2026-03-15T00:58:31.673Z",
-      "reason": "Ralph loop cycle 98"
-    },
-    {
-      "taskId": "50",
-      "oldAgent": "explore",
-      "newAgent": "explore",
-      "timestamp": "2026-03-15T00:59:01.669Z",
-      "reason": "Ralph loop cycle 99"
-    },
-    {
       "taskId": "51",
       "oldAgent": "task",
       "newAgent": "task",
@@ -756,6 +721,41 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-15T01:07:38.833Z",
       "reason": "Ralph loop cycle 12"
+    },
+    {
+      "taskId": "50",
+      "oldAgent": "explore",
+      "newAgent": "explore",
+      "timestamp": "2026-03-15T01:07:48.830Z",
+      "reason": "Ralph loop cycle 13"
+    },
+    {
+      "taskId": "51",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T01:07:48.830Z",
+      "reason": "Ralph loop cycle 13"
+    },
+    {
+      "taskId": "55",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:07:48.831Z",
+      "reason": "Ralph loop cycle 13"
+    },
+    {
+      "taskId": "57",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:07:48.831Z",
+      "reason": "Ralph loop cycle 13"
+    },
+    {
+      "taskId": "58",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T01:07:48.832Z",
+      "reason": "Ralph loop cycle 13"
     }
   ],
   "config": {
