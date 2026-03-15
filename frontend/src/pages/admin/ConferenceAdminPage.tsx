@@ -41,7 +41,7 @@ export function ConferenceAdminPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-brand-primary">Conferences</h1>
+        <h1 className="text-2xl font-bold text-brand-primary dark:text-[#f5f0eb]">Conferences</h1>
         <Link
           to="/admin/conferences/new"
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors"

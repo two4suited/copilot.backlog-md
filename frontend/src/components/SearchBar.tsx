@@ -103,7 +103,7 @@ export function SearchBar() {
           onChange={e => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Search sessions, speakers…"
-          className="w-full pl-9 pr-3 py-1.5 text-sm rounded-lg border border-brand-border bg-brand-surface focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent"
+          className="w-full pl-9 pr-3 py-1.5 text-sm rounded-lg border border-brand-border dark:border-[#4a2e20] bg-brand-surface dark:bg-[#2c1810] text-brand-primary dark:text-[#f5f0eb] placeholder:text-brand-muted dark:placeholder:text-[#c4a882] focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent"
         />
         {loading && (
           <span
@@ -119,15 +119,15 @@ export function SearchBar() {
           id={listboxId}
           role="listbox"
           aria-label="Search results"
-          className="absolute top-full mt-1 left-0 w-80 bg-brand-surface border border-brand-border rounded-xl shadow-lg z-50 overflow-hidden"
+          className="absolute top-full mt-1 left-0 w-80 bg-brand-surface dark:bg-[#2c1810] border border-brand-border dark:border-[#4a2e20] rounded-xl shadow-lg z-50 overflow-hidden"
         >
           {!hasResults ? (
-            <p role="status" className="px-4 py-3 text-sm text-brand-muted">No results found.</p>
+            <p role="status" className="px-4 py-3 text-sm text-brand-muted dark:text-[#c4a882]">No results found.</p>
           ) : (
             <div className="max-h-96 overflow-y-auto">
               {results!.sessions.length > 0 && (
                 <section aria-label="Sessions">
-                  <div className="px-4 py-2 text-xs font-semibold text-brand-muted uppercase tracking-wide bg-brand-bg border-b border-brand-border" aria-hidden="true">
+                  <div className="px-4 py-2 text-xs font-semibold text-brand-muted dark:text-[#c4a882] uppercase tracking-wide bg-brand-bg dark:bg-[#1a0f0a] border-b border-brand-border dark:border-[#4a2e20]" aria-hidden="true">
                     Sessions
                   </div>
                   {results!.sessions.map((s, i) => (
@@ -139,15 +139,15 @@ export function SearchBar() {
                       onClick={() => handleSelect(`/sessions/${s.id}`)}
                       className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === i ? 'bg-brand-accent/10' : 'hover:bg-brand-accent/10'}`}
                     >
-                      <p className="text-sm font-medium text-slate-800 truncate">{s.title}</p>
-                      <p className="text-xs text-brand-muted truncate">{s.conferenceName}</p>
+                      <p className="text-sm font-medium text-slate-800 dark:text-[#f5f0eb] truncate">{s.title}</p>
+                      <p className="text-xs text-brand-muted dark:text-[#c4a882] truncate">{s.conferenceName}</p>
                     </button>
                   ))}
                 </section>
               )}
               {results!.speakers.length > 0 && (
                 <section aria-label="Speakers">
-                  <div className="px-4 py-2 text-xs font-semibold text-brand-muted uppercase tracking-wide bg-brand-bg border-b border-brand-border" aria-hidden="true">
+                  <div className="px-4 py-2 text-xs font-semibold text-brand-muted dark:text-[#c4a882] uppercase tracking-wide bg-brand-bg dark:bg-[#1a0f0a] border-b border-brand-border dark:border-[#4a2e20]" aria-hidden="true">
                     Speakers
                   </div>
                   {results!.speakers.map((sp, i) => (
@@ -159,8 +159,8 @@ export function SearchBar() {
                       onClick={() => handleSelect(`/speakers/${sp.id}`)}
                       className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === sessionCount + i ? 'bg-brand-accent/10' : 'hover:bg-brand-accent/10'}`}
                     >
-                      <p className="text-sm font-medium text-slate-800">{sp.name}</p>
-                      <p className="text-xs text-brand-muted">{sp.company}</p>
+                      <p className="text-sm font-medium text-slate-800 dark:text-[#f5f0eb]">{sp.name}</p>
+                      <p className="text-xs text-brand-muted dark:text-[#c4a882]">{sp.company}</p>
                     </button>
                   ))}
                 </section>

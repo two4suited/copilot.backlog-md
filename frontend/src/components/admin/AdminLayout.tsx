@@ -19,7 +19,7 @@ export function AdminLayout() {
     <div className="flex gap-6">
       <aside className="w-48 shrink-0">
         <nav className="flex flex-col gap-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Admin</p>
+          <p className="text-xs font-semibold text-slate-400 dark:text-[#c4a882] uppercase tracking-wider mb-2 px-3">Admin</p>
           {adminNavItems.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
@@ -28,7 +28,7 @@ export function AdminLayout() {
                 `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   isActive
                     ? 'bg-brand-accent/10 text-brand-accent'
-                    : 'text-brand-muted hover:bg-brand-border/30 hover:text-brand-primary'
+                    : 'text-brand-muted dark:text-[#c4a882] hover:bg-brand-border/30 dark:hover:bg-[#4a2e20]/40 hover:text-brand-primary dark:hover:text-[#f5f0eb]'
                 }`
               }
             >
