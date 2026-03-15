@@ -1,7 +1,7 @@
 const colours: Record<string, string> = {
-  Beginner: 'bg-green-100 text-green-700',
-  Intermediate: 'bg-blue-100 text-blue-700',
-  Advanced: 'bg-purple-100 text-purple-700',
+  Beginner: 'bg-brand-sage/20 text-brand-sage',
+  Intermediate: 'bg-brand-accent/15 text-brand-accent',
+  Advanced: 'bg-brand-primary/10 text-brand-primary',
 };
 
 export function LevelBadge({ level }: { level: string }) {

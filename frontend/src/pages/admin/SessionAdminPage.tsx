@@ -41,41 +41,41 @@ export function SessionAdminPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">Sessions</h1>
+        <h1 className="text-2xl font-bold text-brand-primary">Sessions</h1>
         <Link
           to="/admin/sessions/new"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors"
         >
           <Plus className="w-4 h-4" />
           New Session
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="bg-brand-surface rounded-xl border border-brand-border overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Title</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Track</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Start Time</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Room</th>
+            <tr className="border-b border-brand-border bg-brand-bg">
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Title</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Track</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Start Time</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Room</th>
               <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
             {sessions?.map((session, idx) => (
-              <tr key={session.id} className={`border-b border-slate-100 last:border-0 hover:bg-sky-50/50 transition-colors ${idx % 2 === 1 ? 'bg-slate-50/60' : 'bg-white'}`}>
-                <td className="px-4 py-3 font-medium text-slate-900">{session.title}</td>
-                <td className="px-4 py-3 text-slate-600">{session.track?.name ?? ''}</td>
-                <td className="px-4 py-3 text-slate-600">
+              <tr key={session.id} className={`border-b border-slate-100 last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
+                <td className="px-4 py-3 font-medium text-brand-primary">{session.title}</td>
+                <td className="px-4 py-3 text-brand-muted">{session.track?.name ?? ''}</td>
+                <td className="px-4 py-3 text-brand-muted">
                   {new Date(session.startTime).toLocaleString()}
                 </td>
-                <td className="px-4 py-3 text-slate-600">{session.room}</td>
+                <td className="px-4 py-3 text-brand-muted">{session.room}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       to={`/admin/sessions/${session.id}`}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-brand-border text-brand-muted text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
                     >
                       <Pencil className="w-3 h-3" />
                       Edit

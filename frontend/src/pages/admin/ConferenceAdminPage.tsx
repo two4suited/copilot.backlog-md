@@ -41,41 +41,41 @@ export function ConferenceAdminPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">Conferences</h1>
+        <h1 className="text-2xl font-bold text-brand-primary">Conferences</h1>
         <Link
           to="/admin/conferences/new"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accent/90 transition-colors"
         >
           <Plus className="w-4 h-4" />
           New Conference
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="bg-brand-surface rounded-xl border border-brand-border overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Name</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Location</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Dates</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600">Tracks</th>
+            <tr className="border-b border-brand-border bg-brand-bg">
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Name</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Location</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Dates</th>
+              <th className="text-left px-4 py-3 font-semibold text-brand-muted">Tracks</th>
               <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
             {conferences?.map((conference, idx) => (
-              <tr key={conference.id} className={`border-b border-slate-100 last:border-0 hover:bg-sky-50/50 transition-colors ${idx % 2 === 1 ? 'bg-slate-50/60' : 'bg-white'}`}>
-                <td className="px-4 py-3 font-medium text-slate-900">{conference.name}</td>
-                <td className="px-4 py-3 text-slate-600">{conference.location}</td>
-                <td className="px-4 py-3 text-slate-600">
+              <tr key={conference.id} className={`border-b border-slate-100 last:border-0 hover:bg-brand-border/20 transition-colors ${idx % 2 === 1 ? 'bg-brand-bg/50' : 'bg-brand-surface'}`}>
+                <td className="px-4 py-3 font-medium text-brand-primary">{conference.name}</td>
+                <td className="px-4 py-3 text-brand-muted">{conference.location}</td>
+                <td className="px-4 py-3 text-brand-muted">
                   {new Date(conference.startDate).toLocaleDateString()} – {new Date(conference.endDate).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-3 text-slate-600">{conference.trackCount}</td>
+                <td className="px-4 py-3 text-brand-muted">{conference.trackCount}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       to={`/admin/conferences/${conference.id}`}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-brand-border text-brand-muted text-xs font-medium hover:bg-brand-accent/10 hover:border-brand-accent hover:text-brand-accent transition-colors"
                     >
                       <Pencil className="w-3 h-3" />
                       Edit

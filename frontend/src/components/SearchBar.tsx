@@ -103,13 +103,13 @@ export function SearchBar() {
           onChange={e => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Search sessions, speakers…"
-          className="w-full pl-9 pr-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+          className="w-full pl-9 pr-3 py-1.5 text-sm rounded-lg border border-brand-border bg-brand-surface focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent"
         />
         {loading && (
           <span
             role="status"
             aria-label="Searching…"
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-brand-accent border-t-transparent rounded-full animate-spin"
           />
         )}
       </div>
@@ -119,7 +119,7 @@ export function SearchBar() {
           id={listboxId}
           role="listbox"
           aria-label="Search results"
-          className="absolute top-full mt-1 left-0 w-80 bg-white border border-slate-200 rounded-xl shadow-lg z-50 overflow-hidden"
+          className="absolute top-full mt-1 left-0 w-80 bg-brand-surface border border-brand-border rounded-xl shadow-lg z-50 overflow-hidden"
         >
           {!hasResults ? (
             <p role="status" className="px-4 py-3 text-sm text-slate-500">No results found.</p>
@@ -127,7 +127,7 @@ export function SearchBar() {
             <div className="max-h-96 overflow-y-auto">
               {results!.sessions.length > 0 && (
                 <section aria-label="Sessions">
-                  <div className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wide bg-slate-50 border-b border-slate-100" aria-hidden="true">
+                  <div className="px-4 py-2 text-xs font-semibold text-brand-muted uppercase tracking-wide bg-brand-bg border-b border-brand-border" aria-hidden="true">
                     Sessions
                   </div>
                   {results!.sessions.map((s, i) => (
@@ -137,7 +137,7 @@ export function SearchBar() {
                       role="option"
                       aria-selected={activeIndex === i}
                       onClick={() => handleSelect(`/sessions/${s.id}`)}
-                      className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === i ? 'bg-indigo-50' : 'hover:bg-indigo-50'}`}
+                      className={`w-full text-left px-4 py-2.5 transition-colors ${activeIndex === i ? 'bg-brand-accent/10' : 'hover:bg-brand-accent/10'}`}
                     >
                       <p className="text-sm font-medium text-slate-800 truncate">{s.title}</p>
                       <p className="text-xs text-slate-500 truncate">{s.conferenceName}</p>
@@ -147,7 +147,7 @@ export function SearchBar() {
               )}
               {results!.speakers.length > 0 && (
                 <section aria-label="Speakers">
-                  <div className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wide bg-slate-50 border-b border-slate-100" aria-hidden="true">
+                  <div className="px-4 py-2 text-xs font-semibold text-brand-muted uppercase tracking-wide bg-brand-bg border-b border-brand-border" aria-hidden="true">
                     Speakers
                   </div>
                   {results!.speakers.map((sp, i) => (
