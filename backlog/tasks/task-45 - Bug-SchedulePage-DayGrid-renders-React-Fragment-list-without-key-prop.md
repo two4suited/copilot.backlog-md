@@ -1,9 +1,11 @@
 ---
 id: TASK-45
 title: 'Bug: SchedulePage DayGrid renders React Fragment list without key prop'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-frontend'
 created_date: '2026-03-15 00:44'
+updated_date: '2026-03-15 00:52'
 labels:
   - bug
 dependencies: []
