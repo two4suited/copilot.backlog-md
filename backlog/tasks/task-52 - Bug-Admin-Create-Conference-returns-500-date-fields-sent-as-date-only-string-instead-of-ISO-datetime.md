@@ -7,7 +7,7 @@ status: In Progress
 assignee:
   - '@agent-fix52'
 created_date: '2026-03-15 00:49'
-updated_date: '2026-03-15 00:51'
+updated_date: '2026-03-15 00:52'
 labels:
   - bug
 dependencies: []
@@ -33,8 +33,8 @@ Fix: Append 'T00:00:00Z' or convert date string to ISO format before sending:
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Creating a new conference via the admin form succeeds (201 response)
-- [ ] #2 User is redirected to /admin/conferences after successful creation
-- [ ] #3 Edit conference form also handles date format correctly
-- [ ] #4 No regression on existing conferences
+- [x] #1 Creating a new conference via the admin form succeeds (201 response)
+- [x] #2 User is redirected to /admin/conferences after successful creation
+- [x] #3 Edit conference form also handles date format correctly
+- [x] #4 No regression on existing conferences
 <!-- AC:END -->
