@@ -55,3 +55,15 @@ This keeps GitHub Issues as a live view of the backlog without stale open issues
 - [x] #4 Active (non-Done) tasks always get a GitHub issue created/updated
 - [x] #5 Sync completes cleanly with 0 stale open issues after a full run
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Rewrote sync script with bidirectional reconciliation:
+
+- **Phase 1**: Paginates all open GitHub issues, extracts task IDs from titles, then closes issues whose backlog task is Done/Archived or missing entirely.
+- **Phase 2**: Creates/updates issues for active tasks only — Done/Archived tasks are skipped with a log message.
+- **Removed** `MAX_ISSUES_PER_RUN=20` cap so all tasks are processed every run.
+
+Script syntax verified (bash -n). Logic follows existing bash 4+ patterns already used throughout the script (designed for GitHub Actions/Linux).
+<!-- SECTION:FINAL_SUMMARY:END -->
