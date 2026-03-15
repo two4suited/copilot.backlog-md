@@ -6,16 +6,16 @@ export function HomePage() {
     <div>
       {/* Hero */}
       <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 mb-12 overflow-hidden">
-        <div className="bg-brand-bg px-6 py-20 sm:py-28 text-center border-b border-brand-border">
+        <div className="bg-brand-bg dark:bg-[#1a0f0a] px-6 py-20 sm:py-28 text-center border-b border-brand-border dark:border-[#4a2e20]">
           <div className="relative z-10 max-w-3xl mx-auto">
             <span className="inline-block text-brand-accent text-xs font-bold uppercase tracking-widest mb-4 px-3 py-1 rounded-full border border-brand-accent/30 bg-brand-accent/10">
               The Premier Tech Event Platform
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-primary leading-tight tracking-tight mt-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-primary dark:text-[#f5f0eb] leading-tight tracking-tight mt-4">
               Where Developers<br />
               <span className="text-brand-accent">Connect</span>
             </h1>
-            <p className="mt-6 text-lg text-brand-muted max-w-xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-brand-muted dark:text-[#c4a882] max-w-xl mx-auto leading-relaxed">
               Discover world-class tech conferences, explore cutting-edge sessions, and connect with the speakers shaping our industry.
             </p>
             <div className="mt-10 flex gap-4 justify-center flex-wrap">
@@ -29,7 +29,7 @@ export function HomePage() {
               </Link>
               <Link
                 to="/speakers"
-                className="flex items-center gap-2 px-7 py-3.5 rounded-xl border-2 border-brand-border text-brand-primary font-semibold hover:border-brand-accent hover:text-brand-accent transition-colors"
+                className="flex items-center gap-2 px-7 py-3.5 rounded-xl border-2 border-brand-border dark:border-[#4a2e20] text-brand-primary dark:text-[#f5f0eb] font-semibold hover:border-brand-accent hover:text-brand-accent transition-colors"
               >
                 <Users className="w-5 h-5" />
                 View Speakers
@@ -64,13 +64,13 @@ export function HomePage() {
           <Link
             key={to}
             to={to}
-            className="group bg-brand-surface rounded-2xl border border-brand-border p-6 hover:shadow-md hover:border-brand-accent/40 transition-all"
+            className="group bg-brand-surface dark:bg-[#2c1810] rounded-2xl border border-brand-border dark:border-[#4a2e20] p-6 hover:shadow-md hover:border-brand-accent/40 transition-all"
           >
             <div className="w-10 h-10 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-4">
               <Icon className="w-5 h-5 text-brand-accent" />
             </div>
-            <h3 className="font-semibold text-brand-primary text-base group-hover:text-brand-accent transition-colors">{title}</h3>
-            <p className="text-sm text-brand-muted mt-1 leading-relaxed">{desc}</p>
+            <h3 className="font-semibold text-brand-primary dark:text-[#f5f0eb] text-base group-hover:text-brand-accent transition-colors">{title}</h3>
+            <p className="text-sm text-brand-muted dark:text-[#c4a882] mt-1 leading-relaxed">{desc}</p>
           </Link>
         ))}
       </div>
