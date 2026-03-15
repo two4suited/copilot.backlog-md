@@ -1,14 +1,15 @@
 ---
 id: TASK-50
 title: 'Update README: document Aspire as the way to run the application'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-docs'
 created_date: '2026-03-15 00:46'
+updated_date: '2026-03-15 01:11'
 labels:
   - docs
 dependencies: []
 priority: medium
-github_issue: 106
 ---
 
 ## Description
