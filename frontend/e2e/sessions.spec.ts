@@ -3,8 +3,9 @@ import { test, expect } from '@playwright/test';
 const API_URL = process.env.API_URL || 'https://localhost:7133';
 
 async function isApiAvailable(): Promise<boolean> {
+  const proxyUrl = process.env.APP_URL || 'http://localhost:51127';
   try {
-    const res = await fetch(`${API_URL}/health`).catch(() => null);
+    const res = await fetch(`${proxyUrl}/api/conferences`).catch(() => null);
     return !!res && res.ok;
   } catch {
     return false;
