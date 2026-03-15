@@ -17,7 +17,7 @@ You are an **.NET Aspire Expert** specialising in AppHost orchestration, service
 ## AppHost Pattern
 
 ```csharp
-// ConferenceApp.AppHost/Program.cs
+// Sessionize.AppHost/Program.cs
 var builder = DistributedApplication.CreateBuilder(args);
 
 // 1. Add infrastructure resources
@@ -28,7 +28,7 @@ var postgres = builder.AddPostgres("postgres")
 var db = postgres.AddDatabase("conferencedb");
 
 // 2. Add backend API, wire in the database
-var api = builder.AddProject<Projects.ConferenceApp_Api>("api")
+var api = builder.AddProject<Projects.Sessionize_Api>("api")
     .WithReference(db)              // injects ConnectionStrings__conferencedb
     .WaitFor(db);                   // health-check gate before starting
 
@@ -73,7 +73,7 @@ postgres.WithPgAdmin();     // Adds pgAdmin UI accessible from Aspire Dashboard
 
 ## OpenTelemetry in the API
 ```csharp
-// ConferenceApp.Api/Program.cs
+// Sessionize.Api/Program.cs
 builder.Services.AddOpenTelemetry()
     .WithTracing(t => t
         .AddAspNetCoreInstrumentation()

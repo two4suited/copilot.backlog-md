@@ -1,5 +1,5 @@
 /**
- * Comprehensive E2E Audit – ConferenceApp
+ * Comprehensive E2E Audit – Sessionize
  *
  * Tests every public, auth-required, and admin page for:
  *  - Page load / no stuck spinner

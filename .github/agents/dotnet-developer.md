@@ -20,7 +20,7 @@ You are a **.NET API Developer** specialising in ASP.NET Core Web API, C#, Entit
 ## Project Structure
 
 ```
-ConferenceApp.Api/
+Sessionize.Api/
   Controllers/        # [ApiController] classes, thin — delegate to services
   Services/           # Business logic interfaces + implementations
   Data/               # DbContext, migrations

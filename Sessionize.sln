@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.Models", "Sessionize.Models\ConferenceApp.Models.csproj", "{46344151-3D02-4F70-9810-6721574234C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.Models", "Sessionize.Models\Sessionize.Models.csproj", "{46344151-3D02-4F70-9810-6721574234C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.Api", "Sessionize.Api\ConferenceApp.Api.csproj", "{05B22C43-26BF-44CF-81F3-7DDFD82A662C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.Api", "Sessionize.Api\Sessionize.Api.csproj", "{05B22C43-26BF-44CF-81F3-7DDFD82A662C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.AppHost", "Sessionize.AppHost\ConferenceApp.AppHost.csproj", "{C4E2C857-F37F-499A-AFB7-B98ED57F6847}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.AppHost", "Sessionize.AppHost\Sessionize.AppHost.csproj", "{C4E2C857-F37F-499A-AFB7-B98ED57F6847}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.ServiceDefaults", "Sessionize.ServiceDefaults\ConferenceApp.ServiceDefaults.csproj", "{2329934C-7BCD-412A-9A21-A0C79169DFDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.ServiceDefaults", "Sessionize.ServiceDefaults\Sessionize.ServiceDefaults.csproj", "{2329934C-7BCD-412A-9A21-A0C79169DFDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.Api.Tests", "Sessionize.Api.Tests\ConferenceApp.Api.Tests.csproj", "{50934D57-2D01-42B9-8A5E-9E8D553B5662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sessionize.Api.Tests", "Sessionize.Api.Tests\Sessionize.Api.Tests.csproj", "{50934D57-2D01-42B9-8A5E-9E8D553B5662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

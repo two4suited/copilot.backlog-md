@@ -16,7 +16,7 @@ test.describe('Navigation and Routing', () => {
   test('home page loads with heading and nav links', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/^\/?$|\/$/);
-    // Home page renders a prominent h1 — text was updated from the original "Welcome to ConferenceApp"
+    // Home page renders a prominent h1 — text was updated from the original "Welcome to Sessionize"
     await expect(page.locator('h1').first()).toBeVisible();
 
     // Nav bar links are present
@@ -43,9 +43,9 @@ test.describe('Navigation and Routing', () => {
     await expect(page).toHaveURL(/\/schedule/, { timeout: 10_000 });
   });
 
-  test('ConferenceApp logo link navigates back to home', async ({ page }) => {
+  test('Sessionize logo link navigates back to home', async ({ page }) => {
     await page.goto('/conferences');
-    await page.getByRole('link', { name: /conferenceapp/i }).click();
+    await page.getByRole('link', { name: /sessionize/i }).click();
     await expect(page).toHaveURL(/^\/?$|localhost:[0-9]+\/?$/, { timeout: 10_000 });
   });
 

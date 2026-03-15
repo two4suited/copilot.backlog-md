@@ -49,8 +49,8 @@ On first run the API automatically applies EF Core migrations and seeds demo dat
 |---|---|---|
 | `ConnectionStrings__conferencedb` | PostgreSQL connection string | Injected by Aspire |
 | `Jwt__Key` | JWT signing key (≥ 32 chars) | Dev key in `appsettings.json` — **change in production** |
-| `Jwt__Issuer` | JWT issuer claim | `ConferenceApp` |
-| `Jwt__Audience` | JWT audience claim | `ConferenceAppUsers` |
+| `Jwt__Issuer` | JWT issuer claim | `Sessionize` |
+| `Jwt__Audience` | JWT audience claim | `SessionizeUsers` |
 | `VITE_API_URL` | API base URL for frontend | `http://localhost:5000` |
 
 > **Security**: Never commit `Jwt__Key` to source control. Use secrets management (Azure Key Vault, GitHub Secrets, environment-specific config) in production.
@@ -59,7 +59,7 @@ On first run the API automatically applies EF Core migrations and seeds demo dat
 
 ## Production Deployment — Azure Container Apps
 
-ConferenceApp deploys to Azure Container Apps via [.NET Aspire's Azure hosting integration](https://learn.microsoft.com/dotnet/aspire/deployment/azure/aca-deployment) and the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/).
+Sessionize deploys to Azure Container Apps via [.NET Aspire's Azure hosting integration](https://learn.microsoft.com/dotnet/aspire/deployment/azure/aca-deployment) and the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/).
 
 ### What `azd up` provisions automatically
 
@@ -151,10 +151,10 @@ To set up OIDC for the app registration, add a federated credential for the GitH
 
 ```bash
 # API
-docker build -t conferenceapp-api -f ConferenceApp.Api/Dockerfile .
+docker build -t sessionize-api -f Sessionize.Api/Dockerfile .
 
 # Frontend
-docker build -t conferenceapp-frontend -f frontend/Dockerfile frontend/
+docker build -t sessionize-frontend -f frontend/Dockerfile frontend/
 ```
 
 ### Run with Docker Compose
@@ -174,19 +174,19 @@ services:
       - "5432:5432"
 
   api:
-    image: conferenceapp-api
+    image: sessionize-api
     environment:
       ConnectionStrings__conferencedb: "Host=db;Database=conferencedb;Username=postgres;Password=postgres"
       Jwt__Key: "change-this-secret-key-in-production-32chars"
-      Jwt__Issuer: "ConferenceApp"
-      Jwt__Audience: "ConferenceAppUsers"
+      Jwt__Issuer: "Sessionize"
+      Jwt__Audience: "SessionizeUsers"
     ports:
       - "5000:8080"
     depends_on:
       - db
 
   frontend:
-    image: conferenceapp-frontend
+    image: sessionize-frontend
     environment:
       VITE_API_URL: "http://localhost:5000"
     ports:
@@ -206,13 +206,13 @@ docker compose up -d
 Migrations run automatically on API startup. To run them manually:
 
 ```bash
-dotnet ef database update --project ConferenceApp.Api
+dotnet ef database update --project Sessionize.Api
 ```
 
 To create a new migration after model changes:
 
 ```bash
-dotnet ef migrations add <MigrationName> --project ConferenceApp.Api
+dotnet ef migrations add <MigrationName> --project Sessionize.Api
 ```
 
 ---

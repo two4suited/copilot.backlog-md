@@ -34,7 +34,7 @@ Located in `.github/workflows/`:
 
 ```yaml
 jobs:
-  build-api:        # dotnet build ConferenceApp.sln -c Release
+  build-api:        # dotnet build Sessionize.sln -c Release
   build-frontend:   # cd frontend && npm ci && npm run build
   lint-orchestrator: # node src/orchestrator-cli.js help
 ```

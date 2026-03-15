@@ -93,13 +93,13 @@ public class ConferenceDbContext : DbContext
 ## Migration Commands
 ```bash
 # Add a new migration
-dotnet ef migrations add <MigrationName> --project ConferenceApp.Api --startup-project ConferenceApp.Api
+dotnet ef migrations add <MigrationName> --project Sessionize.Api --startup-project Sessionize.Api
 
 # Apply to database
-dotnet ef database update --project ConferenceApp.Api
+dotnet ef database update --project Sessionize.Api
 
 # Revert last migration
-dotnet ef migrations remove --project ConferenceApp.Api
+dotnet ef migrations remove --project Sessionize.Api
 ```
 
 ## Indexing Strategy
