@@ -161,29 +161,33 @@
     },
     "66": {
       "agent": "general-purpose",
-      "cycle": 283,
-      "assignedAt": "2026-03-15T01:52:49.093Z"
+      "cycle": 284,
+      "assignedAt": "2026-03-15T01:52:59.098Z"
     },
     "67": {
       "agent": "general-purpose",
-      "cycle": 283,
-      "assignedAt": "2026-03-15T01:52:49.093Z"
+      "cycle": 284,
+      "assignedAt": "2026-03-15T01:52:59.098Z"
     },
     "68": {
       "agent": "task",
-      "cycle": 283,
-      "assignedAt": "2026-03-15T01:52:49.093Z"
+      "cycle": 284,
+      "assignedAt": "2026-03-15T01:52:59.099Z"
     },
     "69": {
       "agent": "task",
-      "cycle": 254,
-      "assignedAt": "2026-03-15T01:47:59.066Z",
-      "seenInProgress": 1773539289069
+      "cycle": 284,
+      "assignedAt": "2026-03-15T01:52:59.099Z"
     },
     "70": {
       "agent": "task",
-      "cycle": 283,
-      "assignedAt": "2026-03-15T01:52:49.093Z"
+      "cycle": 284,
+      "assignedAt": "2026-03-15T01:52:59.099Z"
+    },
+    "72": {
+      "agent": "general-purpose",
+      "cycle": 284,
+      "assignedAt": "2026-03-15T01:52:59.100Z"
     }
   },
   "bugs": [],
