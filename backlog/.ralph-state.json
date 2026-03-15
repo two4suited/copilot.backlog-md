@@ -56,48 +56,58 @@
     },
     "45": {
       "agent": "task",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.654Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.656Z"
     },
     "46": {
       "agent": "task",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.654Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.656Z"
     },
     "47": {
       "agent": "general-purpose",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.654Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.657Z"
     },
     "48": {
       "agent": "task",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.654Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.657Z"
     },
     "49": {
       "agent": "general-purpose",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.655Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.657Z"
     },
     "50": {
       "agent": "explore",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.655Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.657Z"
     },
     "51": {
       "agent": "task",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.655Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.657Z"
     },
     "52": {
       "agent": "general-purpose",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.655Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.658Z"
     },
     "53": {
       "agent": "task",
-      "cycle": 81,
-      "assignedAt": "2026-03-15T00:50:01.656Z"
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.658Z"
+    },
+    "54": {
+      "agent": "general-purpose",
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.658Z"
+    },
+    "55": {
+      "agent": "general-purpose",
+      "cycle": 82,
+      "assignedAt": "2026-03-15T00:50:31.658Z"
     }
   },
   "bugs": [],
