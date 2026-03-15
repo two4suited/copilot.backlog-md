@@ -139,6 +139,7 @@ public static class DbSeeder
                 StartDate = new DateTime(2023, 10, 12, 9, 0, 0, DateTimeKind.Utc),
                 EndDate   = new DateTime(2023, 10, 14, 18, 0, 0, DateTimeKind.Utc),
                 Location  = "New York, NY",
+                Timezone   = "America/New_York",
                 WebsiteUrl = "https://techconf2023.example.com",
                 ImageUrl   = "https://picsum.photos/seed/techconf2023/1200/400",
             },
@@ -150,6 +151,7 @@ public static class DbSeeder
                 StartDate = new DateTime(2025, 6, 10, 9, 0, 0, DateTimeKind.Utc),
                 EndDate   = new DateTime(2025, 6, 12, 18, 0, 0, DateTimeKind.Utc),
                 Location  = "Chicago, IL",
+                Timezone   = "America/Chicago",
                 WebsiteUrl = "https://devsummit2025.example.com",
                 ImageUrl   = "https://picsum.photos/seed/devsummit2025/1200/400",
             },
@@ -161,6 +163,7 @@ public static class DbSeeder
                 StartDate = new DateTime(2026, 6, 15, 9, 0, 0, DateTimeKind.Utc),
                 EndDate   = new DateTime(2026, 6, 16, 18, 0, 0, DateTimeKind.Utc),
                 Location  = "San Francisco, CA",
+                Timezone   = "America/Los_Angeles",
                 WebsiteUrl = "https://techconf2026.example.com",
                 ImageUrl   = "https://picsum.photos/seed/techconf2026/1200/400",
             }
