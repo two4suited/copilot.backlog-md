@@ -46,3 +46,17 @@ Aspire handles containerisation, Azure Container Apps provisioning, and deployme
 - [x] #4 docs/deployment.md rewritten for azd only
 - [x] #5 No docker-compose references remain in README or docs
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Removed docker-compose.yml, Dockerfile.api, Dockerfile.frontend, nginx.conf, and .env.example.
+
+kept frontend/Dockerfile.frontend.prod and frontend/nginx.prod.conf (used by Aspire AppHost for production builds).
+
+README.md: replaced "Production Deployment" (docker-compose) section with "Deploy to Azure" (azd workflow); removed the docker-compose-specific Docker Desktop prerequisite note.
+
+docs/deployment.md: rewritten entirely for azd/Aspire deployment — covers provisioned resources, first-time setup, ongoing deploys, tear-down, and CI/CD pointer.
+
+No docker-compose references remain in any markdown or workflow files.
+<!-- SECTION:FINAL_SUMMARY:END -->
