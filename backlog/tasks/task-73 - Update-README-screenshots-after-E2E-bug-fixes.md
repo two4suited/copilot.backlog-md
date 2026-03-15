@@ -12,6 +12,7 @@ labels:
 dependencies:
   - TASK-74
 priority: low
+github_issue: 133
 ---
 
 ## Description
