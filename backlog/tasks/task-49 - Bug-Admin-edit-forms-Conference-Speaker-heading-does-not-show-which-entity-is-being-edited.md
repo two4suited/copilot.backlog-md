@@ -3,9 +3,11 @@ id: TASK-49
 title: >-
   Bug: Admin edit forms (Conference, Speaker) heading does not show which entity
   is being edited
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-frontend'
 created_date: '2026-03-15 00:45'
+updated_date: '2026-03-15 00:52'
 labels:
   - bug
   - ux
