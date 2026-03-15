@@ -9,18 +9,18 @@
     },
     "31": {
       "agent": "code-review",
-      "cycle": 7,
-      "assignedAt": "2026-03-15T00:13:01.628Z"
+      "cycle": 8,
+      "assignedAt": "2026-03-15T00:13:31.625Z"
     },
     "32": {
       "agent": "general-purpose",
-      "cycle": 7,
-      "assignedAt": "2026-03-15T00:13:01.629Z"
+      "cycle": 8,
+      "assignedAt": "2026-03-15T00:13:31.625Z"
     },
     "33": {
       "agent": "task",
-      "cycle": 7,
-      "assignedAt": "2026-03-15T00:13:01.629Z"
+      "cycle": 8,
+      "assignedAt": "2026-03-15T00:13:31.625Z"
     },
     "35": {},
     "37": {
@@ -36,13 +36,13 @@
     },
     "41": {
       "agent": "general-purpose",
-      "cycle": 7,
-      "assignedAt": "2026-03-15T00:13:01.630Z"
+      "cycle": 8,
+      "assignedAt": "2026-03-15T00:13:31.626Z"
     },
     "42": {
       "agent": "general-purpose",
-      "cycle": 7,
-      "assignedAt": "2026-03-15T00:13:01.630Z"
+      "cycle": 8,
+      "assignedAt": "2026-03-15T00:13:31.626Z"
     }
   },
   "bugs": [],
