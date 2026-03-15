@@ -39,7 +39,7 @@ function SessionCard({ session }: { session: Session }) {
   return (
     <Link
       to={`/sessions/${session.id}`}
-      className="group relative block h-full bg-brand-surface rounded-xl border border-brand-border p-3 hover:shadow-md hover:border-brand-accent/40 transition-all"
+      className="group relative block h-full bg-brand-surface dark:bg-[#2c1810] rounded-xl border border-brand-border dark:border-[#4a2e20] p-3 hover:shadow-md hover:border-brand-accent/40 transition-all"
     >
       {/* Bookmark button – stops propagation so the link doesn't fire */}
       <div className="absolute top-2 right-2">
@@ -47,17 +47,17 @@ function SessionCard({ session }: { session: Session }) {
       </div>
       <div className="flex items-start gap-1 mb-1.5 pr-8">
         <LevelBadge level={session.level} />
-        <span className="ml-auto text-xs text-brand-muted shrink-0 tabular-nums">{mins}m</span>
+        <span className="ml-auto text-xs text-brand-muted dark:text-[#c4a882] shrink-0 tabular-nums">{mins}m</span>
       </div>
-      <p className="text-sm font-semibold text-brand-primary group-hover:text-brand-accent leading-snug line-clamp-3 mb-1.5 transition-colors">
+      <p className="text-sm font-semibold text-brand-primary dark:text-[#f5f0eb] group-hover:text-brand-accent leading-snug line-clamp-3 mb-1.5 transition-colors">
         {session.title}
       </p>
       {speakers.length > 0 && (
-        <p className="text-xs text-brand-muted truncate mb-2">
+        <p className="text-xs text-brand-muted dark:text-[#c4a882] truncate mb-2">
           {speakers.map(s => s.name).join(', ')}
         </p>
       )}
-      <div className="flex flex-wrap items-center gap-1.5 mt-auto text-xs text-slate-400">
+      <div className="flex flex-wrap items-center gap-1.5 mt-auto text-xs text-slate-400 dark:text-[#c4a882]">
         {session.room && (
           <span className="flex items-center gap-1 bg-brand-bg px-1.5 py-0.5 rounded-md border border-brand-border">
             <DoorOpen className="w-3 h-3 text-brand-accent" /> {session.room}
