@@ -5,7 +5,7 @@ status: In Progress
 assignee:
   - '@agent-schedule'
 created_date: '2026-03-15 01:31'
-updated_date: '2026-03-15 01:44'
+updated_date: '2026-03-15 01:45'
 labels:
   - bug
   - frontend
@@ -31,10 +31,10 @@ Also check any sticky header logic in `frontend/src/components/` related to sche
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Filter bar no longer overlaps session grid content
-- [ ] #2 All time slots and sessions are fully visible below the filter bar
-- [ ] #3 Sticky positioning (if used) has correct top offset accounting for nav + filter bar height
-- [ ] #4 Fix verified at both desktop (1280px) and mobile (375px) viewport widths
+- [x] #1 Filter bar no longer overlaps session grid content
+- [x] #2 All time slots and sessions are fully visible below the filter bar
+- [x] #3 Sticky positioning (if used) has correct top offset accounting for nav + filter bar height
+- [x] #4 Fix verified at both desktop (1280px) and mobile (375px) viewport widths
 <!-- AC:END -->
 
 ## Implementation Plan
