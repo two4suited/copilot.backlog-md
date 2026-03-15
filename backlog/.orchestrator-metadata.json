@@ -42,41 +42,6 @@
   },
   "history": [
     {
-      "taskId": "5.1",
-      "oldAgent": null,
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:01.130Z",
-      "reason": "Auto-tagged by task labels"
-    },
-    {
-      "taskId": "5.2",
-      "oldAgent": null,
-      "newAgent": "react-developer",
-      "timestamp": "2026-03-14T21:20:01.130Z",
-      "reason": "Auto-tagged by task labels"
-    },
-    {
-      "taskId": "5.3",
-      "oldAgent": null,
-      "newAgent": "dotnet-developer",
-      "timestamp": "2026-03-14T21:20:01.131Z",
-      "reason": "Auto-tagged by task labels"
-    },
-    {
-      "taskId": "6",
-      "oldAgent": "explore",
-      "newAgent": "task",
-      "timestamp": "2026-03-14T21:20:01.131Z",
-      "reason": "Auto-tagged by task labels"
-    },
-    {
-      "taskId": "6.1",
-      "oldAgent": null,
-      "newAgent": "aspire-expert",
-      "timestamp": "2026-03-14T21:20:01.131Z",
-      "reason": "Auto-tagged by task labels"
-    },
-    {
       "taskId": "6.2",
       "oldAgent": null,
       "newAgent": "dotnet-developer",
@@ -740,6 +705,41 @@
       "newAgent": "general-purpose",
       "timestamp": "2026-03-15T00:12:01.624Z",
       "reason": "Ralph loop cycle 5"
+    },
+    {
+      "taskId": "31",
+      "oldAgent": "code-review",
+      "newAgent": "code-review",
+      "timestamp": "2026-03-15T00:12:31.623Z",
+      "reason": "Ralph loop cycle 6"
+    },
+    {
+      "taskId": "32",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:12:31.623Z",
+      "reason": "Ralph loop cycle 6"
+    },
+    {
+      "taskId": "33",
+      "oldAgent": "task",
+      "newAgent": "task",
+      "timestamp": "2026-03-15T00:12:31.623Z",
+      "reason": "Ralph loop cycle 6"
+    },
+    {
+      "taskId": "41",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:12:31.624Z",
+      "reason": "Ralph loop cycle 6"
+    },
+    {
+      "taskId": "42",
+      "oldAgent": "general-purpose",
+      "newAgent": "general-purpose",
+      "timestamp": "2026-03-15T00:12:31.624Z",
+      "reason": "Ralph loop cycle 6"
     }
   ],
   "config": {
