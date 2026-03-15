@@ -202,7 +202,8 @@
     "75": {
       "agent": "general-purpose",
       "cycle": 681,
-      "assignedAt": "2026-03-15T02:59:09.456Z"
+      "assignedAt": "2026-03-15T02:59:09.456Z",
+      "seenInProgress": 1773543559456
     }
   },
   "bugs": [],

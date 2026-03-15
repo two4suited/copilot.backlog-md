@@ -256,14 +256,84 @@ if [[ ${#task_files[@]} -eq 0 ]]; then
   exit 0
 fi
 
-MAX_ISSUES_PER_RUN="${MAX_ISSUES_PER_RUN:-20}"
-if [[ ${#task_files[@]} -gt $MAX_ISSUES_PER_RUN ]]; then
-  log "Capping to $MAX_ISSUES_PER_RUN files (MAX_ISSUES_PER_RUN). Full sync will continue on next run."
-  task_files=("${task_files[@]:0:$MAX_ISSUES_PER_RUN}")
-fi
-
 log "Syncing ${#task_files[@]} of ${#all_task_files[@]} task file(s)."
 
+# ---------------------------------------------------------------------------
+# Phase 1: Reconcile — close open GitHub Issues for Done/Archived/missing tasks
+# ---------------------------------------------------------------------------
+reconcile_open_issues() {
+  log "=== Phase 1: Reconciling open GitHub Issues ==="
+  local page=1
+  local closed_count=0
+
+  while true; do
+    local issues
+    issues=$(gh api "/repos/two4suited/copilot.backlog-md/issues?state=open&per_page=100&page=${page}" \
+      --jq '.[] | "\(.number) \(.title)"' 2>/dev/null || echo "")
+
+    [[ -z "$issues" ]] && break
+
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+      local num title task_id_raw
+      num=$(echo "$line" | awk '{print $1}')
+      title=$(echo "$line" | cut -d' ' -f2-)
+
+      # Extract task ID from title e.g. [TASK-63] or [task-63]
+      task_id_raw=$(echo "$title" | grep -oiE '\[TASK-[0-9]+(\.[0-9]+)*\]' | tr -d '[]' | tr '[:lower:]' '[:upper:]' || true)
+
+      if [[ -z "$task_id_raw" ]]; then
+        log "Issue #$num has no task ID in title, skipping: $title"
+        continue
+      fi
+
+      # Find matching task file (case-insensitive task id)
+      local task_id_lower task_file
+      task_id_lower=$(echo "$task_id_raw" | tr '[:upper:]' '[:lower:]')
+      task_file=$(find backlog/tasks -iname "${task_id_lower} - *.md" 2>/dev/null | head -1)
+
+      local should_close=false
+
+      if [[ -z "$task_file" ]]; then
+        log "Issue #$num: task $task_id_raw not found in backlog → closing"
+        should_close=true
+      else
+        local status
+        status=$(get_field 'status' "$task_file")
+        case "${status,,}" in
+          done|archived)
+            should_close=true
+            log "Issue #$num: $task_id_raw is $status → closing"
+            ;;
+        esac
+      fi
+
+      if [[ "$should_close" == "true" ]]; then
+        gh api --method PATCH "/repos/two4suited/copilot.backlog-md/issues/$num" \
+          --field state=closed >/dev/null 2>&1 \
+          && closed_count=$((closed_count + 1)) \
+          || warn "Failed to close issue #$num"
+        sleep "$SLEEP_BETWEEN_CALLS"
+      fi
+
+    done <<< "$issues"
+
+    # Check if there are more pages
+    local count
+    count=$(echo "$issues" | grep -c . || true)
+    [[ "$count" -lt 100 ]] && break
+    page=$((page + 1))
+  done
+
+  log "Phase 1 complete: closed $closed_count stale issues."
+}
+
+reconcile_open_issues
+sleep "$SLEEP_BETWEEN_CALLS"
+
+# ---------------------------------------------------------------------------
+# Phase 2: Create/update issues for active (non-Done) tasks
+# ---------------------------------------------------------------------------
 for task_file in "${task_files[@]}"; do
   log "Processing: $task_file"
 
@@ -281,6 +351,14 @@ for task_file in "${task_files[@]}"; do
 
   # Normalise task ID to uppercase for consistency
   task_id_upper="${task_id^^}"  # e.g. task-13 → TASK-13
+
+  # Skip Done and Archived tasks — Phase 1 already closes their issues
+  case "${task_status,,}" in
+    done|archived)
+      log "Skipping $task_id_upper (status: $task_status)"
+      continue
+      ;;
+  esac
 
   # --- Parse labels list ---
   mapfile -t raw_labels < <(get_list_field 'labels' "$task_file")
