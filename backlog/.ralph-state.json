@@ -192,13 +192,13 @@
     },
     "73": {
       "agent": "task",
-      "cycle": 349,
-      "assignedAt": "2026-03-15T02:03:49.123Z"
+      "cycle": 350,
+      "assignedAt": "2026-03-15T02:03:59.117Z"
     },
     "74": {
       "agent": "general-purpose",
-      "cycle": 349,
-      "assignedAt": "2026-03-15T02:03:49.124Z"
+      "cycle": 350,
+      "assignedAt": "2026-03-15T02:03:59.118Z"
     }
   },
   "bugs": [],
