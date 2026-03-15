@@ -26,7 +26,7 @@ public class SessionsController : ControllerBase
     {
         var query = _db.Sessions
             .AsNoTracking()
-            .Include(s => s.Track)
+            .Include(s => s.Track).ThenInclude(t => t.Conference)
             .Include(s => s.SessionSpeakers).ThenInclude(ss => ss.Speaker)
             .Include(s => s.Registrations)
             .AsQueryable();
@@ -49,7 +49,7 @@ public class SessionsController : ControllerBase
     {
         var session = await _db.Sessions
             .AsNoTracking()
-            .Include(s => s.Track)
+            .Include(s => s.Track).ThenInclude(t => t.Conference)
             .Include(s => s.SessionSpeakers).ThenInclude(ss => ss.Speaker)
             .Include(s => s.Registrations)
             .FirstOrDefaultAsync(s => s.Id == id, ct);
@@ -172,7 +172,8 @@ public class SessionsController : ControllerBase
             s.SessionSpeakers?.Select(ss => new SpeakerSummaryDto(
                 ss.Speaker.Id, ss.Speaker.Name,
                 ss.Speaker.Company, ss.Speaker.PhotoUrl)).ToList()
-            ?? new List<SpeakerSummaryDto>()
+            ?? new List<SpeakerSummaryDto>(),
+            s.Track?.Conference?.Timezone ?? "UTC"
         );
     }
 }

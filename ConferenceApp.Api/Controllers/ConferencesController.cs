@@ -37,7 +37,7 @@ public class ConferencesController : ControllerBase
             .Take(pageSize)
             .Select(c => new ConferenceDto(
                 c.Id, c.Name, c.Description, c.StartDate, c.EndDate,
-                c.Location, c.WebsiteUrl, c.Tracks.Count, c.CreatedAt))
+                c.Location, c.WebsiteUrl, c.Timezone, c.Tracks.Count, c.CreatedAt))
             .ToListAsync(ct);
 
         return Ok(new PagedResult<ConferenceDto>(items, total, page, pageSize));
@@ -57,7 +57,7 @@ public class ConferencesController : ControllerBase
         var dto = new ConferenceDetailDto(
             conference.Id, conference.Name, conference.Description,
             conference.StartDate, conference.EndDate, conference.Location,
-            conference.WebsiteUrl,
+            conference.WebsiteUrl, conference.Timezone,
             conference.Tracks.Select(t => new TrackDto(
                 t.Id, t.ConferenceId, t.Name, t.Description, t.Color, t.SortOrder,
                 t.Sessions.Count)).ToList(),
@@ -79,6 +79,7 @@ public class ConferencesController : ControllerBase
             EndDate = req.EndDate,
             Location = req.Location,
             WebsiteUrl = req.WebsiteUrl,
+            Timezone = req.Timezone ?? "UTC",
         };
 
         _db.Conferences.Add(conference);
@@ -86,7 +87,7 @@ public class ConferencesController : ControllerBase
 
         var dto = new ConferenceDto(conference.Id, conference.Name, conference.Description,
             conference.StartDate, conference.EndDate, conference.Location,
-            conference.WebsiteUrl, 0, conference.CreatedAt);
+            conference.WebsiteUrl, conference.Timezone, 0, conference.CreatedAt);
 
         return CreatedAtAction(nameof(Get), new { id = conference.Id }, dto);
     }
@@ -106,6 +107,7 @@ public class ConferencesController : ControllerBase
         conference.EndDate = req.EndDate;
         conference.Location = req.Location;
         conference.WebsiteUrl = req.WebsiteUrl;
+        conference.Timezone = req.Timezone ?? conference.Timezone;
 
         await _db.SaveChangesAsync(ct);
         return NoContent();

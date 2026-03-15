@@ -34,6 +34,7 @@ public class SpeakersController : ControllerBase
             .Include(s => s.SessionSpeakers)
                 .ThenInclude(ss => ss.Session)
                     .ThenInclude(s => s.Track)
+                        .ThenInclude(t => t.Conference)
             .FirstOrDefaultAsync(s => s.Id == id, ct);
 
         if (speaker is null) return NotFound();
@@ -44,7 +45,8 @@ public class SpeakersController : ControllerBase
                 ss.Session.Id, ss.Session.Title,
                 ss.Session.StartTime, ss.Session.EndTime,
                 ss.Session.Room, ss.Session.Capacity,
-                ss.Session.SessionType, ss.Session.Level))
+                ss.Session.SessionType, ss.Session.Level,
+                ss.Session.Track?.Conference?.Timezone ?? "UTC"))
             .ToList();
 
         return Ok(new SpeakerDetailDto(

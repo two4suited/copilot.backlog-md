@@ -8,6 +8,7 @@ public record ConferenceDto(
     DateTime EndDate,
     string Location,
     string? WebsiteUrl,
+    string Timezone,
     int TrackCount,
     DateTime CreatedAt
 );
@@ -20,6 +21,7 @@ public record ConferenceDetailDto(
     DateTime EndDate,
     string Location,
     string? WebsiteUrl,
+    string Timezone,
     IReadOnlyList<TrackDto> Tracks,
     DateTime CreatedAt
 );
@@ -30,7 +32,8 @@ public record CreateConferenceRequest(
     DateTime StartDate,
     DateTime EndDate,
     string Location,
-    string? WebsiteUrl
+    string? WebsiteUrl,
+    string? Timezone
 );
 
 public record UpdateConferenceRequest(
@@ -39,7 +42,8 @@ public record UpdateConferenceRequest(
     DateTime StartDate,
     DateTime EndDate,
     string Location,
-    string? WebsiteUrl
+    string? WebsiteUrl,
+    string? Timezone
 );
 
 public record TrackDto(
@@ -70,7 +74,8 @@ public record SessionSummaryDto(
     string Room,
     int Capacity,
     string SessionType,
-    string Level
+    string Level,
+    string ConferenceTimezone = "UTC"
 );
 
 public record CreateTrackRequest(
@@ -113,7 +118,8 @@ public record SessionDto(
     string Level,
     string? SlidesUrl,
     string? RecordingUrl,
-    IReadOnlyList<SpeakerSummaryDto> Speakers
+    IReadOnlyList<SpeakerSummaryDto> Speakers,
+    string ConferenceTimezone = "UTC"
 );
 
 public record CreateSessionRequest(
