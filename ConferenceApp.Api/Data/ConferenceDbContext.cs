@@ -28,6 +28,8 @@ public class ConferenceDbContext : DbContext
         modelBuilder.Entity<Speaker>().HasQueryFilter(s => !s.IsDeleted);
         modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
         modelBuilder.Entity<Registration>().HasQueryFilter(r => !r.IsDeleted);
+        // SessionSpeaker is a join entity — filter mirrors Session and Speaker so EF warning 10622 is resolved
+        modelBuilder.Entity<SessionSpeaker>().HasQueryFilter(ss => !ss.Session.IsDeleted && !ss.Speaker.IsDeleted);
 
         modelBuilder.Entity<Conference>()
             .HasMany(c => c.Tracks)
