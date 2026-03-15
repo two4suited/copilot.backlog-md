@@ -298,9 +298,10 @@ reconcile_open_issues() {
         log "Issue #$num: task $task_id_raw not found in backlog → closing"
         should_close=true
       else
-        local status
+        local status status_lower
         status=$(get_field 'status' "$task_file")
-        case "${status,,}" in
+        status_lower=$(echo "$status" | tr '[:upper:]' '[:lower:]')
+        case "$status_lower" in
           done|archived)
             should_close=true
             log "Issue #$num: $task_id_raw is $status → closing"
