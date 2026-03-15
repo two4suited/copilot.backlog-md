@@ -1,9 +1,11 @@
 ---
 id: TASK-51
 title: Deploy ConferenceApp to Azure Container Apps using Aspire
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@agent-aca'
 created_date: '2026-03-15 00:47'
+updated_date: '2026-03-15 01:28'
 labels:
   - azure
   - deployment
@@ -11,7 +13,6 @@ labels:
   - infrastructure
 dependencies: []
 priority: high
-github_issue: 107
 ---
 
 ## Description
