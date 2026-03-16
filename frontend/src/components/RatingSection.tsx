@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../services/api';
 import type { MyRatingDto, RatingSummaryDto } from '../types';
@@ -48,13 +48,15 @@ export function RatingSection({ sessionId, sessionEndTime, isRegistered }: Ratin
     queryKey: ['ratings-mine', sessionId],
     queryFn: () => api.ratings.getMine(sessionId),
     enabled: sessionEnded && isAuthenticated,
-    onSuccess: (data: MyRatingDto) => {
-      if (data.hasRated && data.rating && !submitted) {
-        setPendingStars(data.rating.stars);
-        setPendingComment(data.rating.comment ?? '');
-      }
-    },
   });
+
+  // Pre-populate form when an existing rating is loaded
+  useEffect(() => {
+    if (mine?.hasRated && mine.rating && !submitted) {
+      setPendingStars(mine.rating.stars);
+      setPendingComment(mine.rating.comment ?? '');
+    }
+  }, [mine, submitted]);
 
   const submitMutation = useMutation({
     mutationFn: () => api.ratings.submit(sessionId, pendingStars, pendingComment || undefined),
