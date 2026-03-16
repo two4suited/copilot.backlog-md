@@ -434,3 +434,7 @@ frontend/dist/
 # Playwright test artifacts
 test-results/
 playwright-report/
+
+# guild-managed
+.agents/memory/context/
+# end guild-managed
