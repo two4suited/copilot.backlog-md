@@ -437,4 +437,5 @@ playwright-report/
 
 # guild-managed
 .agents/memory/context/
+.agents/inbox/
 # end guild-managed
