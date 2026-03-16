@@ -172,6 +172,10 @@ az group delete --name <resource-group-name>
 | `POST` | `/api/auth/register` | Create account → JWT |
 | `POST` | `/api/auth/login` | Login → JWT |
 | `GET` | `/api/auth/me` | Current user profile (🔒) |
+| `POST` | `/api/sessions/{id}/ratings` | Submit or update a rating (🔒 registered attendees) |
+| `GET` | `/api/sessions/{id}/ratings/summary` | Aggregate rating + star distribution |
+| `GET` | `/api/sessions/{id}/ratings/mine` | Current user's rating for a session (🔒) |
+| `GET` | `/api/sessions/{id}/ratings` | All ratings for a session (🔒 admin) |
 
 Swagger UI: `https://localhost:7133/swagger` (development only)
 
@@ -186,11 +190,11 @@ Sessionize.sln
 │   ├── DTOs/                       # Request/response records
 │   └── Services/                   # TokenService (JWT)
 ├── Sessionize.Models/           # Domain models (shared library)
-│   └── Conference, Track, Session, Speaker, User, Registration
+│   └── Conference, Track, Session, Speaker, User, Registration, SessionRating
 frontend/                           # React app
 │   └── src/
 │       ├── pages/                  # ConferencesPage, ConferenceDetailPage, TrackDetailPage, ...
-│       ├── components/             # Layout, LoadingSpinner, ErrorMessage, LevelBadge
+│       ├── components/             # Layout, LoadingSpinner, StarRating, RatingSection, ...
 │       ├── services/api.ts         # axios client with JWT interceptor
 │       └── types/index.ts          # TypeScript interfaces
 src/                                # Orchestrator CLI
@@ -206,12 +210,14 @@ This repo uses an **orchestrator + specialised agents** system to build the app 
 
 | Agent | Handles |
 |-------|---------|
-| `aspire-expert` | AppHost, infrastructure, containers, OTel |
-| `dotnet-developer` | API controllers, services, middleware |
-| `database-developer` | EF Core models, migrations, schema |
-| `react-developer` | React pages, components, hooks |
-| `designer` | UI/UX, Tailwind components, accessibility |
-| `tester` | Playwright e2e tests, bug filing |
+| `turanga-leela` | Orchestrator — routes tasks, tracks decisions, delegates to specialists |
+| `professor-farnsworth` | .NET Aspire, AppHost, infrastructure, containers, OTel |
+| `hermes-conrad` | EF Core models, migrations, database schema |
+| `kif-kroker` | ASP.NET Core controllers, services, middleware |
+| `philip-j-fry` | React pages, components, hooks, Tailwind |
+| `amy-wong` | UI/UX design, accessibility, Tailwind components |
+| `bender-bending-rodriguez` | GitHub Actions, CI/CD, Docker, DevOps |
+| `dr-john-zoidberg` | Playwright e2e tests, bug filing, QA |
 
 ### Orchestrator commands
 
