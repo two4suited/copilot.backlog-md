@@ -77,6 +77,9 @@ See the Maker-Checker skip criteria in the `orchestrate` skill to determine whic
 | Order | Skill directory    | Session-start action                                             |
 | ----- | ------------------ | ---------------------------------------------------------------- |
 | 1     | `routing/`         | Load team roster and routing rules                               |
+| 2     | `markdown-memory/` | `context:read` — load context, decisions, per-agent notes        |
+| 3     | `github-issues/`   | `issue:ready` — surface actionable work from GitHub Issues       |
+| 4     | `markdown-inbox/`  | `message:read` — check waiting messages from other agents        |
 
 ---
 
