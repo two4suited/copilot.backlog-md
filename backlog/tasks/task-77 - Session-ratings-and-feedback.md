@@ -1,9 +1,11 @@
 ---
 id: TASK-77
 title: Session ratings and feedback
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@copilot'
 created_date: '2026-03-16 16:46'
+updated_date: '2026-03-16 16:47'
 labels:
   - feature
   - backend
@@ -31,3 +33,20 @@ Allow registered attendees to rate and leave feedback on sessions they attended.
 - [ ] #9 api.ts extended with ratings namespace (submit, getSummary, getMine)
 - [ ] #10 dotnet build clean, npm run build clean, no TypeScript errors
 <!-- AC:END -->
+
+## Implementation Plan
+
+<!-- SECTION:PLAN:BEGIN -->
+1. Add SessionRating entity to Sessionize.Models/
+2. Add DbSet + EF config + query filter to ConferenceDbContext
+3. Generate EF Core migration
+4. Add RatingDtos.cs (SubmitRatingRequest, RatingDto, RatingSummaryDto, MyRatingDto)
+5. Implement RatingsController with 4 endpoints
+6. Register controller (auto via AddControllers — no extra step)
+7. Add ratings namespace to frontend api.ts
+8. Add SessionRating type to frontend types
+9. Build StarRating component
+10. Build RatingSection component
+11. Wire RatingSection into SessionDetailPage
+12. Verify dotnet build + npm run build both clean
+<!-- SECTION:PLAN:END -->
