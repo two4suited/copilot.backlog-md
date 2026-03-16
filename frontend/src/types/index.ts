@@ -77,6 +77,30 @@ export interface Session extends BaseEntity {
   conferenceTimezone?: string;
 }
 
+export interface SessionRating extends BaseEntity {
+  stars: number;
+  comment?: string;
+}
+
+export interface MyRatingDto {
+  hasRated: boolean;
+  rating?: SessionRating;
+}
+
+export interface StarDistribution {
+  oneStar: number;
+  twoStars: number;
+  threeStars: number;
+  fourStars: number;
+  fiveStars: number;
+}
+
+export interface RatingSummaryDto {
+  averageStars: number;
+  totalRatings: number;
+  distribution: StarDistribution;
+}
+
 export interface User extends BaseEntity {
   email: string;
   name: string;

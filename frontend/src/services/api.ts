@@ -77,4 +77,12 @@ export const api = {
       apiClient.post('/api/auth/login', { email, password }).then(r => r.data),
     register: (data: unknown) => apiClient.post('/api/auth/register', data).then(r => r.data),
   },
+  ratings: {
+    submit: (sessionId: string, stars: number, comment?: string) =>
+      apiClient.post(`/api/sessions/${sessionId}/ratings`, { stars, comment }).then(r => r.data),
+    getSummary: (sessionId: string) =>
+      apiClient.get(`/api/sessions/${sessionId}/ratings/summary`).then(r => r.data),
+    getMine: (sessionId: string) =>
+      apiClient.get(`/api/sessions/${sessionId}/ratings/mine`).then(r => r.data),
+  },
 };

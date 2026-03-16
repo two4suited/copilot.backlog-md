@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Sessionize.Api.Data;
@@ -11,9 +12,11 @@ using Sessionize.Api.Data;
 namespace Sessionize.Api.Migrations
 {
     [DbContext(typeof(ConferenceDbContext))]
-    partial class ConferenceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260316200536_AddSessionRatings")]
+    partial class AddSessionRatings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
