@@ -4,7 +4,7 @@ A full-stack conference management web app built with **React + .NET Aspire + Po
 
 ## The App
 
-Browse conferences, explore tracks and sessions, view speaker profiles, and register for sessions — all in a responsive React UI backed by a .NET API orchestrated with Aspire.
+Browse conferences, explore tracks and sessions, view speaker profiles, register for sessions, and leave ratings and feedback — all in a responsive React UI backed by a .NET API orchestrated with Aspire.
 
 | Layer | Technology |
 |-------|-----------|
@@ -41,6 +41,16 @@ Aspire wires up the API, database, and frontend in a single process and exposes 
 
 ### Session Detail
 ![Session detail page](docs/screenshots/session-detail.png)
+
+### Ratings & Feedback — Summary View
+Attendees see the aggregate star rating and distribution after a session ends. Signed-out users are prompted to sign in.
+
+![Session ratings summary (anonymous)](docs/screenshots/session-ratings-anonymous.png)
+
+### Ratings & Feedback — Rating Form
+Registered attendees can submit a 1–5 star rating with an optional comment. Ratings can be updated at any time.
+
+![Session rating form](docs/screenshots/session-ratings-form.png)
 
 ### Speakers
 ![Speakers page](docs/screenshots/speakers.png)
