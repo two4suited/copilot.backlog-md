@@ -8,6 +8,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LevelBadge } from '../components/LevelBadge';
 import { useAuth } from '../context/AuthContext';
+import { RatingSection } from '../components/RatingSection';
 import { useSessionSeats } from '../hooks/useSessionSeats';
 import { fmtDayLabelTz, fmtTimeRangeTz } from '../utils/time';
 
@@ -249,6 +250,12 @@ export function SessionDetailPage() {
           </div>
         </section>
       )}
+
+      <RatingSection
+        sessionId={id!}
+        sessionEndTime={session.endTime}
+        isRegistered={registered}
+      />
     </div>
   );
 }
