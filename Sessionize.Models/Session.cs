@@ -16,4 +16,5 @@ public class Session : BaseEntity
     public string? RecordingUrl { get; set; }
     public ICollection<SessionSpeaker> SessionSpeakers { get; set; } = new List<SessionSpeaker>();
     public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
+    public ICollection<SessionRating> Ratings { get; set; } = new List<SessionRating>();
 }

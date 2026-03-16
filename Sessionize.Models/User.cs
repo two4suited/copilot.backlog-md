@@ -10,4 +10,5 @@ public class User : BaseEntity
     public UserRole Role { get; set; } = UserRole.Attendee;
     public string? AvatarUrl { get; set; }
     public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
+    public ICollection<SessionRating> Ratings { get; set; } = new List<SessionRating>();
 }

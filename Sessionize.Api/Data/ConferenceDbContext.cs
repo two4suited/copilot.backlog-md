@@ -14,6 +14,7 @@ public class ConferenceDbContext : DbContext
     public DbSet<SessionSpeaker> SessionSpeakers => Set<SessionSpeaker>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Registration> Registrations => Set<Registration>();
+    public DbSet<SessionRating> SessionRatings => Set<SessionRating>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -30,6 +31,7 @@ public class ConferenceDbContext : DbContext
         modelBuilder.Entity<Registration>().HasQueryFilter(r => !r.IsDeleted);
         // SessionSpeaker is a join entity — filter mirrors Session and Speaker so EF warning 10622 is resolved
         modelBuilder.Entity<SessionSpeaker>().HasQueryFilter(ss => !ss.Session.IsDeleted && !ss.Speaker.IsDeleted);
+        modelBuilder.Entity<SessionRating>().HasQueryFilter(sr => !sr.IsDeleted);
 
         modelBuilder.Entity<Conference>()
             .HasMany(c => c.Tracks)
@@ -74,6 +76,23 @@ public class ConferenceDbContext : DbContext
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<Speaker>().HasIndex(sp => sp.Email).IsUnique();
         modelBuilder.Entity<Registration>().HasIndex(r => new { r.UserId, r.SessionId }).IsUnique();
+
+        modelBuilder.Entity<Session>()
+            .HasMany(s => s.Ratings)
+            .WithOne(r => r.Session)
+            .HasForeignKey(r => r.SessionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.Ratings)
+            .WithOne(r => r.User)
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<SessionRating>()
+            .HasIndex(r => new { r.UserId, r.SessionId }).IsUnique();
+        modelBuilder.Entity<SessionRating>()
+            .Property(r => r.Comment).HasMaxLength(500);
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
